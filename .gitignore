@@ -25,3 +25,6 @@ Thumbs.db
 # Environment
 .env
 .env.*
+
+# Derived data (regenerate with: python -m src.data)
+data/processed/
