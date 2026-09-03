@@ -1,295 +1,119 @@
-"""Load, clean, and join the CRM Sales Opportunities tables.
+"""Shared dataset container and cleaning helpers.
 
-The four raw CSVs in ``data/`` are read-only inputs. This module turns them into
-one analysis table and splits off the rows that carry a Won/Lost label from the
-deals that are still open.
-
-Run as a script to write the processed tables and print a cleaning report::
-
-    python -m src.data
-    python -m src.data --data-dir data --out-dir data/processed
+Every loader in :mod:`src.datasets` returns a :class:`Dataset`. Everything
+downstream -- preprocessing, baselines, the advanced models, explainability --
+works from that object and never touches a raw file.
 """
 
 from __future__ import annotations
 
-import argparse
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-# --------------------------------------------------------------------------------------
-# Constants
-# --------------------------------------------------------------------------------------
-
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
-PROCESSED_DIR = DATA_DIR / "processed"
-
-DATE_FORMAT = "%m/%d/%y"
-TARGET = "is_won"
-POSITIVE_STAGE = "Won"
-CLOSED_STAGES = ("Won", "Lost")
-
-#: Known only after a deal closes -- never use these as model features.
-LEAKAGE_COLUMNS = ("close_date", "close_value", "deal_stage", TARGET)
-
-#: ``sales_pipeline.product`` is written without the space that ``products.product``
-#: uses. Left unfixed, roughly one in seven product joins drops silently.
-PRODUCT_NAME_FIXES = {"GTXPro": "GTX Pro"}
-
-#: Misspellings in ``accounts.sector``.
-SECTOR_FIXES = {"technolgy": "technology"}
-
-CATEGORICAL_FEATURES = [
-    "product",
-    "series",
-    "sector",
-    "office_location",
-    "regional_office",
-    "manager",
-    "sales_agent",
-]
-
-NUMERIC_FEATURES = [
-    "sales_price",
-    "revenue",
-    "employees",
-    "revenue_per_employee",
-    "year_established",
-    "account_age_at_engage",
-    "engage_year",
-    "engage_month",
-    "engage_quarter",
-    "engage_dayofweek",
-    "is_subsidiary",
-]
-
-FEATURE_COLUMNS = CATEGORICAL_FEATURES + NUMERIC_FEATURES
 
 
 @dataclass
 class Dataset:
-    """The joined CRM data, split by whether the outcome is known.
+    """A cleaned, labeled table plus the column roles a model needs.
 
     Attributes:
-        labeled: Won/Lost rows, with ``is_won`` set. Use these for train/test.
-        open_deals: Engaging/Prospecting rows. No label -- scoring targets only.
-        report: Counts collected while cleaning, for the write-up.
+        name: short id, also the sub-directory under ``data/`` and ``reports/``.
+        frame: one row per labeled example; contains the target and every column
+            in ``categorical`` / ``numeric``. May carry extra columns for EDA --
+            ``features()`` never returns those.
+        target: name of the binary 0/1 label column.
+        categorical: columns to one-hot encode. Missing values are already a
+            literal ``"Missing"`` category where missingness is informative.
+        numeric: columns to impute (median) and optionally scale.
+        report: counts collected while cleaning, for the write-up.
+        extra: anything else worth keeping (e.g. the CRM's open deals).
     """
 
-    labeled: pd.DataFrame
-    open_deals: pd.DataFrame
-    report: dict[str, object]
+    name: str
+    frame: pd.DataFrame
+    target: str
+    categorical: list[str]
+    numeric: list[str]
+    report: dict[str, object] = field(default_factory=dict)
+    extra: dict[str, object] = field(default_factory=dict)
+
+    @property
+    def feature_columns(self) -> list[str]:
+        return self.categorical + self.numeric
 
     def features(self) -> pd.DataFrame:
-        """Leakage-free feature columns of the labeled rows."""
-        return self.labeled[FEATURE_COLUMNS]
+        return self.frame[self.feature_columns]
 
-    def target(self) -> pd.Series:
-        """Binary label: 1 for Won, 0 for Lost."""
-        return self.labeled[TARGET]
+    def labels(self) -> pd.Series:
+        return self.frame[self.target].astype(int)
+
+    def __post_init__(self) -> None:
+        missing = [c for c in self.feature_columns + [self.target] if c not in self.frame]
+        if missing:
+            raise ValueError(f"{self.name}: columns missing from frame: {missing}")
+        overlap = set(self.categorical) & set(self.numeric)
+        if overlap:
+            raise ValueError(f"{self.name}: columns listed as both categorical and numeric: {overlap}")
+        bad = set(self.frame[self.target].dropna().unique()) - {0, 1}
+        if bad:
+            raise ValueError(f"{self.name}: target must be 0/1, found {bad}")
 
 
 # --------------------------------------------------------------------------------------
-# Loading
+# Helpers shared by the loaders
 # --------------------------------------------------------------------------------------
 
 
-def _strip_strings(frame: pd.DataFrame) -> pd.DataFrame:
+def is_text(series: pd.Series) -> bool:
+    return series.dtype == object or isinstance(series.dtype, pd.StringDtype)
+
+
+def strip_strings(frame: pd.DataFrame) -> pd.DataFrame:
     """Trim surrounding whitespace from every text column."""
     out = frame.copy()
     for column in out.columns:
-        if out[column].dtype == object or isinstance(out[column].dtype, pd.StringDtype):
-            out[column] = out[column].str.strip()
+        if is_text(out[column]):
+            # map, not .str.strip(): a mixed object column (numbers + blank strings)
+            # would have its numbers turned into NaN by the .str accessor.
+            out[column] = out[column].map(lambda v: v.strip() if isinstance(v, str) else v)
     return out
 
 
-def _blank_to_na(frame: pd.DataFrame) -> pd.DataFrame:
-    """Treat empty strings as missing values."""
-    return frame.replace(r"^\s*$", np.nan, regex=True)
-
-
-def load_raw(data_dir: Path | str = DATA_DIR) -> dict[str, pd.DataFrame]:
-    """Read the four raw CSVs with whitespace trimmed and blanks as NaN."""
-    data_dir = Path(data_dir)
-    names = ["sales_pipeline", "accounts", "products", "sales_teams"]
-    return {
-        name: _blank_to_na(_strip_strings(pd.read_csv(data_dir / f"{name}.csv")))
-        for name in names
-    }
-
-
-# --------------------------------------------------------------------------------------
-# Cleaning
-# --------------------------------------------------------------------------------------
-
-
-def clean_pipeline(pipeline: pd.DataFrame) -> pd.DataFrame:
-    """Normalize product keys and parse the two date columns."""
-    out = pipeline.copy()
-    out["product"] = out["product"].replace(PRODUCT_NAME_FIXES)
-    for column in ("engage_date", "close_date"):
-        out[column] = pd.to_datetime(out[column], format=DATE_FORMAT, errors="coerce")
+def blank_to_na(frame: pd.DataFrame, placeholders: tuple[str, ...] = ()) -> pd.DataFrame:
+    """Treat empty strings -- and any listed placeholder tokens -- as missing."""
+    out = frame.replace(r"^\s*$", np.nan, regex=True)
+    if placeholders:
+        out = out.replace(list(placeholders), np.nan)
     return out
 
 
-def clean_accounts(accounts: pd.DataFrame) -> pd.DataFrame:
-    """Fix sector spellings and derive account-level attributes."""
-    out = accounts.copy()
-    out["sector"] = out["sector"].replace(SECTOR_FIXES)
-    out["is_subsidiary"] = out["subsidiary_of"].notna().astype(int)
-    # Revenue is in millions of USD; scale to dollars per head so the ratio reads sanely.
-    out["revenue_per_employee"] = (out["revenue"] * 1_000_000 / out["employees"]).replace(
-        [np.inf, -np.inf], np.nan
-    )
-    return out
+def collapse_rare(series: pd.Series, top_k: int, other: str = "Other") -> pd.Series:
+    """Keep the ``top_k`` most frequent levels, fold the rest into ``other``."""
+    keep = series.value_counts().head(top_k).index
+    return series.where(series.isin(keep) | series.isna(), other)
 
 
-def clean_products(products: pd.DataFrame) -> pd.DataFrame:
-    """Apply the same product-name normalization used on the pipeline table."""
-    out = products.copy()
-    out["product"] = out["product"].replace(PRODUCT_NAME_FIXES)
-    return out
-
-
-def clean_sales_teams(sales_teams: pd.DataFrame) -> pd.DataFrame:
-    """No fixes needed today; kept so every table goes through one path."""
-    return sales_teams.copy()
-
-
-# --------------------------------------------------------------------------------------
-# Joining and feature derivation
-# --------------------------------------------------------------------------------------
-
-
-def join_tables(
-    pipeline: pd.DataFrame,
-    accounts: pd.DataFrame,
-    products: pd.DataFrame,
-    sales_teams: pd.DataFrame,
-) -> pd.DataFrame:
-    """Left-join the dimension tables onto the opportunity fact table."""
-    joined = (
-        pipeline.merge(products, on="product", how="left", validate="many_to_one")
-        .merge(accounts, on="account", how="left", validate="many_to_one")
-        .merge(sales_teams, on="sales_agent", how="left", validate="many_to_one")
-    )
-    if len(joined) != len(pipeline):
-        raise AssertionError("join changed the row count; check for duplicate keys")
-    return joined
-
-
-def add_derived_features(frame: pd.DataFrame) -> pd.DataFrame:
-    """Add calendar and account-age features from ``engage_date`` only.
-
-    ``close_date`` is deliberately untouched: any duration that depends on it is
-    unknown at prediction time.
-    """
+def fill_missing_category(frame: pd.DataFrame, columns: list[str], token: str = "Missing") -> pd.DataFrame:
+    """Make missingness an explicit category on the given columns."""
     out = frame.copy()
-    engage = out["engage_date"]
-    out["engage_year"] = engage.dt.year
-    out["engage_month"] = engage.dt.month
-    out["engage_quarter"] = engage.dt.quarter
-    out["engage_dayofweek"] = engage.dt.dayofweek
-    out["account_age_at_engage"] = out["engage_year"] - out["year_established"]
+    for column in columns:
+        out[column] = out[column].astype("object").where(out[column].notna(), token).astype(str)
     return out
 
 
-def add_label(frame: pd.DataFrame) -> pd.DataFrame:
-    """Set ``is_won`` for closed deals; leave it missing for open ones."""
-    out = frame.copy()
-    is_closed = out["deal_stage"].isin(CLOSED_STAGES)
-    out[TARGET] = np.where(is_closed, (out["deal_stage"] == POSITIVE_STAGE).astype("Int64"), pd.NA)
-    out[TARGET] = out[TARGET].astype("Int64")
-    return out
+def yes_no_to_int(series: pd.Series) -> pd.Series:
+    return series.map({"Yes": 1, "No": 0, "yes": 1, "no": 0}).astype("Int64")
 
 
-# --------------------------------------------------------------------------------------
-# Pipeline entry point
-# --------------------------------------------------------------------------------------
-
-
-def build_dataset(data_dir: Path | str = DATA_DIR) -> Dataset:
-    """Load, clean, join, and split the CRM tables into a modeling dataset."""
-    raw = load_raw(data_dir)
-
-    pipeline = clean_pipeline(raw["sales_pipeline"])
-    accounts = clean_accounts(raw["accounts"])
-    products = clean_products(raw["products"])
-    sales_teams = clean_sales_teams(raw["sales_teams"])
-
-    joined = join_tables(pipeline, accounts, products, sales_teams)
-    joined = add_derived_features(joined)
-    joined = add_label(joined)
-
-    labeled = joined[joined["deal_stage"].isin(CLOSED_STAGES)].reset_index(drop=True)
-    open_deals = joined[~joined["deal_stage"].isin(CLOSED_STAGES)].reset_index(drop=True)
-
-    report = _build_report(raw, joined, labeled, open_deals)
-    return Dataset(labeled=labeled, open_deals=open_deals, report=report)
-
-
-def _build_report(
-    raw: dict[str, pd.DataFrame],
-    joined: pd.DataFrame,
-    labeled: pd.DataFrame,
-    open_deals: pd.DataFrame,
-) -> dict[str, object]:
-    """Collect the counts worth quoting in the paper and worth watching in CI."""
-    won = int((labeled[TARGET] == 1).sum())
-    missing = labeled[FEATURE_COLUMNS].isna().sum()
+def basic_report(frame: pd.DataFrame, target: str) -> dict[str, object]:
+    positives = int(frame[target].sum())
     return {
-        "raw_rows": {name: len(frame) for name, frame in raw.items()},
-        "joined_rows": len(joined),
-        "labeled_rows": len(labeled),
-        "open_rows": len(open_deals),
-        "won": won,
-        "lost": len(labeled) - won,
-        "won_rate": round(won / len(labeled), 4) if len(labeled) else float("nan"),
-        "unmatched_product": int(joined["series"].isna().sum()),
-        "unmatched_account": int(joined["sector"].isna().sum()),
-        "unmatched_agent": int(joined["regional_office"].isna().sum()),
-        "labeled_missing_features": {k: int(v) for k, v in missing.items() if v},
+        "rows": len(frame),
+        "positives": positives,
+        "negatives": len(frame) - positives,
+        "positive_rate": round(positives / len(frame), 4) if len(frame) else float("nan"),
     }
-
-
-def _format_report(report: dict[str, object]) -> str:
-    lines = [
-        "Raw rows:            " + ", ".join(f"{k}={v}" for k, v in report["raw_rows"].items()),
-        f"Joined rows:         {report['joined_rows']}",
-        f"Labeled (Won/Lost):  {report['labeled_rows']}"
-        f"  (won={report['won']}, lost={report['lost']}, won_rate={report['won_rate']})",
-        f"Open (excluded):     {report['open_rows']}",
-        f"Unmatched product:   {report['unmatched_product']}",
-        f"Unmatched account:   {report['unmatched_account']}",
-        f"Unmatched agent:     {report['unmatched_agent']}",
-    ]
-    missing = report["labeled_missing_features"]
-    lines.append(
-        "Missing features:    "
-        + (", ".join(f"{k}={v}" for k, v in missing.items()) if missing else "none")
-    )
-    return "\n".join(lines)
-
-
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--data-dir", type=Path, default=DATA_DIR, help="directory of raw CSVs")
-    parser.add_argument(
-        "--out-dir", type=Path, default=PROCESSED_DIR, help="where to write processed CSVs"
-    )
-    args = parser.parse_args(argv)
-
-    dataset = build_dataset(args.data_dir)
-    args.out_dir.mkdir(parents=True, exist_ok=True)
-    dataset.labeled.to_csv(args.out_dir / "labeled.csv", index=False)
-    dataset.open_deals.to_csv(args.out_dir / "open_deals.csv", index=False)
-
-    print(_format_report(dataset.report))
-    print(f"\nWrote {args.out_dir / 'labeled.csv'} and {args.out_dir / 'open_deals.csv'}")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

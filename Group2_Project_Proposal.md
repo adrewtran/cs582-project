@@ -4,21 +4,29 @@
 
 ## **Project title**
 
-Predicting CRM Sales Opportunities Using Machine Learning
+Predicting Sales Lead Conversion Using Machine Learning
 
 ## **Data set**
 
-We will use the CRM Sales Opportunities dataset from Maven Analytics
-(https://mavenanalytics.io/data-playground/crm-sales-opportunities). The dataset contains information about sales
-opportunities, customer accounts, products, and sales teams. We will join the related tables and use the available
-historical information to build features for predicting the final sales outcome (Won or Lost).
+Our primary dataset is the Lead Scoring dataset from X Education, an online education company (available on Kaggle,
+https://www.kaggle.com/datasets/amritachatterjee09/lead-scoring-dataset). It contains 9,240 sales leads with 37
+attributes describing how each lead was acquired (lead origin and source), the lead's activity on the website (visits,
+time spent, pages per visit, last activity) and profile information from the sign-up form (occupation, specialization,
+city), together with a binary label indicating whether the lead converted into a paying customer (38.5% converted).
+As a secondary dataset for checking whether our findings generalize, we will use the UCI Bank Marketing dataset
+(41,188 telemarketing contacts, 11.3% positive), which is larger and strongly imbalanced. Both datasets contain
+columns that are only known after the outcome (for example the sales team's post-contact tags in the lead data, and
+the call duration in the bank data); identifying and excluding such leakage columns is part of our data preparation.
+We initially considered the Maven Analytics CRM Sales Opportunities dataset, but found that its attributes carry no
+predictive signal for the deal outcome (ROC-AUC ≈ 0.5 without leakage columns); we will report this as a short
+leakage-audit case study.
 
 ## **Project idea**
 
-The objective of this project is to build a binary classification pipeline that predicts whether a CRM sales opportunity
-will be Won or Lost. A useful prediction can help a sales team prioritize opportunities, allocate resources more
-effectively, and focus attention on deals with a higher probability of success. We will prepare the CRM data by joining
-the related tables, cleaning missing or inconsistent values, selecting useful features, and splitting the data into
+The objective of this project is to build a binary classification pipeline that predicts whether a sales lead
+will convert into a customer. A useful prediction can help a sales team prioritize opportunities, allocate resources more
+effectively, and focus attention on deals with a higher probability of success. We will prepare the lead data by
+removing leakage columns, cleaning missing or inconsistent values, selecting useful features, and splitting the data into
 training and testing sets.
 
 We will first establish baseline results with traditional machine learning methods such as Logistic Regression and
@@ -39,7 +47,7 @@ project more practical because a sales team can understand not only the predicti
 
 ## **Software you will need to write**
 
-We will write Python programs to load and join the CRM data, clean and preprocess the data, create and select features,
+We will write Python programs to load the datasets, clean and preprocess the data, create and select features,
 split the data into training and testing sets, train the machine learning models, evaluate and compare the results, and
 generate charts. We
 
@@ -89,7 +97,13 @@ TabNet.
 - [4] S. O. Arik and T. Pfister, “TabNet: Attentive Interpretable Tabular Learning,” in Proc. AAAI Conf. Artificial
   Intelligence (AAAI-21), vol. 35, no. 8, 2021, pp. 6679–6687.
 
-- [5] Maven Analytics, “CRM Sales Opportunities,” Data Playground. [Online].
+- [5] A. Chatterjee, “Lead Scoring Dataset,” Kaggle. [Online].
+  Available: https://www.kaggle.com/datasets/amritachatterjee09/lead-scoring-dataset
+
+- [6] S. Moro, P. Cortez, and P. Rita, “A Data-Driven Approach to Predict the Success of Bank Telemarketing,”
+  Decision Support Systems, vol. 62, pp. 22–31, 2014. Dataset: UCI Machine Learning Repository, “Bank Marketing.”
+
+- [7] Maven Analytics, “CRM Sales Opportunities,” Data Playground. [Online].
   Available: https://www.mavenanalytics.io/data-playground
 
 2 
