@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     ConfusionMatrixDisplay, RocCurveDisplay, accuracy_score, average_precision_score,
@@ -34,6 +35,7 @@ from src.datasets import LOADERS, load
 from src.features import make_preprocessor
 
 RANDOM_STATE = 42
+DEFAULT_DATASET = "crm"
 TEST_SIZE = 0.2
 CV_FOLDS = 5
 
@@ -48,6 +50,10 @@ METRIC_COLUMNS = [
 def make_models(dataset: Dataset) -> dict[str, Pipeline]:
     """The two baselines, each wrapped with its own preprocessing."""
     return {
+        "dummy_majority": Pipeline([
+            ("prep", make_preprocessor(dataset, scale_numeric=False)),
+            ("clf", DummyClassifier(strategy="most_frequent")),
+        ]),
         "logistic_regression": Pipeline([
             ("prep", make_preprocessor(dataset, scale_numeric=True)),
             ("clf", LogisticRegression(max_iter=2000, class_weight="balanced", random_state=RANDOM_STATE)),
@@ -101,7 +107,7 @@ def cross_validate_auc(model: Pipeline, X_train: pd.DataFrame, y_train: pd.Serie
     return float(scores.mean()), float(scores.std())
 
 
-def feature_importance(name: str, model: Pipeline) -> pd.Series:
+def feature_importance(name: str, model: Pipeline) -> pd.Series | None:
     """Per-feature contribution after one-hot encoding, largest first.
 
     Random Forest: impurity importances. Logistic Regression: absolute
@@ -109,7 +115,12 @@ def feature_importance(name: str, model: Pipeline) -> pd.Series:
     """
     names = model.named_steps["prep"].get_feature_names_out()
     clf = model.named_steps["clf"]
-    values = clf.feature_importances_ if hasattr(clf, "feature_importances_") else np.abs(clf.coef_.ravel())
+    if hasattr(clf, "feature_importances_"):
+        values = clf.feature_importances_
+    elif hasattr(clf, "coef_"):
+        values = np.abs(clf.coef_.ravel())
+    else:
+        return None
     return pd.Series(values, index=names, name=name).sort_values(ascending=False)
 
 
@@ -170,12 +181,14 @@ def run(dataset: Dataset, how: str = "random") -> pd.DataFrame:
 
         importance = feature_importance(name, model)
         save_confusion_matrix(out_dir, name, model, X_test, y_test)
-        save_feature_importance(out_dir, importance)
+        if importance is not None:
+            save_feature_importance(out_dir, importance)
 
         print(f"\n== {name}")
         print("  " + "  ".join(f"{k}={v:.4f}" for k, v in metrics.items()))
         print(f"  confusion matrix [[TN FP] [FN TP]]: {confusion_matrix(y_test, model.predict(X_test)).tolist()}")
-        print("  top features: " + ", ".join(importance.head(6).index))
+        if importance is not None:
+            print("  top features: " + ", ".join(importance.head(6).index))
 
     save_roc_curves(out_dir, models, X_test, y_test)
     table = pd.DataFrame(rows).set_index("model")[METRIC_COLUMNS]
@@ -185,7 +198,7 @@ def run(dataset: Dataset, how: str = "random") -> pd.DataFrame:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("dataset", nargs="?", default="leads", choices=sorted(LOADERS))
+    parser.add_argument("dataset", nargs="?", default=DEFAULT_DATASET, choices=sorted(LOADERS))
     parser.add_argument("--split", default="random", choices=["random", "temporal"])
     args = parser.parse_args(argv)
 

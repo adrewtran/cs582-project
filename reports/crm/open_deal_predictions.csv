@@ -1,0 +1,1590 @@
+opportunity_id,deal_stage,engage_date,account,product,sales_agent,win_probability,priority
+EUG019AS,Engaging,2016-12-23,,GTX Basic,Corliss Cosme,0.8913264950827468,High
+SQLYCFGV,Engaging,2016-12-22,Opentech,GTX Pro,Zane Levy,0.8908574558372171,High
+M7I5O9YU,Engaging,2016-11-23,Cheers,GTX Basic,Corliss Cosme,0.8761127702854038,High
+N07K7DR7,Engaging,2016-12-18,Plexzap,MG Special,Rosie Papadopoulos,0.8725640412402271,High
+CNM0H9FR,Engaging,2016-12-02,,GTX Basic,Zane Levy,0.8674116759522174,High
+PYOFK7ZD,Engaging,2016-12-17,,GTX Basic,Cassey Cress,0.8667688056989118,High
+F5U1ACDD,Engaging,2016-11-19,,GTX Plus Basic,Kami Bicknell,0.8651511488266566,High
+1ZDDZD8B,Engaging,2016-12-15,,MG Special,Markita Hansen,0.8617229138008788,High
+XSEG5T4H,Engaging,2017-11-03,Zoomit,GTX Plus Basic,Markita Hansen,0.8616032497155525,High
+O3KC8QI8,Engaging,2016-12-08,,GTX Plus Basic,Kami Bicknell,0.8600044594140228,High
+DWUXMAGZ,Engaging,2016-12-17,,GTX Plus Pro,Corliss Cosme,0.8557460677662613,High
+IBEUTCSW,Engaging,2016-12-08,,MG Advanced,James Ascencio,0.8555931373441303,High
+HAXMC4IX,Engaging,2016-11-03,,MG Advanced,James Ascencio,0.8525558333555153,High
+BJJQSJD8,Engaging,2017-06-09,Zotware,GTX Plus Basic,Daniell Hammack,0.8503202056219213,High
+2DY9U1V7,Engaging,2017-10-20,Konex,GTX Pro,Rosie Papadopoulos,0.8466373492076892,High
+6SN2RQJX,Engaging,2016-12-17,,MG Special,Vicki Laflamme,0.8463451074852387,High
+SU8JNMP4,Engaging,2016-11-24,Bubba Gump,GTX Plus Basic,Kami Bicknell,0.8423576344343321,High
+KD6MB4AP,Engaging,2016-12-11,,MG Special,Elease Gluck,0.8414134937400458,High
+ZOBJHMAF,Engaging,2016-12-11,,MG Advanced,Cassey Cress,0.8317272047234375,High
+NKPH3EFG,Engaging,2016-12-18,,MG Advanced,Cassey Cress,0.8317272047234375,High
+0DRC1U9Q,Engaging,2016-11-20,Green-Plus,GTX Basic,Maureen Marcano,0.8312989103754773,High
+J5BCAQ1Z,Engaging,2017-12-15,Bioplex,GTX Basic,Zane Levy,0.8310611298311248,High
+MV227O65,Engaging,2017-05-11,Sonron,GTX Plus Pro,Maureen Marcano,0.8220337025559964,High
+ZZY4516R,Engaging,2016-11-20,,MG Advanced,Hayden Neloms,0.819987112624305,High
+7XRWWM0X,Engaging,2017-11-15,Scotfind,MG Special,Kami Bicknell,0.8193487965856556,High
+13GM5I6M,Engaging,2016-12-29,,GTX Pro,Kami Bicknell,0.8191336372790594,High
+TLLW2ZRM,Engaging,2017-08-25,Condax,GTX Pro,Zane Levy,0.8170900515780777,High
+46UHJGY0,Engaging,2017-11-02,,MG Special,Corliss Cosme,0.8163220582808999,High
+0U3WVJO0,Engaging,2016-12-28,,GTX Pro,Corliss Cosme,0.8162213311956253,High
+JIACLB24,Engaging,2017-01-14,Scottech,GTX Basic,Vicki Laflamme,0.812466574586658,High
+T6MPH7JC,Engaging,2017-12-17,,MG Special,Violet Mclelland,0.8111391717619852,High
+PFFHM7HR,Engaging,2016-11-27,Opentech,MG Advanced,Markita Hansen,0.8094843409168117,High
+LC93MVYP,Engaging,2017-12-01,,GTX Basic,Kami Bicknell,0.8080843941640026,High
+E1LFK6E3,Engaging,2017-11-03,,GTX Basic,Kami Bicknell,0.8070966875622662,High
+2HT2R2GY,Engaging,2016-12-29,,GTX Plus Pro,Cassey Cress,0.8025407494993093,High
+62PCN0KS,Engaging,2017-11-16,,GTX Plus Basic,Maureen Marcano,0.8017359057224074,High
+9IA34L8S,Engaging,2016-12-29,,GTX Basic,Vicki Laflamme,0.7992707238019182,High
+REO3FMSB,Engaging,2017-06-09,Massive Dynamic,MG Advanced,Corliss Cosme,0.7986324975267493,High
+MG1YUTUE,Engaging,2017-10-01,Acme Corporation,MG Special,Markita Hansen,0.7958781746405038,High
+SLILSQJV,Engaging,2017-10-19,,GTX Plus Basic,Maureen Marcano,0.7954956267917028,High
+PV3TH2FF,Engaging,2017-11-23,,MG Special,Vicki Laflamme,0.7954326468618559,High
+J1G2SZKD,Engaging,2017-11-22,Goodsilron,GTX Basic,Zane Levy,0.7952840813798485,High
+DB801ISB,Engaging,2017-12-22,,MG Special,Elease Gluck,0.7915292675858697,High
+ICMXZOVL,Engaging,2016-12-08,Stanredtax,GTX Pro,Daniell Hammack,0.7885632905889771,High
+HB740BLB,Engaging,2017-12-20,Silis,MG Special,Hayden Neloms,0.785108629788255,High
+GMY4U7RD,Engaging,2017-12-09,,GTX Basic,Maureen Marcano,0.7849073717325359,High
+O691ZXXH,Engaging,2017-10-08,,MG Special,Markita Hansen,0.7830441161509176,High
+9Z2WTTNY,Engaging,2017-07-28,Statholdings,GTX Plus Basic,Darcel Schlecht,0.7829613496814299,High
+Y3AAS62P,Engaging,2017-09-12,Zoomit,GTX Plus Basic,Vicki Laflamme,0.7825888488905199,High
+MIA65OVY,Engaging,2017-10-06,,MG Special,Elease Gluck,0.7800966392112606,High
+854QZNWK,Engaging,2017-11-01,,MG Special,Violet Mclelland,0.7792181915165861,High
+EG7OFLFR,Engaging,2016-11-14,,GTX Basic,Kami Bicknell,0.7782826129008291,High
+JUCNIG4H,Engaging,2016-12-05,,GTX Basic,James Ascencio,0.7780508890800175,High
+06C1N1F7,Engaging,2017-10-05,,MG Special,Elease Gluck,0.7778590849776813,High
+L8XNQONA,Engaging,2017-11-27,Inity,GTX Basic,Zane Levy,0.7740635972812583,High
+ERFRHR3Z,Engaging,2016-12-14,,MG Advanced,Hayden Neloms,0.7729414471453722,High
+OLVI7L8M,Engaging,2016-11-16,,GTX Pro,Cassey Cress,0.7728451652018067,High
+UP409DSB,Engaging,2016-11-10,Ganjaflex,MG Advanced,Maureen Marcano,0.7727172211918099,High
+QCBO7C6E,Engaging,2017-10-13,,GTX Plus Basic,Kami Bicknell,0.7712663519582427,High
+S7UVZXM3,Engaging,2017-10-24,,MG Special,Corliss Cosme,0.7707079370851013,High
+QDBJOE9M,Engaging,2017-10-08,,MG Special,Zane Levy,0.770385209696739,High
+L9EVLHSJ,Engaging,2017-10-08,,GTX Plus Basic,Kami Bicknell,0.7701986498653169,High
+07GUKIG3,Engaging,2017-12-05,,MG Special,Violet Mclelland,0.7700861683961189,High
+GYB4W2AU,Engaging,2016-11-23,,MG Advanced,Elease Gluck,0.7698609971106222,High
+ESZY10SI,Engaging,2017-02-22,,MG Advanced,Hayden Neloms,0.7694361362480008,High
+K5CWSFCW,Engaging,2016-12-21,Blackzim,GTX Pro,Elease Gluck,0.7682523443136874,High
+IBB0VGUN,Engaging,2017-11-05,,MG Special,Cassey Cress,0.7682002729550143,High
+J32XDDAW,Engaging,2016-12-14,,GTX Basic,Markita Hansen,0.7678816213916096,High
+PMMW9JX3,Engaging,2016-12-28,,GTX Basic,Kary Hendrixson,0.7677975735725756,High
+W4XB23IP,Engaging,2017-11-09,,GTX Basic,Boris Faz,0.7674899302088924,High
+2VCDVCIZ,Engaging,2016-12-27,,GTX Basic,Kary Hendrixson,0.7670427531957036,High
+9X2S0K15,Engaging,2017-02-27,,MG Advanced,Hayden Neloms,0.766972013254494,High
+NGG8O0JX,Engaging,2017-10-13,,GTX Basic,Markita Hansen,0.7655123606716165,High
+31IV2B9O,Engaging,2017-10-26,,GTX Basic,Vicki Laflamme,0.7647744837704336,High
+P7MSQO38,Engaging,2017-07-28,Yearin,GTX Basic,Anna Snelling,0.7644804117315841,High
+J6OQS0AU,Engaging,2017-03-26,,MG Advanced,Hayden Neloms,0.7644511229830108,High
+MRCYKUX4,Engaging,2017-03-14,,MG Advanced,Hayden Neloms,0.7638637185199972,High
+WALNFJ70,Engaging,2016-12-08,,GTX Plus Pro,Kary Hendrixson,0.7637723197794015,High
+KV2OFRJT,Engaging,2016-12-13,,GTX Pro,Kami Bicknell,0.7633661230868488,High
+XSTGL252,Engaging,2017-10-15,Toughzap,GTX Pro,Cassey Cress,0.7623676785500774,High
+RN67OVFW,Engaging,2017-11-04,,GTX Basic,Zane Levy,0.7614428734915402,High
+KMB8TJ0I,Engaging,2017-03-24,,MG Advanced,Hayden Neloms,0.7609215909336098,High
+T7N0RX05,Engaging,2017-11-04,,GTX Plus Pro,Maureen Marcano,0.760748601996766,High
+KFPM2LJW,Engaging,2016-12-25,,GTX Basic,Rosalina Dieter,0.760732117225072,High
+B2FSFXKA,Engaging,2017-10-19,,MG Special,Markita Hansen,0.7602163782527892,High
+W72TPY7P,Engaging,2017-10-19,,MG Special,Markita Hansen,0.7602163782527892,High
+BREOLQD9,Engaging,2017-11-16,,MG Advanced,Boris Faz,0.7600015603469233,High
+5653N8BM,Engaging,2017-06-11,Zoomit,GTX Plus Basic,Rosie Papadopoulos,0.7583416739393227,High
+XYLNH45V,Engaging,2017-01-31,Zathunicon,GTX Plus Basic,Daniell Hammack,0.7578295990784902,High
+5WAKI1NB,Engaging,2017-10-04,,GTX Basic,Corliss Cosme,0.7559375619047047,High
+OYH46MQB,Engaging,2017-10-25,,GTX Basic,Corliss Cosme,0.7559375619047047,High
+GQDS81G1,Engaging,2017-11-30,,GTX Plus Pro,Corliss Cosme,0.7545993584789524,High
+WJO52I18,Engaging,2017-11-04,Inity,GTX Pro,Cassey Cress,0.7540125793893094,High
+MA56XGWR,Engaging,2017-11-05,Iselectrics,GTX Basic,Daniell Hammack,0.7536784921348517,High
+4O3EPWFR,Engaging,2017-10-12,,GTX Plus Basic,Corliss Cosme,0.7519470600835665,High
+VDIU10RV,Engaging,2016-11-23,Lexiqvolax,MG Special,Markita Hansen,0.7515965566764853,High
+EPSIB2JR,Engaging,2017-05-26,Zoomit,MG Special,Violet Mclelland,0.7506475257688506,High
+22HV3N2W,Engaging,2017-08-01,Rangreen,GTX Plus Basic,Niesha Huffines,0.7498227572088824,High
+0KWYQTQQ,Engaging,2017-11-10,,MG Special,Rosalina Dieter,0.7492574479468778,High
+C2FSIMZP,Engaging,2017-11-07,,GTX Pro,Corliss Cosme,0.7490249227982074,High
+GR2X90DZ,Engaging,2017-01-15,,GTX Basic,Vicki Laflamme,0.7489899919462972,High
+HXGDBNAV,Engaging,2017-10-25,,MG Advanced,Maureen Marcano,0.7484862988821074,High
+NCMT5KK3,Engaging,2017-03-07,Dalttechnology,GTX Basic,Vicki Laflamme,0.7477607373876889,High
+1VFT3UCK,Engaging,2017-08-21,Condax,GTX Plus Basic,Boris Faz,0.7477593749712961,High
+YMWG4Z3S,Engaging,2017-11-23,Warephase,GTX Plus Basic,Kary Hendrixson,0.7459209482309777,High
+4H2QMS78,Engaging,2016-12-21,,GTX Basic,Vicki Laflamme,0.7448942712468035,High
+HWOBBZWQ,Engaging,2017-10-24,,GTX Basic,Wilburn Farren,0.7442173603420714,High
+NOLCZMV6,Engaging,2017-02-21,Goodsilron,GTX Pro,Violet Mclelland,0.7435365170994094,High
+PFKDTEYU,Engaging,2017-06-16,Xx-zobam,GTX Pro,Rosie Papadopoulos,0.7435160448562347,High
+0CR37ETK,Engaging,2017-11-05,,MG Advanced,Corliss Cosme,0.7431959693229669,High
+3ECHUPQY,Engaging,2016-12-20,,GTX Plus Basic,Daniell Hammack,0.7416640945112024,High
+26CH1NDR,Engaging,2017-03-09,Mathtouch,GTX Basic,Daniell Hammack,0.7414645828619324,High
+GL2FM1RM,Engaging,2017-10-22,,GTX Basic,Rosalina Dieter,0.7409995608707909,High
+6JBM1ZKO,Engaging,2017-11-09,,GTX Pro,Vicki Laflamme,0.7408196682630921,High
+RS31U03Y,Engaging,2017-12-07,,GTX Plus Basic,Zane Levy,0.7370585478367458,High
+MNVMY83P,Engaging,2016-12-10,Plussunin,GTX Pro,Cassey Cress,0.7366385771106404,High
+BZGJ44FH,Engaging,2017-10-19,,GTX Pro,Kami Bicknell,0.7356378136484737,High
+D55HTKRU,Engaging,2017-11-24,Newex,GTX Pro,Kary Hendrixson,0.7354894815311761,High
+F761DF0M,Engaging,2017-10-11,Silis,GTX Basic,Zane Levy,0.7354460629854743,High
+G1W97XZA,Engaging,2017-11-13,,GTX Plus Basic,Maureen Marcano,0.733797947402236,High
+EM1BA4EK,Engaging,2017-10-01,Scotfind,GTX Basic,Cassey Cress,0.7337053339181953,High
+IE7VQ5BA,Engaging,2016-12-23,Finhigh,GTX Plus Basic,Daniell Hammack,0.7336179918224628,High
+OHOWVHYX,Engaging,2017-10-11,Zoomit,MG Advanced,Rosalina Dieter,0.7332803221632256,High
+H2MC2E7K,Engaging,2017-02-02,Condax,GTX Plus Basic,Vicki Laflamme,0.7328351156588548,High
+MYD4PBM9,Engaging,2017-10-03,,GTX Basic,Kary Hendrixson,0.7323812705128827,High
+Y6NI5EBV,Engaging,2017-10-17,,GTX Plus Basic,Kami Bicknell,0.7320432857053939,High
+RJYG004O,Engaging,2016-12-16,Domzoom,GTX Basic,Daniell Hammack,0.7317870694460482,High
+VL8YNHD7,Engaging,2017-12-08,,GTX Plus Basic,Kary Hendrixson,0.7297138714297164,High
+8SLDCS0F,Engaging,2017-10-11,,MG Special,Markita Hansen,0.728354038282989,High
+579LZ3F9,Engaging,2016-11-24,J-Texon,GTX Plus Basic,Daniell Hammack,0.7277845834295134,High
+XOVYPE58,Engaging,2017-04-19,Betasoloin,GTX Pro,Rosie Papadopoulos,0.7269708399216102,High
+PMK11X5L,Engaging,2017-11-08,,GTX Plus Basic,Wilburn Farren,0.7267921442818971,High
+YQJGEI71,Engaging,2017-10-19,,GTX Plus Pro,James Ascencio,0.726544072359327,High
+FZWU2I30,Engaging,2017-12-10,The New York Inquirer,GTX Plus Pro,Zane Levy,0.7261461905019403,High
+AI76U58A,Engaging,2016-12-25,Treequote,GTX Basic,Maureen Marcano,0.7261142617477191,High
+4ZKFSG5F,Engaging,2017-10-16,,GTX Basic,Violet Mclelland,0.7259281452466717,High
+1BW8S7JD,Engaging,2017-11-06,,MG Special,Violet Mclelland,0.7255640536538076,High
+PQ84ANKD,Engaging,2017-11-20,,MG Special,Violet Mclelland,0.7255640536538076,High
+RYWETTBK,Engaging,2017-10-20,Fasehatice,GTX Basic,Kami Bicknell,0.7254137852544917,High
+O1SCOU11,Engaging,2017-10-31,,MG Special,Elease Gluck,0.7237699974069034,High
+DYYJW46L,Engaging,2017-10-14,,GTX Plus Pro,Vicki Laflamme,0.7229352928583458,High
+1L68AC0E,Engaging,2017-10-04,Gogozoom,GTX Pro,Wilburn Farren,0.7226732089190762,High
+YB4YJTK4,Engaging,2017-08-23,Lexiqvolax,GTX Basic,Kami Bicknell,0.7225460692203491,High
+QD7MU7DD,Engaging,2017-11-05,,GTX Pro,Rosie Papadopoulos,0.7216337226230263,High
+SWJ9OOZU,Engaging,2017-02-13,Opentech,MG Advanced,Hayden Neloms,0.720963351925824,High
+HCQK8NQ8,Engaging,2017-12-20,,GTX Plus Basic,Wilburn Farren,0.7208864844711133,High
+W5FH95XO,Engaging,2017-10-30,,MG Special,Hayden Neloms,0.7183384898273032,High
+N2249A7T,Engaging,2017-11-02,,GTX Pro,Markita Hansen,0.7181190088388932,High
+GWOOPZE8,Engaging,2017-10-01,Cheers,GTX Plus Basic,Cassey Cress,0.7178454644366635,High
+SQ71BWHG,Engaging,2017-11-04,Zencorporation,GTX Pro,Kary Hendrixson,0.717289948812758,High
+A1TDRYHZ,Engaging,2017-03-18,Rangreen,MG Advanced,Rosie Papadopoulos,0.7172421255488187,High
+6VIK2VX8,Engaging,2017-02-06,Isdom,MG Special,Hayden Neloms,0.7170282342589832,High
+WIQQUZRQ,Engaging,2017-09-10,,MG Special,Rosalina Dieter,0.7168359203911704,High
+7EHJYKWE,Engaging,2017-10-28,Xx-holding,GTX Basic,Kary Hendrixson,0.7161789915803101,High
+NNNEMOZ5,Engaging,2017-11-05,,GTX Plus Pro,James Ascencio,0.7142568474663408,High
+EP5QRHID,Engaging,2017-10-04,,MG Advanced,Boris Faz,0.7136851376220213,High
+P5C842B5,Engaging,2017-10-28,,GTX Plus Pro,Kami Bicknell,0.7126544236981187,High
+ATMWAQL5,Engaging,2017-08-03,Gogozoom,GTX Plus Basic,Niesha Huffines,0.7124792272264556,High
+E2CJIO85,Engaging,2017-10-03,,GTX Plus Pro,Vicki Laflamme,0.7122929353766275,High
+RVUJPYY8,Engaging,2017-10-18,,MG Special,Rosalina Dieter,0.7122680076010734,High
+RDHTQLNI,Engaging,2017-12-21,,GTX Plus Pro,Cassey Cress,0.7121387469758258,High
+T4FQOS6J,Engaging,2017-05-14,Opentech,GTX Plus Basic,Maureen Marcano,0.7110752558520728,High
+9SLINQY5,Engaging,2017-02-21,Newex,MG Advanced,Markita Hansen,0.7110679916196426,High
+YPM5PZMD,Engaging,2017-09-03,,MG Special,Vicki Laflamme,0.7106138799203218,High
+RTWE19SU,Engaging,2017-12-17,Conecom,GTX Pro,Kary Hendrixson,0.7096793014752036,High
+HF74MC9F,Engaging,2017-05-06,Ganjaflex,GTX Plus Pro,Corliss Cosme,0.7072976836831225,High
+P1SGQODJ,Engaging,2017-03-21,Rangreen,GTX Plus Basic,Boris Faz,0.7071581952545866,High
+OFC7ZTU8,Engaging,2017-10-17,,GTX Pro,Kami Bicknell,0.7058747103878888,High
+WA4TPQ5U,Engaging,2017-06-13,Zoomit,GTX Plus Basic,Maureen Marcano,0.7054366985121852,High
+M16D8PYH,Engaging,2017-01-05,,GTX Plus Pro,Daniell Hammack,0.7039874453895946,High
+RW39Y63V,Engaging,2017-01-10,,GTX Pro,Vicki Laflamme,0.7038917113658653,High
+ON821ADT,Engaging,2017-11-04,,GTX Pro,Markita Hansen,0.7037744839282327,High
+0IO43YMS,Engaging,2017-02-20,,MG Advanced,Wilburn Farren,0.7036193273956672,High
+NGTVHTFH,Engaging,2017-12-19,,GTX Pro,Boris Faz,0.7033241533764335,High
+2TYZRE2R,Engaging,2017-07-24,Massive Dynamic,MG Special,Moses Frase,0.7031871185493022,High
+S2Y2Q1D2,Engaging,2017-07-27,Singletechno,GTX Plus Basic,Marty Freudenburg,0.7024730096527981,High
+I35REHYN,Engaging,2017-09-12,Genco Pura Olive Oil Company,GTX Basic,Vicki Laflamme,0.7021680855015738,High
+102XKYAC,Engaging,2017-09-01,Zotware,GTX Pro,Cassey Cress,0.7017694648023907,High
+4D0K5T7T,Engaging,2017-10-26,Gogozoom,GTX Pro,Zane Levy,0.7006136227071982,High
+3FWZBSW1,Engaging,2017-08-01,Cancity,MG Special,Versie Hillebrand,0.7004413096993618,High
+JVF7HZMV,Engaging,2017-11-28,,GTX Plus Basic,Zane Levy,0.700383680615894,High
+QNB3SCN9,Engaging,2017-10-01,,GTX Plus Pro,Wilburn Farren,0.7002485708400519,High
+0HUWQWOJ,Engaging,2017-10-09,,MG Special,Markita Hansen,0.7002089107487418,High
+I5VHXAWW,Engaging,2017-11-06,Bluth Company,GTX Plus Pro,Boris Faz,0.6992805362999633,Medium
+RVH3UUKY,Engaging,2017-02-19,,MG Advanced,Vicki Laflamme,0.6991195877119729,Medium
+3N46WQVI,Engaging,2017-05-13,Faxquote,MG Advanced,Hayden Neloms,0.6990215887908652,Medium
+X3ZSQCH8,Engaging,2017-02-10,Scotfind,GTX Basic,Kami Bicknell,0.6979753608474363,Medium
+5P3NH791,Engaging,2017-02-10,Golddex,MG Advanced,Boris Faz,0.6978883297533311,Medium
+VVE9HGLD,Engaging,2017-10-05,,GTX Pro,Kary Hendrixson,0.6972950068746414,Medium
+IQR162ZT,Engaging,2017-12-13,,GTX Plus Basic,Elease Gluck,0.696193479780449,Medium
+GG85QBTM,Engaging,2017-06-10,Lexiqvolax,GTK 500,Elease Gluck,0.6954508805955321,Medium
+H0RRUQZ6,Engaging,2017-09-08,,MG Special,Maureen Marcano,0.6953382309790207,Medium
+4S17VJ7O,Engaging,2017-10-19,,MG Advanced,Kary Hendrixson,0.6952782442879022,Medium
+A194RP0I,Engaging,2016-12-12,,MG Advanced,Rosalina Dieter,0.6943204816222703,Medium
+TJ03NDNX,Engaging,2017-03-25,Iselectrics,MG Advanced,Violet Mclelland,0.693794008525976,Medium
+5RNWV17L,Engaging,2017-02-11,Golddex,MG Advanced,Rosalina Dieter,0.6936464594813206,Medium
+YQ0Y0YQS,Engaging,2017-03-05,Newex,MG Advanced,Violet Mclelland,0.6928555809318537,Medium
+CT3HBBI2,Engaging,2017-01-15,Mathtouch,MG Special,Elease Gluck,0.6927806691397843,Medium
+T7T1YIM7,Engaging,2017-01-06,,GTX Plus Pro,Boris Faz,0.6922639186675247,Medium
+VXMFL425,Engaging,2017-02-12,Faxquote,GTX Basic,James Ascencio,0.6922315470136027,Medium
+RFQP9VCW,Engaging,2017-03-07,,MG Advanced,Wilburn Farren,0.6916819759718001,Medium
+5C8HCDXT,Engaging,2017-03-21,,MG Advanced,Wilburn Farren,0.6916819759718001,Medium
+5TCGN3GX,Engaging,2017-10-16,,GTX Plus Basic,Violet Mclelland,0.6915846207520121,Medium
+1LHU0876,Engaging,2017-09-22,Labdrill,MG Advanced,Elease Gluck,0.691401116827081,Medium
+V1SX6HOD,Engaging,2017-09-19,,GTX Plus Basic,Maureen Marcano,0.691257470428595,Medium
+1GIP77EP,Engaging,2017-02-21,,GTX Plus Pro,Maureen Marcano,0.6901372131912781,Medium
+QR2BDRAI,Engaging,2017-01-04,,MG Advanced,James Ascencio,0.6894249102827408,Medium
+7MP6KLZO,Engaging,2017-07-24,Goodsilron,GTX Basic,Moses Frase,0.6893589182709423,Medium
+J962I0KG,Engaging,2017-11-20,,GTX Plus Basic,Cassey Cress,0.6893468521639179,Medium
+B5A1BERF,Engaging,2017-02-07,Umbrella Corporation,GTX Pro,Kami Bicknell,0.6891937778791577,Medium
+848QSODT,Engaging,2017-05-14,,GTX Basic,Vicki Laflamme,0.6888803695060522,Medium
+Y28VHZKQ,Engaging,2017-03-13,,MG Advanced,Cassey Cress,0.6886621543439623,Medium
+HN6TZPAF,Engaging,2017-10-31,,GTX Plus Pro,Wilburn Farren,0.6884214965263638,Medium
+QEZ2X87C,Engaging,2017-09-07,Iselectrics,MG Special,Rosalina Dieter,0.688414173646212,Medium
+54OH0061,Engaging,2017-06-19,,GTX Pro,Maureen Marcano,0.6883810365587997,Medium
+KBR253C0,Engaging,2017-01-29,,MG Advanced,Kami Bicknell,0.6883042843717814,Medium
+1D54L027,Engaging,2017-01-25,,MG Advanced,Wilburn Farren,0.6880778296150171,Medium
+0AQGBN7B,Engaging,2017-05-08,,GTX Plus Basic,Maureen Marcano,0.6873698346599341,Medium
+U177IWW0,Engaging,2017-05-22,,GTX Plus Basic,Maureen Marcano,0.6873698346599341,Medium
+JKAYQ4HQ,Engaging,2017-09-03,,MG Special,Elease Gluck,0.6867904359088625,Medium
+WJQ8VD51,Engaging,2017-02-19,Faxquote,GTX Basic,Kami Bicknell,0.6862478185551332,Medium
+OMCFUDOU,Engaging,2017-10-31,,GTX Pro,James Ascencio,0.6857442178887024,Medium
+7S8SLZDY,Engaging,2017-11-27,,MG Special,Rosalina Dieter,0.6855855597115555,Medium
+VYPYVO8V,Engaging,2017-01-24,,GTX Basic,Vicki Laflamme,0.6852776242805138,Medium
+UAE5ZC7O,Engaging,2016-12-05,,GTX Plus Pro,Daniell Hammack,0.6849817245803033,Medium
+VJ5QGP8Z,Engaging,2017-02-15,,MG Advanced,Maureen Marcano,0.6849640352397288,Medium
+XT8HCGAD,Engaging,2017-09-10,Bubba Gump,MG Special,Rosalina Dieter,0.6848753043809735,Medium
+IVJP36UT,Engaging,2017-02-08,,MG Advanced,Cassey Cress,0.6846658847221906,Medium
+C8TV7R8A,Engaging,2016-12-26,,GTX Pro,Kary Hendrixson,0.6835783778205441,Medium
+B00UMAV4,Engaging,2016-12-26,Gogozoom,MG Advanced,Kami Bicknell,0.6835454022607521,Medium
+24K085JJ,Engaging,2017-09-15,,GTX Plus Basic,Maureen Marcano,0.6833688222584899,Medium
+9A9E1KPG,Engaging,2017-02-08,Genco Pura Olive Oil Company,GTX Basic,Elease Gluck,0.683361606691456,Medium
+EJJCUJ3P,Engaging,2017-07-23,,GTX Plus Basic,Darcel Schlecht,0.6817824979138475,Medium
+ODFL6HOF,Engaging,2017-07-23,,GTX Plus Basic,Darcel Schlecht,0.6817824979138475,Medium
+EY7OI10Z,Engaging,2017-07-30,,GTX Plus Basic,Darcel Schlecht,0.6817824979138475,Medium
+AY3KTIXX,Engaging,2017-06-08,Cheers,GTX Plus Pro,James Ascencio,0.6817009664070516,Medium
+BTUG5VDL,Engaging,2017-01-15,Inity,GTX Pro,Corliss Cosme,0.6813040530805592,Medium
+24REVMX7,Engaging,2017-06-25,,GTX Basic,Rosalina Dieter,0.6807630265249525,Medium
+OTLQMB5X,Engaging,2017-04-30,,GTX Basic,Rosalina Dieter,0.6805005962558406,Medium
+7VOW7BUJ,Engaging,2017-02-07,,GTX Pro,Cassey Cress,0.6804250459363886,Medium
+R55U5QI4,Engaging,2017-07-30,Scottech,GTX Plus Pro,Darcel Schlecht,0.6798529598001174,Medium
+USS2SNQI,Engaging,2017-08-13,,MG Special,Maureen Marcano,0.6790423452170142,Medium
+YT34YUZN,Engaging,2017-06-12,Betasoloin,GTX Pro,Corliss Cosme,0.6789787020246215,Medium
+1FLN8BTI,Engaging,2017-08-01,Rundofase,MG Special,Darcel Schlecht,0.6789692918192176,Medium
+TCJA7XF2,Engaging,2017-08-27,,MG Special,Kami Bicknell,0.677523483317127,Medium
+84LN84VM,Engaging,2017-02-17,,MG Advanced,Vicki Laflamme,0.6774493673878386,Medium
+EQCD7G7Q,Engaging,2017-01-08,Initech,GTX Basic,Rosalina Dieter,0.6772851539032426,Medium
+N5UIZYIV,Engaging,2017-01-28,Konmatfix,MG Special,Zane Levy,0.6770715898477596,Medium
+QIHWKCFK,Engaging,2017-03-24,Singletechno,MG Advanced,Cassey Cress,0.676753702207262,Medium
+K9KGXL2E,Engaging,2017-12-13,Lexiqvolax,MG Advanced,Markita Hansen,0.6764395865646089,Medium
+VPXW8RJS,Engaging,2017-01-05,,MG Advanced,Kami Bicknell,0.6761064294859447,Medium
+9AESK6QV,Engaging,2017-08-07,,GTX Basic,Vicki Laflamme,0.6756336244934924,Medium
+MUSSD9WD,Engaging,2017-08-09,Goodsilron,GTX Plus Basic,Darcel Schlecht,0.6755302423890152,Medium
+O7UUAK3Y,Engaging,2017-01-02,dambase,GTX Plus Basic,Corliss Cosme,0.6742094024834868,Medium
+X7MN9ROG,Engaging,2017-10-23,,GTX Plus Pro,Vicki Laflamme,0.6740939403476982,Medium
+JJGRAQ2K,Engaging,2017-10-23,Rangreen,GTX Plus Pro,Kary Hendrixson,0.6738763899921681,Medium
+PKDJTR06,Engaging,2017-01-24,Hatfan,GTX Plus Basic,Kami Bicknell,0.673557025637669,Medium
+AF7XJNED,Engaging,2017-03-16,,GTX Plus Pro,Rosie Papadopoulos,0.673055218417617,Medium
+5BE27MLY,Engaging,2017-01-28,,GTX Pro,Maureen Marcano,0.672499877609468,Medium
+DFFEQ87N,Engaging,2017-03-28,Scottech,MG Special,Maureen Marcano,0.6721651898526371,Medium
+125VIRMX,Engaging,2016-12-19,Warephase,GTK 500,Elease Gluck,0.6721433698808765,Medium
+4ZB2W6O7,Engaging,2017-08-01,Plusstrip,MG Special,Anna Snelling,0.6715811543824541,Medium
+V74O6XQT,Engaging,2017-03-14,,GTX Pro,Daniell Hammack,0.6712377294992041,Medium
+RPONINLM,Engaging,2017-01-23,,GTX Plus Basic,Vicki Laflamme,0.6709197724740136,Medium
+IBZI95HI,Engaging,2017-05-26,Zoomit,GTX Plus Basic,James Ascencio,0.670894725795739,Medium
+RIW4VWBW,Engaging,2017-01-10,,GTX Plus Pro,Hayden Neloms,0.6708714786516443,Medium
+TV300INP,Engaging,2017-03-03,,GTX Plus Pro,Wilburn Farren,0.6702329350633532,Medium
+E887HZT1,Engaging,2017-02-12,Cheers,MG Advanced,Rosalina Dieter,0.6700101144856079,Medium
+LZ3B174J,Engaging,2017-09-29,,MG Special,Vicki Laflamme,0.669555470849804,Medium
+LDJ6VTNW,Engaging,2017-10-04,,GTX Plus Basic,Daniell Hammack,0.6692465592105493,Medium
+S8FODURJ,Engaging,2017-09-07,Nam-zim,GTX Basic,Zane Levy,0.6689082389862123,Medium
+2J5E145N,Engaging,2017-02-07,,GTX Pro,Daniell Hammack,0.6685240080696356,Medium
+DN6SG3US,Engaging,2017-02-25,,GTX Plus Pro,Wilburn Farren,0.6683932360210463,Medium
+XFB1VXQY,Engaging,2017-03-25,,MG Advanced,Maureen Marcano,0.6683482489953476,Medium
+Y7N97FW8,Engaging,2017-02-20,,GTX Pro,Vicki Laflamme,0.668020811761646,Medium
+VGSH1TSW,Engaging,2017-08-25,Vehement Capital Partners,MG Special,Violet Mclelland,0.6666149407176181,Medium
+6BIZ2MB6,Engaging,2017-05-24,,MG Special,Maureen Marcano,0.6665755287516832,Medium
+SIBR2J01,Engaging,2017-05-31,,MG Special,Maureen Marcano,0.6665755287516832,Medium
+AKMV6WN5,Engaging,2017-04-06,,GTK 500,Elease Gluck,0.6665119329172634,Medium
+RQULJHTU,Engaging,2017-03-16,,GTX Plus Pro,Daniell Hammack,0.6664953608070155,Medium
+Z75ND4JF,Engaging,2017-01-04,,GTX Basic,Kary Hendrixson,0.6662914356247702,Medium
+M3IMVC9G,Engaging,2017-05-16,,GTX Plus Basic,Rosalina Dieter,0.6661812839669405,Medium
+8LW65NDL,Engaging,2017-01-10,,GTX Plus Pro,Violet Mclelland,0.6660554423282193,Medium
+4E5A84H1,Engaging,2017-02-23,,MG Advanced,Kami Bicknell,0.6659632690428241,Medium
+PM2BF2KB,Engaging,2017-12-13,Xx-holding,GTX Plus Basic,Cassey Cress,0.6657760928030327,Medium
+THKCN7HU,Engaging,2017-03-19,,GTX Basic,Kary Hendrixson,0.6657038765165706,Medium
+0N11U6L3,Engaging,2017-10-30,Acme Corporation,GTX Plus Basic,Daniell Hammack,0.664821776670325,Medium
+6CT660FF,Engaging,2017-08-31,,GTX Plus Basic,Maureen Marcano,0.6646217730908438,Medium
+VRWH3YJV,Engaging,2017-09-14,,GTX Plus Pro,Maureen Marcano,0.6643939994267816,Medium
+FZC2J90W,Engaging,2017-02-26,Bluth Company,MG Advanced,Maureen Marcano,0.6639539621837648,Medium
+OERROEPM,Engaging,2017-05-28,,GTX Basic,Markita Hansen,0.6637288249821636,Medium
+67IKZGGJ,Engaging,2017-01-29,,GTX Plus Basic,Maureen Marcano,0.6637126314710101,Medium
+DEHQTB8B,Engaging,2017-03-01,Kinnamplus,MG Special,Boris Faz,0.6635673003053779,Medium
+LJBQ7P0V,Engaging,2017-03-09,Zotware,MG Special,James Ascencio,0.6635249091428308,Medium
+QM6VR1H5,Engaging,2017-01-04,,GTX Plus Pro,Daniell Hammack,0.6633587277761237,Medium
+DZ57QIQN,Engaging,2017-01-18,,GTX Plus Pro,Daniell Hammack,0.6633587277761237,Medium
+5CAP1055,Engaging,2017-08-13,Kan-code,GTX Plus Pro,Kary Hendrixson,0.6630216740254578,Medium
+R9GI5SJ5,Engaging,2017-08-05,Domzoom,MG Advanced,Vicki Laflamme,0.6630083394896675,Medium
+W24IDMVV,Engaging,2017-02-15,,GTX Plus Pro,Corliss Cosme,0.6629929569501072,Medium
+0OESOJNN,Engaging,2017-01-17,Warephase,GTX Plus Basic,James Ascencio,0.6627572439011525,Medium
+1LY8CAXD,Engaging,2017-09-27,Betasoloin,GTK 500,Rosalina Dieter,0.6625919269674722,Medium
+H6I16U57,Engaging,2017-04-01,Sunnamplex,MG Advanced,Rosie Papadopoulos,0.6615710257110285,Medium
+ZR436XWW,Engaging,2017-08-12,,GTX Plus Basic,Maureen Marcano,0.6615581671331826,Medium
+10IY4PV4,Engaging,2017-03-18,,MG Advanced,Rosalina Dieter,0.6614308937287998,Medium
+G3SJ8X1K,Engaging,2017-03-31,,MG Advanced,Violet Mclelland,0.6612446658624231,Medium
+JBECEURV,Engaging,2017-09-14,,GTX Basic,Zane Levy,0.6611165907359945,Medium
+HMWIP0F2,Engaging,2017-08-12,Finjob,MG Special,Darcel Schlecht,0.6608994667973911,Medium
+8PLXH354,Engaging,2017-08-26,,MG Special,Rosalina Dieter,0.6606911781039857,Medium
+QP006VDE,Engaging,2017-05-01,Domzoom,MG Advanced,Markita Hansen,0.6605469530504792,Medium
+1ORXGKVH,Engaging,2017-06-17,Sonron,GTX Pro,Kary Hendrixson,0.6598721170113881,Medium
+TLOHEQ18,Engaging,2017-01-02,,GTX Plus Basic,Corliss Cosme,0.6597874913825816,Medium
+CJ2ON1LV,Engaging,2017-01-11,Nam-zim,GTX Pro,Corliss Cosme,0.6595351867691731,Medium
+HY94AVIW,Engaging,2017-05-14,,GTX Basic,Maureen Marcano,0.6593739633663173,Medium
+839AMI93,Engaging,2017-03-10,,GTX Basic,Kary Hendrixson,0.6592798051490195,Medium
+BFGASJAW,Engaging,2017-03-10,,GTX Basic,Kary Hendrixson,0.6592798051490195,Medium
+R1K16RZO,Engaging,2017-05-01,,GTX Plus Pro,Maureen Marcano,0.6590833556152043,Medium
+QMFN71BT,Engaging,2017-08-13,,GTX Plus Basic,Darcel Schlecht,0.658804685183869,Medium
+5T8Q2YID,Engaging,2017-01-01,,MG Special,Elease Gluck,0.6585676728820141,Medium
+J9PCNCUP,Engaging,2017-11-06,Golddex,GTX Basic,Kary Hendrixson,0.6584421158609861,Medium
+UQQE9ILV,Engaging,2017-01-13,Iselectrics,GTX Pro,James Ascencio,0.6582415281306804,Medium
+6HG76L6U,Engaging,2017-02-21,,GTX Pro,Boris Faz,0.6575618123131834,Medium
+L2S4T3VA,Engaging,2017-02-08,,GTX Plus Pro,Cassey Cress,0.657073692331016,Medium
+ISQJD695,Engaging,2017-07-16,Sunnamplex,GTX Basic,Boris Faz,0.6570484571441897,Medium
+NJNY07JZ,Engaging,2017-07-29,Codehow,GTX Basic,Darcel Schlecht,0.656942779241841,Medium
+4I8X7EMW,Engaging,2017-01-11,,GTX Pro,Corliss Cosme,0.6566742374589121,Medium
+WUNMIJW9,Engaging,2017-03-02,,MG Advanced,Elease Gluck,0.6565485427701806,Medium
+73HO9OZC,Engaging,2017-03-12,Finjob,GTX Basic,Cassey Cress,0.6564406759568192,Medium
+Z1WLLL1H,Engaging,2017-01-21,,GTX Basic,Kami Bicknell,0.6561570790681456,Medium
+JIEO87ZV,Engaging,2017-10-06,,MG Advanced,Daniell Hammack,0.6558378275846105,Medium
+RIC5ZHK4,Engaging,2017-05-07,Plussunin,GTX Plus Basic,Corliss Cosme,0.6535186364340563,Medium
+ORYORRQV,Engaging,2017-10-13,Hottechi,GTX Basic,Kary Hendrixson,0.6534163707263017,Medium
+WSO3NMK5,Engaging,2017-09-18,,MG Advanced,Maureen Marcano,0.6533066977359271,Medium
+IIVP87B8,Engaging,2017-04-22,,MG Special,Maureen Marcano,0.6529328183603149,Medium
+M41NS5DN,Engaging,2017-03-24,,GTX Plus Pro,Cassey Cress,0.6528724808398163,Medium
+298J5EM0,Engaging,2017-08-09,,GTX Basic,Vicki Laflamme,0.65285502409463,Medium
+P6NQ2LZK,Engaging,2017-08-23,,GTX Basic,Vicki Laflamme,0.65285502409463,Medium
+P66UXGPS,Engaging,2017-07-22,,GTX Plus Basic,Darcel Schlecht,0.6527579118374298,Medium
+UWI771ZX,Engaging,2017-07-29,,GTX Plus Basic,Darcel Schlecht,0.6527579118374298,Medium
+Y6UBZM6P,Engaging,2017-01-09,,GTX Plus Pro,Vicki Laflamme,0.6527283601969956,Medium
+71GQNH5T,Engaging,2017-03-05,,MG Advanced,Cassey Cress,0.6526984289693704,Medium
+AMP2GT6F,Engaging,2017-08-14,,GTX Pro,Maureen Marcano,0.6519937533808107,Medium
+P9LE92UR,Engaging,2017-03-31,,MG Special,Kary Hendrixson,0.6518375894951198,Medium
+FYN7C0CV,Engaging,2017-03-04,,MG Advanced,Cassey Cress,0.6511103928704591,Medium
+CMS1HUGL,Engaging,2017-03-25,,MG Advanced,Cassey Cress,0.6511103928704591,Medium
+G5JP0G7Q,Engaging,2017-02-19,,MG Advanced,Markita Hansen,0.6510046987305164,Medium
+9FPDDSIJ,Engaging,2017-03-22,,GTX Pro,Cassey Cress,0.6508962587132351,Medium
+92G1TO7L,Engaging,2017-02-15,,GTX Basic,Kary Hendrixson,0.6505924091494727,Medium
+XTE9XJTS,Engaging,2017-06-04,Zencorporation,MG Special,Kary Hendrixson,0.6505628174584541,Medium
+8GE7FY98,Engaging,2017-03-22,,GTX Pro,Violet Mclelland,0.6505615894069016,Medium
+1UW6ILCH,Engaging,2017-09-05,Bioplex,GTX Basic,Maureen Marcano,0.6505247236305262,Medium
+GVYF29NM,Engaging,2017-02-25,,MG Advanced,Violet Mclelland,0.6501969020594371,Medium
+HLDA8IA1,Engaging,2017-07-02,,MG Special,Elease Gluck,0.6499269529120152,Medium
+NEFPSWOJ,Engaging,2017-06-16,Toughzap,GTX Plus Basic,Markita Hansen,0.6496729737021156,Medium
+IGHYUSN8,Engaging,2017-05-06,Golddex,GTX Plus Pro,Vicki Laflamme,0.64954735165474,Medium
+WWCMITY9,Engaging,2017-06-12,Funholding,GTX Pro,Rosalina Dieter,0.6494957974416203,Medium
+U1XSUD1P,Engaging,2017-09-06,,GTX Basic,Kami Bicknell,0.6493213534586908,Medium
+WL6CZ7N4,Engaging,2017-07-28,,GTX Plus Basic,Marty Freudenburg,0.6492908050297751,Medium
+R7I947IZ,Engaging,2017-07-30,,GTX Plus Basic,Marty Freudenburg,0.6492559770705392,Medium
+WRUG19FZ,Engaging,2017-01-13,Vehement Capital Partners,MG Advanced,Hayden Neloms,0.6483266136780421,Medium
+A8QRKXG3,Engaging,2017-06-25,,GTX Pro,Vicki Laflamme,0.6473072872249093,Medium
+NMLTE4CS,Engaging,2017-09-30,,GTX Plus Pro,Maureen Marcano,0.6470372833020419,Medium
+HZIU2NOT,Engaging,2017-02-04,,GTX Plus Pro,Kary Hendrixson,0.6469619606391023,Medium
+SWEQFKRF,Engaging,2017-05-22,,GTX Pro,Rosie Papadopoulos,0.6469266430840126,Medium
+CLRPASVW,Engaging,2017-08-08,Cancity,GTX Basic,Kami Bicknell,0.6469093576019771,Medium
+7439NGIG,Engaging,2017-07-20,Sumace,GTX Pro,Marty Freudenburg,0.6469037417457845,Medium
+N3GVE0VP,Engaging,2017-05-18,,GTK 500,Markita Hansen,0.646649296552742,Medium
+5VYJCJAE,Engaging,2017-01-15,Zoomit,GTX Plus Pro,Corliss Cosme,0.6465930718194746,Medium
+8AJG1YLJ,Engaging,2017-02-11,,GTX Basic,Kary Hendrixson,0.6465319212849142,Medium
+ALHQU8W8,Engaging,2017-03-20,Plexzap,GTX Basic,Corliss Cosme,0.6463887789582107,Medium
+0S6OQ9AO,Engaging,2017-07-24,,GTX Plus Basic,Marty Freudenburg,0.6459196954330632,Medium
+OAUUCC2N,Engaging,2017-07-31,,GTX Plus Basic,Marty Freudenburg,0.6459196954330632,Medium
+K8LRZ95S,Engaging,2017-04-18,,GTX Plus Basic,Maureen Marcano,0.6457460675946336,Medium
+477HSG28,Engaging,2017-06-11,,GTX Basic,Vicki Laflamme,0.64543549575428,Medium
+TOJ902PF,Engaging,2017-12-15,Bioholding,GTX Plus Basic,Daniell Hammack,0.6452896980502166,Medium
+H5J7C2FE,Engaging,2017-09-05,,GTX Basic,Kami Bicknell,0.6452593978842119,Medium
+7K0S2P6K,Engaging,2017-04-17,,GTX Pro,Rosalina Dieter,0.6452320122235514,Medium
+RP7KA6HS,Engaging,2017-02-05,Mathtouch,MG Special,Elease Gluck,0.6451061771028386,Medium
+S6645YWA,Engaging,2017-02-07,Y-corporation,GTX Basic,Kami Bicknell,0.6438111452797127,Medium
+UGB3A3CE,Engaging,2017-07-04,,MG Special,Maureen Marcano,0.643724663288461,Medium
+5BXUKFPR,Engaging,2017-02-11,,GTX Plus Pro,James Ascencio,0.6435740183620208,Medium
+X1D1HYMM,Engaging,2017-02-25,,GTX Plus Pro,James Ascencio,0.6435740183620208,Medium
+7DOGGIXI,Engaging,2017-08-05,Bioplex,MG Special,Elease Gluck,0.6434932295564562,Medium
+3N3RAHXR,Engaging,2017-03-19,Nam-zim,GTX Plus Basic,Cassey Cress,0.6434276416864273,Medium
+8YIANRVX,Engaging,2017-01-29,,GTX Pro,Zane Levy,0.6430809897280613,Medium
+7COYG1Z2,Engaging,2017-07-30,,MG Special,Kami Bicknell,0.6430690958554621,Medium
+B96E3BBD,Engaging,2017-08-12,,GTX Basic,Vicki Laflamme,0.6430409277478231,Medium
+MQEFGUOG,Engaging,2017-08-12,,GTX Basic,Vicki Laflamme,0.6430409277478231,Medium
+Q9VC6GV0,Engaging,2017-07-19,Konmatfix,MG Special,Anna Snelling,0.6426733204692814,Medium
+UVCHXUIG,Engaging,2017-07-26,Konmatfix,MG Special,Anna Snelling,0.6426733204692814,Medium
+YVXKNYSM,Engaging,2017-05-07,,GTX Pro,Corliss Cosme,0.6422737187666548,Medium
+UJ58VMZT,Engaging,2017-07-21,,GTX Plus Basic,Cecily Lampkin,0.6417935693427214,Medium
+E8GD44YC,Engaging,2017-07-21,,GTX Plus Basic,Cecily Lampkin,0.6417935693427214,Medium
+3F34LWKM,Engaging,2017-05-06,,GTX Pro,Vicki Laflamme,0.6415339242271332,Medium
+44Q1W18Y,Engaging,2017-08-12,Zoomit,MG Special,Moses Frase,0.6414448327230035,Medium
+5DQZSOBE,Engaging,2017-07-22,,GTX Plus Basic,Cecily Lampkin,0.641202096399621,Medium
+H7GXKD3O,Engaging,2017-08-19,Kan-code,GTX Plus Basic,Maureen Marcano,0.6409557594611517,Medium
+Z6R4KJFU,Engaging,2017-06-25,,GTX Pro,Daniell Hammack,0.6406254517703169,Medium
+YM8DBAFV,Engaging,2017-02-05,Sumace,GTX Basic,Cassey Cress,0.6402307079906353,Medium
+89P5UVQ0,Engaging,2017-05-14,,GTX Pro,Wilburn Farren,0.6399809451674321,Medium
+UMF3KRCL,Engaging,2017-08-11,,GTX Basic,Maureen Marcano,0.6399300740332172,Medium
+TUKHDOGS,Engaging,2017-08-20,,GTX Pro,Maureen Marcano,0.6398922521947098,Medium
+7VMOJBPN,Engaging,2017-06-03,Faxquote,GTX Pro,Kami Bicknell,0.6391489995076446,Medium
+AKTPC3M1,Engaging,2017-03-05,,GTX Basic,Kami Bicknell,0.6389775612470793,Medium
+GL1YE4PQ,Engaging,2017-05-09,,GTK 500,Markita Hansen,0.6389194270345209,Medium
+RE3UNESR,Engaging,2017-05-21,,GTX Basic,Kary Hendrixson,0.6388659414027086,Medium
+GQ2W1DXM,Engaging,2017-04-25,,GTX Pro,Maureen Marcano,0.6388025964737333,Medium
+49SUORYW,Engaging,2017-08-04,Betasoloin,GTX Plus Basic,Niesha Huffines,0.6387593300299977,Medium
+U7M26UZV,Engaging,2017-03-03,,MG Special,Vicki Laflamme,0.638736050265279,Medium
+YB20NWM1,Engaging,2017-03-24,,MG Special,Vicki Laflamme,0.638736050265279,Medium
+V0G393Q6,Engaging,2017-08-13,,GTX Plus Basic,Marty Freudenburg,0.638493787780816,Medium
+SX0SSL0H,Engaging,2017-03-06,,GTX Plus Basic,Rosie Papadopoulos,0.6380898162822064,Medium
+M9GP930T,Engaging,2017-04-23,,MG Special,Rosalina Dieter,0.6380171394055352,Medium
+WEES59KH,Engaging,2017-09-06,,MG Special,Violet Mclelland,0.6378585481036705,Medium
+7AFBJFP5,Engaging,2017-07-24,,MG Special,Maureen Marcano,0.6373293377483061,Medium
+6G6ZCKSB,Engaging,2017-04-16,,GTX Pro,Vicki Laflamme,0.6365192479441906,Medium
+KPYCCBQA,Engaging,2017-07-27,,GTX Plus Basic,Cecily Lampkin,0.6364129308278245,Medium
+J53D8EOL,Engaging,2016-12-14,Hottechi,GTX Plus Basic,Kary Hendrixson,0.636253045708608,Medium
+J31SUXQJ,Engaging,2017-08-10,Sumace,GTX Plus Pro,Marty Freudenburg,0.6362424759950875,Medium
+ILR33OAV,Engaging,2017-03-11,,MG Advanced,James Ascencio,0.6360210589796738,Medium
+ZRYPU2QW,Engaging,2017-03-09,,MG Advanced,James Ascencio,0.6359801802475652,Medium
+R5RSH4JV,Engaging,2017-02-25,,GTX Plus Pro,Boris Faz,0.635946420762637,Medium
+OZ5S8NCK,Engaging,2017-01-18,,GTX Pro,Kary Hendrixson,0.6356642383842404,Medium
+LHBWJAD3,Engaging,2017-07-20,,GTX Plus Basic,Darcel Schlecht,0.6355676019227401,Medium
+KRWKDPWW,Engaging,2017-07-20,,GTX Plus Basic,Darcel Schlecht,0.6355676019227401,Medium
+SSK95WLX,Engaging,2017-07-27,,GTX Plus Basic,Darcel Schlecht,0.6355676019227401,Medium
+PK1PS0KR,Engaging,2017-01-22,,MG Advanced,Rosie Papadopoulos,0.6354172656902711,Medium
+DNBR1VHP,Engaging,2017-07-20,Silis,MG Special,Anna Snelling,0.6353540391137492,Medium
+ZGW9SCQ0,Engaging,2017-09-10,,MG Advanced,Hayden Neloms,0.6352780935915066,Medium
+RTX8ZJXT,Engaging,2017-08-31,,GTX Basic,Vicki Laflamme,0.6344779421076883,Medium
+W8CXDBQN,Engaging,2017-01-13,,MG Special,Vicki Laflamme,0.6341371582965761,Medium
+961ED0B1,Engaging,2017-06-19,,GTX Plus Basic,Corliss Cosme,0.6336632163955276,Medium
+2YLXKON1,Engaging,2017-05-22,,MG Advanced,Hayden Neloms,0.6334907157037946,Medium
+HJRM13DI,Engaging,2017-07-25,Treequote,MG Special,Marty Freudenburg,0.6324619528570646,Medium
+P9PFSLS6,Engaging,2017-02-05,,MG Special,Maureen Marcano,0.6321581137805948,Medium
+9SRD5NCR,Engaging,2017-07-27,,GTK 500,Rosalina Dieter,0.6320119452859675,Medium
+KVR52YDI,Engaging,2017-03-01,,GTX Pro,Corliss Cosme,0.6320004864069421,Medium
+2JY9SQ2L,Engaging,2017-03-18,,MG Special,Vicki Laflamme,0.6318349581492908,Medium
+246MLWZ7,Engaging,2017-05-09,Rangreen,GTX Basic,Zane Levy,0.6316471178595737,Medium
+UEZOR630,Engaging,2017-04-29,,GTX Basic,Elease Gluck,0.6315415812680922,Medium
+WM7XURV6,Engaging,2017-05-22,Groovestreet,GTX Plus Basic,Corliss Cosme,0.6314645005949379,Medium
+ZEYGDEBG,Engaging,2017-10-09,,GTX Pro,Daniell Hammack,0.631230347250093,Medium
+MIXJ9F4F,Engaging,2017-07-18,,GTX Plus Basic,Maureen Marcano,0.6310434709615187,Medium
+TNWCER5C,Engaging,2017-06-12,,GTX Plus Basic,Rosie Papadopoulos,0.6309602076134442,Medium
+OIFERO7S,Engaging,2017-05-07,,MG Advanced,Rosalina Dieter,0.6305642327845491,Medium
+NMKAJZJ4,Engaging,2017-03-06,,MG Special,Kary Hendrixson,0.6301825986848114,Medium
+3IWUUUCN,Engaging,2017-05-24,,GTX Pro,Elease Gluck,0.630047633384042,Medium
+L6223VHA,Engaging,2017-07-26,Sumace,GTX Pro,Darcel Schlecht,0.629830336565205,Medium
+K2NPVZL8,Engaging,2017-09-23,,GTX Basic,Kami Bicknell,0.6296904802478186,Medium
+CI9S6CST,Engaging,2017-07-15,,MG Special,Rosalina Dieter,0.629622649538441,Medium
+XVB2CGL6,Engaging,2017-07-21,,GTX Pro,Maureen Marcano,0.6296076696426334,Medium
+6R6S91WE,Engaging,2017-03-25,,GTX Pro,Daniell Hammack,0.6295451391706708,Medium
+P8QXRXMR,Engaging,2017-09-25,,GTX Pro,Rosalina Dieter,0.6293449844638651,Medium
+379DUF2N,Engaging,2017-01-29,,GTX Basic,Markita Hansen,0.6284942477132874,Medium
+EQ0PLA0O,Engaging,2017-09-13,,MG Special,Vicki Laflamme,0.6283545842450643,Medium
+ZRCQXB38,Engaging,2017-07-23,,GTX Basic,Darcel Schlecht,0.6281785274397979,Medium
+CUZDYOOO,Engaging,2017-07-30,,GTX Basic,Darcel Schlecht,0.6281785274397979,Medium
+L1YN7LDL,Engaging,2017-06-16,Bluth Company,MG Special,Cassey Cress,0.6281574371484844,Medium
+GRYHHER0,Engaging,2017-09-03,Finhigh,MG Special,Hayden Neloms,0.6281098337570619,Medium
+3A7G5K0E,Engaging,2017-06-12,,GTX Basic,Rosalina Dieter,0.6279030697104064,Medium
+ETLF2H4K,Engaging,2017-07-21,,GTX Plus Basic,Maureen Marcano,0.6278757603520526,Medium
+ZK4S74FD,Engaging,2017-05-25,Singletechno,GTX Plus Pro,Vicki Laflamme,0.6278435155455464,Medium
+KTC0RC8I,Engaging,2017-04-23,,MG Special,James Ascencio,0.6272801810437063,Medium
+D62905BC,Engaging,2017-04-04,,GTX Plus Pro,Maureen Marcano,0.6270736878811948,Medium
+Q1HNDPKW,Engaging,2017-07-23,,GTX Pro,Darcel Schlecht,0.6270018620972344,Medium
+5WHMLQDK,Engaging,2017-05-01,,GTX Pro,Kary Hendrixson,0.6269261591695369,Medium
+EUYJDW9C,Engaging,2017-05-29,,GTX Pro,Kary Hendrixson,0.6269261591695369,Medium
+L0GMLGRR,Engaging,2017-03-02,,MG Special,Vicki Laflamme,0.6268070906167295,Medium
+XAC1J3TF,Engaging,2017-05-15,,MG Advanced,Rosalina Dieter,0.6261847635280069,Medium
+MTN3BOMC,Engaging,2017-07-30,,GTX Plus Basic,Maureen Marcano,0.6261130443479802,Medium
+2HS1C21I,Engaging,2017-04-03,,GTX Pro,Elease Gluck,0.6260541749904196,Medium
+03VCDZEE,Engaging,2017-02-23,,GTX Pro,Maureen Marcano,0.6260505227388053,Medium
+D193SPY4,Engaging,2017-07-08,Plussunin,MG Special,Violet Mclelland,0.6260275182161179,Medium
+ZBDT3T2H,Engaging,2017-09-18,,GTX Basic,Kary Hendrixson,0.6253780782917743,Medium
+CYWZJ2AI,Engaging,2017-02-20,Donquadtech,GTX Plus Basic,Kary Hendrixson,0.6253125721721591,Medium
+A5SCVK7E,Engaging,2017-09-01,Goodsilron,GTX Plus Pro,Corliss Cosme,0.6251204996958142,Medium
+F569KUVC,Engaging,2017-01-24,,GTX Basic,Kami Bicknell,0.6248562215641122,Medium
+F3EOBN5A,Engaging,2017-07-20,Genco Pura Olive Oil Company,GTX Plus Pro,Moses Frase,0.6247889441016203,Medium
+CYV6MJL9,Engaging,2017-08-14,,MG Advanced,Hayden Neloms,0.6246808008164308,Medium
+W533W8G6,Engaging,2017-09-04,,GTX Basic,Zane Levy,0.624658377969861,Medium
+JSZZN48S,Engaging,2017-02-28,,GTX Plus Pro,James Ascencio,0.6241083803959837,Medium
+ASZNII2J,Engaging,2017-09-01,,MG Special,Elease Gluck,0.623490040635668,Medium
+EZVKSQ9C,Engaging,2016-12-16,Genco Pura Olive Oil Company,GTX Plus Pro,Boris Faz,0.6233672816996394,Medium
+S3W6Q07M,Engaging,2017-01-16,Acme Corporation,GTX Plus Pro,Kami Bicknell,0.6232982446742552,Medium
+6SMB6SDY,Engaging,2017-08-15,,GTX Pro,Vicki Laflamme,0.6231376139893847,Medium
+WV2YBM8V,Engaging,2017-09-30,,GTX Basic,Kary Hendrixson,0.6230712548438786,Medium
+YRTI0EKE,Engaging,2017-05-29,,GTX Basic,Rosalina Dieter,0.6229028697838493,Medium
+9D43V124,Engaging,2017-08-20,Mathtouch,MG Special,Vicki Laflamme,0.6228020213737564,Medium
+0QPZIIPF,Engaging,2017-03-27,Donware,GTX Plus Basic,Vicki Laflamme,0.6226852197653037,Medium
+USVLKDF4,Engaging,2017-02-04,Dontechi,GTX Basic,Corliss Cosme,0.6223392298683579,Medium
+HF2DSIT5,Engaging,2017-05-16,,GTX Basic,Elease Gluck,0.6220833338245243,Medium
+C32E4E1D,Engaging,2017-04-20,,MG Special,Kami Bicknell,0.6220559498485273,Medium
+S2SC8AP7,Engaging,2017-06-25,,MG Special,Violet Mclelland,0.6217118781014304,Medium
+SE6OIGYN,Engaging,2017-06-12,Isdom,GTX Plus Basic,Violet Mclelland,0.6215308826535043,Medium
+E8QHX9TE,Engaging,2017-05-11,,GTX Plus Pro,Vicki Laflamme,0.6213740423990601,Medium
+8BYEALF9,Engaging,2017-07-14,,MG Special,Vicki Laflamme,0.6213349747447472,Medium
+FHWXZ6HL,Engaging,2017-05-09,,GTX Pro,Rosie Papadopoulos,0.6212633575406077,Medium
+F8QQEW1W,Engaging,2017-06-04,,GTX Plus Basic,Kami Bicknell,0.6208445894124145,Medium
+3T64Z7DB,Engaging,2017-03-25,,GTX Basic,Kami Bicknell,0.6204857351198974,Medium
+YVDQ80A0,Engaging,2017-07-15,,GTX Plus Basic,Maureen Marcano,0.6203371334555003,Medium
+3T23AW36,Engaging,2017-06-30,,GTX Plus Basic,James Ascencio,0.6202734337004633,Medium
+Q6OUJCH5,Engaging,2017-04-21,,GTX Pro,Vicki Laflamme,0.6201185142650982,Medium
+DOGKQHQP,Engaging,2017-03-31,,GTX Pro,Vicki Laflamme,0.6198328925806386,Medium
+81PWOUF0,Engaging,2017-07-06,,GTX Pro,Maureen Marcano,0.6196514048775601,Medium
+K72CEXGZ,Engaging,2017-03-20,,GTX Plus Basic,Maureen Marcano,0.6195019499757604,Medium
+A4JROIDO,Engaging,2017-01-19,,MG Special,Vicki Laflamme,0.6193569609753242,Medium
+E4THD359,Engaging,2017-02-05,,GTX Basic,Wilburn Farren,0.6191873702710289,Medium
+O0L6JUYE,Engaging,2017-08-12,Bluth Company,GTX Basic,Marty Freudenburg,0.6190629693014973,Medium
+GXIVJQPG,Engaging,2017-10-01,Xx-zobam,GTX Plus Basic,Daniell Hammack,0.6190492788034548,Medium
+QHJ3W8FW,Engaging,2017-03-12,,GTX Pro,Kami Bicknell,0.6190066581592677,Medium
+OCGXWE8H,Engaging,2017-02-03,,MG Special,Vicki Laflamme,0.6177065841745905,Medium
+LLQCQOCR,Engaging,2017-06-19,,GTX Plus Basic,Kary Hendrixson,0.6176941178003801,Medium
+ND0OV6MQ,Engaging,2017-06-26,,GTX Plus Basic,Kary Hendrixson,0.6176941178003801,Medium
+8XY5IA68,Engaging,2017-09-11,Sonron,GTX Pro,Rosie Papadopoulos,0.6173910928910241,Medium
+8LA72RM8,Engaging,2017-09-17,Donware,MG Advanced,Maureen Marcano,0.6170690505250509,Medium
+TIPG6R0Z,Engaging,2017-06-17,,GTX Basic,Vicki Laflamme,0.6167702275336714,Medium
+81FNO0VM,Engaging,2017-03-07,,GTX Plus Basic,Wilburn Farren,0.6166647038634231,Medium
+9B7FS6YL,Engaging,2017-07-27,Konex,GTX Pro,Darcel Schlecht,0.6165049946750735,Medium
+CVFUMOK9,Engaging,2017-04-12,Rangreen,GTX Plus Pro,Corliss Cosme,0.6164775340141416,Medium
+NXXKM7C7,Engaging,2017-11-14,Cancity,GTX Plus Basic,Daniell Hammack,0.616311245949967,Medium
+EB89ONZN,Engaging,2017-03-29,Funholding,GTX Pro,Kary Hendrixson,0.6161434969554317,Medium
+96798U7Y,Engaging,2017-06-20,,GTX Pro,Rosie Papadopoulos,0.6159886522856828,Medium
+WZN26QZQ,Engaging,2017-08-27,Lexiqvolax,GTX Plus Pro,Corliss Cosme,0.6159491591010047,Medium
+2BXYT4PD,Engaging,2017-05-18,Funholding,GTX Plus Pro,Hayden Neloms,0.6158711955506269,Medium
+JUHQ1POT,Engaging,2017-07-01,Streethex,GTX Plus Basic,Boris Faz,0.6157531885558686,Medium
+PAQ6EKHB,Engaging,2017-09-17,,GTX Basic,Kami Bicknell,0.6155126311112438,Medium
+U4IJO6SL,Engaging,2017-04-08,,GTX Pro,Vicki Laflamme,0.6153975957478024,Medium
+2LSNRT4U,Engaging,2017-04-17,,GTX Pro,Kary Hendrixson,0.6145389196601536,Medium
+OJ42ZCHR,Engaging,2017-07-30,,MG Special,Violet Mclelland,0.6145043381571219,Medium
+4ZQTMS3Z,Engaging,2017-11-23,Kan-code,MG Special,Violet Mclelland,0.6140462051719479,Medium
+2MKG6ZDD,Engaging,2017-06-20,Domzoom,GTX Basic,James Ascencio,0.6136727708521075,Medium
+UU25XD9E,Engaging,2017-05-08,Hatfan,GTX Pro,Zane Levy,0.6136360595835221,Medium
+DF1011UT,Engaging,2017-03-17,Konmatfix,GTX Plus Basic,Corliss Cosme,0.613635823569879,Medium
+JS5N8USN,Engaging,2017-06-14,,GTX Plus Basic,Corliss Cosme,0.6136320092734673,Medium
+C6TQMD3C,Engaging,2017-06-07,,GTX Plus Pro,Vicki Laflamme,0.6133295271836335,Medium
+NFMCPYOV,Engaging,2017-03-30,Finjob,GTX Basic,Rosie Papadopoulos,0.6133279839413118,Medium
+9Y85N0W5,Engaging,2017-03-22,,MG Advanced,Markita Hansen,0.6126162646952955,Medium
+XYNTWPN1,Engaging,2017-01-08,Rundofase,MG Special,Violet Mclelland,0.6126089583049583,Medium
+D17T8PTH,Engaging,2017-06-08,,GTX Basic,Vicki Laflamme,0.6124821396069648,Medium
+HKV37WU9,Engaging,2017-06-15,,GTX Basic,Vicki Laflamme,0.6124821396069648,Medium
+DJH67UIZ,Engaging,2017-03-17,,MG Special,Violet Mclelland,0.6123404509212175,Medium
+7VGJ2B7O,Engaging,2017-03-17,,MG Special,Violet Mclelland,0.6123404509212175,Medium
+A8NDGVJE,Engaging,2017-08-06,,GTX Pro,Darcel Schlecht,0.6121255883041083,Medium
+PU62ZGX4,Engaging,2017-07-27,Singletechno,GTX Plus Basic,Jonathan Berthelot,0.6119626021266868,Medium
+VKT0UN11,Engaging,2017-01-14,Codehow,MG Advanced,James Ascencio,0.611897288341505,Medium
+0A1LN7GB,Engaging,2017-03-09,,MG Special,Violet Mclelland,0.6115616862871215,Medium
+0STR2QEA,Engaging,2017-05-25,Inity,GTX Plus Pro,Corliss Cosme,0.6115568105682944,Medium
+HSYU33MS,Engaging,2017-06-24,,MG Special,Vicki Laflamme,0.6114992242001775,Medium
+6Q67ZUJ1,Engaging,2017-01-09,,MG Special,Maureen Marcano,0.6114046775230665,Medium
+K64TY8LU,Engaging,2017-01-16,,MG Special,Maureen Marcano,0.6114046775230665,Medium
+LBO52V0N,Engaging,2017-08-14,,GTX Pro,Cassey Cress,0.6111624290439054,Medium
+M2ZRU2UH,Engaging,2017-07-28,,GTX Basic,Rosalina Dieter,0.6111147725835596,Medium
+TQQDICC6,Engaging,2017-07-22,,GTX Basic,Darcel Schlecht,0.6109408064219197,Medium
+8SVMGDPA,Engaging,2017-05-09,Donquadtech,GTX Plus Basic,Maureen Marcano,0.6108194295064984,Medium
+2FNTCPOU,Engaging,2017-06-25,,GTX Plus Pro,Vicki Laflamme,0.6107907175460687,Medium
+ZTLLHCBU,Engaging,2017-03-07,Dontechi,GTX Basic,Kary Hendrixson,0.6106059642333612,Medium
+SJ3QA8KP,Engaging,2017-07-28,Treequote,MG Advanced,Niesha Huffines,0.61031459287403,Medium
+ZU3GICE9,Engaging,2017-06-15,,GTX Basic,Maureen Marcano,0.6095111212984003,Medium
+XB1ZV04H,Engaging,2017-08-03,,GTX Basic,Versie Hillebrand,0.6094938970667403,Medium
+VCSHYIU8,Engaging,2017-01-12,,GTX Plus Basic,Maureen Marcano,0.6094010909481768,Medium
+VRYR5A81,Engaging,2017-03-25,Finhigh,GTX Basic,Wilburn Farren,0.6093870153101055,Medium
+UYQJ2A1O,Engaging,2017-05-01,,GTX Plus Pro,Vicki Laflamme,0.609254473135442,Medium
+HHDQ9EW4,Engaging,2017-04-28,Inity,GTX Basic,Kami Bicknell,0.6089810113699776,Medium
+FB9M4FR7,Engaging,2017-03-26,,MG Special,James Ascencio,0.6089735049639792,Medium
+TH9RV79M,Engaging,2017-02-06,,MG Special,Maureen Marcano,0.6088401650349415,Medium
+RG893DYQ,Engaging,2017-05-05,The New York Inquirer,GTX Basic,Markita Hansen,0.6087920527928127,Medium
+CENVLTFH,Engaging,2017-01-28,Toughzap,GTX Plus Basic,Corliss Cosme,0.6087310393229208,Medium
+04YGLJ3N,Engaging,2017-03-17,,GTX Plus Pro,Kary Hendrixson,0.6085129686280552,Medium
+CR6ZLEWC,Engaging,2017-03-24,,GTX Plus Pro,Kary Hendrixson,0.6085129686280552,Medium
+LIQZNH9U,Engaging,2017-03-31,,GTX Plus Pro,Kary Hendrixson,0.6085129686280552,Medium
+9W7PFSNX,Engaging,2017-01-31,,GTX Basic,Corliss Cosme,0.6084960883362608,Medium
+T0VJ4AMX,Engaging,2017-03-31,Green-Plus,GTX Basic,Corliss Cosme,0.6081656206999186,Medium
+RCJRB8W8,Engaging,2017-08-05,,GTX Plus Pro,Darcel Schlecht,0.6080526578302771,Medium
+5NGPM4C3,Engaging,2017-08-05,,GTX Plus Pro,Darcel Schlecht,0.6080526578302771,Medium
+3Q15OHQB,Engaging,2017-09-23,,MG Advanced,Vicki Laflamme,0.6078433503726807,Medium
+WQSJNIEZ,Engaging,2017-05-05,,GTX Basic,Markita Hansen,0.6077733548123393,Medium
+BNY8MJ6L,Engaging,2017-02-16,Labdrill,GTX Basic,Kary Hendrixson,0.6077331178388249,Medium
+T1SITEI0,Engaging,2017-07-29,Singletechno,MG Special,Darcel Schlecht,0.6076705021817845,Medium
+B6Z5NFV0,Engaging,2017-06-20,,MG Advanced,Wilburn Farren,0.6075902845735155,Medium
+6AO6E15O,Engaging,2017-07-09,Statholdings,GTX Pro,Rosalina Dieter,0.6075561897978808,Medium
+XRZVJPD5,Engaging,2017-02-27,,GTX Plus Basic,Maureen Marcano,0.6075513701104436,Medium
+PNISVWNN,Engaging,2017-07-21,Scotfind,MG Advanced,Darcel Schlecht,0.6074710169413773,Medium
+UGTXH980,Engaging,2017-06-01,,GTX Pro,Daniell Hammack,0.6070120372228259,Medium
+EJVD09HQ,Engaging,2017-09-25,Betasoloin,MG Special,James Ascencio,0.6069224471295533,Medium
+IMLFM79C,Engaging,2017-09-09,,GTX Plus Basic,Markita Hansen,0.6065565700752886,Medium
+H85L45JM,Engaging,2017-08-01,,MG Special,Anna Snelling,0.6065109271434834,Medium
+B08R55ET,Engaging,2017-08-15,,MG Special,Anna Snelling,0.6065109271434834,Medium
+GMN9KQN2,Engaging,2017-05-27,,GTX Pro,Daniell Hammack,0.6063431858817317,Medium
+XDECB9X2,Engaging,2017-04-07,,GTX Basic,Vicki Laflamme,0.6059637569370085,Medium
+BRFHWGVC,Engaging,2017-05-19,,GTX Plus Basic,Kary Hendrixson,0.6059114120066236,Medium
+NSX4NR40,Engaging,2017-08-14,Bioholding,GTX Plus Pro,Anna Snelling,0.6058509401230515,Medium
+QNVW1NSS,Engaging,2017-05-30,,MG Advanced,Wilburn Farren,0.605837404851463,Medium
+9P180HVQ,Engaging,2017-08-05,Zencorporation,GTX Basic,Moses Frase,0.6058172594741822,Medium
+CGWJ1WHI,Engaging,2017-01-04,,MG Special,Wilburn Farren,0.6057235369497066,Medium
+G2XP6IGJ,Engaging,2017-07-25,,GTX Basic,Moses Frase,0.6054259485119545,Medium
+JQA8H6M5,Engaging,2017-02-15,,GTX Plus Pro,Kami Bicknell,0.6049915621975831,Medium
+FEFNNXH1,Engaging,2017-07-22,Singletechno,MG Special,Anna Snelling,0.6049512671282795,Medium
+Q3HHDSDS,Engaging,2017-07-24,,GTX Basic,Marty Freudenburg,0.6047771477736229,Medium
+7F2DDW3C,Engaging,2017-07-25,,MG Advanced,Hayden Neloms,0.6046490955650929,Medium
+61IKUAZI,Engaging,2017-09-20,Dalttechnology,GTX Plus Basic,Rosalina Dieter,0.6046273490269506,Medium
+4JHY98UG,Engaging,2017-01-07,,GTX Basic,Cassey Cress,0.6046246453545071,Medium
+25FUROM1,Engaging,2017-02-27,Y-corporation,GTX Plus Basic,Daniell Hammack,0.6046188439013263,Medium
+AMNKCM1H,Engaging,2017-02-17,Betasoloin,MG Special,Elease Gluck,0.6046089998642631,Medium
+1B27CZ2M,Engaging,2017-03-10,,GTX Plus Pro,James Ascencio,0.6044996771015982,Medium
+0558PJL2,Engaging,2017-09-11,,GTX Basic,Corliss Cosme,0.6042568053929436,Medium
+8V5OCDHN,Engaging,2017-09-12,,GTX Basic,Cassey Cress,0.6037104513968772,Medium
+J71N4WQ6,Engaging,2017-05-06,,GTX Plus Basic,Markita Hansen,0.6036874724386355,Medium
+X8M3SCVF,Engaging,2017-07-19,,GTX Basic,Darcel Schlecht,0.6034111716205378,Medium
+DY8DMZZ9,Engaging,2017-09-16,,GTX Plus Pro,Vicki Laflamme,0.6032500134751626,Medium
+4XZ4RY1N,Engaging,2017-03-15,,GTX Plus Basic,Wilburn Farren,0.6027560301584637,Medium
+Y8ZUSC9C,Engaging,2017-08-14,,GTX Basic,Jonathan Berthelot,0.6026945652845902,Medium
+CBQRKYZP,Engaging,2017-07-21,Silis,GTX Plus Pro,Marty Freudenburg,0.602389354367985,Medium
+AV72Y65Y,Engaging,2017-08-06,Streethex,MG Special,Cecily Lampkin,0.6023838666148945,Medium
+LCQ934W7,Engaging,2017-05-05,Xx-holding,GTX Plus Basic,Cassey Cress,0.6018532169383388,Medium
+OT5G3M9A,Engaging,2017-07-22,Treequote,MG Advanced,Cecily Lampkin,0.6016271940296836,Medium
+751V8OFM,Engaging,2017-07-22,Funholding,GTX Plus Basic,Gladys Colclough,0.6015852706640907,Medium
+14CNQKX8,Engaging,2017-06-21,,GTX Pro,Kary Hendrixson,0.6015397813923354,Medium
+4NGSQODD,Engaging,2017-01-28,Blackzim,GTX Pro,James Ascencio,0.6013010894054893,Medium
+BKOWQMMV,Engaging,2017-07-19,,GTX Basic,Moses Frase,0.601244493287838,Medium
+AW4PSTWR,Engaging,2017-06-25,Ron-tech,GTX Basic,Rosie Papadopoulos,0.6012207465803225,Medium
+WLS5J30E,Engaging,2017-03-31,Inity,MG Special,Elease Gluck,0.6010976322793316,Medium
+VIY7P8J6,Engaging,2017-08-01,Hatfan,MG Special,Versie Hillebrand,0.6009200329795278,Medium
+Y3TOQUQI,Engaging,2017-07-25,Zotware,GTX Basic,Marty Freudenburg,0.6004564414824657,Medium
+RACLHBXN,Engaging,2017-03-19,,GTX Plus Basic,Daniell Hammack,0.6003494246103489,Medium
+4LXUITP3,Engaging,2017-06-04,,GTX Basic,Kary Hendrixson,0.6003437390811225,Medium
+1GT10YJD,Engaging,2017-03-17,,GTX Plus Pro,Vicki Laflamme,0.600335043426196,Medium
+TJ95PY76,Engaging,2017-07-30,J-Texon,GTX Pro,Darcel Schlecht,0.6003169557618148,Medium
+3JUL12VK,Engaging,2017-03-22,,GTX Basic,Kami Bicknell,0.6003123142594797,Medium
+I6U62W0R,Engaging,2017-03-29,,GTX Basic,Kami Bicknell,0.6003123142594797,Medium
+7ONH55WT,Engaging,2017-02-24,,GTX Basic,Cassey Cress,0.6002045557664308,Medium
+L4R7LDY1,Engaging,2017-08-17,Hatfan,MG Special,Violet Mclelland,0.6000777440102679,Medium
+LC2RIMSX,Engaging,2017-06-10,Vehement Capital Partners,GTX Pro,Rosalina Dieter,0.599842761927494,Medium
+CGJ7NRZH,Engaging,2017-02-12,,MG Special,Violet Mclelland,0.599830830555652,Medium
+T1F2I8ED,Engaging,2017-03-09,,GTX Plus Basic,Corliss Cosme,0.5998305522213921,Medium
+R69OYH4Z,Engaging,2017-07-21,Umbrella Corporation,GTX Pro,Vicki Laflamme,0.5994818719349586,Medium
+MU7JWTP6,Engaging,2017-02-18,,MG Special,Cassey Cress,0.599190875195098,Medium
+DO6VKC2G,Engaging,2017-08-01,,GTK 500,Marty Freudenburg,0.5991809020998875,Medium
+LKJZEISS,Engaging,2017-08-24,,GTX Basic,Zane Levy,0.5990766288115852,Medium
+6C6Z3HRA,Engaging,2017-08-31,,GTX Basic,Zane Levy,0.5990766288115852,Medium
+GXC8JN36,Engaging,2017-06-04,,GTX Pro,Kary Hendrixson,0.598929023658744,Medium
+GEQ7KT9J,Engaging,2017-07-20,Plussunin,GTX Plus Basic,Wilburn Farren,0.5988133124912093,Medium
+9CPUX0D0,Engaging,2017-08-13,,GTX Pro,Marty Freudenburg,0.5987732817694603,Medium
+3C6E0D28,Engaging,2017-08-12,,GTX Plus Pro,Vicki Laflamme,0.5985105448053801,Medium
+5G4I94TF,Engaging,2017-03-26,Statholdings,GTX Plus Pro,Kary Hendrixson,0.5984901394390904,Medium
+OBDEDIXA,Engaging,2017-07-31,,MG Advanced,Hayden Neloms,0.5983959656819609,Medium
+4PNXMXXC,Engaging,2017-08-05,,GTX Basic,Anna Snelling,0.5983926173070283,Medium
+XU836DFA,Engaging,2017-06-18,,GTX Basic,Kami Bicknell,0.5983920302837217,Medium
+H9N9DP3D,Engaging,2017-07-01,,GTX Basic,Vicki Laflamme,0.598179928098683,Medium
+3C5GNT3Q,Engaging,2017-06-16,,MG Special,Vicki Laflamme,0.5978185721071164,Medium
+RV5Y8DRY,Engaging,2017-07-25,,GTX Plus Pro,Marty Freudenburg,0.5976361002737143,Medium
+APIB681L,Engaging,2017-07-25,,GTX Basic,Darcel Schlecht,0.5976095995247859,Medium
+TFSKOBH7,Engaging,2017-07-25,,GTX Basic,Darcel Schlecht,0.5976095995247859,Medium
+10THTNLC,Engaging,2017-06-22,,GTX Plus Basic,Zane Levy,0.5970865749031239,Medium
+10AEGW41,Engaging,2017-04-16,,GTX Pro,Kary Hendrixson,0.5969393470884616,Medium
+UUGY3W44,Engaging,2017-04-07,,GTX Basic,Kary Hendrixson,0.596850792246438,Medium
+XQ0N9T87,Engaging,2017-04-10,,MG Advanced,Hayden Neloms,0.5966474139042974,Medium
+NUQPJV8A,Engaging,2017-04-24,,MG Advanced,Hayden Neloms,0.5966474139042974,Medium
+GWQX8BSZ,Engaging,2017-07-30,Donquadtech,GTX Basic,Niesha Huffines,0.596594750630181,Medium
+HVZMZW96,Engaging,2017-02-26,,GTX Plus Basic,Maureen Marcano,0.596589927793229,Medium
+1H1YDS7C,Engaging,2017-02-26,,GTX Plus Basic,Maureen Marcano,0.596589927793229,Medium
+HTF7TYQS,Engaging,2017-06-27,,GTX Pro,Daniell Hammack,0.5963768067546217,Medium
+7X0T2QOL,Engaging,2017-05-26,,MG Advanced,Hayden Neloms,0.5963707786186822,Medium
+7KKFQ7LX,Engaging,2017-05-26,,MG Advanced,Hayden Neloms,0.5963707786186822,Medium
+BED55OSG,Engaging,2017-04-02,,GTX Pro,Markita Hansen,0.5960532246300645,Medium
+79EHWR35,Engaging,2017-03-02,,GTX Basic,Vicki Laflamme,0.5957982087841177,Medium
+2VDN72EP,Engaging,2017-03-30,,GTX Basic,Vicki Laflamme,0.5957982087841177,Medium
+AD2YEH7W,Engaging,2017-08-06,,GTX Plus Pro,Marty Freudenburg,0.5957289074053643,Medium
+8QDSXHQ8,Engaging,2017-07-22,,GTX Basic,Cecily Lampkin,0.5955554714838421,Medium
+KXR63BV7,Engaging,2017-09-04,,GTX Pro,Corliss Cosme,0.5950451213097506,Medium
+JB60NPU9,Engaging,2017-09-11,,GTX Pro,Corliss Cosme,0.5950451213097506,Medium
+EWDOBEM6,Engaging,2017-01-03,,MG Special,Hayden Neloms,0.5948120449706118,Medium
+PYRLUYIQ,Engaging,2017-07-27,Y-corporation,GTX Plus Basic,Marty Freudenburg,0.5945957618729745,Medium
+Z4OOTJAJ,Engaging,2017-08-10,,GTX Plus Pro,Darcel Schlecht,0.5940306115743749,Medium
+A04V2WB3,Engaging,2017-08-03,,GTK 500,Elease Gluck,0.5940095217041202,Medium
+58W7CZGD,Engaging,2017-08-12,Cancity,GTX Pro,Vicki Laflamme,0.593827114704474,Medium
+ZQ4QTT1Z,Engaging,2017-03-07,,GTX Plus Basic,Boris Faz,0.5936336792459389,Medium
+7VKQWIXD,Engaging,2017-03-14,,GTX Plus Basic,Boris Faz,0.5936336792459389,Medium
+BJO4VYLK,Engaging,2017-06-21,,GTX Pro,Daniell Hammack,0.5932557586363852,Medium
+DJMPI9TO,Engaging,2017-04-18,Xx-zobam,GTK 500,Elease Gluck,0.5932037433374726,Medium
+MV7I9RKH,Engaging,2017-07-21,Treequote,GTX Plus Basic,Marty Freudenburg,0.593070359141378,Medium
+VO1YR5CY,Engaging,2017-07-25,,GTX Basic,Versie Hillebrand,0.5930374324687729,Medium
+WX546S1D,Engaging,2017-07-27,,GTX Basic,Marty Freudenburg,0.5929578867435815,Medium
+81MXE1H7,Engaging,2017-02-14,Bioholding,MG Advanced,Markita Hansen,0.5926280904644666,Medium
+5UFU5IO4,Engaging,2017-08-04,Cancity,MG Special,Corliss Cosme,0.5924753857131052,Medium
+NGCM47PC,Engaging,2017-03-07,,GTX Pro,Zane Levy,0.5924690241539428,Medium
+3PPHOXTT,Engaging,2017-07-28,,MG Special,Darcel Schlecht,0.592406638841676,Medium
+NPORW46K,Engaging,2017-08-14,,MG Special,Anna Snelling,0.5921657949247003,Medium
+0GS0L5VR,Engaging,2017-08-14,,MG Special,Anna Snelling,0.5921657949247003,Medium
+NUS67BOQ,Engaging,2017-08-31,,GTX Basic,Rosie Papadopoulos,0.5918698961593094,Medium
+3JW6CZ7K,Engaging,2017-07-20,,GTX Basic,Moses Frase,0.5916739060382044,Medium
+EN8JHUXA,Engaging,2017-07-27,,GTX Basic,Moses Frase,0.5916739060382044,Medium
+PR1H7NHK,Engaging,2017-08-01,Mathtouch,MG Special,Versie Hillebrand,0.5915863049011778,Medium
+UAX2OR58,Engaging,2017-07-22,,MG Special,Darcel Schlecht,0.5915758866611741,Medium
+754UOV5F,Engaging,2017-07-30,,MG Special,Marty Freudenburg,0.5912653385187037,Medium
+ZHXIDZNI,Engaging,2017-02-08,,GTX Pro,Kary Hendrixson,0.5910291967702803,Medium
+VHZFABAC,Engaging,2017-06-22,,MG Special,Daniell Hammack,0.5908595164932273,Medium
+B4SIVH1O,Engaging,2017-02-22,Fasehatice,GTX Basic,Daniell Hammack,0.5906704245388698,Medium
+GVBWTDI3,Engaging,2017-01-31,,GTX Plus Basic,Daniell Hammack,0.5905974278011479,Medium
+LSA39JBG,Engaging,2017-03-05,,GTX Basic,Daniell Hammack,0.5904063092812053,Medium
+T56J7ES7,Engaging,2017-06-09,Nam-zim,GTX Plus Basic,Kami Bicknell,0.5903824382858708,Medium
+7VSFD2MV,Engaging,2017-08-03,,GTX Basic,Kary Hendrixson,0.5903025636078904,Medium
+NNH4EBG8,Engaging,2017-08-03,Mathtouch,MG Special,Vicki Laflamme,0.5901978731616638,Medium
+7HSRDCCK,Engaging,2017-06-13,,GTX Plus Pro,Kary Hendrixson,0.5898891946876168,Medium
+IEAPJ5X1,Engaging,2017-02-07,,GTX Plus Basic,Maureen Marcano,0.5897522739464451,Medium
+5URQT67R,Engaging,2017-06-14,Treequote,GTK 500,Markita Hansen,0.5896122337212963,Medium
+4RDJBBB6,Engaging,2017-03-22,,MG Special,Daniell Hammack,0.5896028083085366,Medium
+VVO21D4Z,Engaging,2017-07-25,,GTX Basic,Cecily Lampkin,0.5895765662070221,Medium
+VY4IVO2W,Engaging,2017-04-24,,GTX Plus Basic,Kami Bicknell,0.5893592505372652,Medium
+51VR0RD3,Engaging,2017-08-04,,MG Special,Violet Mclelland,0.5891945195869355,Medium
+MIY4MF3R,Engaging,2017-04-01,,MG Advanced,Hayden Neloms,0.58902088756198,Medium
+VFEV5XBS,Engaging,2017-01-31,,GTX Plus Basic,Violet Mclelland,0.588463873297417,Medium
+73086D08,Engaging,2017-05-07,,GTX Plus Pro,Markita Hansen,0.5883509878586638,Medium
+V02WMIWK,Engaging,2017-07-26,,MG Special,Anna Snelling,0.5882885728062013,Medium
+7868JVH9,Engaging,2017-08-29,Rantouch,GTX Plus Basic,Cassey Cress,0.5882870248328234,Medium
+9HRMW8SL,Engaging,2017-02-19,,MG Special,Daniell Hammack,0.5882648878418448,Medium
+SCS5H8V1,Engaging,2017-02-14,Vehement Capital Partners,GTK 500,Markita Hansen,0.5881192674451766,Medium
+LAYVBSH4,Engaging,2017-07-19,,GTX Basic,Anna Snelling,0.5880922925608414,Medium
+2FMT1053,Engaging,2017-05-18,,MG Advanced,Hayden Neloms,0.5879188796920646,Medium
+Y2EC6KYG,Engaging,2017-05-25,,MG Advanced,Hayden Neloms,0.5879188796920646,Medium
+G39V1X3G,Engaging,2017-01-07,,MG Special,Corliss Cosme,0.5878517590669575,Medium
+97PFKCPG,Engaging,2017-03-26,,GTX Pro,James Ascencio,0.5878236596933702,Medium
+RUFJMV3I,Engaging,2017-06-20,,MG Special,James Ascencio,0.5875287517153382,Medium
+OVA9HMN1,Engaging,2017-08-05,,GTX Plus Pro,Anna Snelling,0.5875281168300944,Medium
+EMUG64GW,Engaging,2017-06-29,,GTX Basic,Kary Hendrixson,0.5871790717673505,Medium
+45B6VA2Y,Engaging,2017-04-09,,MG Special,Violet Mclelland,0.5867821173346848,Medium
+I5AKI9KC,Engaging,2017-07-30,,MG Special,Niesha Huffines,0.5867728237575726,Medium
+H5VBBEVI,Engaging,2017-04-03,,GTX Plus Basic,Cassey Cress,0.5865123883657913,Medium
+I1R23P5F,Engaging,2017-08-01,,GTX Plus Basic,Anna Snelling,0.5864159202275032,Medium
+CFKXEPFN,Engaging,2017-08-01,,GTX Plus Basic,Anna Snelling,0.5864159202275032,Medium
+WNTAT1OT,Engaging,2017-08-31,,GTX Basic,Boris Faz,0.5862033231051011,Medium
+8NG46N94,Engaging,2017-09-10,,GTX Pro,Kami Bicknell,0.5860187596005542,Medium
+OLGT0VHP,Engaging,2017-05-01,Statholdings,GTX Plus Pro,James Ascencio,0.5858532556062617,Medium
+2FM8HJDM,Engaging,2017-09-20,,MG Advanced,Vicki Laflamme,0.5853157953284602,Medium
+ZD1X3R4G,Engaging,2017-06-29,,GTX Plus Basic,Corliss Cosme,0.5852477837903105,Medium
+MBYOJR5A,Engaging,2017-08-01,,GTX Plus Pro,Marty Freudenburg,0.5848201424925581,Medium
+S2XTTF3B,Engaging,2017-09-11,,MG Special,Rosalina Dieter,0.5847956816231005,Medium
+HABN7JBG,Engaging,2017-06-17,Rantouch,GTX Basic,Elease Gluck,0.5847757887140693,Medium
+QU220OFI,Engaging,2017-07-08,Finhigh,GTX Basic,Boris Faz,0.5847509190603204,Medium
+Q8BZ3PC9,Engaging,2017-04-18,,GTX Plus Pro,Rosie Papadopoulos,0.5846023585229493,Medium
+I7MDOGGU,Engaging,2017-03-18,,GTX Basic,Maureen Marcano,0.5845421128755751,Medium
+EGEJA2HY,Engaging,2017-06-17,,GTX Basic,Markita Hansen,0.5844629595645321,Medium
+A7SA2L21,Engaging,2017-01-30,,GTK 500,Elease Gluck,0.5842693918460047,Medium
+Q5GNQ823,Engaging,2017-07-26,,GTX Pro,Vicki Laflamme,0.5841861209692868,Medium
+VYR4EWHR,Engaging,2017-08-18,,GTX Basic,Kary Hendrixson,0.5839341407674216,Medium
+G7QIQDSA,Engaging,2017-09-26,,GTX Pro,Corliss Cosme,0.5839126218895894,Medium
+BJO24Z5A,Engaging,2017-05-14,,GTX Plus Basic,Cassey Cress,0.5836465073832602,Medium
+OK39IHP1,Engaging,2017-05-18,,MG Special,Rosalina Dieter,0.5833367552657285,Medium
+IQFDPIND,Engaging,2017-07-19,,GTX Basic,Versie Hillebrand,0.582796127363852,Medium
+3L3W9W8I,Engaging,2017-07-28,,GTX Basic,Marty Freudenburg,0.5827697694354843,Medium
+CX4ZLSDW,Engaging,2017-05-18,,MG Special,Wilburn Farren,0.5827304558753637,Medium
+IBS3H6Z4,Engaging,2017-03-17,,GTX Plus Basic,Hayden Neloms,0.5826818035330861,Medium
+MWSPTOQK,Engaging,2017-05-28,,GTX Pro,Zane Levy,0.582662541459052,Medium
+PTZ9QLEF,Engaging,2017-08-29,,GTX Basic,Violet Mclelland,0.5826489742063327,Medium
+CX0SXNCN,Engaging,2017-05-21,Treequote,GTX Basic,Corliss Cosme,0.5825729536665543,Medium
+5XPYFICK,Engaging,2017-03-10,Inity,MG Special,Rosie Papadopoulos,0.582517338742179,Medium
+ZTVWSE98,Engaging,2017-06-01,,MG Special,Rosalina Dieter,0.5823206796514504,Medium
+OXNWRI4I,Engaging,2017-06-15,,MG Special,Rosalina Dieter,0.5823206796514504,Medium
+NR947OAB,Engaging,2017-02-24,,GTX Pro,Kami Bicknell,0.5821753054557447,Medium
+5KK2SSSB,Engaging,2017-02-16,,GTX Basic,Rosie Papadopoulos,0.5820142935514587,Medium
+V7W8CA47,Engaging,2017-08-16,,MG Special,Vicki Laflamme,0.5820100044412849,Medium
+ZGFB0IF1,Engaging,2017-07-20,,GTX Plus Basic,Anna Snelling,0.5820086557335843,Medium
+D5VY17OP,Engaging,2017-04-02,,GTX Pro,Kami Bicknell,0.5817364384548325,Medium
+LOQ46F0T,Engaging,2017-09-03,,GTX Basic,Cassey Cress,0.581678438191503,Medium
+P91SQBST,Engaging,2017-07-25,Dalttechnology,MG Special,Anna Snelling,0.5816091590101897,Medium
+ULJG457F,Engaging,2017-08-03,,MG Special,Anna Snelling,0.5813475153546486,Medium
+S0Z4QVL2,Engaging,2017-07-21,,GTX Pro,Vicki Laflamme,0.5812072927913015,Medium
+34XWXEQE,Engaging,2017-09-10,,GTX Pro,James Ascencio,0.5810925729378357,Medium
+3H3TNCP5,Engaging,2017-05-23,Condax,GTX Plus Basic,James Ascencio,0.5810403386392792,Medium
+E26Z10W7,Engaging,2017-07-22,,MG Special,James Ascencio,0.5808841089615195,Medium
+SP9W5IND,Engaging,2017-07-30,Acme Corporation,MG Special,Boris Faz,0.5808827575589343,Medium
+WW1WV7IT,Engaging,2017-03-31,Cancity,GTX Pro,Cassey Cress,0.5805612185577845,Medium
+27REMGYU,Engaging,2017-08-12,,GTX Basic,James Ascencio,0.5805203932701096,Medium
+DZP41ANW,Engaging,2017-09-03,,GTX Plus Basic,Hayden Neloms,0.5801748421428903,Medium
+TWEVVI99,Engaging,2017-08-25,Scottech,GTX Plus Basic,Daniell Hammack,0.5801626079897069,Medium
+7PXJ92C5,Engaging,2017-03-15,,GTX Pro,Kary Hendrixson,0.5801508967773119,Medium
+X6NSKI7H,Engaging,2017-09-06,,GTX Basic,Cassey Cress,0.5801221198782457,Medium
+STI8KYWL,Engaging,2017-07-31,,GTX Plus Basic,Niesha Huffines,0.5800947570970789,Medium
+I7BWM5O0,Engaging,2017-03-06,Warephase,MG Special,Violet Mclelland,0.5799846070253409,Medium
+5IQAJGCU,Engaging,2017-05-11,,GTX Basic,Kami Bicknell,0.5798915129581502,Medium
+K6M3EX4O,Engaging,2017-04-15,,GTX Plus Basic,Kami Bicknell,0.5797042766233649,Medium
+S2J63YRV,Engaging,2017-06-08,,MG Special,Rosie Papadopoulos,0.5796299355907837,Medium
+VHT6G2BS,Engaging,2017-08-14,,GTX Plus Basic,Jonathan Berthelot,0.5794856145312587,Medium
+BTRIUUWG,Engaging,2017-05-16,,GTX Basic,Rosie Papadopoulos,0.5793306866066639,Medium
+0LRVHITK,Engaging,2017-06-16,,MG Special,Violet Mclelland,0.5792899045947869,Medium
+IOPIJ6C6,Engaging,2017-09-07,,GTX Plus Basic,Boris Faz,0.5792701031365233,Medium
+R443AUAG,Engaging,2017-06-27,,GTX Pro,Violet Mclelland,0.5792006247779335,Medium
+37UCYEDY,Engaging,2017-07-26,Bluth Company,GTX Plus Basic,Cassey Cress,0.5791525686714637,Medium
+H2IOHZ8R,Engaging,2017-03-18,,GTX Basic,James Ascencio,0.5790415815498443,Medium
+SY61BAXZ,Engaging,2017-08-17,Rantouch,GTX Plus Basic,Cassey Cress,0.5786180694269623,Medium
+8Y4LJOJ0,Engaging,2017-07-24,,GTX Plus Basic,Versie Hillebrand,0.5785844358667451,Medium
+FVGRGJU8,Engaging,2017-04-21,Betatech,MG Advanced,Rosie Papadopoulos,0.578473659525304,Medium
+LXZD2PZD,Engaging,2017-04-04,,GTX Plus Pro,Corliss Cosme,0.5781396455169231,Medium
+P4D1NK6D,Engaging,2017-08-11,,GTX Basic,Elease Gluck,0.5779583167000163,Medium
+LMU41E2W,Engaging,2017-08-30,,MG Special,Rosalina Dieter,0.5778984268513986,Medium
+SMP2K39G,Engaging,2017-09-28,,GTX Pro,Markita Hansen,0.5778966287680366,Medium
+04OAV3CV,Engaging,2017-05-17,,GTX Plus Pro,Elease Gluck,0.5769418237794105,Medium
+QPUPBL50,Engaging,2017-08-20,,GTX Basic,Kary Hendrixson,0.5768243589291067,Medium
+STT3X4NB,Engaging,2017-03-01,Xx-holding,GTX Basic,Violet Mclelland,0.5767382734790284,Medium
+G40058T1,Engaging,2017-07-29,Yearin,MG Special,Versie Hillebrand,0.5765768055450723,Medium
+ANRCHVJM,Engaging,2017-04-15,Plusstrip,MG Special,Violet Mclelland,0.57639003597731,Medium
+DC2JL47C,Engaging,2017-05-27,Dontechi,GTX Pro,Daniell Hammack,0.57629389899676,Medium
+60NIT1PM,Engaging,2017-05-02,,GTX Plus Basic,Boris Faz,0.5762287398065026,Medium
+44Y3J17P,Engaging,2017-05-02,,GTX Plus Basic,Boris Faz,0.5762287398065026,Medium
+K5GFWLKM,Engaging,2017-05-09,,GTX Plus Basic,Boris Faz,0.5762287398065026,Medium
+HYSOZRCG,Engaging,2017-05-23,,GTX Plus Basic,Boris Faz,0.5762287398065026,Medium
+0EYXI1UN,Engaging,2017-04-19,,MG Advanced,Hayden Neloms,0.5760308764879226,Medium
+5F1RM2YM,Engaging,2017-09-20,,MG Special,Elease Gluck,0.5760038131769454,Medium
+NBJR3GVR,Engaging,2017-08-01,,GTX Pro,Marty Freudenburg,0.5759990206586587,Medium
+N9GIC5PC,Engaging,2017-07-27,,GTX Plus Pro,Anna Snelling,0.5758262779282264,Medium
+1T5WFCEJ,Engaging,2017-07-27,,GTX Plus Pro,Anna Snelling,0.5758262779282264,Medium
+YI1V6SOX,Engaging,2017-07-29,The New York Inquirer,GTX Pro,Darcel Schlecht,0.5758141554255267,Medium
+806KPNNN,Engaging,2017-07-24,Zathunicon,GTX Basic,Versie Hillebrand,0.5754266888790168,Medium
+KSOW4MUK,Engaging,2017-06-17,,GTX Basic,Kami Bicknell,0.5752393476500293,Medium
+D85PDC6S,Engaging,2017-05-18,,GTX Plus Pro,James Ascencio,0.5752256081764532,Medium
+LWPFQ1UA,Engaging,2017-04-15,,GTX Basic,Kary Hendrixson,0.5750070829108833,Medium
+DZP0MNRM,Engaging,2017-07-25,Konex,GTX Plus Basic,Niesha Huffines,0.5749636998414986,Medium
+VKIR68JX,Engaging,2017-09-04,,GTX Plus Basic,Violet Mclelland,0.5746786709075478,Medium
+HI9S2MRZ,Engaging,2017-07-09,,GTX Plus Basic,Elease Gluck,0.5746076984408194,Medium
+XRO7PMA2,Engaging,2017-05-17,,GTX Plus Basic,Cassey Cress,0.5743258428247012,Medium
+HIV4W2E0,Engaging,2017-07-02,Betasoloin,GTX Plus Basic,Kary Hendrixson,0.5743222468832678,Medium
+PO158L29,Engaging,2017-03-23,Blackzim,GTX Basic,Cassey Cress,0.574025581574867,Medium
+055Z2OAS,Engaging,2017-07-19,Dontechi,MG Special,Anna Snelling,0.5739602179688161,Medium
+9A4H9IAC,Engaging,2017-03-07,,GTX Plus Basic,James Ascencio,0.5738124661187113,Medium
+X8GGF9MG,Engaging,2017-04-12,Dontechi,MG Special,Rosalina Dieter,0.5737640176245431,Medium
+0I6U3MQ6,Engaging,2017-01-12,Funholding,GTX Basic,Violet Mclelland,0.5736260350795644,Medium
+197EQMY8,Engaging,2017-09-20,,GTX Pro,Kami Bicknell,0.5735806040449833,Medium
+KIKG1BGV,Engaging,2017-08-02,Domzoom,MG Advanced,Moses Frase,0.5732991326028153,Medium
+BMH2FEGF,Engaging,2017-06-30,,GTX Plus Basic,Boris Faz,0.5732062217344852,Medium
+FHPRER2D,Engaging,2017-07-25,Sonron,MG Special,Versie Hillebrand,0.5728042087846925,Medium
+S50ETCN7,Engaging,2017-07-21,,GTX Plus Basic,Anna Snelling,0.5725499400600131,Medium
+GY10EROJ,Engaging,2017-07-20,Cheers,GTX Basic,Jonathan Berthelot,0.5724447883403879,Medium
+KR22DD8M,Engaging,2017-08-17,,GTX Basic,Cassey Cress,0.5723225199622459,Medium
+SZAMHBGA,Engaging,2017-06-28,Nam-zim,MG Advanced,Violet Mclelland,0.5722266007362233,Medium
+5E274CQS,Engaging,2017-09-05,,GTX Pro,Boris Faz,0.5717569422742347,Medium
+FKY3O5O1,Engaging,2017-08-01,Zotware,GTX Pro,Niesha Huffines,0.5716352789063028,Medium
+S931EBRN,Engaging,2017-08-09,,GTX Basic,Cassey Cress,0.5715643187138341,Medium
+T4AW06MM,Engaging,2017-07-22,,GTX Plus Pro,Anna Snelling,0.5713620689815503,Medium
+T0TDA2O1,Engaging,2017-07-29,,GTX Plus Pro,Anna Snelling,0.5713620689815503,Medium
+LXM6CTMS,Engaging,2017-02-12,,GTX Plus Basic,Hayden Neloms,0.571292112890842,Medium
+1K6HY455,Engaging,2017-05-09,,MG Advanced,Boris Faz,0.5712060328830415,Medium
+UJ7BYO6A,Engaging,2017-05-04,,MG Advanced,Wilburn Farren,0.571117377805587,Medium
+04T6SOQW,Engaging,2017-08-06,,GTX Basic,Kami Bicknell,0.5704324276158362,Medium
+EUBMHJGQ,Engaging,2017-07-21,Hottechi,MG Special,Versie Hillebrand,0.5702612709578337,Medium
+1R2CLEGQ,Engaging,2017-07-20,,MG Special,Anna Snelling,0.5700824067319318,Medium
+YYU1J6E1,Engaging,2017-07-27,,MG Special,Anna Snelling,0.5700824067319318,Medium
+JM5GDLEF,Engaging,2017-05-20,,GTX Pro,Corliss Cosme,0.5699402644951127,Medium
+8254HM4E,Engaging,2017-04-06,,GTX Plus Basic,Kami Bicknell,0.5695699802160347,Medium
+T5SX9Z3T,Engaging,2017-05-10,Conecom,GTX Basic,Vicki Laflamme,0.5693674294275005,Medium
+3YDXZ4FA,Engaging,2017-07-21,,GTX Plus Pro,Versie Hillebrand,0.5692836412556346,Medium
+PQJZNRKK,Engaging,2017-08-14,,GTX Pro,Rosie Papadopoulos,0.5692338518414947,Medium
+QV3TAWDT,Engaging,2017-07-10,,GTX Pro,Rosie Papadopoulos,0.5692331131821502,Medium
+A3T91VUM,Engaging,2017-07-21,,MG Special,Cecily Lampkin,0.5691927113976295,Medium
+5Z8S8UHK,Engaging,2017-03-06,,GTX Basic,Cassey Cress,0.5688583378794815,Medium
+SVCKI631,Engaging,2017-02-15,,GTX Basic,Maureen Marcano,0.5688418355905989,Medium
+O9WYT5ST,Engaging,2017-06-23,Kan-code,GTX Pro,Zane Levy,0.5685634224320291,Medium
+PPUSV3RG,Engaging,2017-05-21,,GTX Plus Pro,Kary Hendrixson,0.5681468851455261,Medium
+DYO98F6J,Engaging,2017-08-10,,MG Special,Marty Freudenburg,0.5680870987269508,Medium
+3A2CCWEG,Engaging,2017-07-29,,MG Special,Cecily Lampkin,0.5680450640393034,Medium
+ICG3THQK,Engaging,2017-07-31,Sumace,GTX Basic,Gladys Colclough,0.5678239186694727,Medium
+FHYD80FB,Engaging,2017-06-17,,GTX Pro,Kami Bicknell,0.5675682346879065,Medium
+S9JXWIBD,Engaging,2017-07-30,,GTX Plus Basic,Gladys Colclough,0.5675064480349944,Medium
+N07XYH50,Engaging,2017-07-28,Newex,GTX Pro,Gladys Colclough,0.5671744851321124,Medium
+CMKXOOJQ,Engaging,2017-02-24,,GTX Basic,Corliss Cosme,0.5671569574545573,Medium
+K1K48OTP,Engaging,2017-07-07,Conecom,GTX Plus Pro,Kary Hendrixson,0.5667946054901793,Medium
+ETZKANFZ,Engaging,2017-01-21,,GTX Basic,Markita Hansen,0.5667904086695921,Medium
+QD8F0CI6,Engaging,2017-04-17,,GTX Basic,Rosalina Dieter,0.5665621728841045,Medium
+693K7IAT,Engaging,2017-08-07,Funholding,GTX Basic,Boris Faz,0.566519683023343,Medium
+HFUZQFQQ,Engaging,2017-05-09,Groovestreet,GTX Basic,Markita Hansen,0.5662384525455304,Medium
+BXK5HGEY,Engaging,2017-03-28,,MG Special,Vicki Laflamme,0.5659254368591621,Medium
+XXUGTDX7,Engaging,2017-03-28,,MG Special,Vicki Laflamme,0.5659254368591621,Medium
+LWXHKI88,Engaging,2017-03-28,,MG Special,Vicki Laflamme,0.5659254368591621,Medium
+M2A8EY5Q,Engaging,2017-07-16,,GTX Plus Pro,Hayden Neloms,0.5655215759943485,Medium
+WS3BIQ4S,Engaging,2017-05-22,,GTX Plus Pro,Markita Hansen,0.565413833987466,Medium
+OBC504T8,Engaging,2017-07-25,,GTX Plus Basic,Niesha Huffines,0.5653134110550697,Medium
+6S2ABHZS,Engaging,2017-04-14,,GTX Basic,Markita Hansen,0.5652196441822486,Medium
+Z0RLNFVY,Engaging,2017-03-16,,GTX Plus Basic,Boris Faz,0.5651713869420584,Medium
+UIOJX7O0,Engaging,2017-08-24,,GTX Pro,Cassey Cress,0.5650839790468534,Medium
+MB7G8DWS,Engaging,2017-04-03,,GTX Plus Pro,Cassey Cress,0.564948893032418,Medium
+PIFPDJMN,Engaging,2017-06-05,,GTX Basic,Kary Hendrixson,0.5648511090920987,Medium
+MCA0202R,Engaging,2017-06-12,,GTX Basic,Kary Hendrixson,0.5648511090920987,Medium
+35LLMROC,Engaging,2017-07-03,,GTX Basic,Kary Hendrixson,0.56459522472943,Medium
+FHM7LYZ3,Engaging,2017-06-09,,MG Special,Corliss Cosme,0.5645259112126875,Medium
+68EYCEV4,Engaging,2017-08-10,Faxquote,GTX Pro,Rosie Papadopoulos,0.5645067184166646,Medium
+G1L2YY5P,Engaging,2017-05-26,,GTX Basic,Zane Levy,0.5642950061069781,Medium
+J58BUYQH,Engaging,2017-04-11,,GTX Plus Basic,Kary Hendrixson,0.5642552290689165,Medium
+1RXGKOUE,Engaging,2017-07-29,,GTX Plus Pro,Versie Hillebrand,0.5641174212675417,Medium
+QFRZLXF3,Engaging,2017-08-12,,MG Special,Cecily Lampkin,0.5640518073075854,Medium
+V4XHHFO3,Engaging,2017-03-15,Blackzim,GTX Basic,Elease Gluck,0.5639928116553996,Medium
+7AXR8U55,Engaging,2017-05-26,,MG Advanced,Boris Faz,0.5637872270998755,Medium
+JA5G7YBO,Engaging,2017-03-05,Blackzim,MG Special,Markita Hansen,0.5637419673274385,Medium
+Q2RY668B,Engaging,2017-05-10,,GTX Basic,Kami Bicknell,0.5635124128292834,Medium
+VBFYOCDO,Engaging,2017-05-10,,GTX Basic,Kami Bicknell,0.5635124128292834,Medium
+HTBPSC2D,Engaging,2017-05-31,,GTX Basic,Kami Bicknell,0.5635124128292834,Medium
+X4FW4JR1,Engaging,2017-05-15,,GTX Basic,Kary Hendrixson,0.5634138492251713,Medium
+AF8NG5JC,Engaging,2017-02-08,Betatech,MG Special,Cassey Cress,0.5632163410758657,Medium
+U2HYH97X,Engaging,2017-04-20,,GTX Basic,Kary Hendrixson,0.5629541228233984,Medium
+DQ7GS2BN,Engaging,2017-04-02,,GTX Plus Pro,James Ascencio,0.5627847868880643,Medium
+1Y58TSUU,Engaging,2017-08-30,,MG Special,Violet Mclelland,0.5622878334532242,Medium
+HEWKNHTH,Engaging,2017-06-18,,GTX Plus Pro,Daniell Hammack,0.562117004291084,Medium
+PODXJ4SP,Engaging,2017-08-18,Donquadtech,GTX Basic,Maureen Marcano,0.5620948774183405,Medium
+23NAJF9W,Engaging,2017-06-26,Plussunin,GTX Pro,Zane Levy,0.5617748543623226,Medium
+MBPJUJ7F,Engaging,2017-08-10,Plexzap,GTX Basic,Jonathan Berthelot,0.5617065186233087,Medium
+I6M40320,Engaging,2017-08-07,Betatech,GTX Plus Basic,Niesha Huffines,0.5616055932930318,Medium
+6PW6ZQEE,Engaging,2017-02-23,,GTX Basic,Corliss Cosme,0.5615817813423727,Medium
+VN8LKQN3,Engaging,2017-02-02,,GTX Plus Basic,Boris Faz,0.5614791907181158,Medium
+021Z2J9L,Engaging,2017-07-23,Rundofase,GTK 500,Markita Hansen,0.5613766550969069,Medium
+8D8JOXP6,Engaging,2017-07-19,,MG Special,Cecily Lampkin,0.5612888782334041,Medium
+IPHP2GVT,Engaging,2017-07-19,,MG Special,Cecily Lampkin,0.5612888782334041,Medium
+R0CLLIH9,Engaging,2017-04-12,,GTX Pro,Kary Hendrixson,0.5612293229082742,Medium
+A7OVC1WK,Engaging,2017-09-19,,GTX Plus Pro,Corliss Cosme,0.5609932753157693,Medium
+J732416R,Engaging,2017-07-23,,MG Special,Anna Snelling,0.5609580305916505,Medium
+IAUXJ05J,Engaging,2017-07-23,,MG Special,Anna Snelling,0.5609580305916505,Medium
+MK380H70,Engaging,2017-07-30,,MG Special,Anna Snelling,0.5609580305916505,Medium
+5SNCUQ8Z,Engaging,2017-07-30,,MG Special,Anna Snelling,0.5609580305916505,Medium
+0XYUJ7HF,Engaging,2017-08-23,Isdom,MG Special,Vicki Laflamme,0.5609474774701374,Medium
+INBGKE14,Engaging,2017-02-16,,GTX Pro,Kary Hendrixson,0.5607113764140116,Medium
+U0E0XHK9,Engaging,2017-04-06,,MG Advanced,Hayden Neloms,0.5600795557228595,Medium
+SKBDCYV5,Engaging,2017-04-09,Zencorporation,GTX Plus Basic,Zane Levy,0.5600542284074694,Medium
+QRR70537,Engaging,2017-07-22,,GTX Basic,Anna Snelling,0.5598232066404398,Medium
+RKOQZJZR,Engaging,2017-09-11,J-Texon,GTX Plus Basic,Zane Levy,0.559700433778529,Medium
+A9TEJW6U,Engaging,2017-08-01,,MG Special,Versie Hillebrand,0.5594434683276313,Medium
+1DC9PQ4S,Engaging,2017-08-01,,MG Special,Versie Hillebrand,0.5594434683276313,Medium
+Q1TS5ZKD,Engaging,2017-08-03,,MG Special,Versie Hillebrand,0.5592158586869413,Medium
+Z9S1ZX7W,Engaging,2017-07-02,Condax,GTX Plus Basic,Daniell Hammack,0.5590615453279565,Medium
+JXUSPNPV,Engaging,2017-09-26,,GTX Plus Basic,Markita Hansen,0.5589045901168797,Medium
+QGXJLNK1,Engaging,2017-07-24,,GTX Basic,Jonathan Berthelot,0.5583845683646105,Medium
+4XXAK1QL,Engaging,2017-07-31,,GTX Basic,Jonathan Berthelot,0.5583845683646105,Medium
+29W6WPLA,Engaging,2017-07-20,Gekko & Co,GTX Plus Basic,Jonathan Berthelot,0.5582575858984563,Medium
+HAUB1NBF,Engaging,2017-07-02,,GTX Pro,Corliss Cosme,0.5581939315436841,Medium
+EJGRLQP8,Engaging,2017-09-08,,GTX Pro,James Ascencio,0.5577208695489116,Medium
+SLMY2KDA,Engaging,2017-08-06,,GTX Pro,Kary Hendrixson,0.5576298619135333,Medium
+MAH5U65E,Engaging,2017-08-18,,MG Advanced,Vicki Laflamme,0.5575714774222778,Medium
+QQPAK72N,Engaging,2017-08-13,,GTX Plus Pro,Hayden Neloms,0.5575658197590438,Medium
+AERVH1AC,Engaging,2017-07-20,,GTX Plus Basic,Niesha Huffines,0.557554481858041,Medium
+PD2198ZH,Engaging,2017-03-19,,GTX Pro,Zane Levy,0.5571010685417759,Medium
+4LOHS2AJ,Engaging,2017-07-13,,MG Special,Rosie Papadopoulos,0.5570494885696609,Medium
+GVJFKHNL,Engaging,2017-07-21,Silis,MG Special,Gladys Colclough,0.5565762600549741,Medium
+1MQ3015O,Engaging,2017-08-15,,GTX Plus Basic,Niesha Huffines,0.5565704131100453,Medium
+BY2L60V1,Engaging,2017-03-11,,MG Special,Zane Levy,0.555931113098257,Medium
+99EA6HXJ,Engaging,2017-08-10,,GTX Basic,Markita Hansen,0.555862933748439,Medium
+SAMPTSH0,Engaging,2017-08-14,,GTX Plus Basic,Anna Snelling,0.5556869136390636,Medium
+EYBMEX1Z,Engaging,2017-07-23,,GTX Basic,Moses Frase,0.5556695580144657,Medium
+ABT1TDH1,Engaging,2017-07-30,,GTX Basic,Moses Frase,0.5556695580144657,Medium
+2PI827MA,Engaging,2017-05-25,,GTX Pro,Kary Hendrixson,0.5556389967882943,Medium
+RYNZ2WOK,Engaging,2017-08-29,Iselectrics,MG Advanced,Markita Hansen,0.5555985316830131,Medium
+XBPJ6M4K,Engaging,2017-08-31,Finhigh,GTX Basic,Kary Hendrixson,0.5555777530978241,Medium
+Q19RWR17,Engaging,2017-02-22,Rundofase,GTX Basic,Vicki Laflamme,0.5554473223545902,Medium
+QJ1DIUN7,Engaging,2017-08-17,Ganjaflex,MG Special,Rosalina Dieter,0.5552444807402254,Medium
+7A3R2M9T,Engaging,2017-07-17,Sonron,GTX Plus Pro,Vicki Laflamme,0.5548335162845232,Medium
+2N2MUDOA,Engaging,2017-08-05,Bioholding,GTX Pro,Daniell Hammack,0.5547691898794416,Medium
+FY5MBCWQ,Engaging,2017-07-22,,GTX Pro,Darcel Schlecht,0.5545425551566755,Medium
+PNTHPFHY,Engaging,2017-07-29,,GTX Pro,Darcel Schlecht,0.5545425551566755,Medium
+2I7IFY8D,Engaging,2017-07-29,,GTX Pro,Darcel Schlecht,0.5545425551566755,Medium
+D9MZMDOL,Engaging,2017-09-20,Zumgoity,MG Special,Vicki Laflamme,0.5543264123495445,Medium
+Q65B52C5,Engaging,2017-07-31,Kan-code,GTX Basic,Niesha Huffines,0.5541964529570756,Medium
+IN9S33CD,Engaging,2017-03-17,Finhigh,GTX Plus Pro,Rosalina Dieter,0.5540894549291914,Medium
+FQI66XXN,Engaging,2017-07-29,,GTX Basic,Marty Freudenburg,0.5538597886098848,Medium
+Y7244XW7,Engaging,2017-08-01,Plussunin,MG Special,Moses Frase,0.5538089205541484,Medium
+10QE4JCA,Engaging,2017-07-28,,MG Special,Anna Snelling,0.553768120951395,Medium
+QD4ONE04,Engaging,2017-07-31,Rangreen,MG Special,Anna Snelling,0.5535284164297911,Medium
+NS6JLCZ2,Engaging,2017-09-29,,GTX Pro,Rosie Papadopoulos,0.5534045407778327,Medium
+YLK0MRJ3,Engaging,2017-04-01,Iselectrics,GTX Basic,Kary Hendrixson,0.5533340039027289,Medium
+43LFUTVM,Engaging,2017-03-24,,GTX Plus Pro,Zane Levy,0.5530503792581509,Medium
+ERD6D5K3,Engaging,2017-07-30,,GTX Basic,Anna Snelling,0.5528814415850256,Medium
+VVM42VWQ,Engaging,2017-07-30,,GTX Basic,Anna Snelling,0.5528814415850256,Medium
+EJDHOY6M,Engaging,2017-03-17,,GTX Basic,Corliss Cosme,0.5528713541645576,Medium
+GEJLL5L3,Engaging,2017-03-24,,GTX Basic,Corliss Cosme,0.5528713541645576,Medium
+KF05URX0,Engaging,2017-05-11,,MG Special,Corliss Cosme,0.5527520375330809,Medium
+EF24VTVA,Engaging,2017-05-14,Kinnamplus,GTX Plus Pro,James Ascencio,0.55273584132854,Medium
+0H9C9J03,Engaging,2017-08-25,,GTX Plus Basic,Markita Hansen,0.5520346281821812,Medium
+R65LGLJ0,Engaging,2017-08-30,,MG Special,Cassey Cress,0.551928649451902,Medium
+ZH14SZPT,Engaging,2017-04-29,,GTX Plus Basic,Violet Mclelland,0.5518955962322425,Medium
+8LP076IV,Engaging,2017-08-02,,MG Special,Versie Hillebrand,0.5516050467098808,Medium
+CWXHKUV5,Engaging,2017-08-02,,MG Special,Versie Hillebrand,0.5516050467098808,Medium
+HPIKEMB9,Engaging,2017-04-06,,MG Special,Elease Gluck,0.5514559377355808,Medium
+ZVAZKWF3,Engaging,2017-04-14,,GTX Pro,Kami Bicknell,0.5509771402349698,Medium
+RW3CJO8D,Engaging,2017-09-04,,MG Advanced,Zane Levy,0.550830566917901,Medium
+FSNL204U,Engaging,2017-08-09,Hatfan,GTX Plus Pro,Marty Freudenburg,0.5507245089859871,Medium
+8JH8YA79,Engaging,2017-07-14,,GTX Basic,Kami Bicknell,0.5506147401194867,Medium
+HTEAOHFO,Engaging,2017-07-21,,GTX Basic,Kami Bicknell,0.5506147401194867,Medium
+WGFTBY3W,Engaging,2017-07-24,,GTX Pro,Darcel Schlecht,0.5505770900848469,Medium
+NCCB118E,Engaging,2017-07-24,,GTX Pro,Darcel Schlecht,0.5505770900848469,Medium
+FSEV7ZJC,Engaging,2017-07-31,,GTX Pro,Darcel Schlecht,0.5505770900848469,Medium
+OEP0IJ6S,Engaging,2017-07-31,,GTX Pro,Darcel Schlecht,0.5505770900848469,Medium
+XYRO1TLJ,Engaging,2017-06-29,,GTX Pro,Markita Hansen,0.5503915863085672,Medium
+PMEENWD5,Engaging,2017-01-21,Globex Corporation,GTX Pro,Corliss Cosme,0.5503789157167421,Medium
+V1KABF71,Engaging,2017-08-04,,GTX Plus Basic,Jonathan Berthelot,0.5502951396832251,Medium
+JW4Q5F4Z,Engaging,2017-04-01,,MG Special,Cassey Cress,0.5499834108954812,Medium
+VP8ERXPR,Engaging,2017-04-29,,MG Special,Cassey Cress,0.5499834108954812,Medium
+02K37JAK,Engaging,2017-07-21,,GTX Plus Basic,Jonathan Berthelot,0.549532465627012,Medium
+6F5TIV66,Engaging,2017-07-21,,GTX Plus Basic,Jonathan Berthelot,0.549532465627012,Medium
+6KEWAQMX,Engaging,2017-08-12,,GTX Pro,Cassey Cress,0.549436327010605,Medium
+E29GOFUV,Engaging,2017-06-20,Sumace,MG Special,Elease Gluck,0.5486468568742682,Medium
+Z7Q2USU1,Engaging,2017-08-11,,MG Special,Markita Hansen,0.5481476485013503,Medium
+13FIM9V3,Engaging,2017-06-24,,GTX Pro,Corliss Cosme,0.5481052015785862,Medium
+LFJVV393,Engaging,2017-08-13,,GTX Plus Basic,Hayden Neloms,0.5480770344810795,Medium
+RD6Y5R4P,Engaging,2017-08-03,Cancity,MG Special,Kami Bicknell,0.5480762391652589,Medium
+FJE58EP1,Engaging,2017-08-14,,GTX Pro,Darcel Schlecht,0.5479446161204119,Medium
+AILB4LIX,Engaging,2017-08-14,,GTX Pro,Darcel Schlecht,0.5479446161204119,Medium
+7882RJGY,Engaging,2017-04-27,,MG Special,Wilburn Farren,0.5478273006130272,Medium
+URQYDGX8,Engaging,2017-08-02,,GTX Basic,Jonathan Berthelot,0.5477091309198796,Medium
+BJH89YWM,Engaging,2017-08-09,,GTX Basic,Jonathan Berthelot,0.5477091309198796,Medium
+OGHK250E,Engaging,2017-09-03,,GTX Basic,Violet Mclelland,0.5474647794259981,Medium
+ER0U0TOC,Engaging,2017-09-15,,GTX Basic,Corliss Cosme,0.5473019993806143,Medium
+CG9VXPV1,Engaging,2017-02-19,,GTX Basic,Zane Levy,0.5470438375472355,Medium
+F2B62IW4,Engaging,2017-02-28,Bioplex,MG Special,Maureen Marcano,0.5470314264679202,Medium
+8DDR4MUL,Engaging,2017-09-08,,MG Advanced,James Ascencio,0.5468870803392163,Medium
+JHCA115A,Engaging,2017-07-19,Green-Plus,GTX Pro,Vicki Laflamme,0.5467364731767375,Medium
+CDVDL9I5,Engaging,2017-07-20,,GTX Plus Basic,Jonathan Berthelot,0.5467143327210833,Medium
+EVDKJDY3,Engaging,2017-07-27,,GTX Plus Basic,Jonathan Berthelot,0.5467143327210833,Medium
+EEB0JYIQ,Engaging,2017-08-10,,GTX Plus Basic,Niesha Huffines,0.5463789807605692,Medium
+51H02FX1,Engaging,2017-07-27,,MG Special,Niesha Huffines,0.5461172575158408,Medium
+Z9QZKUV5,Engaging,2017-03-30,Zumgoity,GTX Basic,Zane Levy,0.5461138034844067,Medium
+JCPQZ2SN,Engaging,2017-02-04,Cheers,GTX Plus Basic,Hayden Neloms,0.5458468727385661,Medium
+ZG8WPG99,Engaging,2017-03-03,,GTX Pro,Kary Hendrixson,0.5457323049904438,Medium
+K7056XS7,Engaging,2017-07-05,Kinnamplus,MG Advanced,Rosie Papadopoulos,0.545670207171927,Medium
+283MDYKM,Engaging,2017-07-31,,GTX Plus Basic,Moses Frase,0.545610717613973,Medium
+Q2CLAKLM,Engaging,2017-04-30,,GTX Plus Pro,Daniell Hammack,0.5454816447168754,Medium
+7ZN8YCH8,Engaging,2017-08-12,Gekko & Co,MG Special,Versie Hillebrand,0.5454809251762779,Medium
+0PT4RY4P,Engaging,2017-07-31,,MG Advanced,Cecily Lampkin,0.5454005795551984,Medium
+G03J67Z1,Engaging,2017-08-22,,GTX Plus Basic,Zane Levy,0.5452902822049451,Medium
+DYNHHN6P,Engaging,2017-04-29,Massive Dynamic,GTX Pro,Maureen Marcano,0.5451460587554106,Medium
+CFI2GXN1,Engaging,2017-07-07,,GTX Pro,Boris Faz,0.5450563792084311,Medium
+C7ODMOS2,Engaging,2017-06-13,,MG Advanced,Zane Levy,0.545045589500801,Medium
+VH6OFWCV,Engaging,2017-06-20,,MG Advanced,Zane Levy,0.545045589500801,Medium
+9GYIYGHW,Engaging,2017-06-06,,MG Advanced,Violet Mclelland,0.5448160486397161,Medium
+DAAHNY6T,Engaging,2017-08-05,,MG Special,Anna Snelling,0.5446213222142295,Medium
+80QJ0BQH,Engaging,2017-08-05,,MG Special,Anna Snelling,0.5446213222142295,Medium
+ZPXE49AP,Engaging,2017-09-06,,GTX Basic,Daniell Hammack,0.5443724480278036,Medium
+G1AKE0NR,Engaging,2017-06-07,,GTX Pro,Zane Levy,0.5439034467853402,Medium
+6GG9CSTV,Engaging,2017-07-23,,MG Special,Gladys Colclough,0.5438094413628471,Medium
+5WSQ6D2E,Engaging,2017-07-23,,MG Special,Gladys Colclough,0.5438094413628471,Medium
+RTOIXNPC,Engaging,2017-07-30,,MG Special,Gladys Colclough,0.5438094413628471,Medium
+UFL6ZQDV,Engaging,2017-05-18,,GTX Basic,Zane Levy,0.5435423330453535,Medium
+OZ761BUJ,Engaging,2017-02-13,,GTX Basic,Violet Mclelland,0.5434826717403327,Medium
+7GDSUY9K,Engaging,2017-09-05,Konmatfix,GTX Plus Pro,Hayden Neloms,0.5432830872488527,Medium
+UU7N7LZK,Engaging,2017-09-18,,MG Advanced,James Ascencio,0.5430425930470767,Medium
+KQ83VL8T,Engaging,2017-09-17,,GTX Plus Basic,Boris Faz,0.5430114009644383,Medium
+PQOHTS9I,Engaging,2017-07-19,Inity,GTX Pro,Jonathan Berthelot,0.5429567323825191,Medium
+LMOAYCUK,Engaging,2017-01-11,Plusstrip,GTX Plus Basic,Kami Bicknell,0.542707164226403,Medium
+5JDWBOLS,Engaging,2017-03-04,,GTX Basic,Daniell Hammack,0.5424810524583606,Medium
+ZIK2R3S7,Engaging,2017-05-16,,MG Advanced,Corliss Cosme,0.5423331170545359,Medium
+OIO2H2MY,Engaging,2017-05-01,,GTX Plus Pro,Boris Faz,0.5423195957200632,Medium
+SUUVV6RP,Engaging,2017-08-03,,MG Special,Niesha Huffines,0.5422040065106871,Medium
+7FFV8D9U,Engaging,2017-08-06,Plusstrip,GTX Pro,Gladys Colclough,0.5421310843342273,Medium
+6I125KPN,Engaging,2017-05-22,,MG Advanced,Daniell Hammack,0.5419090271034818,Medium
+VJSI29OF,Engaging,2017-08-11,,MG Special,Versie Hillebrand,0.5418387277213458,Medium
+VAL8O4PH,Engaging,2017-08-01,,MG Special,Darcel Schlecht,0.5416915244180021,Medium
+HJY0TQ7X,Engaging,2017-09-18,Toughzap,MG Special,Zane Levy,0.5414282188538675,Medium
+5X3TSUA9,Engaging,2017-09-13,,GTX Plus Basic,Cassey Cress,0.5414222849670275,Medium
+LSVGDJ1A,Engaging,2017-04-17,,GTX Plus Pro,Kary Hendrixson,0.5414103570634797,Medium
+4ZX1WPS7,Engaging,2017-05-03,Inity,GTX Pro,Cassey Cress,0.5412645353068632,Medium
+XM4VD3NN,Engaging,2017-04-04,,GTX Plus Basic,Markita Hansen,0.540996983460851,Medium
+20CVXRTX,Engaging,2017-04-01,Kinnamplus,GTX Pro,Vicki Laflamme,0.5404768095133208,Medium
+RY6T3GLC,Engaging,2017-05-29,Zathunicon,GTX Pro,Corliss Cosme,0.5403547213160514,Medium
+KAGK2GQJ,Engaging,2017-09-01,,GTX Plus Pro,James Ascencio,0.5401063967946504,Medium
+P3Z2LYCL,Engaging,2017-07-23,,MG Special,Versie Hillebrand,0.5399668124259192,Medium
+0M3NCPQX,Engaging,2017-07-30,,MG Special,Versie Hillebrand,0.5399668124259192,Medium
+8P3O8A9H,Engaging,2017-08-21,,MG Special,Vicki Laflamme,0.5396966687369787,Medium
+DJFMG9QI,Engaging,2017-07-30,Plusstrip,MG Special,Moses Frase,0.5396661969257152,Medium
+R2V49PU5,Engaging,2017-08-21,,GTX Plus Basic,Kami Bicknell,0.539648739307678,Medium
+IKU97NEU,Engaging,2017-04-10,Funholding,MG Advanced,Markita Hansen,0.5394087137013934,Medium
+8CBTC1PX,Engaging,2017-08-11,Streethex,MG Advanced,Marty Freudenburg,0.5389367922203597,Medium
+T4FR3FAC,Engaging,2017-06-29,,MG Advanced,Vicki Laflamme,0.5388285621255867,Medium
+ODGKZEVV,Engaging,2017-03-23,,GTX Pro,Kary Hendrixson,0.5388016349394272,Medium
+FCBSZ6FJ,Engaging,2017-08-09,,GTX Plus Pro,Anna Snelling,0.5387693370419234,Medium
+CCLIVXMG,Engaging,2017-07-19,,GTX Pro,Elease Gluck,0.5387529356166345,Medium
+N909ADDC,Engaging,2017-08-02,,MG Advanced,Vicki Laflamme,0.5386509595776013,Medium
+3DATPTEH,Engaging,2017-07-22,,MG Special,Anna Snelling,0.5384664215632609,Medium
+FT5U6NIG,Engaging,2017-07-22,,MG Special,Anna Snelling,0.5384664215632609,Medium
+RQF6II3D,Engaging,2017-07-22,,MG Special,Anna Snelling,0.5384664215632609,Medium
+S6YZO6UQ,Engaging,2017-07-21,,GTX Pro,Darcel Schlecht,0.5381030238228542,Medium
+PI45UJKA,Engaging,2017-07-21,,GTX Pro,Darcel Schlecht,0.5381030238228542,Medium
+Q62JFLLD,Engaging,2017-07-28,,GTX Pro,Darcel Schlecht,0.5381030238228542,Medium
+SU1NDYXR,Engaging,2017-08-16,Stanredtax,GTX Plus Basic,Boris Faz,0.5380597651667669,Medium
+S53EVWFC,Engaging,2017-08-23,,GTX Pro,Daniell Hammack,0.5379775589000848,Medium
+DXRG254A,Engaging,2017-07-28,,GTX Basic,Boris Faz,0.5379348596263459,Medium
+UMXZFLO8,Engaging,2017-05-29,,GTX Pro,Zane Levy,0.5379257906176185,Medium
+RXAQJKSL,Engaging,2017-04-26,,GTX Plus Pro,Corliss Cosme,0.5379033411266597,Medium
+NMY6FA6X,Engaging,2017-04-24,,MG Advanced,Corliss Cosme,0.5375658797160106,Medium
+TGSLH2ZD,Engaging,2017-08-27,,GTX Basic,Zane Levy,0.5374322222690485,Medium
+OLXEYM3P,Engaging,2017-08-27,,GTX Basic,Zane Levy,0.5374322222690485,Medium
+VV6T07G4,Engaging,2017-07-24,,MG Advanced,Darcel Schlecht,0.5372133467165567,Medium
+86C26QSR,Engaging,2017-05-03,,GTX Plus Pro,Markita Hansen,0.5369615210281737,Medium
+YXXWQA4G,Engaging,2017-06-15,,MG Advanced,Zane Levy,0.5368800171680199,Medium
+Z7OH4GWO,Engaging,2017-04-13,,GTX Pro,Kami Bicknell,0.5367605706080727,Medium
+USJWM3F3,Engaging,2017-07-10,,GTX Basic,Violet Mclelland,0.5366898402981327,Medium
+NZJXKD9H,Engaging,2017-08-19,,MG Special,Daniell Hammack,0.5364891652239504,Medium
+WQAKXOYU,Engaging,2017-07-02,,GTX Pro,Boris Faz,0.5363007600122112,Medium
+I92EJ805,Engaging,2017-05-01,Bluth Company,GTX Basic,Kami Bicknell,0.5361960696841923,Medium
+3VC45PML,Engaging,2017-06-14,,GTX Basic,James Ascencio,0.5360686936873141,Medium
+E617EXPD,Engaging,2017-08-14,Iselectrics,MG Advanced,Vicki Laflamme,0.5358641893587651,Medium
+7J0ZLDB1,Engaging,2017-06-05,,MG Special,Zane Levy,0.5357775313478185,Medium
+ORM1IRQ2,Engaging,2017-07-07,,MG Special,Violet Mclelland,0.5354997801838492,Medium
+KDPBAHOJ,Engaging,2017-06-20,,MG Advanced,Kami Bicknell,0.5353070139953741,Medium
+FSYTM6YE,Engaging,2017-09-27,,GTX Pro,James Ascencio,0.5352854549189844,Medium
+O28I4VDY,Engaging,2017-07-18,,GTX Plus Basic,Corliss Cosme,0.5351525959738925,Medium
+YY2DWBG5,Engaging,2017-07-24,Ron-tech,MG Advanced,Versie Hillebrand,0.5350403283790724,Medium
+7K1KXMBT,Engaging,2017-08-27,,GTX Pro,Kami Bicknell,0.5350020443217641,Medium
+G1M1KVHU,Engaging,2017-07-23,Xx-zobam,GTX Plus Basic,Niesha Huffines,0.534820719649112,Medium
+4UZCVHEV,Engaging,2017-03-17,,GTX Basic,Violet Mclelland,0.5347319037795828,Medium
+GK1NH8G7,Engaging,2017-03-16,Iselectrics,GTX Basic,Kami Bicknell,0.5346938118256581,Medium
+3F2ZPCSL,Engaging,2017-03-25,,GTX Plus Basic,Kary Hendrixson,0.5346774280393557,Medium
+4CXUC4VR,Engaging,2017-03-02,Rantouch,GTX Basic,Vicki Laflamme,0.5342891723436407,Medium
+MPME6VZD,Engaging,2017-05-29,Dontechi,GTX Plus Basic,Kami Bicknell,0.5341839414014227,Medium
+0NSRB3EO,Engaging,2017-07-20,,MG Special,Jonathan Berthelot,0.5336724782113037,Medium
+LMKNU8IZ,Engaging,2017-02-24,,GTX Pro,Markita Hansen,0.5336128598453845,Medium
+YFB7Y92U,Engaging,2017-02-07,,GTK 500,Elease Gluck,0.5334780255170193,Medium
+98K99UW9,Engaging,2017-08-06,,GTX Plus Pro,Rosie Papadopoulos,0.5333377425586893,Medium
+OW9OM3UO,Engaging,2017-07-09,,MG Advanced,Rosalina Dieter,0.5331947693792608,Medium
+8MUD1WS1,Engaging,2017-08-12,,MG Advanced,Cecily Lampkin,0.5331630813629432,Medium
+FWTTJ2G8,Engaging,2017-05-06,Initech,GTX Basic,Kary Hendrixson,0.5329962141995015,Medium
+OT26ZUZ7,Engaging,2017-07-09,Betatech,GTX Pro,Daniell Hammack,0.5329121130233258,Medium
+ZTQD4PLQ,Engaging,2017-07-22,,GTX Plus Basic,Jonathan Berthelot,0.5324864301953449,Medium
+7BKYKVF2,Engaging,2017-07-29,,GTX Plus Basic,Jonathan Berthelot,0.5324864301953449,Medium
+LOHJU3OB,Engaging,2017-09-10,,GTX Pro,Zane Levy,0.5322843225993007,Medium
+Z7EBMMAE,Engaging,2017-07-24,,MG Special,Versie Hillebrand,0.5322568466095817,Medium
+KT4OEP4X,Engaging,2017-07-24,,MG Special,Versie Hillebrand,0.5322568466095817,Medium
+ODHVHXKS,Engaging,2017-07-24,,MG Special,Versie Hillebrand,0.5322568466095817,Medium
+K63TD0WD,Engaging,2017-07-31,,MG Special,Versie Hillebrand,0.5322568466095817,Medium
+3ORQ2R0R,Engaging,2017-08-28,,GTX Pro,Elease Gluck,0.5319385605106007,Medium
+0K59ZLQC,Engaging,2017-05-18,Donquadtech,GTX Basic,Corliss Cosme,0.5318703826352995,Medium
+5W29OCB8,Engaging,2017-07-30,Bioholding,MG Special,Lajuana Vencill,0.5317389238244735,Medium
+CEEJ2EN5,Engaging,2017-04-25,,GTX Plus Basic,Violet Mclelland,0.531692966020227,Medium
+Q8QGD2OG,Engaging,2017-08-08,,MG Advanced,Cecily Lampkin,0.5316605339848878,Medium
+OSG9KZGB,Engaging,2017-08-07,Kan-code,GTX Plus Basic,Anna Snelling,0.5314322994881945,Medium
+GZCWM6GK,Engaging,2017-03-22,Statholdings,MG Special,Elease Gluck,0.5314234552560974,Medium
+ZC987DAQ,Engaging,2017-08-07,,MG Advanced,Markita Hansen,0.5313928575784029,Medium
+YX4E972E,Engaging,2017-06-14,Conecom,GTX Pro,Markita Hansen,0.5313070439306407,Medium
+4R4QF0ZU,Engaging,2017-09-20,,GTX Pro,Zane Levy,0.5312332095132417,Medium
+7FVBMH48,Engaging,2017-08-13,,MG Advanced,Markita Hansen,0.53101331818253,Medium
+H3DYTZIQ,Engaging,2017-06-18,Scottech,GTX Plus Basic,Cassey Cress,0.5308102990865196,Medium
+9DY57A6F,Engaging,2017-09-13,,GTX Pro,Daniell Hammack,0.5307762930697937,Medium
+S3LATQVJ,Engaging,2017-07-23,Kinnamplus,GTX Plus Basic,Versie Hillebrand,0.5304976201036984,Medium
+IDKBZCAF,Engaging,2017-09-21,,GTX Pro,Daniell Hammack,0.5299021519605778,Medium
+WSQHC199,Engaging,2017-07-24,,MG Special,Darcel Schlecht,0.5298011976279109,Medium
+YWGU40CP,Engaging,2017-07-31,,MG Special,Darcel Schlecht,0.5298011976279109,Medium
+UIX6X6R3,Engaging,2017-05-01,Umbrella Corporation,MG Advanced,Zane Levy,0.529699625188221,Medium
+K7TV5UBZ,Engaging,2017-05-24,,GTX Plus Pro,James Ascencio,0.5295461713667371,Medium
+NBBIFIKB,Engaging,2017-09-15,,MG Advanced,Wilburn Farren,0.5293449925443336,Medium
+OVLGWURN,Engaging,2017-07-30,,GTX Basic,Kary Hendrixson,0.5292914898912218,Medium
+ZT52DT8H,Engaging,2017-06-26,,MG Advanced,Daniell Hammack,0.5292808165558458,Medium
+REAFB3C3,Engaging,2017-07-21,,GTX Basic,Zane Levy,0.5292677694846587,Medium
+0Z8ZAS2M,Engaging,2017-07-21,,GTX Basic,Zane Levy,0.5292677694846587,Medium
+VRCYXSP1,Engaging,2017-07-21,,GTX Basic,Zane Levy,0.5292677694846587,Medium
+C9330YF1,Engaging,2017-04-17,Blackzim,GTX Basic,Markita Hansen,0.5289770421908699,Medium
+FKVC924F,Engaging,2017-08-17,,GTX Pro,Daniell Hammack,0.5289594728004087,Medium
+LXVCMY4C,Engaging,2017-08-17,,GTX Pro,Daniell Hammack,0.5289594728004087,Medium
+7FLPKZN7,Engaging,2017-09-23,Kan-code,GTX Pro,Kami Bicknell,0.528884010690176,Medium
+0T9KUEQ2,Engaging,2017-07-11,,GTX Plus Pro,Cassey Cress,0.5285315348669969,Medium
+QKXCMJVB,Engaging,2017-07-08,,GTX Basic,James Ascencio,0.5283871343701821,Medium
+3A54O8JT,Engaging,2017-08-05,,MG Special,Versie Hillebrand,0.5275669965308923,Medium
+8TFYRWZ6,Engaging,2017-07-22,Mathtouch,MG Advanced,Gladys Colclough,0.5275604917320842,Medium
+EJDRMHNC,Engaging,2017-07-17,,MG Special,Boris Faz,0.5274751926116169,Medium
+BDUNPUWY,Engaging,2017-04-25,,GTX Plus Basic,Boris Faz,0.5274524185854402,Medium
+R0XNAFUB,Engaging,2017-07-12,,GTX Basic,Zane Levy,0.527375755191789,Medium
+T50TV9SO,Engaging,2017-07-26,,GTX Basic,Zane Levy,0.527375755191789,Medium
+T9QD8U1Y,Engaging,2017-07-21,Betasoloin,MG Special,Darcel Schlecht,0.527173034046043,Medium
+WTAM4BED,Engaging,2017-06-13,,MG Special,Cassey Cress,0.527127541308848,Medium
+WVT3X6IC,Engaging,2017-07-27,,MG Special,Versie Hillebrand,0.5268962674886991,Medium
+Q2BB73WT,Engaging,2017-04-03,,GTX Plus Basic,Hayden Neloms,0.5261980550386467,Medium
+UI3DE2C4,Engaging,2017-02-26,,GTX Plus Basic,Zane Levy,0.5258724392450624,Medium
+ZLN48IIP,Engaging,2017-04-03,Iselectrics,GTX Basic,Markita Hansen,0.5258618937109858,Medium
+ISAWVDYZ,Engaging,2017-03-09,,GTX Basic,Daniell Hammack,0.5256640734100526,Medium
+P9EJ68SM,Engaging,2017-07-30,,GTX Plus Basic,Cassey Cress,0.5251298301089912,Medium
+HDALWEHF,Engaging,2017-04-25,,GTX Pro,Cassey Cress,0.5250807996791453,Medium
+4V9NMGEA,Engaging,2017-03-02,,GTX Basic,Rosalina Dieter,0.5248765080080194,Medium
+NX2EICNQ,Engaging,2017-07-28,Kan-code,GTX Basic,Versie Hillebrand,0.5247030606699432,Medium
+MGD7DZAU,Engaging,2017-05-19,Globex Corporation,GTX Basic,Kami Bicknell,0.5241597067958544,Medium
+6RZ5GSAB,Engaging,2017-08-03,,GTX Basic,Jonathan Berthelot,0.5241449115777945,Medium
+61E7IHAY,Engaging,2017-04-22,,MG Special,Violet Mclelland,0.5236449356652232,Medium
+PCVNB0NO,Engaging,2017-06-19,,GTX Basic,Zane Levy,0.5236428062752005,Medium
+LD4F6QTP,Engaging,2017-07-20,Groovestreet,GTX Plus Pro,Anna Snelling,0.5235118942012502,Medium
+CYB0NUCJ,Engaging,2017-05-23,,MG Special,Cassey Cress,0.5233656594350053,Medium
+8ODHXBNE,Engaging,2017-07-25,,MG Special,Rosalina Dieter,0.523302959477727,Medium
+BTT6YAVZ,Engaging,2017-01-01,Green-Plus,GTX Plus Basic,Zane Levy,0.5232927039866511,Medium
+CMW6IQJI,Engaging,2017-07-25,Faxquote,MG Advanced,Niesha Huffines,0.5231079322404105,Medium
+WFCEPHD3,Engaging,2017-03-16,,GTX Pro,Markita Hansen,0.5230533294509022,Medium
+3ATYY665,Engaging,2017-05-26,Conecom,GTX Pro,Kami Bicknell,0.5229903771284063,Medium
+SXYJU7LC,Engaging,2017-07-05,,GTX Basic,Kami Bicknell,0.5229730461214676,Medium
+Z8Z77GN3,Engaging,2017-08-24,,GTX Pro,Kami Bicknell,0.5229550587586183,Medium
+YYTZSTL0,Engaging,2017-07-07,,GTX Plus Pro,Rosie Papadopoulos,0.5229449291440788,Medium
+7Y530NLJ,Engaging,2017-04-12,Genco Pura Olive Oil Company,GTX Plus Basic,Boris Faz,0.5228381577036818,Medium
+5VW9YVTU,Engaging,2017-08-04,Condax,GTX Basic,Moses Frase,0.5227145151123552,Medium
+8G3HB5S6,Engaging,2017-05-29,,GTX Basic,James Ascencio,0.5225867143476866,Medium
+R9U1QNHQ,Engaging,2017-04-29,Betasoloin,MG Special,Hayden Neloms,0.5220207562414321,Medium
+LR45YFE4,Engaging,2017-05-03,Groovestreet,MG Special,Violet Mclelland,0.522009282661771,Medium
+Y3CYQGPH,Engaging,2017-02-22,,GTX Basic,Rosalina Dieter,0.5218641134078779,Medium
+PXNDLIL2,Engaging,2017-08-13,Initech,MG Special,Lajuana Vencill,0.5212382557711809,Medium
+QIEAKLRU,Engaging,2017-08-03,,MG Advanced,Cecily Lampkin,0.5210725536597596,Medium
+81G840FM,Engaging,2017-04-13,,GTX Basic,Zane Levy,0.5210242280685927,Medium
+OTJR9SSK,Engaging,2017-04-25,,GTX Plus Basic,Hayden Neloms,0.5207340551798147,Medium
+J9OP2A5I,Engaging,2017-05-02,,MG Special,Rosalina Dieter,0.5205010674209327,Medium
+NX28C8EI,Engaging,2017-09-30,,GTX Plus Pro,James Ascencio,0.5203413246808711,Medium
+8WB5HXOB,Engaging,2017-05-02,,GTX Plus Pro,Zane Levy,0.520283671972749,Medium
+3NC5XSDF,Engaging,2017-09-12,,MG Advanced,Violet Mclelland,0.5202208109234762,Medium
+4SOUOUKH,Engaging,2017-09-30,Treequote,GTX Plus Pro,Vicki Laflamme,0.5200008203643006,Medium
+UM1OU73X,Engaging,2017-08-04,,GTX Pro,Darcel Schlecht,0.5199290542248436,Medium
+69U39SXU,Engaging,2017-08-04,,GTX Pro,Darcel Schlecht,0.5199290542248436,Medium
+HU970PDK,Engaging,2017-05-18,Donquadtech,GTX Plus Pro,James Ascencio,0.5198866573325044,Medium
+KJHM27ZM,Engaging,2017-05-15,Labdrill,GTX Plus Pro,Daniell Hammack,0.5198003221406367,Medium
+LORMJLTE,Engaging,2017-07-19,Konmatfix,GTX Plus Basic,Lajuana Vencill,0.519058988684527,Medium
+X9L0T199,Engaging,2017-08-18,,GTX Pro,Kami Bicknell,0.5189999159675107,Medium
+FH30JK3J,Engaging,2017-09-06,Ontomedia,GTX Plus Basic,Cassey Cress,0.5188707517545481,Medium
+JGXK8P6T,Engaging,2017-08-01,,MG Advanced,Zane Levy,0.5188415333637055,Medium
+MOAP4XN7,Engaging,2017-08-05,,GTX Pro,Boris Faz,0.5183441359570659,Medium
+BJOY31DL,Engaging,2017-06-23,Betasoloin,MG Special,Violet Mclelland,0.5182201994380324,Medium
+2O76H591,Engaging,2017-06-17,,MG Advanced,James Ascencio,0.5182095632281161,Medium
+39EYEBMK,Engaging,2017-07-18,,GTX Basic,Violet Mclelland,0.5178009459639054,Medium
+AR33M33M,Engaging,2017-07-01,,GTX Plus Basic,Hayden Neloms,0.5177360433640177,Medium
+QRQ8C6MQ,Engaging,2017-03-03,Globex Corporation,GTX Pro,Cassey Cress,0.5177357972419075,Medium
+0KEO3OP7,Engaging,2017-04-27,,GTX Plus Pro,Daniell Hammack,0.5174239577188302,Medium
+ZJQKUIZ4,Engaging,2017-05-22,Opentech,MG Special,Kary Hendrixson,0.5174231677716494,Medium
+H2FCUPHJ,Engaging,2017-07-24,,GTX Pro,Niesha Huffines,0.5172913241507006,Medium
+8I84MV5A,Engaging,2017-05-11,Zencorporation,GTX Basic,Cassey Cress,0.5171283055717728,Medium
+9M72KPA3,Engaging,2017-07-29,Bluth Company,GTX Plus Basic,Kami Bicknell,0.5170549687067332,Medium
+EBLSL27F,Engaging,2017-06-24,,GTX Plus Pro,Boris Faz,0.5170313703162096,Medium
+2F41W100,Engaging,2017-08-26,,GTX Plus Basic,Daniell Hammack,0.5170012507202644,Medium
+988J5AUI,Engaging,2017-08-10,,GTX Plus Basic,Hayden Neloms,0.5168151538848779,Medium
+4EGO7VCJ,Engaging,2017-07-02,,GTX Pro,Kami Bicknell,0.516697177860389,Medium
+N7G1TU1X,Engaging,2017-06-02,,MG Advanced,James Ascencio,0.5165792415347485,Medium
+PNO7D8PD,Engaging,2017-04-05,,GTX Basic,Zane Levy,0.5165442008086236,Medium
+9HYMQL4I,Engaging,2017-04-26,,GTX Basic,Zane Levy,0.5165442008086236,Medium
+H8XH5MFQ,Engaging,2017-09-03,,GTX Plus Pro,Kary Hendrixson,0.5163812293209717,Medium
+MN6E59H6,Engaging,2017-03-14,,GTX Plus Pro,Markita Hansen,0.516200486913828,Medium
+6V7FT2YU,Engaging,2017-07-20,,GTX Pro,Darcel Schlecht,0.5160297494579632,Medium
+M6JT5RL8,Engaging,2017-07-27,,GTX Pro,Darcel Schlecht,0.5160297494579632,Medium
+45H84LNT,Engaging,2017-07-27,,GTX Pro,Darcel Schlecht,0.5160297494579632,Medium
+E8MIFXOH,Engaging,2017-07-27,,GTX Pro,Darcel Schlecht,0.5160297494579632,Medium
+UO8DLVVQ,Engaging,2017-07-27,,GTX Pro,Darcel Schlecht,0.5160297494579632,Medium
+B06D1F9M,Engaging,2017-02-13,Faxquote,GTX Pro,Vicki Laflamme,0.5156294969118158,Medium
+CY7C3ZPJ,Engaging,2017-04-23,,MG Advanced,Markita Hansen,0.5151522346507063,Medium
+EEQV0YY4,Engaging,2017-08-12,,GTX Basic,Violet Mclelland,0.5151122936772533,Medium
+VXTVHC1Z,Engaging,2017-05-28,,GTX Plus Pro,Boris Faz,0.5147443255883648,Medium
+KKRJ6TBY,Engaging,2017-04-01,Scotfind,GTX Pro,Daniell Hammack,0.5146997789199713,Medium
+SPV7OJTH,Engaging,2017-06-02,,MG Advanced,Cassey Cress,0.5145574515797571,Medium
+QU6CFZ22,Engaging,2017-06-23,,MG Advanced,Cassey Cress,0.5145574515797571,Medium
+XRDF1NAB,Engaging,2017-03-01,,GTX Pro,Zane Levy,0.5132454820499605,Medium
+KBPKLB2X,Engaging,2017-08-14,,GTX Pro,Jonathan Berthelot,0.513178694485497,Medium
+ALZNZ666,Engaging,2017-05-14,Toughzap,MG Advanced,Boris Faz,0.5131716428518646,Medium
+3P7QQSVF,Engaging,2017-04-12,,MG Special,Vicki Laflamme,0.5130609975066542,Medium
+I6PXHXST,Engaging,2017-08-14,Singletechno,MG Advanced,Marty Freudenburg,0.5130378496301197,Medium
+XRZNF1LQ,Engaging,2017-08-31,,GTX Pro,Kary Hendrixson,0.5128599288694405,Medium
+SLYFFVBE,Engaging,2017-03-07,Blackzim,GTX Plus Basic,Maureen Marcano,0.5124421216028386,Medium
+JL9ERNVY,Engaging,2017-05-20,,GTX Plus Pro,Boris Faz,0.5124324134662634,Medium
+RUAU1ORD,Engaging,2017-06-10,,GTX Basic,Zane Levy,0.5120793730652717,Medium
+MRWHJE9P,Engaging,2017-04-21,,GTX Plus Basic,Cassey Cress,0.5120487784822577,Medium
+QDGUWTLU,Engaging,2017-02-27,,MG Special,Rosalina Dieter,0.5120258796333232,Medium
+BEDNZXVE,Engaging,2017-07-25,,GTX Basic,Jonathan Berthelot,0.5119181020760871,Medium
+E3XLWCWX,Engaging,2017-07-19,Ontomedia,GTX Plus Pro,Marty Freudenburg,0.5116491224992739,Medium
+Z2E1UVVB,Engaging,2017-05-07,,MG Advanced,Violet Mclelland,0.5114286541554727,Medium
+LDK61ORQ,Engaging,2017-07-19,Xx-zobam,MG Special,Hayden Neloms,0.5111738539555721,Medium
+Z236WCM1,Engaging,2017-05-05,Vehement Capital Partners,GTX Plus Basic,Kary Hendrixson,0.5109393825881461,Medium
+74KGIZW4,Engaging,2017-06-24,Betasoloin,GTX Pro,Kary Hendrixson,0.5107895824270162,Medium
+6TGCOE5O,Engaging,2017-08-03,,GTX Plus Pro,Cassey Cress,0.5104192566225237,Medium
+J6F10SFK,Engaging,2017-04-08,,MG Advanced,Markita Hansen,0.5103220339925999,Medium
+YTGQKC7A,Engaging,2017-06-03,Dalttechnology,MG Special,Rosalina Dieter,0.5099094515488964,Medium
+3PVNGGBX,Engaging,2017-03-14,The New York Inquirer,GTX Basic,Markita Hansen,0.5097192240472592,Medium
+U4L1277G,Engaging,2017-08-01,,GTX Plus Basic,Hayden Neloms,0.5096082493275503,Medium
+6F79VYH8,Engaging,2017-03-07,,GTX Basic,Boris Faz,0.509577063674601,Medium
+I9SPENCQ,Engaging,2017-07-21,Cheers,GTX Plus Basic,Violet Mclelland,0.5094809322119289,Medium
+ZCUMC0XC,Engaging,2017-08-04,,MG Special,Gladys Colclough,0.5094054430169568,Medium
+WQ5U8PPM,Engaging,2017-07-26,Umbrella Corporation,GTX Plus Basic,Niesha Huffines,0.5093858937964885,Medium
+KM1D04JS,Engaging,2017-02-16,,GTX Plus Basic,James Ascencio,0.5093484998426627,Medium
+EFIR7HGR,Engaging,2017-06-18,Groovestreet,MG Advanced,Daniell Hammack,0.5089346311887972,Medium
+0R5KAHNB,Engaging,2017-08-03,Umbrella Corporation,MG Advanced,Moses Frase,0.5089089863076462,Medium
+Y0M8X7BV,Engaging,2017-08-25,,GTX Plus Pro,Corliss Cosme,0.5088302373034865,Medium
+VLYT262U,Engaging,2017-08-04,,GTX Plus Basic,Daniell Hammack,0.5088077836642787,Medium
+CGFLLZZI,Engaging,2017-07-25,,MG Special,Kary Hendrixson,0.5078105400139294,Medium
+PW9DTZON,Engaging,2017-07-26,Donquadtech,GTX Pro,James Ascencio,0.5070974372235806,Medium
+0XBGT413,Engaging,2017-07-30,,GTX Pro,Gladys Colclough,0.5070479669092859,Medium
+QELHQ898,Engaging,2017-07-22,Statholdings,GTX Plus Basic,Zane Levy,0.5069203526332225,Medium
+41RF80KQ,Engaging,2017-05-23,,GTX Plus Pro,Boris Faz,0.5068398301578422,Medium
+6US3WW0M,Engaging,2017-07-29,,MG Special,Jonathan Berthelot,0.5066669464651944,Medium
+NRK892VX,Engaging,2017-09-20,,GTX Plus Pro,Elease Gluck,0.5064546761694969,Medium
+BBOWBQA6,Engaging,2017-07-20,Blackzim,GTX Plus Pro,Niesha Huffines,0.5061590700957604,Medium
+HISWL7B0,Engaging,2017-08-01,,GTX Pro,Darcel Schlecht,0.5061072517347593,Medium
+BSKNQJOJ,Engaging,2017-08-01,,GTX Pro,Darcel Schlecht,0.5061072517347593,Medium
+FH3UXT3T,Engaging,2017-08-08,,GTX Pro,Darcel Schlecht,0.5061072517347593,Medium
+XNHTLVT1,Engaging,2017-07-22,,MG Special,Gladys Colclough,0.5060742933040927,Medium
+3FI1J4VO,Engaging,2017-07-29,,MG Special,Gladys Colclough,0.5060742933040927,Medium
+IG540SIB,Engaging,2017-07-30,,MG Advanced,Cecily Lampkin,0.5057527832713699,Medium
+NY7Z4I06,Engaging,2017-08-05,Betasoloin,GTX Plus Pro,Kary Hendrixson,0.505569265483653,Medium
+GL95LARP,Engaging,2017-04-08,,GTX Pro,Cassey Cress,0.5054667299583446,Medium
+MM79TSUR,Engaging,2017-07-22,,MG Special,Versie Hillebrand,0.5054118306188097,Medium
+INLVV78V,Engaging,2017-07-22,,MG Special,Versie Hillebrand,0.5054118306188097,Medium
+4JTH72JR,Engaging,2017-07-22,,MG Special,Versie Hillebrand,0.5054118306188097,Medium
+TQZLDFIJ,Engaging,2017-07-29,,MG Special,Versie Hillebrand,0.5054118306188097,Medium
+KBQ16F1I,Engaging,2017-03-03,,GTX Basic,Zane Levy,0.5052911058193513,Medium
+CUV49MUR,Engaging,2017-06-02,Zathunicon,GTX Pro,Violet Mclelland,0.5051540754729205,Medium
+IQMW1VDP,Engaging,2017-06-07,,MG Special,Violet Mclelland,0.5043463207103376,Medium
+TF19VML9,Engaging,2017-02-08,,GTX Plus Basic,Kami Bicknell,0.5041024463750516,Medium
+XXD7OQOH,Engaging,2017-08-30,,MG Special,Markita Hansen,0.5040637499010363,Medium
+ZHY9C8OO,Engaging,2017-02-02,,GTX Plus Basic,Kami Bicknell,0.5032615579885821,Medium
+VD2KHXRY,Engaging,2017-07-27,Toughzap,GTX Pro,Zane Levy,0.5031552249234077,Medium
+NK1B8YME,Engaging,2017-07-09,,GTX Plus Pro,Cassey Cress,0.5028599287186128,Medium
+9Q7NSPTF,Engaging,2017-07-23,,GTX Plus Pro,Cassey Cress,0.5028599287186128,Medium
+0D37PQA0,Engaging,2017-07-08,,GTX Plus Basic,Violet Mclelland,0.502647929814937,Medium
+FM505XD5,Engaging,2017-04-08,Y-corporation,GTX Plus Pro,Daniell Hammack,0.502520493059734,Medium
+RFXH6VDX,Engaging,2017-07-27,,GTX Plus Basic,Hayden Neloms,0.5024604692762893,Medium
+1976N63N,Engaging,2017-07-26,Kinnamplus,GTX Plus Basic,Darcel Schlecht,0.5020963508272186,Medium
+I3IRJZRL,Engaging,2017-07-27,,GTX Basic,Niesha Huffines,0.5020249722028487,Medium
+F5I33E1I,Engaging,2017-03-13,Sumace,MG Special,Elease Gluck,0.5019856531357113,Medium
+01EH41WA,Engaging,2017-03-04,,GTX Pro,Zane Levy,0.501898709995819,Medium
+BYF6ABTZ,Engaging,2017-04-18,Opentech,GTX Plus Pro,Kary Hendrixson,0.5017469786389632,Medium
+8GV0BQTU,Engaging,2017-05-17,Xx-holding,MG Advanced,Kary Hendrixson,0.5013264887661648,Medium
+R2W96FGX,Engaging,2017-02-15,,GTX Basic,Zane Levy,0.5013188814692825,Medium
+BRFZCNMP,Engaging,2017-07-06,,GTX Plus Basic,Corliss Cosme,0.5008870613550024,Medium
+V71FMJBD,Engaging,2017-06-28,,MG Advanced,Rosie Papadopoulos,0.5006605565223871,Medium
+V3HVIJLL,Engaging,2017-02-16,,GTX Basic,Zane Levy,0.5004742487900816,Medium
+LTVGILHP,Engaging,2017-05-11,Bioholding,GTX Basic,Kary Hendrixson,0.49976486857420305,Medium
+TQJJDWWH,Engaging,2017-08-15,,MG Advanced,James Ascencio,0.4997109927944115,Medium
+11V16SZZ,Engaging,2017-05-24,Labdrill,GTX Basic,Corliss Cosme,0.4996646868889714,Medium
+TZPE6M07,Engaging,2017-08-22,,MG Advanced,Wilburn Farren,0.49956647253652275,Medium
+8Z4ZMS9U,Engaging,2017-05-19,,MG Advanced,Violet Mclelland,0.4994728862824751,Medium
+1XJFMYCW,Engaging,2017-07-27,Golddex,MG Special,Anna Snelling,0.49937252164140455,Medium
+VK9KN5PT,Engaging,2017-04-02,,MG Advanced,Boris Faz,0.4992072979763665,Medium
+9B20R6A5,Engaging,2017-08-09,,GTX Pro,Darcel Schlecht,0.49890708171625436,Medium
+WRKPDK7O,Engaging,2017-08-01,Hatfan,GTX Plus Pro,Versie Hillebrand,0.498728777490638,Medium
+SYA1A4E5,Engaging,2017-08-07,,GTX Pro,Niesha Huffines,0.4986577356078605,Medium
+3SEMPUU1,Engaging,2017-05-17,Labdrill,GTX Pro,Markita Hansen,0.49819825474492696,Medium
+7YT7NRV9,Engaging,2017-05-15,,MG Special,Elease Gluck,0.4980762028703746,Medium
+1WHXI2RW,Engaging,2017-02-19,,GTX Plus Basic,Markita Hansen,0.4980508708146785,Medium
+C51GWGUE,Engaging,2017-09-29,,GTX Plus Basic,Daniell Hammack,0.49796847100009434,Medium
+HBN3R2TJ,Engaging,2017-07-17,,MG Advanced,Elease Gluck,0.4977583355007164,Medium
+33BMGHPN,Engaging,2017-07-22,Opentech,MG Special,Gladys Colclough,0.4977261305676069,Medium
+EDM7CEZ6,Engaging,2017-08-31,Opentech,GTX Pro,Kami Bicknell,0.49758328790776624,Medium
+21OMR381,Engaging,2017-07-12,,MG Special,Corliss Cosme,0.4967072267319561,Medium
+IW6S2BN0,Engaging,2017-08-01,,GTX Plus Basic,Gladys Colclough,0.49639348674993794,Medium
+EFKPYBI9,Engaging,2017-07-26,Xx-holding,MG Advanced,Gladys Colclough,0.49606571378522996,Medium
+QCNOCX0P,Engaging,2017-04-07,,GTX Pro,Boris Faz,0.49586871566747204,Medium
+JEWIBFH9,Engaging,2017-08-14,,MG Advanced,Wilburn Farren,0.49532971827372535,Medium
+7D75QXBD,Engaging,2017-05-18,Groovestreet,GTX Plus Basic,Kary Hendrixson,0.495152651633092,Medium
+4U9D1IZ5,Engaging,2017-03-22,,GTX Basic,Zane Levy,0.4943625927670467,Medium
+GZ6SFRAT,Engaging,2017-07-25,Hottechi,MG Special,Lajuana Vencill,0.4943128830723319,Medium
+RFQFJLNJ,Engaging,2017-08-21,,MG Special,Markita Hansen,0.4940696822592564,Medium
+DFSFEADV,Engaging,2017-08-13,,GTX Basic,Lajuana Vencill,0.4939714485118658,Medium
+3E4VTH6E,Engaging,2017-03-12,Hatfan,MG Special,Hayden Neloms,0.49382180170601275,Medium
+X9HFP474,Engaging,2017-07-12,Dontechi,GTX Basic,Daniell Hammack,0.49357499762938195,Medium
+S2MSQIXP,Engaging,2017-04-19,Hottechi,GTX Basic,Zane Levy,0.493514140258085,Medium
+5378T3K3,Engaging,2017-08-15,,GTX Plus Pro,Markita Hansen,0.4932217559999153,Medium
+R6OZIG5J,Engaging,2017-07-30,,MG Advanced,Darcel Schlecht,0.49304448878785445,Medium
+DVT7NPEH,Engaging,2017-07-30,,MG Advanced,Darcel Schlecht,0.49304448878785445,Medium
+LDQITW5C,Engaging,2017-08-03,Acme Corporation,MG Advanced,Lajuana Vencill,0.493000562077392,Medium
+ZGK1AWBD,Engaging,2017-08-06,Vehement Capital Partners,MG Special,Boris Faz,0.4925050054841835,Medium
+95YT659K,Engaging,2017-09-06,Groovestreet,MG Special,Zane Levy,0.49249453432891954,Medium
+WVKBXWA9,Engaging,2017-09-19,,MG Advanced,Rosie Papadopoulos,0.4924236137817196,Medium
+FOJG3OCO,Engaging,2017-07-01,,GTX Plus Pro,Corliss Cosme,0.49234727207923346,Medium
+DWUD4S0P,Engaging,2017-01-10,,GTX Basic,Markita Hansen,0.49191793879818724,Medium
+NU4ACGMY,Engaging,2017-07-19,,GTX Pro,Darcel Schlecht,0.49171909234502403,Medium
+TJ7PNIXL,Engaging,2017-07-26,,GTX Pro,Darcel Schlecht,0.49171909234502403,Medium
+VMBM5EKL,Engaging,2017-07-26,,GTX Pro,Darcel Schlecht,0.49171909234502403,Medium
+JNEQWZQK,Engaging,2017-04-25,,GTX Basic,Wilburn Farren,0.49163635169518083,Medium
+GIPPUV2F,Engaging,2017-05-31,Nam-zim,GTX Plus Basic,Hayden Neloms,0.4915811657221525,Medium
+M857G6G1,Engaging,2017-04-18,,MG Advanced,Vicki Laflamme,0.49092566085783834,Medium
+D9NLFAEG,Engaging,2017-07-30,,GTX Basic,Niesha Huffines,0.49050883657061617,Medium
+2GFL3TAF,Engaging,2017-07-25,,GTX Pro,Darcel Schlecht,0.4904450262686624,Medium
+CUSWE9PB,Engaging,2017-07-25,,GTX Pro,Darcel Schlecht,0.4904450262686624,Medium
+5MAXF8FK,Engaging,2017-08-11,The New York Inquirer,GTX Plus Pro,Gladys Colclough,0.49037663220109434,Medium
+4QFATB6J,Engaging,2017-04-22,,GTX Basic,Violet Mclelland,0.4899696595129753,Medium
+PSMWYTMB,Engaging,2017-09-20,Toughzap,MG Advanced,Boris Faz,0.48990287368508123,Medium
+AWORM94L,Engaging,2017-07-05,,GTX Basic,Cassey Cress,0.4889246930854006,Medium
+EW28ZONV,Engaging,2017-02-25,,GTX Plus Basic,Zane Levy,0.48883931893733445,Medium
+7O1UQ19W,Engaging,2017-08-13,,GTX Basic,Gladys Colclough,0.4883610312938346,Medium
+8FGW6RSX,Engaging,2017-08-14,,MG Special,Elease Gluck,0.4879518845561915,Medium
+COM9RNBL,Engaging,2017-04-14,,MG Special,Markita Hansen,0.48792504891755417,Medium
+D3ZC338T,Engaging,2017-03-02,,GTX Basic,Zane Levy,0.48748909286821007,Medium
+G7RZTAMV,Engaging,2017-07-27,,GTX Plus Pro,Gladys Colclough,0.4869020025048035,Medium
+CPOA6FVA,Engaging,2017-08-04,,GTX Basic,Lajuana Vencill,0.4865142828376872,Medium
+041Q1IZL,Engaging,2017-08-15,Green-Plus,GTX Pro,Zane Levy,0.4862752504400656,Medium
+G0DTQHIC,Engaging,2017-07-26,,GTX Basic,Jonathan Berthelot,0.48626269356058716,Medium
+7FZ9CBZ3,Engaging,2017-07-24,Scotfind,GTX Plus Pro,Anna Snelling,0.4859596769833405,Medium
+059K86LU,Engaging,2017-08-26,Labdrill,GTX Plus Pro,Kami Bicknell,0.4859401630023117,Medium
+SXFE42KG,Engaging,2017-07-25,Gogozoom,MG Advanced,Cecily Lampkin,0.48585631839431825,Medium
+XQY4Z4KI,Engaging,2017-06-06,,MG Special,Rosie Papadopoulos,0.4856672438015081,Medium
+JB3J080M,Engaging,2017-07-11,,GTX Plus Pro,Kary Hendrixson,0.4856327120803277,Medium
+A2YIYWNW,Engaging,2017-08-01,,MG Advanced,Cassey Cress,0.4855458971120439,Medium
+ICR59VIJ,Engaging,2017-08-15,,MG Advanced,Cassey Cress,0.4855458971120439,Medium
+5P4O1IU6,Engaging,2017-08-22,,MG Advanced,Cassey Cress,0.4855458971120439,Medium
+XFCKQ7RI,Engaging,2017-07-25,,MG Advanced,Darcel Schlecht,0.48553742140277306,Medium
+X33HL9WS,Engaging,2017-07-28,,GTX Plus Basic,Daniell Hammack,0.48515831636748885,Medium
+COSC7XVA,Engaging,2017-07-21,,MG Advanced,Gladys Colclough,0.4845755972345065,Medium
+3G61D5KV,Engaging,2017-08-03,,MG Special,Gladys Colclough,0.4845401338575054,Medium
+JH643YRI,Engaging,2017-07-25,Umbrella Corporation,MG Advanced,Lajuana Vencill,0.4839668328062012,Medium
+3CB3WNBM,Engaging,2017-07-17,Kinnamplus,GTX Basic,Boris Faz,0.48352458111872026,Medium
+YE7F777U,Engaging,2017-08-01,,GTX Basic,Lajuana Vencill,0.48327167231696905,Medium
+FS60AX8A,Engaging,2017-08-08,,GTX Basic,Lajuana Vencill,0.48327167231696905,Medium
+XGHMOHYQ,Engaging,2017-08-15,,GTX Basic,Lajuana Vencill,0.48327167231696905,Medium
+QKW7MDJK,Engaging,2017-08-23,,GTX Pro,Violet Mclelland,0.4831204123585784,Medium
+NSO0UHK1,Engaging,2017-07-20,,GTX Plus Basic,Daniell Hammack,0.48285779284359925,Medium
+MCE5DKD1,Engaging,2017-01-10,Bioholding,MG Special,Markita Hansen,0.4828455944926622,Medium
+WD7Q5D3G,Engaging,2017-08-07,,GTX Plus Basic,Markita Hansen,0.48273943274176545,Medium
+E4082SMQ,Engaging,2017-04-17,,GTX Basic,James Ascencio,0.48126477622864594,Medium
+ACGLK2YE,Engaging,2017-08-05,Treequote,GTX Plus Basic,Moses Frase,0.48121455457992557,Medium
+90G292UY,Engaging,2017-07-20,,GTX Basic,Jonathan Berthelot,0.4811167279839449,Medium
+JDHHDOX8,Engaging,2017-07-20,,GTX Basic,Jonathan Berthelot,0.4811167279839449,Medium
+KTWP0SMT,Engaging,2017-07-20,,GTX Basic,Jonathan Berthelot,0.4811167279839449,Medium
+64KHY8MT,Engaging,2017-07-27,,GTX Basic,Jonathan Berthelot,0.4811167279839449,Medium
+5PWO4RPC,Engaging,2017-07-27,,GTX Basic,Jonathan Berthelot,0.4811167279839449,Medium
+CTWSDG4U,Engaging,2017-04-19,,GTX Basic,Corliss Cosme,0.4809509865200364,Medium
+EMH2I8XE,Engaging,2017-07-31,Acme Corporation,MG Advanced,Lajuana Vencill,0.4806722882941009,Medium
+77IBMLTB,Engaging,2017-09-11,,GTX Plus Pro,James Ascencio,0.48027667302717053,Medium
+4OYGRQGO,Engaging,2017-07-29,,MG Advanced,Kami Bicknell,0.47989435967158756,Medium
+LT111IZL,Engaging,2017-08-12,,MG Special,Moses Frase,0.4798179351924208,Medium
+QHY85D44,Engaging,2017-08-12,,MG Special,Moses Frase,0.4798179351924208,Medium
+9V2SW5MV,Engaging,2017-08-03,,MG Advanced,Marty Freudenburg,0.47923305143135203,Medium
+ZNEQXZZK,Engaging,2017-07-25,Donquadtech,MG Advanced,Anna Snelling,0.47921027895415497,Medium
+VMIAO42Z,Engaging,2017-04-28,Donquadtech,GTX Plus Pro,Vicki Laflamme,0.4790332323572557,Medium
+9E8A7MQ8,Engaging,2017-02-26,Blackzim,GTX Plus Pro,Kary Hendrixson,0.47820576855292696,Medium
+RZXMIHGO,Engaging,2017-08-01,,GTX Basic,Gladys Colclough,0.4781492564867698,Medium
+513PSPBN,Engaging,2017-07-24,,GTX Plus Pro,Anna Snelling,0.47808891517609425,Medium
+49ZS7GTS,Engaging,2017-04-18,,MG Special,Vicki Laflamme,0.4779696517161403,Medium
+XV41LZYE,Engaging,2017-07-28,,GTX Basic,Lajuana Vencill,0.47728798948888146,Medium
+0RI2I8ZL,Engaging,2017-07-28,,GTX Basic,Lajuana Vencill,0.47728798948888146,Medium
+WK1319MB,Engaging,2017-08-23,,MG Advanced,Boris Faz,0.47723831108316495,Medium
+IGRY0M4Q,Engaging,2017-04-26,,MG Advanced,Daniell Hammack,0.4765512250221353,Medium
+01XZ9CRY,Engaging,2017-09-18,Initech,GTX Plus Pro,Zane Levy,0.475503956967842,Medium
+PDMZ1I99,Engaging,2017-08-06,Globex Corporation,MG Advanced,Lajuana Vencill,0.4753576550743619,Medium
+CQYAMIQ3,Engaging,2017-07-09,,GTX Pro,Zane Levy,0.47513456798437076,Medium
+K6MTPSB5,Engaging,2017-07-23,,GTX Basic,Lajuana Vencill,0.47457547186927,Medium
+D2QPN9LN,Engaging,2017-07-23,,GTX Basic,Lajuana Vencill,0.47457547186927,Medium
+UHIIYU2J,Engaging,2017-07-30,,GTX Basic,Lajuana Vencill,0.47457547186927,Medium
+BPOTQCFG,Engaging,2017-04-04,,MG Special,Elease Gluck,0.4745029575713528,Medium
+2KWJIZX6,Engaging,2017-08-10,,GTX Plus Basic,Lajuana Vencill,0.47431430422856685,Medium
+R9AVNYCO,Engaging,2017-06-07,Conecom,GTX Plus Basic,Zane Levy,0.4742018004100279,Medium
+V3G1HBTZ,Engaging,2017-07-28,Nam-zim,GTX Basic,Lajuana Vencill,0.47402091112855216,Medium
+OO9U4C0Y,Engaging,2017-08-27,Y-corporation,GTX Plus Basic,Cassey Cress,0.47397978109711164,Medium
+PQ104BT2,Engaging,2017-07-27,Finjob,GTX Pro,Darcel Schlecht,0.4739097963101653,Medium
+TM70L0W8,Engaging,2017-08-22,,GTX Pro,Zane Levy,0.47384543253330713,Medium
+MIGDLH14,Engaging,2017-07-23,,GTX Basic,Zane Levy,0.47344966530545335,Medium
+SZS2IPM3,Engaging,2017-07-24,Doncon,MG Advanced,Versie Hillebrand,0.4733823634202378,Medium
+CN8X0DLA,Engaging,2017-08-24,Stanredtax,GTX Plus Basic,Daniell Hammack,0.47332141413574247,Medium
+XRWMLGOG,Engaging,2017-07-18,,MG Advanced,James Ascencio,0.47277609180863955,Medium
+R6Q5JOLX,Engaging,2017-09-16,,GTX Plus Pro,Cassey Cress,0.4724475041711555,Medium
+OMJHW2J1,Engaging,2017-08-06,,MG Advanced,Versie Hillebrand,0.47206616149165104,Medium
+G6CMP5I9,Engaging,2017-08-06,,MG Advanced,Versie Hillebrand,0.47206616149165104,Medium
+456BP2X7,Engaging,2017-04-10,,MG Advanced,Zane Levy,0.4716587540754336,Medium
+FPLXC8Z3,Engaging,2017-07-26,,GTX Plus Pro,Kary Hendrixson,0.47153194856742775,Medium
+9JTFD4FZ,Engaging,2017-09-28,,GTX Plus Pro,Wilburn Farren,0.4711955923208449,Medium
+PVLGUIEN,Engaging,2017-04-09,,MG Advanced,Corliss Cosme,0.4705527667260803,Medium
+HIVUC1C4,Engaging,2017-07-19,,MG Special,Lajuana Vencill,0.4703209510319773,Medium
+NJC4XMEN,Engaging,2017-09-09,Initech,GTX Plus Basic,James Ascencio,0.47007901351165365,Medium
+I6UG2OLX,Engaging,2017-05-13,,MG Advanced,Corliss Cosme,0.46985547625622404,Medium
+3BA9OPGY,Engaging,2017-08-03,,MG Special,Lajuana Vencill,0.4698414697143961,Medium
+VJ9K12PY,Engaging,2017-07-21,,MG Special,Lajuana Vencill,0.4690002532313108,Medium
+UBO7V799,Engaging,2017-07-31,,MG Advanced,Lajuana Vencill,0.4683028447999509,Medium
+7TI1WTV9,Engaging,2017-03-04,Acme Corporation,GTX Pro,Zane Levy,0.4679995106754073,Medium
+8TD2LLOF,Engaging,2017-07-26,,MG Advanced,Darcel Schlecht,0.46729782672726505,Medium
+I2ESAAIK,Engaging,2017-07-22,,GTX Plus Basic,Lajuana Vencill,0.4671977859467716,Medium
+TIPXNDS2,Engaging,2017-08-03,Betatech,MG Special,Gladys Colclough,0.4671972535290686,Medium
+2GV66JA7,Engaging,2017-04-06,,MG Advanced,Daniell Hammack,0.46712974519473316,Medium
+R7H0M07R,Engaging,2017-07-27,,MG Advanced,Darcel Schlecht,0.46700800385954433,Medium
+JQ5AOYQ8,Engaging,2017-07-27,,MG Advanced,Darcel Schlecht,0.46700800385954433,Medium
+9C3YHNBY,Engaging,2017-08-01,,MG Advanced,Gladys Colclough,0.46687156030285093,Medium
+7OZ7L8BB,Engaging,2017-07-24,,GTX Basic,Gladys Colclough,0.46646845331483594,Medium
+8AK3KGFA,Engaging,2017-07-25,,MG Advanced,Gladys Colclough,0.46609454326123617,Medium
+HF1GSBT4,Engaging,2017-08-24,,GTX Plus Pro,Daniell Hammack,0.4649937427604805,Medium
+TDJ3N8EJ,Engaging,2017-07-20,Kinnamplus,MG Advanced,Kami Bicknell,0.46412350626916876,Medium
+W07RZO17,Engaging,2017-07-04,,MG Advanced,Kary Hendrixson,0.4634878843249389,Medium
+0OHEJOI5,Engaging,2017-08-13,,MG Advanced,Corliss Cosme,0.46323053592250923,Medium
+J0G6ZLYZ,Engaging,2017-09-02,,GTX Plus Pro,Zane Levy,0.46191120167137417,Medium
+GE4QGOCI,Engaging,2017-07-21,,MG Special,Moses Frase,0.4617730343738241,Medium
+M5FP7HGQ,Engaging,2017-07-28,,MG Special,Moses Frase,0.4617730343738241,Medium
+PYQ3VX08,Engaging,2017-08-15,,GTX Pro,Niesha Huffines,0.4615252806096541,Medium
+HQKWQ004,Engaging,2017-08-13,,MG Advanced,Moses Frase,0.4614330260785066,Medium
+RC4LEDIA,Engaging,2017-08-09,,MG Advanced,Marty Freudenburg,0.4608751303500041,Medium
+GACPNKGI,Engaging,2017-04-17,,MG Special,Elease Gluck,0.46069253640418084,Medium
+3SD04QJ4,Engaging,2017-07-29,,MG Advanced,Wilburn Farren,0.4597509224351875,Medium
+O8C2G4G2,Engaging,2017-07-17,,MG Advanced,Cassey Cress,0.4581474639873192,Medium
+11LIZUQE,Engaging,2017-07-24,,MG Advanced,Cassey Cress,0.4581474639873192,Medium
+UJTU7DUB,Engaging,2017-07-22,,MG Special,Moses Frase,0.45801389532890296,Medium
+OM8LELJW,Engaging,2017-09-06,Iselectrics,GTX Basic,Kary Hendrixson,0.45791677437518324,Medium
+U5K2MZB6,Engaging,2017-04-13,,MG Advanced,Zane Levy,0.45761206666188975,Medium
+HVT28XPH,Engaging,2017-04-03,,MG Special,Vicki Laflamme,0.45725492032928394,Medium
+INKH0Y59,Engaging,2017-04-24,,MG Special,Vicki Laflamme,0.45725492032928394,Medium
+OSMGVV1S,Engaging,2017-04-24,,MG Special,Vicki Laflamme,0.45725492032928394,Medium
+7K31BXX3,Engaging,2017-07-28,,GTX Pro,Jonathan Berthelot,0.4570820318734968,Medium
+IK7LMFER,Engaging,2017-07-26,,MG Special,Moses Frase,0.4567590916091903,Medium
+1FEHFRKX,Engaging,2017-07-20,Labdrill,GTX Plus Pro,Anna Snelling,0.4566711736867748,Medium
+82K9NWKO,Engaging,2017-07-27,,MG Advanced,Gladys Colclough,0.45621158107727056,Medium
+EVXPG3V5,Engaging,2017-08-09,The New York Inquirer,GTX Basic,Lajuana Vencill,0.455813628064415,Medium
+M9V8824W,Engaging,2017-04-07,,MG Advanced,Corliss Cosme,0.4550506770373401,Medium
+DZQW0KQ4,Engaging,2017-07-31,,GTX Plus Pro,Markita Hansen,0.45433871036234924,Medium
+WO1OYV0Z,Engaging,2017-08-06,,GTX Plus Pro,Boris Faz,0.4541940346242294,Medium
+7LD79NYD,Engaging,2017-07-19,,MG Advanced,Marty Freudenburg,0.4533977805793263,Medium
+EP9JNNF1,Engaging,2017-07-31,,MG Special,Violet Mclelland,0.4525608255378491,Medium
+U6XJRWV8,Engaging,2017-04-18,,MG Advanced,James Ascencio,0.4521100343701552,Medium
+BO1ZOZG2,Engaging,2017-05-28,Ontomedia,GTX Plus Basic,Kary Hendrixson,0.4513191866740909,Medium
+7TFHGN6O,Engaging,2017-07-26,Inity,GTX Plus Pro,Darcel Schlecht,0.4513009114089871,Medium
+PJ75Q8VM,Engaging,2017-07-20,,GTX Pro,Jonathan Berthelot,0.45077456933183413,Medium
+1O72EKFY,Engaging,2017-07-31,,GTX Plus Pro,James Ascencio,0.4506838140673935,Medium
+TTKPNDTP,Engaging,2017-07-22,,MG Advanced,Versie Hillebrand,0.45053003210676557,Medium
+0HVUV9OY,Engaging,2017-07-21,,GTX Basic,Gladys Colclough,0.450441967921191,Medium
+WLDFQR7Z,Engaging,2017-07-21,Bubba Gump,MG Advanced,Darcel Schlecht,0.4500597816096716,Medium
+4IT33RBO,Engaging,2017-03-13,,GTX Basic,Markita Hansen,0.449793188595814,Medium
+56LUBQTV,Engaging,2017-07-31,,MG Advanced,Moses Frase,0.44972884608410585,Medium
+H176AX96,Engaging,2017-06-18,Gekko & Co,MG Advanced,James Ascencio,0.44955478079107547,Medium
+LXS3Z82E,Engaging,2017-07-23,,MG Advanced,Niesha Huffines,0.44939275619821945,Medium
+CZ8PPZTC,Engaging,2017-03-05,Bioplex,MG Special,Rosie Papadopoulos,0.44905860877033843,Medium
+IMLG35AP,Engaging,2017-07-22,,GTX Plus Pro,Lajuana Vencill,0.44900690564043283,Medium
+RKVXBXBM,Engaging,2017-06-07,,MG Special,Markita Hansen,0.44802835625538345,Medium
+E5V4WT18,Engaging,2017-05-25,Genco Pura Olive Oil Company,MG Special,Vicki Laflamme,0.44689362283197703,Medium
+VIFA2I18,Engaging,2017-07-28,,GTX Basic,Jonathan Berthelot,0.4445490814915204,Medium
+VPG5E490,Engaging,2017-05-11,Bubba Gump,GTX Basic,Boris Faz,0.4422045491731555,Medium
+W1XRTUT2,Engaging,2017-08-15,Finhigh,MG Special,Versie Hillebrand,0.4421415940658747,Medium
+E3Z74U5K,Engaging,2017-07-24,,GTX Basic,Lajuana Vencill,0.4419617430973918,Medium
+WU81R3XH,Engaging,2017-07-31,,GTX Basic,Lajuana Vencill,0.4419617430973918,Medium
+18YA4UUP,Engaging,2017-07-27,Xx-zobam,GTX Plus Pro,Versie Hillebrand,0.44191183756659713,Medium
+LFI3BGEE,Engaging,2017-09-22,,GTX Plus Pro,Daniell Hammack,0.44048001947730736,Medium
+9ILB20UV,Engaging,2017-04-05,,MG Special,Markita Hansen,0.4404100180467717,Medium
+O7LSETHG,Engaging,2017-08-08,,MG Advanced,Rosie Papadopoulos,0.4400033209818007,Medium
+2CZUU9E0,Engaging,2017-07-22,,GTX Basic,Lajuana Vencill,0.4399335953846171,Medium
+SPMQ0BHA,Engaging,2017-07-29,,GTX Basic,Lajuana Vencill,0.4399335953846171,Medium
+YCQTM2BQ,Engaging,2017-07-25,,MG Advanced,Lajuana Vencill,0.43938208631353015,Medium
+0T2CY70E,Engaging,2017-07-22,,MG Advanced,Lajuana Vencill,0.4383062310801231,Medium
+VM0MHPAO,Engaging,2017-04-03,,MG Special,Wilburn Farren,0.4373945793499466,Medium
+7RLLNAYC,Engaging,2017-07-26,,MG Special,Gladys Colclough,0.4372476089392212,Medium
+BRDB1I76,Engaging,2017-07-26,,MG Special,Gladys Colclough,0.4372476089392212,Medium
+WOO9JXOQ,Engaging,2017-07-31,Sumace,MG Advanced,Gladys Colclough,0.43584618884776,Medium
+BCA6Y34B,Engaging,2017-07-01,,MG Advanced,Rosie Papadopoulos,0.4358351425027354,Medium
+I3KQNE9V,Engaging,2017-07-19,Isdom,GTX Plus Pro,Darcel Schlecht,0.4357564961518791,Medium
+G78ZK6XI,Engaging,2017-08-01,,MG Special,Gladys Colclough,0.43508643358836474,Medium
+AZN2K0V9,Engaging,2017-08-03,Ganjaflex,MG Advanced,Anna Snelling,0.4344668104165808,Medium
+YBY3PA1S,Engaging,2017-07-22,,GTX Basic,Gladys Colclough,0.4339591270819941,Medium
+TX5SADEI,Engaging,2017-07-30,Dontechi,GTX Plus Basic,Niesha Huffines,0.4332682588829181,Medium
+2E2FDZHG,Engaging,2017-08-02,,GTX Pro,Niesha Huffines,0.43309468357073955,Medium
+PQL5GITI,Engaging,2017-07-25,,GTX Basic,Gladys Colclough,0.4323290258727154,Medium
+2WDSO6PG,Engaging,2017-07-19,Hatfan,GTX Basic,Niesha Huffines,0.42970928933339897,Medium
+DMG5EOFC,Engaging,2017-07-19,Lexiqvolax,MG Advanced,Violet Mclelland,0.42947661897208594,Medium
+JOLNKYNH,Engaging,2017-07-22,,MG Advanced,Moses Frase,0.4293396797892786,Medium
+TV2M081C,Engaging,2017-07-22,,MG Advanced,Moses Frase,0.4293396797892786,Medium
+SJGOQMLT,Engaging,2017-07-22,,MG Advanced,Moses Frase,0.4293396797892786,Medium
+OPCLCCQH,Engaging,2017-03-16,Konex,GTX Plus Basic,Kami Bicknell,0.4291180842753818,Medium
+RN7M3757,Engaging,2017-07-30,,MG Advanced,Versie Hillebrand,0.4291099369536934,Medium
+OI3UIKVF,Engaging,2017-07-20,Konmatfix,GTX Plus Basic,Hayden Neloms,0.4272625783963108,Medium
+6OD1J7MW,Engaging,2017-09-02,Plexzap,GTX Plus Pro,Elease Gluck,0.4267679455085,Medium
+AWCGYWTE,Engaging,2017-07-22,Kinnamplus,MG Special,Moses Frase,0.4259261834037985,Medium
+WGETO859,Engaging,2017-04-19,,GTX Basic,Boris Faz,0.42578204619484483,Medium
+30R81VZX,Engaging,2017-02-06,Zoomit,GTX Pro,Kami Bicknell,0.425760892966535,Medium
+RU5X1LZM,Engaging,2017-08-26,,GTX Pro,Zane Levy,0.4251035108366335,Medium
+VBB0LCEN,Engaging,2017-07-26,,MG Advanced,Lajuana Vencill,0.42419232691292275,Medium
+7DT8UKKY,Engaging,2017-05-01,Zencorporation,GTX Basic,Corliss Cosme,0.4227730511519771,Medium
+VSYO182N,Engaging,2017-07-01,Dalttechnology,GTX Pro,Kary Hendrixson,0.4218053930313326,Medium
+BHHDOY2E,Engaging,2017-04-07,,MG Advanced,Kary Hendrixson,0.42063763020837824,Medium
+FW2XJG9S,Engaging,2017-02-15,,GTX Plus Basic,Markita Hansen,0.419049316588409,Medium
+0TC6I9SJ,Engaging,2017-07-24,Dontechi,GTX Pro,Darcel Schlecht,0.4189671505559992,Medium
+MLD3WEJC,Engaging,2017-07-25,Xx-holding,MG Advanced,Moses Frase,0.41793690354039087,Medium
+GQ7H31ZJ,Engaging,2017-07-27,Funholding,GTX Pro,Darcel Schlecht,0.41771340755138975,Medium
+P3K1DVYB,Engaging,2017-07-26,,MG Advanced,Moses Frase,0.4173757143416495,Medium
+BB1PRS3T,Engaging,2017-07-26,,MG Advanced,Moses Frase,0.4173757143416495,Medium
+XNKIZY9J,Engaging,2017-08-18,,MG Advanced,Corliss Cosme,0.417321926911769,Medium
+7W9S4DCZ,Engaging,2017-07-28,Dalttechnology,MG Special,Lajuana Vencill,0.4170069903342382,Medium
+ZI89S9HC,Engaging,2017-06-11,Dalttechnology,MG Advanced,Markita Hansen,0.41402713147093473,Medium
+QP0QCP8Y,Engaging,2017-07-05,Dalttechnology,GTX Plus Pro,Kary Hendrixson,0.4115414094438916,Medium
+FN1QX0BQ,Engaging,2017-04-11,,MG Special,Violet Mclelland,0.4104287416229456,Medium
+5K0ZFCVO,Engaging,2017-04-18,,MG Special,Violet Mclelland,0.4104287416229456,Medium
+6AEVX11M,Engaging,2017-04-18,,MG Special,Violet Mclelland,0.4104287416229456,Medium
+KPH05GU8,Engaging,2017-07-26,The New York Inquirer,MG Advanced,Lajuana Vencill,0.40454855640919474,Medium
+4G0X8VHP,Engaging,2017-05-24,Y-corporation,MG Advanced,Markita Hansen,0.40448101592631763,Medium
+HHWZEWDV,Engaging,2017-07-31,,GTX Plus Basic,Lajuana Vencill,0.4007787191662167,Medium
+04SCU6DK,Engaging,2017-07-01,,MG Advanced,Corliss Cosme,0.4002712439121908,Medium
+4QQOSYGL,Engaging,2017-07-29,,MG Advanced,Corliss Cosme,0.4002712439121908,Medium
+8TRT2HNF,Engaging,2017-04-03,Green-Plus,GTX Basic,Markita Hansen,0.40013320760841725,Medium
+OD895EQM,Engaging,2017-07-26,,GTX Plus Pro,Lajuana Vencill,0.3969292088788694,Low
+23J295J4,Engaging,2017-08-21,Xx-holding,MG Special,Rosalina Dieter,0.3943930107338765,Low
+49T60OCI,Engaging,2017-07-04,Scottech,GTX Plus Pro,Cassey Cress,0.39320510115702734,Low
+DW29KM30,Engaging,2017-06-07,Zathunicon,MG Advanced,Elease Gluck,0.3931079056072192,Low
+E9J482PX,Engaging,2017-07-22,,MG Advanced,Anna Snelling,0.390947467007246,Low
+B1ZN2CFP,Engaging,2017-07-29,,MG Advanced,Anna Snelling,0.390947467007246,Low
+E2KGQVEO,Engaging,2017-07-06,,MG Advanced,Daniell Hammack,0.390486081674072,Low
+4DLY9ZDH,Engaging,2017-07-25,Dalttechnology,MG Advanced,Anna Snelling,0.38914530592672575,Low
+WZ3FJA3V,Engaging,2017-08-25,Labdrill,GTX Plus Basic,Zane Levy,0.38176266115943686,Low
+JDXSS1HT,Engaging,2017-03-08,Silis,GTX Basic,Markita Hansen,0.37846209528838676,Low
+RTWAUR7C,Engaging,2017-07-24,Y-corporation,GTX Plus Pro,Gladys Colclough,0.3773691978530925,Low
+WEKW3XIN,Engaging,2017-06-20,Condax,GTX Plus Pro,Cassey Cress,0.37189087335930415,Low
+G7H64S20,Engaging,2017-07-23,,MG Advanced,Anna Snelling,0.36729160117390586,Low
+ERTQ4SN3,Engaging,2017-07-29,Zumgoity,MG Special,Lajuana Vencill,0.36375800602617314,Low
+ZJLW1OPF,Engaging,2017-07-28,Xx-zobam,GTX Pro,Darcel Schlecht,0.3539092403376397,Low
+0KRVN3V5,Engaging,2017-07-21,Hatfan,MG Advanced,Anna Snelling,0.352857259831781,Low
+5CZBHSRI,Engaging,2017-04-29,Toughzap,MG Advanced,Kary Hendrixson,0.3450474886599344,Low
+LUTZ8UQM,Engaging,2017-07-25,Isdom,GTX Pro,Darcel Schlecht,0.3442009180837673,Low
+1QKDD1OI,Engaging,2017-07-25,Isdom,GTX Pro,Darcel Schlecht,0.3442009180837673,Low
+B3A6VXVQ,Engaging,2017-07-08,Acme Corporation,GTX Basic,Corliss Cosme,0.3399471505626712,Low
+5M5TW9RC,Engaging,2017-07-07,Umbrella Corporation,GTX Plus Basic,Cassey Cress,0.3296782537818405,Low
+EZDMNAK8,Engaging,2017-08-14,Plussunin,MG Advanced,Lajuana Vencill,0.3259870008760178,Low
+3372JYYQ,Engaging,2017-05-15,Condax,MG Advanced,Cassey Cress,0.322581631721927,Low
+7P069DNF,Engaging,2017-08-20,Labdrill,GTX Plus Basic,Kary Hendrixson,0.3127458460745394,Low
+FUI9BIS3,Engaging,2017-08-04,Funholding,MG Advanced,Moses Frase,0.30423795109899443,Low
+WARBRUXU,Engaging,2017-07-21,Stanredtax,GTX Basic,Jonathan Berthelot,0.2941823602638704,Low
+PGXIPGDM,Engaging,2017-04-12,Lexiqvolax,MG Advanced,Vicki Laflamme,0.28495511210545743,Low

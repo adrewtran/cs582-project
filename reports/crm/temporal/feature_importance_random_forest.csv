@@ -1,0 +1,86 @@
+feature,importance
+engage_dayofweek,0.09395572534657037
+engage_month,0.09330507362012407
+revenue_per_employee,0.059345012649554996
+revenue,0.05757311663733018
+employees,0.05754167286287894
+account_age_at_engage,0.05187426833753818
+year_established,0.05176542221800335
+sales_price,0.04354141554814002
+engage_quarter,0.04207846203389398
+product_GTX Basic,0.015663704922753385
+product_GTX Plus Basic,0.014105728556284624
+product_GTX Pro,0.013898238566394275
+series_MG,0.012184288087965406
+series_GTX,0.011920743183650936
+product_MG Advanced,0.011050152453507114
+manager_Melvin Marxen,0.010997936331770977
+product_GTX Plus Pro,0.010820845499181438
+manager_Dustin Brinkmann,0.010309811877610302
+sector_retail,0.010130523394203901
+is_subsidiary,0.009896806687609365
+product_MG Special,0.009683613840469058
+manager_Summer Sewald,0.009425909047289767
+sales_agent_Darcel Schlecht,0.009400967502401592
+manager_Celia Rouche,0.00930483081376519
+manager_Rocco Neubert,0.009007756939465518
+sector_medical,0.008932383594410523
+sales_agent_Anna Snelling,0.008788723628285113
+sector_technology,0.00844602092526607
+office_location_United States,0.008304338318545774
+manager_Cara Losch,0.008215122305386546
+regional_office_West,0.007834582906743461
+sector_finance,0.00755450585015614
+regional_office_Central,0.007506460310829346
+regional_office_East,0.007444670134214497
+engage_year,0.007237468709165194
+sales_agent_Vicki Laflamme,0.006690978261069225
+sales_agent_Kary Hendrixson,0.0066594870333896135
+sales_agent_Donn Cantrell,0.006602517025773135
+sector_software,0.006600403725404019
+sector_marketing,0.006563722454465787
+sales_agent_Lajuana Vencill,0.006452679266012075
+sales_agent_Zane Levy,0.0062747014879047614
+sales_agent_Jonathan Berthelot,0.00616905219045627
+sales_agent_Kami Bicknell,0.006103177649520095
+sector_entertainment,0.00604593822986263
+sales_agent_Maureen Marcano,0.006028944551787065
+sector_telecommunications,0.0058351270420942845
+sales_agent_Cassey Cress,0.0058158222555110654
+sales_agent_Gladys Colclough,0.005743593706218737
+sales_agent_Reed Clapper,0.0056611614344627935
+sales_agent_Versie Hillebrand,0.005508700523808663
+sales_agent_Daniell Hammack,0.005485939422516845
+sales_agent_Markita Hansen,0.005471646505505209
+sales_agent_Moses Frase,0.005170851971027562
+sales_agent_Niesha Huffines,0.005026352420940863
+sales_agent_Corliss Cosme,0.0047862992801633595
+sales_agent_Marty Freudenburg,0.004724741814957547
+sales_agent_James Ascencio,0.004492520930611894
+sector_employment,0.0043875745335653525
+sales_agent_Cecily Lampkin,0.004206264864428884
+sector_services,0.0041847726462829245
+sales_agent_Hayden Neloms,0.004059892499531892
+sales_agent_Rosie Papadopoulos,0.003956368102816727
+sales_agent_Boris Faz,0.0038626861162215803
+sales_agent_Violet Mclelland,0.003487954811022366
+sales_agent_Rosalina Dieter,0.0032975666869152474
+sales_agent_Elease Gluck,0.0032567671561443854
+sales_agent_Garret Kinder,0.0032270737109428072
+sales_agent_Wilburn Farren,0.0019911058125460165
+office_location_Panama,0.001990328312924257
+office_location_Korea,0.001902786138882142
+office_location_Poland,0.001514140825650688
+office_location_Norway,0.0012904916074304303
+office_location_Kenya,0.0012809566779345993
+office_location_Italy,0.0011995344582076898
+office_location_Jordan,0.0010949253168205464
+office_location_Belgium,0.0010465377006374384
+office_location_Philipines,0.0010250351837557893
+office_location_Romania,0.0009666101952280373
+office_location_Germany,0.0009040179602598453
+office_location_Japan,0.0008875055707089833
+office_location_Brazil,0.0006935299198865529
+series_GTK,0.0004588835279727634
+product_GTK 500,0.00043595168950850787
+office_location_China,0.00043007514895060357
