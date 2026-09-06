@@ -1,8 +1,8 @@
-"""Maven CRM Sales Opportunities -- retired as the modeling dataset.
+"""Maven CRM Sales Opportunities -- the project's primary dataset.
 
-Kept for the paper's leakage-audit appendix: every attribute is independent of
-the outcome (leakage-free ROC-AUC ~0.5), while ``close_value`` is 0 for every
-Lost deal and > 0 for every Won deal, i.e. it is the label in disguise.
+The honest model uses only information available when a deal is engaging.
+Outcome fields remain in ``frame`` for audit and EDA, but ``Dataset.features``
+can never return them.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ TARGET = "is_won"
 CLOSED_STAGES = ("Won", "Lost")
 
 #: Known only after a deal closes -- never model features.
-LEAKAGE_COLUMNS = ("close_date", "close_value", "deal_stage")
+LEAKAGE_COLUMNS = ("close_date", "close_value", "deal_stage", "opportunity_id")
 
 #: ``sales_pipeline.product`` lacks the space that ``products.product`` uses.
 PRODUCT_NAME_FIXES = {"GTXPro": "GTX Pro"}
@@ -87,14 +87,28 @@ def build(data_dir: Path = CRM_DIR) -> Dataset:
     closed = joined["deal_stage"].isin(CLOSED_STAGES)
     joined[TARGET] = np.where(closed, (joined["deal_stage"] == "Won").astype(int), np.nan)
 
-    labeled = joined[closed].reset_index(drop=True)
+    labeled = joined[closed].sort_values("engage_date", kind="stable").reset_index(drop=True)
     labeled[TARGET] = labeled[TARGET].astype(int)
     open_deals = joined[~closed].drop(columns=TARGET).reset_index(drop=True)
+    scorable_open_deals = open_deals[
+        open_deals["deal_stage"].eq("Engaging") & open_deals["engage_date"].notna()
+    ].reset_index(drop=True)
 
     report = basic_report(labeled, TARGET) | {
         "raw_rows": {k: len(v) for k, v in raw.items()},
         "open_rows": len(open_deals),
+        "scorable_open_rows": len(scorable_open_deals),
+        "row_order_is_temporal": True,
+        "temporal_column": "engage_date",
         "unmatched_product": int(joined["series"].isna().sum()),
         "unmatched_account_in_labeled": int(labeled["sector"].isna().sum()),
     }
-    return Dataset("crm", labeled, TARGET, CATEGORICAL, NUMERIC, report, {"open_deals": open_deals})
+    return Dataset(
+        "crm",
+        labeled,
+        TARGET,
+        CATEGORICAL,
+        NUMERIC,
+        report,
+        {"open_deals": open_deals, "scorable_open_deals": scorable_open_deals},
+    )

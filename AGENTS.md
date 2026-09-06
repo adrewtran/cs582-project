@@ -22,7 +22,7 @@ Deliverables: proposal, slides/video (week 15), paper (week 16), code and script
 ## Layout
 
 ```
-data/<name>/              Raw datasets, committed, read-only: leads/ (primary), bank/, telco/, crm/ (retired)
+data/<name>/              Raw datasets, committed, read-only: crm/ (primary); others are prior experiments
 data/<name>/processed/    Written by `python -m src.datasets <name>` — gitignored, regenerable
 src/data.py               `Dataset` container + cleaning helpers shared by every loader
 src/datasets/<name>.py    One loader per dataset; `src.datasets.load(name)` is the registry
@@ -43,8 +43,8 @@ Suggested placement for what does not exist yet: `src/models/{mlp,tabnet}.py`, `
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m src.datasets leads     # clean + write data/leads/processed/, print the cleaning report
-.venv/bin/python -m src.baselines leads    # fit LR + RF, write reports/leads/ (~1 min; bank ~3 min)
+.venv/bin/python -m src.datasets crm       # validate/join CRM data and print the cleaning report
+.venv/bin/python -m src.baselines crm --split temporal  # fit Dummy + LR + RF, write reports/crm/
 .venv/bin/python -m src.baselines bank --split temporal   # last 20% of rows as test → reports/bank/temporal/
 .venv/bin/python -m src.summary            # every baseline_metrics.csv → reports/summary.csv
 ```
@@ -60,9 +60,9 @@ cleaning sheet to PLAN.md. `Dataset.__post_init__` validates column roles and a 
 
 ## Data
 
-Four datasets under `data/`; PLAN.md has the full comparison and cleaning sheets. Summary of the traps:
+CRM is the owner-approved primary dataset because it matches the submitted proposal. Other datasets remain as prior experiments.
 
-### Leads (primary) — `data/leads/Leads X Education.csv`, 9,240 × 37, target `Converted` (38.5%)
+### Leads (prior experiment) — `data/leads/Leads X Education.csv`, 9,240 × 37, target `Converted` (38.5%)
 
 - `"Select"` is a form placeholder → NaN (`src/datasets/leads.PLACEHOLDERS`).
 - **Leakage — never features:** `Tags`, `Lead Quality`, `Asymmetrique ×4`, `Last Notable Activity`. These are
@@ -92,12 +92,13 @@ Four datasets under `data/`; PLAN.md has the full comparison and cleaning sheets
   blank strings among floats) — `src.data.strip_strings` uses `map`, not `.str.strip()`, precisely because the
   `.str` accessor turns the floats into NaN. Drop IDs and geography (all California).
 
-### CRM (retired) — `data/crm/`, 6,711 labeled × 18 features, target `is_won` (63.2%)
+### CRM (primary) — `data/crm/`, 6,711 labeled rows, target `is_won` (63.2%)
 
-- Every attribute is independent of every outcome: leakage-free AUC ≈ 0.50–0.53, and `close_value` on Won deals is
-  `sales_price × iid noise`. `close_value` is 0 for every Lost deal → AUC 1.0 if leaked. Kept only for the paper's
-  leakage-audit appendix. Join gotchas (`GTXPro` vs `GTX Pro`, `technolgy`, all missing accounts being open deals)
-  are handled in `src/datasets/crm.py`.
+- Available pre-close attributes have little outcome signal: leakage-free AUC ≈ 0.50–0.53. This honest negative
+  result is a project finding, not a reason to change the submitted dataset. `close_value` is 0 for every Lost deal
+  and therefore creates severe leakage. The project reports both the leakage audit and the honest result. Join
+  gotchas (`GTXPro` vs `GTX Pro`, `technolgy`, all missing accounts being open deals) are handled in
+  `src/datasets/crm.py`.
 
 ### Cross-cutting
 
