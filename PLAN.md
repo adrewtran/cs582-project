@@ -1,54 +1,28 @@
-# CRM Sales Opportunities Project Plan
+# CRM completion plan and status
 
-Status: **CRM-first direction approved by the project owner on 2026-09-06.**
+Original CRM proposal is authoritative. Leads, Bank and Telco remain historical experiments.
 
-## Scope decision
+## Implemented
 
-The Maven CRM Sales Opportunities dataset in `data/crm/` is the primary dataset because it is the dataset named in the submitted proposal and reported to the professor. Earlier experiments that promoted Leads and Bank are not the main project.
+1. Raw validation, four-table joins, training EDA and input-coverage audit.
+2. Date-group 60%/80% boundaries with train/validation outcome-availability purge.
+3. Shared rows/preprocessing contract for Dummy prior, LR, RF, MLP and TabNet on CPU.
+4. Validation-only model/threshold choice and frozen-model sigmoid calibration.
+5. Full proposal metric set plus AP, Brier/log loss; separate invalid leakage control.
+6. Native/permutation importance, RF TreeSHAP reconstruction check, open-deal reference sensitivities and warnings.
+7. Result-driven paper, editable slides, ESL script, README and notebook.
 
-## Research question
+Entry: `python -m src.run_project`. Evidence: `reports/crm/final/`.
 
-Can machine-learning models predict whether an opportunity will be Won or Lost using only information available when the deal is engaging?
+## Interpretation
 
-## Data policy
+Near-chance AUC does not establish useful sales prioritization. No causal intervention, revenue uplift, pristine external test or completed actual Colab session is claimed. Open scores are frozen snapshot demonstrations. Legacy 80/20 temporal results are retained separately.
 
-- Train on 6,711 closed deals: 4,238 Won and 2,473 Lost.
-- Do not train on the 2,089 open deals.
-- Score the 1,589 Engaging deals after model training as a practical demonstration.
-- Never use `deal_stage`, `close_date`, `close_value`, or `opportunity_id` as honest model features.
-- Normalize `GTXPro` to `GTX Pro` before joining product data.
-- Preserve raw files; generated files go to `reports/crm/`.
+## External steps
 
-## Evaluation
+- Group runs notebook in its Colab account and checks Google Slides import.
+- Review paper, confirm actual contributions, rehearse and verify final slot.
+- Authorized integration: push `codex/crm-completion` through the existing writable project fork and open a PR against `thai-phan/cs582-project:main`. No automatic merge.
+- Submit course deliverables. No video recording is claimed; guidelines allow slides and/or video.
 
-The primary evaluation is a chronological 80/20 holdout ordered by `engage_date`. All preprocessing is learned from the training portion only. A random stratified split may be shown as a secondary sensitivity check.
-
-Models are developed in this order:
-
-1. Dummy majority baseline
-2. Logistic Regression
-3. Random Forest
-4. MLP
-5. TabNet
-
-Every model reports accuracy, balanced accuracy, precision, recall, F1, ROC-AUC, PR-AUC, and a confusion matrix.
-
-## Novel contribution
-
-1. **Leakage audit:** show the misleading result produced by `close_value`, then remove all outcome-time fields.
-2. **Fair model comparison:** compare traditional and neural models on the same chronological split.
-3. **Explainable open-deal scoring:** export win probabilities and High/Medium/Low priority groups for Engaging deals, followed by global and local explanation work.
-
-An honest ROC-AUC near 0.50 is a valid result: it means the available CRM attributes contain little pre-close signal. The paper must describe this limitation instead of reintroducing leakage.
-
-## Milestones
-
-- **Foundation:** validated CRM loader, chronological split, Dummy/LR/RF, tests, Colab notebook, open-deal CSV.
-- **Advanced models:** MLP and TabNet with the same data and split.
-- **Explainability:** global importance plus local explanations for selected open deals.
-- **Submission:** final tables, figures, paper, slides, and presentation practice.
-
-Detailed design and implementation plan:
-
-- `docs/superpowers/specs/2026-09-06-crm-first-design.md`
-- `docs/superpowers/plans/2026-09-06-crm-first-foundation.md`
+Detailed records: `docs/COMMITMENT_AUDIT.md`, `docs/superpowers/specs/2026-10-06-crm-completion-design.md`, `docs/superpowers/plans/2026-10-06-crm-completion.md`. These supersede September evaluation/output conventions.

@@ -9,6 +9,8 @@ __pycache__/
 .eggs/
 .ipynb_checkpoints/
 .venv/
+.venv-*/
+.superpowers/
 venv/
 env/
 .mypy_cache/
@@ -28,3 +30,8 @@ Thumbs.db
 
 # Derived data (regenerate with: python -m src.data)
 data/*/processed/
+
+# Disposable smoke outputs; verified full reports remain tracked.
+reports/crm/smoke/
+reports/crm/final/deliverables/*.tmp
+reports/crm/final/deliverables/.~lock.*#
