@@ -1,6 +1,6 @@
 # CRM completion plan and status
 
-Original CRM proposal is authoritative. Leads, Bank and Telco remain historical experiments.
+Original CRM proposal is authoritative. Leads, Bank and Telco experiments were removed on 2026-10-07 (recoverable from commit `c5bcfa6`).
 
 ## Implemented
 
@@ -16,7 +16,7 @@ Entry: `python -m src.run_project`. Evidence: `reports/crm/final/`.
 
 ## Interpretation
 
-Near-chance AUC does not establish useful sales prioritization. No causal intervention, revenue uplift, pristine external test or completed actual Colab session is claimed. Open scores are frozen snapshot demonstrations. Legacy 80/20 temporal results are retained separately.
+Near-chance AUC does not establish useful sales prioritization. No causal intervention, revenue uplift, pristine external test or completed actual Colab session is claimed. Open scores are frozen snapshot demonstrations.
 
 ## External steps
 

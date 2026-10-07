@@ -1,25 +1,6 @@
 import importlib
-from dataclasses import replace
 import numpy as np
-import pytest
 from src.datasets.crm import build
-from src.baselines import make_models,split
-from src.crm_workflow import score_open_deals
-
-
-def test_legacy_scoring_accepts_empty_open_set():
-    d=build(); x,_,y,_=split(d,'temporal'); m=make_models(d)['logistic_regression'].fit(x,y)
-    empty=replace(d,extra=d.extra|{'scorable_open_deals':d.extra['scorable_open_deals'].iloc[:0]})
-    result=score_open_deals(m,empty,include_explanations=True)
-    assert result.empty and 'negative_factors' in result
-
-
-def test_legacy_lr_factors_can_reconstruct_log_odds_including_intercept():
-    d=build(); x,_,y,_=split(d,'temporal'); m=make_models(d)['logistic_regression'].fit(x,y)
-    scores=score_open_deals(m,d,include_explanations=True)
-    assert 'model_log_odds' in scores and 'intercept_log_odds' in scores and 'sum_feature_log_odds' in scores
-    np.testing.assert_allclose(scores.model_log_odds,scores.intercept_log_odds+scores.sum_feature_log_odds)
-    np.testing.assert_allclose(1/(1+np.exp(-scores.model_log_odds)),scores.win_probability)
 
 
 def test_reference_explanations_are_labeled_and_flag_missing_accounts():

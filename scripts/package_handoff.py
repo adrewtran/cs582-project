@@ -9,8 +9,7 @@ import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
 PATHS=['.gitignore','AGENTS.md','README.md','PLAN.md','Group2_Project_Proposal.md','requirements.txt',
-       'src','tests','scripts','notebooks/CRM_Sales_Opportunities.ipynb','docs',
-       'archive/Lead_Scoring_Proposal_superseded.md','reports/crm']
+       'src','tests','scripts','notebooks/CRM_Sales_Opportunities.ipynb','docs','reports/crm']
 
 
 def git(*args,env=None):
@@ -41,7 +40,6 @@ def package(destination):
         raise AssertionError('Real Git index unexpectedly changed')
     hashes={name:hashlib.sha256((destination/name).read_bytes()).hexdigest() for name in ['CRM_CS582_Complete.zip','crm-completion.patch']}
     manifest={'base_commit':base,'tree':tree,'changed_files':changed,'sha256':hashes,
-              'excluded_working_change':'data/telco/Telco_customer_churn.xlsx',
               'git_status':'no commit, branch change, push or PR; real index unchanged'}
     (destination/'HANDOFF.json').write_text(json.dumps(manifest,indent=2))
     (destination/'HANDOFF.md').write_text(f'''# CRM handoff
@@ -52,7 +50,7 @@ For Colab: upload the standalone `CRM_Sales_Opportunities.ipynb`, then upload `C
 
 For GitHub: keep the existing repository. Use a fresh feature branch. Either copy the extracted contents into the checkout, or apply `crm-completion.patch` to a clean checkout at the base above. Run `git apply --check crm-completion.patch` before `git apply --index crm-completion.patch`. Do not apply the patch twice. Review and test before commit/push/PR.
 
-The ZIP retains the committed original Telco file; it does not include the unrelated local Telco edit. The patch changes no raw data. Python environments, Git metadata and credentials are excluded. Hashes and changed-file paths are in HANDOFF.json.
+The patch changes no raw data. Python environments, Git metadata and credentials are excluded. Hashes and changed-file paths are in HANDOFF.json.
 
 The project has weak predictive discrimination; do not present it as production-ready. Actual group Colab/Google Slides validation, member review and course submission remain external steps.
 ''',encoding='utf-8')

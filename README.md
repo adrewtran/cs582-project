@@ -8,7 +8,7 @@ Project giữ đúng đề tài CRM đã báo cáo với giáo sư. Input là b�
 
 ## 1. Kết quả thực tế
 
-Bản full đã chạy trong môi trường phát triển Python 3.12 / CPU. Dummy, Logistic Regression (LR), Random Forest (RF), MLP và TabNet đều được train thật. Kết quả chính nằm trong **`reports/crm/final/`**. Thư mục `temporal/` và CSV cũ ở `reports/crm/` là lịch sử, không dùng làm kết quả cuối.
+Bản full đã chạy trong môi trường phát triển Python 3.12 / CPU. Dummy, Logistic Regression (LR), Random Forest (RF), MLP và TabNet đều được train thật. Kết quả chính nằm trong **`reports/crm/final/`**.
 
 | Model | Test ROC-AUC | Accuracy | F1 (Won) |
 |---|---:|---:|---:|
@@ -161,7 +161,7 @@ Giới hạn 1–8 slides trong thông báo trước dành cho progress forum. D
 | Reproducible/free CPU | setup, runner, notebook, tests |
 | Paper + slides | editable team-review drafts |
 
-`docs/COMMITMENT_AUDIT.md` lưu audit ban đầu và trạng thái khắc phục. Proposal CRM gốc: `docs/CS582_Group2_Original_CRM_Proposal.docx`; Markdown ở root là transcription. Hướng Leads cũ đã được lưu trong archive.
+`docs/COMMITMENT_AUDIT.md` lưu audit ban đầu và trạng thái khắc phục. Proposal CRM gốc: `docs/CS582_Group2_Original_CRM_Proposal.docx`; Markdown ở root là transcription. Hướng Leads/Bank/Telco cũ đã bị xóa khỏi repo (lấy lại từ commit `c5bcfa6` nếu cần).
 
 ## 9. Push branch / mở PR vào repo của nhóm
 
@@ -181,17 +181,17 @@ git switch -c codex/crm-completion
 
 Nếu branch đã tồn tại, kiểm tra rồi dùng `git switch codex/crm-completion`. Không reset/xóa các thay đổi CRM đang chưa commit. Nếu main đã tiến thêm, đối chiếu và xử lý conflict, không ghi đè mù.
 
-Stage theo path, **không dùng `git add .`** vì workspace có thay đổi Telco riêng:
+Stage theo path, **không dùng `git add .`** để tránh stage nhầm file ngoài scope:
 
 ```bash
 git add .gitignore AGENTS.md README.md PLAN.md Group2_Project_Proposal.md requirements.txt
 git add src tests scripts notebooks/CRM_Sales_Opportunities.ipynb docs
-git add archive/Lead_Scoring_Proposal_superseded.md reports/crm/final
+git add reports/crm/final
 git diff --cached --stat
 git diff --cached --name-only
 ```
 
-Đọc diff; đảm bảo không chứa file Telco hoặc dữ liệu ngoài scope. Sau đó:
+Đọc diff; đảm bảo không chứa dữ liệu ngoài scope. Sau đó:
 
 ```bash
 git commit -m "Complete CRM model comparison and reproducible course deliverables"
@@ -218,7 +218,7 @@ Nếu dùng patch bàn giao: áp vào clone sạch đúng base commit ghi trong 
 | SHAP dependency lỗi | Dùng đúng env/pins; giữ traceback và manifest để chẩn đoán |
 | AUC quanh 0.5 | Kết quả thật; audit leakage nếu một score cao bất thường |
 | High priority rất ít | Không ép threshold cho đẹp; band chưa validate nghiệp vụ |
-| Numbers khác slide cũ | Chỉ dùng `reports/crm/final/`, không trộn legacy split |
+| Numbers khác slide cũ | Chỉ dùng `reports/crm/final/`, không trộn kết quả cũ |
 | Sửa slide rồi rerun bị mất | Sửa generator `src/deliverables.py` hoặc giữ bản PowerPoint sửa tay tên khác |
 
 Cấu trúc: `data/crm/` inputs → `src/` pipeline → `reports/crm/final/` outputs; `tests/` kiểm thử; `scripts/` setup/notebook; `docs/` contract/audit/PR.

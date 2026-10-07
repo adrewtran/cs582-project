@@ -1,6 +1,6 @@
 """Build one dataset, write its processed table, print the cleaning report.
 
-    python -m src.datasets leads
+    python -m src.datasets crm
 """
 
 from __future__ import annotations
