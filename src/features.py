@@ -27,7 +27,8 @@ def make_preprocessor(dataset: Dataset, scale_numeric: bool) -> ColumnTransforme
         numeric_steps.append(("scale", StandardScaler()))
     return ColumnTransformer(
         transformers=[
-            ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), dataset.categorical),
+            ("cat", Pipeline([('impute',SimpleImputer(strategy='constant',fill_value='Missing')),
+                               ('encode',OneHotEncoder(handle_unknown="ignore", sparse_output=False))]), dataset.categorical),
             ("num", Pipeline(numeric_steps), dataset.numeric),
         ],
         verbose_feature_names_out=False,
