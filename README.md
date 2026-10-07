@@ -184,7 +184,7 @@ Nếu branch đã tồn tại, kiểm tra rồi dùng `git switch codex/crm-comp
 Stage theo path, **không dùng `git add .`** để tránh stage nhầm file ngoài scope:
 
 ```bash
-git add .gitignore AGENTS.md README.md PLAN.md Group2_Project_Proposal.md requirements.txt
+git add .gitignore AGENTS.md README.md PLAN.md CS582_Group2_Project_Proposal.md requirements.txt
 git add src tests scripts notebooks/CRM_Sales_Opportunities.ipynb docs
 git add reports/crm/final
 git diff --cached --stat

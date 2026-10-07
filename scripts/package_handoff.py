@@ -8,7 +8,7 @@ import subprocess
 import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
-PATHS=['.gitignore','AGENTS.md','README.md','PLAN.md','Group2_Project_Proposal.md','requirements.txt',
+PATHS=['.gitignore','AGENTS.md','README.md','PLAN.md','CS582_Group2_Project_Proposal.md','requirements.txt',
        'src','tests','scripts','notebooks/CRM_Sales_Opportunities.ipynb','docs','reports/crm']
 
 
