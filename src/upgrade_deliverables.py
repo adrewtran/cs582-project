@@ -202,7 +202,9 @@ def write_docx(markdown,path):
             doc.add_paragraph()
         elif line.startswith('#'):
             level=len(line)-len(line.lstrip('#')); title=line.lstrip('# ').replace('**','')
-            doc.add_paragraph(title,style='Title' if level==1 else f'Heading {min(level-1,3)}')
+            p=doc.add_paragraph(title,style='Title' if level==1 else f'Heading {min(level-1,3)}')
+            if path.name=='SPEAKER_SCRIPT_ESL.docx' and (title.startswith('Slide 5 ') or title.startswith('Slide 9 ') or title=='Natural ESL answers for questions'):
+                p.paragraph_format.page_break_before=True
         else:
             doc.add_paragraph(line.replace('**','').replace('`',''))
     doc.save(path)
@@ -243,7 +245,7 @@ def build_deliverables(output_dir,template_required=True):
     (dest/'slide_content.json').write_text(json.dumps(slides,indent=2,ensure_ascii=False),encoding='utf-8')
     paper=report(m,q,a,example,c,coverage)
     (dest/'CRM_Final_Report.md').write_text(paper,encoding='utf-8'); write_docx(paper,dest/'CRM_Final_Report.docx')
-    script='# CRM presentation script\n\nSuggested speaking allocation only. This does not claim each member performed these development tasks. Total 10 minutes including a short live command. Rehearse and adjust the pace without hiding limitations.\n\n'
+    script='# CRM presentation script\n\nSuggested speaking allocation only. This does not claim each member performed these development tasks. Target 11 minutes (allow 10–12 minutes) including a short live command. Speaking order: Hong Thai Phan (slides 1–4, 0:00–3:40), Nguyen Khanh An Tran (slides 5–8, 3:40–7:20), Hoang Thien Bao Bui (slides 9–12, 7:20–11:00). This is presentation allocation, not a claim about development authorship. Aim for 100–115 words per minute. Rehearse once with a timer. The timings include the live demonstration. Questions can follow after the 11 minutes.\n\n'
     elapsed=0
     for i,item in enumerate(slides,1):
         end=elapsed+item['seconds']; stamp=lambda t:f'{t//60}:{t%60:02d}'
@@ -251,6 +253,8 @@ def build_deliverables(output_dir,template_required=True):
         if i==9: script+='Demo cue: run the prepared src.demo command. Show the probability, one reason, and the evidence beneath one action. Allow about 20 seconds for the screen walkthrough.\n\n'
         elapsed=end
     script+=f'''## Natural ESL answers for questions
+Why can a win probability above 50 percent still have a Lost label? We choose the classification threshold on validation data. It is about 61 percent for this saved run, rather than a fixed 50 percent. The probability, class label and loss-risk band answer different questions.
+
 
 What is new here? Our contribution combines a tested time-aware history engine, a leakage audit, and a sales assistant that explains each suggested review action. We use existing learning algorithms. We do not claim a new algorithm or proven sales improvement.
 
@@ -282,12 +286,12 @@ Can we call this excellent? The implementation adds testable novelty and a repro
 
 - Run the notebook in the group Colab account and keep the results ZIP.
 - Inspect all slides and notes after Google Slides import.
-- Rehearse the 10-minute script and the real-model demo.
+- Rehearse the 11-minute script and the real-model demo.
 - Review the exact negative result and limitations together.
 - Confirm actual member contributions and the professor's formatting, slide limit and presentation slot.
 - Review the PR before merging. No merge, video recording or course submission occurs automatically.
 ''',encoding='utf-8')
-    print('Generated upgraded report, presentation content and 10-minute script:',dest,flush=True)
+    print('Generated upgraded report, presentation content and 11-minute script:',dest,flush=True)
 
 
 if __name__=='__main__':
