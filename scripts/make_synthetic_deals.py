@@ -39,23 +39,26 @@ def effects(rng, names, scale):
     return dict(zip(names, rng.normal(0, scale, len(names))))
 
 
-def env_weight(d):
-    """Industry trend acts as the environment: a growing industry cares more about the comparison."""
-    return (1 + d["trend_5y_avg_growth"].fillna(0) / 10).clip(0.3, 2.5)
+def env_weight(d, k=1.0):
+    """Industry trend acts as the environment: a growing industry cares more about the comparison.
+    ``k`` steepens the dependence (k=1: original 0.3-2.5 range)."""
+    return (1 + k * d["trend_5y_avg_growth"].fillna(0) / 10).clip(0.3 / k, 2.5 * k)
 
 
-def win_logit(d, prod_fx, agent_fx):
-    """Planted truth. ``d`` is a frame with product/agent/sector-match/trend/price columns."""
+def win_logit(d, prod_fx, agent_fx, k=1.0):
+    """Planted truth. ``d`` is a frame with product/agent/sector-match/trend/price columns.
+    ``k`` multiplies the three interaction terms and the trend x comparison dependence;
+    k=1 reproduces the original data exactly."""
     z = d["product"].map(prod_fx) + d["sales_agent"].map(agent_fx)
     z += 0.6 * d["sector_match"]
     z += 0.05 * d["trend_5y_avg_growth"].fillna(0)
-    z += 0.5 * d["sector_match"] * (d["trend_5y_slope"].fillna(0) > 0)          # interaction 1
-    z -= 0.8 * ((np.log(d["sales_price"]) > 8) & (d["revenue"] < d["revenue"].median()))  # interaction 2
-    z += 0.7 * ((d["series"] == "GTS") & (d["regional_office"] == "West"))      # interaction 3
+    z += k * 0.5 * d["sector_match"] * (d["trend_5y_slope"].fillna(0) > 0)          # interaction 1
+    z -= k * 0.8 * ((np.log(d["sales_price"]) > 8) & (d["revenue"] < d["revenue"].median()))  # interaction 2
+    z += k * 0.7 * ((d["series"] == "GTS") & (d["regional_office"] == "West"))      # interaction 3
     # head-to-head vs the competing product, amplified by the industry-trend environment
     cmp_ = (0.02 * d["recycled_diff"] + 0.15 * d["longevity_diff"] + 0.4 * d["usa_diff"]
             - 0.5 * np.log(d["sales_price"] / d["competitor_price"]))
-    return z + env_weight(d) * cmp_
+    return z + env_weight(d, k) * cmp_
 
 
 def main():
@@ -63,6 +66,8 @@ def main():
     ap.add_argument("--n-deals", type=int, default=20000)
     ap.add_argument("--seed", type=int, default=582)
     ap.add_argument("--out-dir", type=Path, default=SYN)
+    ap.add_argument("--interaction-strength", type=float, default=1.0,
+                    help="multiplier on planted interactions (1 = original data)")
     a = ap.parse_args()
     rng = np.random.default_rng(a.seed)
     out = a.out_dir
@@ -117,7 +122,7 @@ def main():
 
     prod_fx = effects(rng, products["product"], 0.4)
     agent_fx = effects(rng, teams["sales_agent"], 0.4)
-    z = win_logit(d, prod_fx, agent_fx)
+    z = win_logit(d, prod_fx, agent_fx, a.interaction_strength)
     lo, hi = -10.0, 10.0
     for _ in range(50):  # shift the intercept so the overall win rate matches the real data (~0.63)
         mid = (lo + hi) / 2
