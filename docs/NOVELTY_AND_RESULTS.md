@@ -1,5 +1,9 @@
 # Promised novelty and observed results
 
+## Current measured extension
+
+PR #4 adds 19 strictly prior training-only history features, six models on raw versus history inputs, and an assistant with rule IDs, evidence and rationale. Validation selects history / Logistic Regression: test AUC 0.5168 versus raw LR 0.5238. Raw CatBoost reaches 0.5424 descriptively, but does not replace the validation winner after test inspection. No general predictive benefit or sales uplift is established. The contribution is an auditable applied system, not a new learning algorithm. See `reports/crm/final/ablation_comparison.csv`; older foundation discussion follows.
+
 The original CRM proposal promises prediction plus model explainability, and a comparison of traditional models with TabNet. It does not promise a new algorithm or a minimum accuracy. The progress slides also proposed win probabilities, follow-up priority and the main factors behind each prediction.
 
 | Promise | Implemented evidence | Interpretation |

@@ -1,5 +1,9 @@
 # CRM project commitment audit
 
+## Current upgrade
+
+PR #4 includes six-model raw/history comparison, strict training-only history, evidence-backed assistant, saved-model CLI, 12 slides and three-speaker 11-minute transcript. See `PROFESSOR_DEMO_GUIDE.md` and `PUBLISH_STATUS.md`. Older sections describe the foundation milestone. Cloud rehearsal and submission remain team responsibilities.
+
 ## Completion update — 2026-10-06
 
 The sections below preserve the **initial audit**, before implementation. They are not the current missing-work list.

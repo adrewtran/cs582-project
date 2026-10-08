@@ -1,5 +1,7 @@
 # Verification record — 2026-10-06
 
+**Historical foundation record.** Current publication status is in [PUBLISH_STATUS.md](PUBLISH_STATUS.md). Current pipeline: six models, raw/history comparison, seven notebook code cells and an 11-minute presentation. Older counts and receipts below are not verification of the current version. Tests were not rerun during final publication at the user's request.
+
 Initial preparation used `codex/crm-first-foundation` at `52c3191ccfbbbbfc1f3312ebdf100091d449588a`, without commit/push. Authorized integration now uses `codex/crm-completion` based on upstream `main` at `f37826f90bebb7f7a33046222b81c28b09fa37d4`. Upstream PR #1 already incorporated the original CRM foundation; its historical report files are preserved unchanged in this PR.
 
 ## Executed evidence
