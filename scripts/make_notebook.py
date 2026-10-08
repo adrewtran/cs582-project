@@ -10,7 +10,7 @@ def create_notebook():
     nb.metadata={'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'colab':{'name':'CRM_Sales_Opportunities.ipynb'},'language_info':{'name':'python','version':'3.12'}}
     nb.cells=[
         nbf.v4.new_markdown_cell('''# CS 582 — CRM Sales Opportunities\n
-**Run all**: upload the project ZIP, install CPU dependencies, run all five models, inspect results, download outputs. No GitHub write permission, API key, paid runtime, or GPU is needed. Setup requires internet and available Colab CPU quota. Use a Python 3.12 runtime; other Python versions are not claimed as tested.\n
+**Run all**: upload the project ZIP, install CPU dependencies, run all six models, inspect results, download outputs. No GitHub write permission, API key, paid runtime, or GPU is needed. Setup requires internet and available Colab CPU quota. Use a Python 3.12 runtime; other Python versions are not claimed as tested.\n
 Đây là notebook chạy toàn bộ project. Bấm **Runtime → Run all**, chọn ZIP được giao (không upload patch). Cell cài đặt có thể mất vài phút. Kết quả yếu vẫn là kết quả hợp lệ; không dùng `close_value` làm predictor.'''),
         nbf.v4.new_code_cell('''from pathlib import Path
 import os, sys, subprocess, tempfile, zipfile
@@ -60,7 +60,7 @@ print("Project interpreter:", PYTHON)'''),
 Run the full test suite before the reportable experiment. Tests use real small CPU fits and temporary outputs; they do not overwrite final results.'''),
         nbf.v4.new_code_cell('''subprocess.run([str(PYTHON), "-m", "pytest", "-q"], cwd=ROOT, check=True)'''),
         nbf.v4.new_markdown_cell('''## 2. Full experiment and deliverables\n
-Default: full CPU budgets, all five models, SHAP, 1,589 Engaging scores, figures, paper, slides and ESL notes. `QUICK=True` is only a smoke test, never a final result. Every command stops on error.'''),
+Default: full CPU budgets, all six models, SHAP, 1,589 Engaging scores, figures, paper, slides and ESL notes. `QUICK=True` is only a smoke test, never a final result. Every command stops on error.'''),
         nbf.v4.new_code_cell('''QUICK = os.environ.get("CRM_NOTEBOOK_QUICK") == "1"
 OUTPUT = Path(os.environ.get("CRM_OUTPUT", str(ROOT / ("reports/crm/smoke" if QUICK else "reports/crm/final")))).resolve()
 command = [str(PYTHON), "-m", "src.run_project", "--output", str(OUTPUT)]
@@ -68,7 +68,7 @@ if QUICK:
     command.append("--quick")
 subprocess.run(command, cwd=ROOT, check=True)'''),
         nbf.v4.new_markdown_cell('''## 3. Verify before reporting\n
-Expect status `complete`, five model rows, win+loss=1 and score counts matching the current data-quality report. The supplied snapshot has 1,589 scores and 1,088 account-missing warnings; changed valid input can have different counts. AUC near 0.5 is a warning about predictive usefulness, not a failed software run.'''),
+Expect status `complete`, six model rows, win+loss=1 and score counts matching the current data-quality report. The supplied snapshot has 1,589 scores and 1,088 account-missing warnings; changed valid input can have different counts. AUC near 0.5 is a warning about predictive usefulness, not a failed software run.'''),
         nbf.v4.new_code_cell('''import csv, json, math
 from IPython.display import display, Markdown, Image
 manifest = json.loads((OUTPUT / "run_manifest.json").read_text())
@@ -78,7 +78,16 @@ with (OUTPUT / "test_metrics.csv").open() as handle:
 with (OUTPUT / "open_deal_predictions.csv").open() as handle:
     predictions = list(csv.DictReader(handle))
 quality = json.loads((OUTPUT / "data_quality.json").read_text())
-assert len(metrics) == 5
+assert len(metrics) == 6
+with (OUTPUT / "ablation_comparison.csv").open() as handle:
+    comparison = list(csv.DictReader(handle))
+assert len(comparison) == 12
+agents = [json.loads(line) for line in (OUTPUT / "sales_assistant_outputs.jsonl").read_text().splitlines() if line.strip()]
+assert len(agents) == len(predictions)
+assert all(2 <= len(r["agent_recommendation"]["actions"]) <= 4 for r in agents)
+print("PASS: 12 A/B rows and", len(agents), "assistant outputs")
+for row in comparison:
+    print(row["experiment"], row["model"], "test AUC", row["test_roc_auc"])
 assert len(predictions) == manifest["scored_open_rows"] == quality["scorable_open_rows"]
 assert all(math.isclose(float(r["win_probability"])+float(r["loss_probability"]), 1.0) for r in predictions)
 assert sum(r["account_missing"] == "True" for r in predictions) == quality["scorable_missing_account"]
@@ -88,6 +97,11 @@ for row in metrics:
 display(Image(filename=str(OUTPUT / "figures/roc_curves.png")))
 display(Image(filename=str(OUTPUT / "figures/eda_missingness.png")))
 display(Markdown((OUTPUT / "deliverables/RESULTS_SUMMARY.md").read_text()))'''),
+        nbf.v4.new_markdown_cell('Live demo: the saved model recomputes an actual Engaging record. The rules suggest review actions, not proven interventions.'),
+        nbf.v4.new_code_cell('''if manifest["scored_open_rows"]:
+    subprocess.run([str(PYTHON), "-m", "src.demo", "--bundle", str(OUTPUT / "model_bundle.joblib")], cwd=ROOT, check=True)
+else:
+    print("No dated Engaging opportunity is available. Continue to download the results.")'''),
         nbf.v4.new_markdown_cell('''## 4. Download and keep your results\n
 Colab storage is temporary. Download this ZIP before ending the session. Open the PPTX in Google Slides; inspect layout after import. Paper and slides are team-review drafts, not already submitted work.'''),
         nbf.v4.new_code_cell('''import shutil

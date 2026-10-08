@@ -17,9 +17,8 @@ def main():
         os.environ.update(CRM_PROJECT_ROOT=str(ROOT),CRM_NOTEBOOK_SKIP_SETUP='1',
             CRM_PYTHON=sys.executable,CRM_OUTPUT=str(Path(temp)/'notebook_run'),CRM_NOTEBOOK_QUICK='0')
         notebook=nbformat.read(ROOT/'notebooks/CRM_Sales_Opportunities.ipynb',as_version=4)
-        # This workspace prohibits both TCP and IPC listeners, so a Jupyter
-        # kernel cannot start. Execute the unchanged Python cells sequentially
-        # instead, and label this narrower verification explicitly.
+        # Execute unchanged Python cells sequentially without a Jupyter kernel.
+        # This checks integration, not notebook UI or kernel startup.
         namespace={}; count=0
         for cell in notebook.cells:
             if cell.cell_type!='code': continue
@@ -35,7 +34,7 @@ def main():
                 'code_cells_executed':len(code_cells),'mode':manifest['mode'],
                 'pipeline_status':manifest['status'],'scored_open_rows':manifest['scored_open_rows'],
                 'setup':'already-installed isolated runtime; setup_cpu.py tested separately',
-                'not_verified':['Jupyter kernel: local socket binding prohibited','Google account login','Colab upload/download UI','Google Slides import']}
+                'not_verified':['Jupyter kernel startup','Google account login','Colab upload/download UI','Google Slides import']}
         (evidence/'notebook_execution.json').write_text(json.dumps(report,indent=2))
         print(json.dumps(report,indent=2))
 
