@@ -1,0 +1,33 @@
+competitor_product,competes_with,competitor_brand,sales_price,recycled_pct,longevity_years,made_in_usa
+Nexora GTX Basic-class,GTX Basic,Nexora,497.61,18,3.5,1
+Vantrix GTX Basic-class,GTX Basic,Vantrix,638.7,18,4.5,0
+Orbitek GTX Pro-class,GTX Pro,Orbitek,5490.61,55,9.2,0
+Kalmor GTX Pro-class,GTX Pro,Kalmor,3868.08,72,6.5,0
+Tession MG Special-class,MG Special,Tession,67.34,26,1.7,0
+Brightline MG Special-class,MG Special,Brightline,58.3,14,1.8,1
+Nexora MG Advanced-class,MG Advanced,Nexora,2870.27,56,7.3,1
+Vantrix MG Advanced-class,MG Advanced,Vantrix,4092.83,44,9.4,1
+Orbitek GTX Plus Pro-class,GTX Plus Pro,Orbitek,4632.01,66,8.9,1
+Kalmor GTX Plus Pro-class,GTX Plus Pro,Kalmor,5970.52,27,5.5,1
+Tession GTX Plus Basic-class,GTX Plus Basic,Tession,1193.83,45,6.7,1
+Brightline GTX Plus Basic-class,GTX Plus Basic,Brightline,880.19,51,5.1,1
+Nexora GTK 500-class,GTK 500,Nexora,30107.46,81,14.4,0
+Vantrix GTK 500-class,GTK 500,Vantrix,26751.73,85,9.2,1
+Orbitek GTX Lite-class,GTX Lite,Orbitek,216.87,0,4.3,1
+Kalmor GTX Lite-class,GTX Lite,Kalmor,256.59,0,4.4,1
+Tession GTX Ultra-class,GTX Ultra,Tession,11191.19,31,15.2,0
+Brightline GTX Ultra-class,GTX Ultra,Brightline,11387.46,39,13.8,0
+Nexora MG Lite-class,MG Lite,Nexora,29.9,6,2.2,1
+Vantrix MG Lite-class,MG Lite,Vantrix,27.12,0,2.8,0
+Orbitek MG Elite-class,MG Elite,Orbitek,6205.93,55,10.3,0
+Kalmor MG Elite-class,MG Elite,Kalmor,7653.36,64,16.8,0
+Tession GTK 250-class,GTK 250,Tession,15227.32,41,10.6,1
+Brightline GTK 250-class,GTK 250,Brightline,15848.19,61,6.8,0
+Nexora GTK 1000-class,GTK 1000,Nexora,55535.39,100,18.5,1
+Vantrix GTK 1000-class,GTK 1000,Vantrix,63074.97,46,20.8,1
+Orbitek GTS Starter-class,GTS Starter,Orbitek,1734.47,45,4.7,0
+Kalmor GTS Starter-class,GTS Starter,Kalmor,1683.42,43,3.9,1
+Tession GTS Standard-class,GTS Standard,Tession,3631.12,22,5.0,1
+Brightline GTS Standard-class,GTS Standard,Brightline,3668.71,62,3.5,0
+Nexora GTS Enterprise-class,GTS Enterprise,Nexora,14761.19,52,14.1,0
+Vantrix GTS Enterprise-class,GTS Enterprise,Vantrix,12178.96,72,18.5,0

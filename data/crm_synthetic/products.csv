@@ -1,17 +1,17 @@
-product,series,sales_price,synthetic,industry
-GTX Basic,GTX,550,False,retail
-GTX Pro,GTX,4821,False,marketing
-MG Special,MG,55,False,employment
-MG Advanced,MG,3393,False,entertainment
-GTX Plus Pro,GTX,5482,False,finance
-GTX Plus Basic,GTX,1096,False,services
-GTK 500,GTK,26768,False,telecommunications
-GTX Lite,GTX,250,True,retail
-GTX Ultra,GTX,9800,True,technolgy
-MG Lite,MG,25,True,employment
-MG Elite,MG,7200,True,software
-GTK 250,GTK,13400,True,telecommunications
-GTK 1000,GTK,52000,True,medical
-GTS Starter,GTS,1500,True,services
-GTS Standard,GTS,3200,True,marketing
-GTS Enterprise,GTS,15000,True,finance
+product,series,sales_price,synthetic,industry,recycled_pct,longevity_years,made_in_usa
+GTX Basic,GTX,550,False,retail,25,4,1
+GTX Pro,GTX,4821,False,marketing,35,7,1
+MG Special,MG,55,False,employment,15,3,0
+MG Advanced,MG,3393,False,entertainment,30,6,0
+GTX Plus Pro,GTX,5482,False,finance,40,8,1
+GTX Plus Basic,GTX,1096,False,services,30,5,1
+GTK 500,GTK,26768,False,telecommunications,55,12,1
+GTX Lite,GTX,250,True,retail,20,3,1
+GTX Ultra,GTX,9800,True,technolgy,50,10,1
+MG Lite,MG,25,True,employment,10,2,0
+MG Elite,MG,7200,True,software,45,9,0
+GTK 250,GTK,13400,True,telecommunications,45,10,1
+GTK 1000,GTK,52000,True,medical,65,15,1
+GTS Starter,GTS,1500,True,services,20,4,0
+GTS Standard,GTS,3200,True,marketing,35,6,0
+GTS Enterprise,GTS,15000,True,finance,60,12,1
