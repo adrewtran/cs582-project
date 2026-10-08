@@ -1,153 +1,182 @@
-# Predicting CRM Sales Opportunities Using Machine Learning
+# CRM Sales Decision Support
 
-CS 582 • Group 2 • Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
+CS 582 Group 2
 
-Result-driven final paper draft for team review. Experiment mode: **full**. Generated from the run starting 2026-10-06T19:41:05.038515+00:00. This document has not been submitted. Team members must verify the narrative, authorship/contributions and instructor formatting requirements before submission.
+Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 
 ## Abstract
 
-We implement a reproducible CRM classification and explanation pipeline using the supplied Maven Sales Opportunities data. The system estimates P(Won) and P(Lost) and reports the input factors behind each score. We compare a prior-only control, Logistic Regression, Random Forest, MLP and TabNet using identical dated partitions and training-only preprocessing. To reduce future-label leakage, a training or validation deal is eligible only when its outcome was available before the next period. The resulting split contains 2,975 training, 583 validation and 1,361 test deals, with 1,792 late-label records purged. Logistic Regression is selected on validation ROC-AUC and reaches test ROC-AUC 0.5238. These results do not establish practically useful discrimination. A deliberately invalid close-value control demonstrates how outcome leakage can create a misleading near-perfect score. We provide calibrated snapshot scores, auditable local sensitivities, Random Forest SHAP diagnostics and explicit input-quality warnings. The contribution is an applied, explainable evaluation workflow and an honest negative finding, not a new learning algorithm or proven sales uplift.
+We evaluate whether strictly prior sales history improves CRM win prediction and connect predictions to an inspectable sales assistant. We compare six CPU classifiers on the same availability-aware split, using 18 raw features (A) or 37 raw and historical features (B). Validation selects history / Logistic Regression. Its exploratory test ROC-AUC is 0.5168, compared with 0.5238 for the same model using raw inputs. For Logistic Regression, history has lower test AUC than raw inputs (B minus A -0.0070). This single exploratory comparison does not prove a general predictive benefit. Our contribution is the combination of a leakage audit, a tested temporal feature engine and an evidence-based rule agent. All metrics come from the full run beginning 2026-10-08T09:58:22.178893+00:00.
 
-## 1. Problem and intended use
+## 1 Problem and related work
 
-Sales teams need to understand which opportunities may close successfully and why a model gives a particular score. Our target is binary: Won = 1 and Lost = 0 among observed closed opportunities. We seek a prediction at the engagement stage using attributes available before closing. Open records have unknown outcomes and are never assigned artificial Lost labels. This dataset does not support a fixed-horizon claim such as winning within 30 days; we model eventual recorded outcome conditional on closure being observed.
+The model estimates P(Won) and its complement among opportunities whose eventual outcome is observed. Open deals are never assigned artificial Lost labels. We do not predict a fixed closing horizon. The intended use is to inspect a score and decide what information needs review, with a person retaining control of sales actions.
 
-The expected outputs are (1) complementary win/loss probabilities and (2) the input factors associated with a higher or lower model score. A predicted class and simple priority band are added for demonstration. They are not a validated business intervention. In particular, changing an explanatory factor is not guaranteed to change the real sales outcome.
+Sales win propensity prediction and probability-based B2B workflows already exist [2,3]. TabNet provides an attention-based tabular comparator [4,7]. CatBoost provides a categorical gradient-boosting comparator [8]. We apply existing algorithms rather than claim a novel model architecture. Explainability supports inspection, but SHAP alone is not our novelty.
 
-## 2. Related work and scope of contribution
+## 2 Data and preprocessing
 
-Yan et al. [2] frame win propensity as a component of sales pipeline management and evaluate a data-driven approach on enterprise B2B data. Their work motivates our probability output; we do not reproduce their proprietary data or claim a comparable business benefit.
+The supplied Maven CRM dataset describes a fictitious B2B hardware company [1]. It contains 8,800 opportunities, 85 accounts, 7 products and 35 team records. A fifth CSV is the data dictionary. There are 6,711 closed records with 4,238 Won and 2,473 Lost outcomes. The system scores 1,589 dated Engaging opportunities. It excludes undated Prospecting records. Among scored opportunities, 1,088 lack account information.
 
-Rezazadeh [3] presents a B2B workflow connecting probabilistic training with prediction and decision boundaries. This motivates separating model fitting, evaluation and scoring. Our implementation uses a small, free CPU workflow rather than reproducing its Azure infrastructure or monetary evaluation.
+We validate key uniqueness, many-to-one joins, stage values, nonnegative numeric fields and valid date ordering. We normalize GTXPro to GTX Pro and the sector spelling technolgy to technology. The source CSV files remain unchanged. run_manifest.json records their SHA-256 hashes and the source hashes for this run.
 
-Arik and Pfister [4] introduce sequential attention for tabular learning in TabNet. We compare an existing TabNet implementation [7] with simpler learners, without claiming that advanced architecture must improve this CRM dataset. We do not implement its self-supervised pretraining.
+The 18 raw inputs include product and team information, account attributes, list price and engagement calendar fields. Account revenue is in millions in the source. Revenue per employee converts it to currency units first. Current close_value, close_date, deal_stage and opportunity_id are never model predictors. Stage defines the target; dates enforce availability; IDs link audit records. Histories use other deals' already-observed outcomes, not the current outcome.
 
-Our course-project contribution combines availability-aware splitting, an explicit leakage control, probability diagnostics, local explanations and missing-input warnings in one regenerable pipeline. Explainable CRM scoring already exists in the literature. We therefore describe our novelty as the design and audit of this particular applied workflow, rather than a previously unknown algorithm.
+One-hot categorical encoders and median imputation fit only training rows. LR, MLP and TabNet scale numerics using training statistics. CatBoost uses native categorical strings and training-fitted numeric medians. Missing categories remain explicit. Static account, product and team snapshots may not describe each entity's true historical state.
 
-## 3. Data and preparation
+## 3 Temporal design and feature engineering
 
-Maven describes the source as a fictitious B2B computer-hardware company [1]. The supplied files contain 8,800 opportunities, 85 accounts, 7 products and 35 sales-team records, plus a data dictionary. The opportunity table is left-joined to product, account and team tables with many-to-one checks. Keys, stage values, numerical fields, dates and row counts are validated. Source CSV files are unchanged and SHA-256 hashes are saved in the run manifest.
+Training has 2,975 rows, validation 583, and test 1,361. We purge 1,792 records whose outcome was not available before the next period. Validation starts 2017-07-15 and test starts 2017-09-18. All six models and both feature variants receive the same row IDs. Win fractions are 64.64%, 60.72% and 60.03%, respectively.
 
-The loader normalizes GTXPro to GTX Pro (1,480 pipeline rows) and fixes the documented sector spelling technolgy. There are 6,711 labeled records: 4,238 Won and 2,473 Lost. The 2,089 open records include 1,589 Engaging opportunities eligible for snapshot scoring and 500 Prospecting records, which are excluded. Among scored open records, 1,088 lack an account; 0 labeled records lack matched account attributes. Coverage differences limit the interpretation of open-deal scores.
+The history engine uses a frozen training archive. At engagement time T, a record can contribute only if close_date < T and its opportunity ID differs from the query. Same-day closures are excluded because intraday order is unknown. Validation and test outcomes never enter the archive, even when they have already closed. This conservative design is an offline comparison, not an online adaptive evaluation.
 
-Seven categorical predictors cover product, product series, account sector/location, regional office, manager and sales agent. Eleven numeric predictors cover product list price, account revenue and employees, revenue per employee, establishment year, account age, engagement calendar fields and subsidiary status. Revenue is expressed in millions in the source and is multiplied by one million when computing revenue per employee. We do not use account name as a predictor. close_value, close_date, deal_stage and opportunity_id are excluded from the feature matrix. close_date is read only for label availability; deal_stage defines the target; IDs preserve traceability.
+For each sales agent, account and product, we derive a prior closed count, smoothed win rate, mean observed close value, mean cycle length and cold-start flag. Four global prior statistics complete the 19 added features. The smoothed entity win rate is (prior entity wins + 5 times eligible global win rate) divided by (prior entity count + 5). The smoothing strength is fixed before testing. Missing entity keys use the eligible global prior with local count zero. With no eligible global history, the probability prior is 0.5, count/value/cycle defaults are zero, and cold-start flags remain visible.
 
-Categoricals use constant missing-value imputation followed by one-hot encoding with unknown-category handling. Numeric values use training medians. Logistic Regression, MLP and TabNet also standardize numeric columns using training statistics. Missing open categories unseen during training are encoded as unknowns, so a missing-account warning remains necessary. EDA outcome comparisons use training rows; full-data missingness is an input-quality audit, not a model-selection signal.
+The row-level audit records query date, latest eligible closure and archive size. Unit tests check same-day and self exclusion, shuffled input order, future-outcome invariance and held-out-label invariance. The following coverage table counts queries with at least one eligible entity-specific past closure.
 
-![Input coverage](../figures/eda_missingness.png)
+| split | entity | rows | with_history | coverage |
+| --- | --- | --- | --- | --- |
+| train | agent | 2975 | 1951 | 0.6558 |
+| train | account | 2975 | 1896 | 0.6373 |
+| train | product | 2975 | 1970 | 0.6622 |
+| validation | agent | 583 | 583 | 1.0000 |
+| validation | account | 583 | 583 | 1.0000 |
+| validation | product | 583 | 583 | 1.0000 |
+| test | agent | 1361 | 1361 | 1.0000 |
+| test | account | 1361 | 1361 | 1.0000 |
+| test | product | 1361 | 1361 | 1.0000 |
 
-## 4. Evaluation design
+## 4 Model selection and experimental protocol
 
-The 60th and 80th percentiles of ordered closed engagement dates define period boundaries. All rows sharing a boundary date stay in the same period. The validation period starts 2017-07-15; the test period starts 2017-09-18. A training row must engage and close before the validation boundary. A validation row must engage during its period and close before the test boundary. Test rows engage on or after the test boundary and have observed outcomes in the dataset. Counts are 2,975/583/1,361; 1,792 late outcomes are recorded in split_manifest.csv rather than silently reassigned.
+A uses raw inputs. B adds histories. We fit Dummy prior, Logistic Regression, Random Forest, MLP, TabNet and CatBoost for both variants. Dummy returns the training win fraction. LR uses L2 regularization and C=1. RF uses 300 trees and minimum leaf size 5. MLP uses hidden layers 64 and 32, alpha 0.001, learning rate 0.001, at most 120 epochs and patience 15. TabNet uses n_d=n_a=8, three steps, learning rate 0.02, at most 80 epochs and patience 12. CatBoost uses depth 5, learning rate 0.05, up to 500 iterations, L2 leaf regularization 5 and validation early stopping 40. CPU threads are limited and the random seed is 42. Smoke runs use smaller budgets and are explicitly unreportable.
 
-The win fractions are 64.64% in training, 60.72% in validation and 60.03% in test. This is a single exploratory historical evaluation. Earlier project exploration already examined this dataset, and all boundaries are constructed retrospectively from the observed closed sample. The split is not an untouched prospective test and cannot remove closed-only selection bias or end-of-snapshot censoring.
+Validation ROC-AUC selects the model and experiment, with lower validation Brier score and deterministic name ordering breaking ties. We retain validation-selected neural checkpoints. A validation macro-F1 search chooses class thresholds. Positive-slope sigmoid calibration uses validation and keeps the base classifier frozen. selection_lock.json saves both experiments' choices before either evaluates test predictions. The validation sample serves multiple roles, so these estimates can be optimistic. Test results do not trigger another configuration search.
 
-All models receive exactly the same rows and feature roles. The model is chosen using validation ROC-AUC, with lower Brier score and then model name breaking ties. Class thresholds maximize validation macro-F1 over 0.10–0.90 in increments of 0.01; ties prefer the threshold closest to 0.50. No test statistic is used by the selection code. Neural early stopping also uses validation AUC, so the shared validation sample has several roles; a larger dataset should reserve a separate calibration/tuning sample or use nested temporal folds.
+Diagnostic C is a separate depth-one tree using the current final close value. It illustrates invalid outcome leakage and never supplies real opportunity scores. We report AP as average precision, rather than calling it trapezoidal PR-AUC. Precision, recall and F1 treat Won as positive. Confusion counts and additional metrics appear in the appendix and CSV files.
 
-We report Accuracy, Precision, Recall, F1, ROC-AUC and confusion matrices as promised. Precision, recall and F1 treat Won as positive. Balanced accuracy, macro-F1, average precision, Brier and log loss provide additional context. Average precision is explicitly reported as AP, not mislabeled trapezoidal PR-AUC. F1 and accuracy can look favorable for a majority-Won model; the prior control is therefore essential.
+## 5 Validation and test results
 
-## 5. Models and computation
+Validation comparisons determine selection. These numbers are tuning diagnostics rather than an independent estimate of generalization.
 
-Dummy prior outputs the training win fraction. Logistic Regression is an L2-regularized linear baseline. Random Forest uses bootstrap trees. MLP uses two ReLU hidden layers (64, 32), Adam, alpha 0.001 and learning rate 0.001. Its best validation checkpoint is retained. TabNet uses CPU attention steps with n_d = n_a = 8, n_steps = 3, learning rate 0.02, batch size 256 and virtual batch size 64. Its best validation checkpoint is also retained. We use seed 42 and limit numerical threads. These are fixed, modest comparison budgets, not an exhaustive hyperparameter search.
+| experiment | model | validation_roc_auc | validation_brier | validation_threshold |
+| --- | --- | --- | --- | --- |
+| raw | dummy_prior | 0.5000 | 0.2400 | 0.5000 |
+| raw | logistic_regression | 0.5630 | 0.2514 | 0.4800 |
+| raw | random_forest | 0.5380 | 0.2429 | 0.5400 |
+| raw | mlp | 0.5286 | 0.2911 | 0.4600 |
+| raw | tabnet | 0.5205 | 0.2386 | 0.5900 |
+| raw | catboost | 0.5446 | 0.2386 | 0.5800 |
+| history | dummy_prior | 0.5000 | 0.2400 | 0.5000 |
+| history | logistic_regression | 0.5692 | 0.2755 | 0.4100 |
+| history | random_forest | 0.4957 | 0.2573 | 0.4900 |
+| history | mlp | 0.5372 | 0.2732 | 0.4200 |
+| history | tabnet | 0.5289 | 0.2383 | 0.6200 |
+| history | catboost | 0.5235 | 0.2442 | 0.5300 |
 
-Actual settings for this run:
+The test comparison below uses the original probability scale of each model and its validation-selected threshold. Lower Brier and log loss are better. AUC 0.5 represents no useful ranking.
 
-- Dummy prior: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false}
-- Logistic Regression: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "C": 1.0, "max_iter": 2000}
-- Random Forest: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "n_estimators": 300, "min_samples_leaf": 5}
-- MLP: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "hidden_layers": [64, 32], "alpha": 0.001, "learning_rate": 0.001, "max_epochs": 120, "patience": 15, "best_epoch": 38, "epochs_run": 53}
-- TabNet: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "n_d": 8, "n_a": 8, "n_steps": 3, "max_epochs": 80, "patience": 12, "best_epoch": 12, "epochs_run": 24}
+| experiment | model | test_accuracy | test_f1 | test_roc_auc | test_brier |
+| --- | --- | --- | --- | --- | --- |
+| raw | dummy_prior | 0.6003 | 0.7502 | 0.5000 | 0.2421 |
+| raw | logistic_regression | 0.4372 | 0.2620 | 0.5238 | 0.2794 |
+| raw | random_forest | 0.5900 | 0.7388 | 0.5194 | 0.2508 |
+| raw | mlp | 0.4849 | 0.5135 | 0.4954 | 0.3314 |
+| raw | tabnet | 0.5327 | 0.6555 | 0.4924 | 0.2397 |
+| raw | catboost | 0.6018 | 0.7472 | 0.5424 | 0.2429 |
+| history | dummy_prior | 0.6003 | 0.7502 | 0.5000 | 0.2421 |
+| history | logistic_regression | 0.4262 | 0.2055 | 0.5168 | 0.3180 |
+| history | random_forest | 0.5011 | 0.5683 | 0.4804 | 0.2537 |
+| history | mlp | 0.5011 | 0.5268 | 0.4987 | 0.3013 |
+| history | tabnet | 0.4879 | 0.5313 | 0.4770 | 0.2418 |
+| history | catboost | 0.5261 | 0.6230 | 0.4988 | 0.2443 |
 
-The environment is Python 3.12.14, scikit-learn 1.8.0, CPU PyTorch 2.8.0+cpu and pytorch-tabnet 4.1.0. The manifest records the other versions, source hashes and timings. This experiment was executed in the assistant workspace on CPU. A matching notebook is provided for Colab; an actual user Colab session and Google Slides import still need confirmation.
+The selected model changes from raw-feature AUC 0.5238 to selected-variant AUC 0.5168, a descriptive difference of -0.0070. For Logistic Regression, history has lower test AUC than raw inputs (B minus A -0.0070). This single exploratory comparison does not prove a general predictive benefit. The history representation may capture time trends and sparsity rather than stable opportunity information. Training history grows over time, while validation/test use a frozen archive; this changes the feature distribution. Those are plausible explanations, not separately verified causes. We did not run a multi-seed or cluster-bootstrap significance study.
 
-## 6. Results
+The highest test AUC is a descriptive observation only. We retain the validation winner rather than choose a model after inspecting test results. Dummy can attain a high Won-class F1 by predicting the majority class, so F1 alone is not enough to demonstrate useful prioritization.
 
-Validation metrics below explain the selection. Threshold values were chosen on this sample, so threshold-dependent validation metrics are in-sample tuning diagnostics.
+### Probability calibration
 
-| model               |   roc_auc |   brier |   threshold |
-|:--------------------|----------:|--------:|------------:|
-| dummy_prior         |    0.5000 |  0.2400 |      0.5000 |
-| logistic_regression |    0.5630 |  0.2514 |      0.4800 |
-| random_forest       |    0.5380 |  0.2429 |      0.5400 |
-| mlp                 |    0.5286 |  0.2911 |      0.4600 |
-| tabnet              |    0.5587 |  0.2369 |      0.6100 |
+| variant | roc_auc | brier | log_loss | threshold |
+| --- | --- | --- | --- | --- |
+| raw | 0.5168 | 0.3180 | 0.8405 | 0.4100 |
+| calibrated | 0.5168 | 0.2489 | 0.6910 | 0.6109 |
 
-The primary test comparison uses raw probabilities and each model's validation-selected threshold:
+Calibration changes the probability scale while preserving ranking, apart from numerical ties. Its result does not establish reliable future probabilities. Brier must be interpreted against the prior-only baseline as well as the uncalibrated selected model.
 
-| model               |   accuracy |   precision |   recall |     f1 |   roc_auc |   brier |
-|:--------------------|-----------:|------------:|---------:|-------:|----------:|--------:|
-| dummy_prior         |     0.6003 |      0.6003 |   1.0000 | 0.7502 |    0.5000 |  0.2421 |
-| logistic_regression |     0.4372 |      0.6154 |   0.1665 | 0.2620 |    0.5238 |  0.2794 |
-| random_forest       |     0.5900 |      0.5982 |   0.9657 | 0.7388 |    0.5194 |  0.2508 |
-| mlp                 |     0.4849 |      0.5929 |   0.4529 | 0.5135 |    0.4954 |  0.3314 |
-| tabnet              |     0.5628 |      0.6135 |   0.7344 | 0.6685 |    0.5173 |  0.2468 |
+## 6 Explanations and sales assistant
 
-Confusion counts and additional metrics:
+The selected calibrated model produces the win probability and complementary loss probability. Its local explanations replace one feature with a training median or mode and measure the probability difference. These are nonadditive reference sensitivities, not causal effects. Correlated history features can yield unrealistic single-feature replacements. RF TreeSHAP is a separate supporting diagnostic for the uncalibrated forest, with numerical reconstruction checks [6]. It is not mislabeled as an explanation of another selected classifier.
 
-| model               |   tn |   fp |   fn |   tp |   balanced_accuracy |   macro_f1 |   average_precision |
-|:--------------------|-----:|-----:|-----:|-----:|--------------------:|-----------:|--------------------:|
-| dummy_prior         |    0 |  544 |    0 |  817 |              0.5000 |     0.3751 |              0.6003 |
-| logistic_regression |  459 |   85 |  681 |  136 |              0.5051 |     0.4036 |              0.6138 |
-| random_forest       |   14 |  530 |   28 |  789 |              0.4957 |     0.3933 |              0.6169 |
-| mlp                 |  290 |  254 |  447 |  370 |              0.4930 |     0.4832 |              0.5879 |
-| tabnet              |  166 |  378 |  217 |  600 |              0.5198 |     0.5133 |              0.6231 |
+The deterministic assistant receives the probability, historical context, signed sensitivities and warnings. It returns loss risk HIGH below P(win)=0.40, MEDIUM from 0.40 to below 0.70, and LOW at 0.70 or above. Risk describes estimated loss probability; it is distinct from the legacy High win-priority label. Fixed bands are illustrative, not a validated allocation policy.
 
-![Test ROC](../figures/roc_curves.png)
+Rules request account completion when identity is missing, direct verification when fewer than five account outcomes exist, product-fit review when at least five past product outcomes lag the eligible global win rate by over 0.10, or a second sales review when high loss risk and sufficiently supported agent history agree. The output includes at most two triggered rules plus two universal checks: verify current opportunity status and review the evidence before action. Each action exposes its rule ID, observed evidence and rationale. No rule sends a message, changes a price, measures uplift, or claims an intervention will cause a win. No paid LLM API is required.
 
-The selected Logistic Regression reaches test AUC 0.5238, accuracy 0.4372 and recall 0.1665. The Dummy prior reaches accuracy 0.6003 and AUC 0.5000. The results do not establish a meaningful ranking improvement. There is no multi-seed or account-cluster uncertainty study, and we do not claim statistical significance from small AUC differences. More complex models do not justify a deployment claim in this experiment.
+Our course-level contribution has three linked parts: an explicit leakage audit, an availability-tested historical feature engine and an inspectable rule-based sales assistant. CatBoost is a stronger comparator and SHAP is supporting analysis. Neither is claimed as our own new algorithm. The agent is decision support, not autonomous planning or a learned sales policy.
 
-### 6.1 Calibration and decision thresholds
+## 7 Live demonstration
 
-We fit a positive-slope sigmoid on the selected model's validation logit scores, retaining the exact frozen base model. Test Brier score changes from 0.2794 to 0.2443; the prior control scores 0.2421 (lower is better). Calibration can improve probability scale while leaving ordering unchanged, and it does not demonstrate stronger discrimination. We do not refit the classifier after calibration. The raw threshold 0.48 maps to calibrated threshold 0.6044, preserving the classification rule; calibration is not a retuning of the test decisions.
+The default example is opportunity 01XZ9CRY, account Initech, product GTX Plus Pro. The saved model estimates win probability 53.43% and loss probability 46.57%, with loss risk MEDIUM. Its real outcome remains unknown. Scoring context: post_model_engagement_snapshot. The example is selected by date and ID, not a high score.
 
-![Reliability](../figures/reliability.png)
+The CLI reloads model_bundle.joblib, reconstructs histories from its saved archive, recalculates the probability and reasons, and runs the rule engine. Tests compare it with the exported score. Records whose engagement predates model availability are explicitly marked retrospective snapshots. Even later records remain historical demonstrations, not a live CRM deployment. Only load joblib bundles from trusted sources.
 
-### 6.2 Outcome-leakage control
+## 8 Limitations and next evidence
 
-A depth-one tree trained on close_value is intentionally invalid for pre-close prediction. Lost records have zero close value, making this post-outcome field an answer key in these files. leakage_audit.csv compares its test performance with the selected honest model on the same split. This control is never used for model selection or open-deal scoring. It explains why apparently excellent scores from outcome columns must be rejected.
+The data has been inspected in earlier project iterations, so this is an exploratory holdout. Closed-only sampling and end-of-snapshot censoring remain. Accounts and agents recur across periods, so the experiment is not a test of entirely new customers. Input tables are static. The training archive remains frozen and early training examples have thin or no history. Open records with missing accounts differ from the complete-account labeled sample.
 
-![Leakage control](../figures/leakage_audit.png)
+The measured discrimination is weak. Recommendations have logical rule tests but no user study or intervention-outcome evaluation. The rule thresholds and probability bands need prospective validation. We do not claim increased revenue, expected deal value, causal actions or production readiness. Future work should collect dated interaction, qualification and competitor information; evaluate rolling periods or an external cohort; reserve separate calibration data; and test whether users find the evidence-linked actions useful. Changes should be predeclared before consulting a new test.
 
-## 7. Explanations and decision-support outputs
+## 9 Reproducibility and conclusion
 
-We export native LR coefficients, RF impurity importance and TabNet attention importance with their distinct meanings. Held-out permutation importance measures the AUC change when one original feature is shuffled. Correlated inputs can share information, so low or negative permutation importance is possible and is not evidence that a feature can never matter.
+Run python scripts/setup_cpu.py with Python 3.12, then .venv-crm/bin/python -m src.run_project. The CPU pipeline writes both experiments, the selection lock, all metrics, audits, models, 1-row live demo example and batch assistant outputs. The notebook invokes the same code. A successful software run is distinct from a useful predictive model. Our verified execution environment is development CPU; actual group Colab execution, Google Slides import and course submission require team confirmation.
 
-For each open deal, the selected calibrated model reports reference sensitivity: delta_j = P(Won | observed inputs) minus P(Won | input j replaced by its training reference). References are training medians for numeric fields and training modes for categories. The three largest positive and negative changes are shown; all deltas are saved in JSON. These independent substitutions are not additive SHAP values and are not causal effects. Correlated fields can create unrealistic combinations when only one is replaced. The display explains model behavior, not what a sales representative should change.
+The extension strengthens the experimental audit and connects model output to transparent review actions. It does not justify a claim that historical features improve predictive accuracy on this dataset. Reporting this distinction is central to the project.
 
-Separately, TreeSHAP [6] explains the raw Random Forest on 64 dated test rows. The saved expected probability plus per-feature SHAP values reconstructs the raw RF prediction with maximum error 1.77e-12. This provides an additive diagnostic for that RF only; it is not relabeled as an explanation of the selected calibrated classifier.
+## Appendix Complete metrics and confusion counts
 
-![RF explanations](../figures/rf_shap.png)
 
-The output contains 1,589 rows with ID, context, P(Won), P(Lost), predicted outcome, priority, input warnings, model name and explanation method. A real exported example is opportunity AI76U58A, product GTX Basic: win probability 87.94%, loss probability 12.06%. Its outcome is unknown. This is a snapshot demonstration; the model may have been fitted using events later than an open record's original engagement date. It is not a claim that a probability was available on that historic date.
+### Raw features
 
-Priority labels use fixed illustrative cutoffs: Low below 0.40, Medium from 0.40 to below 0.70, High at least 0.70. These are separate from the learned class threshold. Test group diagnostics are:
+| model | precision | recall | macro_f1 | balanced_accuracy |
+| --- | --- | --- | --- | --- |
+| Dummy prior | 0.6003 | 1.0000 | 0.3751 | 0.5000 |
+| Logistic Regression | 0.6154 | 0.1665 | 0.4036 | 0.5051 |
+| Random Forest | 0.5982 | 0.9657 | 0.3933 | 0.4957 |
+| MLP | 0.5929 | 0.4529 | 0.4832 | 0.4930 |
+| TabNet | 0.5879 | 0.7405 | 0.4647 | 0.4806 |
+| CatBoost | 0.6036 | 0.9804 | 0.4047 | 0.5068 |
 
-| priority   |   count |   observed_win_rate |   mean_probability |
-|:-----------|--------:|--------------------:|-------------------:|
-| Low        |       5 |              0.2000 |             0.3893 |
-| Medium     |    1352 |              0.6021 |             0.5426 |
-| High       |       4 |              0.5000 |             0.7122 |
+### Raw features
 
-Small or empty groups provide little evidence, and observed rates need not increase across bands. We include validation sensitivity tables for alternative cutoffs, but do not claim a business benefit, expected revenue or intervention uplift. Better account coverage and prospectively collected sales activities are necessary before a real prioritization policy can be evaluated.
+| model | average_precision | log_loss | tn | fp | fn | tp |
+| --- | --- | --- | --- | --- | --- | --- |
+| Dummy prior | 0.6003 | 0.6775 | 0 | 544 | 0 | 817 |
+| Logistic Regression | 0.6138 | 0.7541 | 459 | 85 | 681 | 136 |
+| Random Forest | 0.6169 | 0.6990 | 14 | 530 | 28 | 789 |
+| MLP | 0.5879 | 0.9353 | 290 | 254 | 447 | 370 |
+| TabNet | 0.6181 | 0.6723 | 120 | 424 | 212 | 605 |
+| CatBoost | 0.6381 | 0.6793 | 18 | 526 | 16 | 801 |
 
-## 8. Limitations, completion and next work
+### History features
 
-- Previously inspected dataset: exploratory holdout, not an untouched external test.
-- Outcome-availability purge reduces but cannot remove right-censoring/closed-only selection bias.
-- Static account/product/team snapshots may not reflect historical values at engagement.
-- Repeated accounts/agents cross periods: not a new-customer generalization test.
-- Validation reused for early stopping, selection, threshold and calibration; estimates may be optimistic.
-- Open scoring is a frozen-model snapshot demo, not an as-of replay of each historical open deal.
-- Missing-account open deals are out of training support; no validated uplift or causal recommendation.
-- Probability calibration and priority thresholds need external/prospective validation.
+| model | precision | recall | macro_f1 | balanced_accuracy |
+| --- | --- | --- | --- | --- |
+| Dummy prior | 0.6003 | 1.0000 | 0.3751 | 0.5000 |
+| Logistic Regression | 0.6084 | 0.1236 | 0.3782 | 0.5021 |
+| Random Forest | 0.5913 | 0.5471 | 0.4887 | 0.4896 |
+| MLP | 0.6117 | 0.4627 | 0.4996 | 0.5107 |
+| TabNet | 0.5896 | 0.4835 | 0.4834 | 0.4890 |
+| CatBoost | 0.5962 | 0.6524 | 0.4925 | 0.4944 |
 
-The promised four classifiers, full metric set, EDA/cleaning, feature importance and optional SHAP have executable implementations and generated evidence. The repository includes a Colab entry notebook, readable instructions, editable paper and slide drafts, and an ESL presentation script for three speakers. The software work is complete for this experimental scope; completion does not mean that the predictive model is useful in production. Slides satisfy the documented slides-and/or-video deliverable; no video recording is claimed. No autonomous agent or production service was required in the CRM proposal.
+### History features
 
-The next external steps are for the group to run the notebook in its own Colab account, review slides after Google Slides import, verify member contributions, rehearse and submit according to the professor's schedule. The code is prepared on a feature branch for peer review through a pull request to the group repository. Submission and merge are separate team actions. Research extensions include multiple temporal windows, account-group evaluation, more informative pre-close activity features, separate calibration data and prospective measurement of a specified sales policy. Such work is future work, not a reported completed experiment.
-
-## Reproducibility
-
-Run `python scripts/setup_cpu.py`, then `.venv-crm/bin/python -m src.run_project`. The default output is reports/crm/final. Use `.venv-crm/bin/python -m pytest -q` for tests. The upload-first notebook invokes the same entry point. `--quick` runs small neural budgets and writes SMOKE_TEST_NOT_FINAL artifacts separately. Each run saves source/data hashes, split assignments, configurations, raw test probabilities and a serialized frozen scoring model. Only load the model bundle generated by this trusted project; joblib is not an untrusted-file format.
+| model | average_precision | log_loss | tn | fp | fn | tp |
+| --- | --- | --- | --- | --- | --- | --- |
+| Dummy prior | 0.6003 | 0.6775 | 0 | 544 | 0 | 817 |
+| Logistic Regression | 0.6095 | 0.8405 | 479 | 65 | 716 | 101 |
+| Random Forest | 0.5895 | 0.7005 | 235 | 309 | 370 | 447 |
+| MLP | 0.5993 | 0.8145 | 304 | 240 | 439 | 378 |
+| TabNet | 0.5803 | 0.6769 | 269 | 275 | 422 | 395 |
+| CatBoost | 0.5999 | 0.6818 | 183 | 361 | 284 | 533 |
 
 ## References
 
@@ -164,3 +193,5 @@ Run `python scripts/setup_cpu.py`, then `.venv-crm/bin/python -m src.run_project
 [6] SHAP documentation. TreeExplainer. https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html (accessed 2026-10-06).
 
 [7] DreamQuark. pytorch-tabnet implementation and documentation. https://github.com/dreamquark-ai/tabnet (version 4.1.0 used).
+
+[8] L. Prokhorenkova et al. CatBoost: unbiased boosting with categorical features. NeurIPS, 2018. https://arxiv.org/abs/1706.09516 ; implementation https://catboost.ai/docs/ (version 1.2.10 used).
