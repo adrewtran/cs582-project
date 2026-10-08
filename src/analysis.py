@@ -91,7 +91,7 @@ def learning_curves(histories,out):
 
 
 def native_importances(models,out):
-    for name in ['logistic_regression','random_forest','tabnet']:
+    for name in ['logistic_regression','random_forest','tabnet','catboost']:
         model=models[name]
         if name=='logistic_regression':
             values=model.clf.coef_[0]
@@ -99,6 +99,7 @@ def native_importances(models,out):
         else:
             values=model.clf.feature_importances_
             description='Impurity importance' if name=='random_forest' else 'TabNet attention importance'
+            if name=='catboost': description='CatBoost PredictionValuesChange (not causal)'
         table=pd.DataFrame({'feature':model.prep.get_feature_names_out(),'importance':values})
         table['absolute_importance']=table.importance.abs()
         table=table.sort_values('absolute_importance',ascending=False)

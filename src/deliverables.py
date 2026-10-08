@@ -23,7 +23,7 @@ REFERENCES=[
 
 
 def pretty(name):
-    return {'dummy_prior':'Dummy prior','logistic_regression':'Logistic Regression','random_forest':'Random Forest','mlp':'MLP','tabnet':'TabNet'}[name]
+    return {'dummy_prior':'Dummy prior','logistic_regression':'Logistic Regression','random_forest':'Random Forest','mlp':'MLP','tabnet':'TabNet','catboost':'CatBoost'}[name]
 
 
 def paper_text(m,quality,table,validation,calibration,priority,history,example,shap):
@@ -329,7 +329,7 @@ def build_deliverables(output_dir):
 
 **What is the difference between SHAP and your local explanation?** Our main output changes one input to a training reference and measures the score change. Those changes do not add up to the prediction. TreeSHAP is a separate additive explanation for the raw Random Forest.
 
-**What have you actually run?** We ran all five models on CPU in the development environment. The notebook uses the same code. The group still needs to confirm the run in its own Colab account.
+**What have you actually run?** We ran all six models on CPU in the development environment. The notebook uses the same code. The group still needs to confirm the run in its own Colab account.
 
 **Is this an intelligent agent?** This version is a supervised decision-support pipeline. The proposal did not require an autonomous agent, and we do not claim one.
 
@@ -341,7 +341,7 @@ def build_deliverables(output_dir):
         if line.strip(): scriptdoc.add_paragraph(line.replace('**','').lstrip('# '))
     scriptdoc.save(out/'SPEAKER_SCRIPT_ESL.docx')
     summary=f"# Results from the current run\n\nMode: **{m['mode']}**. Selected on validation: **{pretty(m['selected_model'])}**.\n\n"+t[['model','accuracy','f1','roc_auc','brier']].to_markdown(index=False,floatfmt='.4f')
-    summary+=f'\n\nAll five models ran. Open scores: {len(scored):,}; missing-account warnings: {missing:,}. Near-chance AUC does not support production prioritization. Calibration and priority bands are diagnostics, not proven business improvement. See the paper for limitations.\n'
+    summary+=f'\n\nAll six models ran. Open scores: {len(scored):,}; missing-account warnings: {missing:,}. Near-chance AUC does not support production prioritization. Calibration and priority bands are diagnostics, not proven business improvement. See the paper for limitations.\n'
     (out/'RESULTS_SUMMARY.md').write_text(summary,encoding='utf-8')
     (out/'TEAM_REVIEW.md').write_text('''# Final team review before submission
 

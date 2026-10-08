@@ -1,4 +1,4 @@
-"""Five CPU classifiers with a shared, training-fitted preprocessing contract."""
+"""Six CPU classifiers with training-fitted preprocessing and validation-only tuning."""
 from copy import deepcopy
 from dataclasses import dataclass
 from time import perf_counter
@@ -11,7 +11,7 @@ from sklearn.neural_network import MLPClassifier
 from threadpoolctl import threadpool_limits
 from src.features import make_preprocessor
 
-MODEL_NAMES=('dummy_prior','logistic_regression','random_forest','mlp','tabnet')
+MODEL_NAMES=('dummy_prior','logistic_regression','random_forest','mlp','tabnet','catboost')
 SEED=42
 
 
@@ -28,7 +28,8 @@ class FittedModel:
     def predict_proba(self,X):
         if len(X)==0:
             return np.empty((0,2))
-        transformed=np.asarray(self.prep.transform(X),dtype=np.float32)
+        transformed=self.prep.transform(X)
+        if self.name!='catboost': transformed=np.asarray(transformed,dtype=np.float32)
         with threadpool_limits(limits=2):
             p=np.asarray(self.clf.predict_proba(transformed),dtype=float)
         if p.shape!=(len(X),2) or not np.isfinite(p).all():
@@ -39,10 +40,41 @@ class FittedModel:
         return (self.predict_proba(X)[:,1]>=.5).astype(int)
 
 
+class NativePreprocessor:
+    """CatBoost strings + numerical medians fitted strictly on training rows."""
+    def __init__(self,categorical,numeric):
+        self.categorical=list(categorical); self.numeric=list(numeric)
+
+    def fit(self,X):
+        self.medians=X[self.numeric].median().fillna(0.)
+        return self
+
+    def transform(self,X):
+        result=X[self.categorical+self.numeric].copy()
+        for col in self.categorical: result[col]=result[col].fillna('Missing').astype(str)
+        result[self.numeric]=result[self.numeric].fillna(self.medians).astype(float)
+        return result
+
+    def get_feature_names_out(self):
+        return np.array(self.categorical+self.numeric)
+
+
 def fit_model(name,dataset,train_idx,val_idx,quick=False):
     if name not in MODEL_NAMES:
         raise ValueError(f'unknown model {name}')
     start=perf_counter()
+    if name=='catboost':
+        from catboost import CatBoostClassifier
+        X=dataset.features(); y=dataset.labels()
+        prep=NativePreprocessor(dataset.categorical,dataset.numeric).fit(X.loc[train_idx])
+        settings=dict(iterations=20 if quick else 500,depth=5,learning_rate=.05,l2_leaf_reg=5,
+                      random_seed=SEED,thread_count=2,loss_function='Logloss',eval_metric='AUC',
+                      allow_writing_files=False,verbose=False,task_type='CPU')
+        clf=CatBoostClassifier(**settings)
+        clf.fit(prep.transform(X.loc[train_idx]),y.loc[train_idx],cat_features=dataset.categorical,
+                eval_set=(prep.transform(X.loc[val_idx]),y.loc[val_idx]),early_stopping_rounds=40)
+        settings.update(early_stopping_rounds=40,best_iteration=int(clf.get_best_iteration()),quick=quick)
+        return FittedModel(name,prep,clf,clf.get_evals_result(),settings,len(train_idx),perf_counter()-start)
     prep=make_preprocessor(dataset,scale_numeric=name not in ('dummy_prior','random_forest'))
     X=dataset.features(); y=dataset.labels()
     xt=np.asarray(prep.fit_transform(X.loc[train_idx]),dtype=np.float32)
