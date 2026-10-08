@@ -1,0 +1,17 @@
+product,series,sales_price,synthetic,industry,recycled_pct,longevity_years,made_in_usa,unit_cost
+GTX Basic,GTX,550,False,retail,25,4,1,215.78
+GTX Pro,GTX,4821,False,marketing,35,7,1,2062.91
+MG Special,MG,55,False,employment,15,3,0,17.69
+MG Advanced,MG,3393,False,entertainment,30,6,0,1194.49
+GTX Plus Pro,GTX,5482,False,finance,40,8,1,2257.4
+GTX Plus Basic,GTX,1096,False,services,30,5,1,496.45
+GTK 500,GTK,26768,False,telecommunications,55,12,1,15475.59
+GTX Lite,GTX,250,True,retail,20,3,1,129.12
+GTX Ultra,GTX,9800,True,technolgy,50,10,1,4585.16
+MG Lite,MG,25,True,employment,10,2,0,7.75
+MG Elite,MG,7200,True,software,45,9,0,2852.97
+GTK 250,GTK,13400,True,telecommunications,45,10,1,7590.51
+GTK 1000,GTK,52000,True,medical,65,15,1,28468.79
+GTS Starter,GTS,1500,True,services,20,4,0,642.17
+GTS Standard,GTS,3200,True,marketing,35,6,0,1437.08
+GTS Enterprise,GTS,15000,True,finance,60,12,1,6029.64
