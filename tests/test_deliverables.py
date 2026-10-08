@@ -40,9 +40,9 @@ from tests.test_project_run import completed_run
 
 
 @pytest.mark.parametrize('count',[0,2])
-def test_documents_follow_actual_open_counts_including_empty(completed_run,tmp_path,count):
+def test_documents_follow_actual_open_counts_including_empty(comparison,tmp_path,count):
     from src.deliverables import build_deliverables
-    original,_=completed_run
+    original,_=comparison
     out=tmp_path/'altered_run'; shutil.copytree(original,out)
     scores=pd.read_csv(out/'open_deal_predictions.csv').iloc[:count]
     scores.to_csv(out/'open_deal_predictions.csv',index=False)
@@ -64,5 +64,9 @@ def test_documents_follow_actual_open_counts_including_empty(completed_run,tmp_p
     assert f'{count:,} Engaging records scored; 3 Prospecting excluded' in texts
     notebook=nbformat.read(Path(__file__).resolve().parents[1]/'notebooks/CRM_Sales_Opportunities.ipynb',as_version=4)
     verification=next(cell.source for cell in notebook.cells if cell.cell_type=='code' and cell.source.startswith('import csv'))
+    agents=(out/'sales_assistant_outputs.jsonl').read_text().splitlines()[:count]
+    (out/'sales_assistant_outputs.jsonl').write_text('\n'.join(agents))
     # Execute the real verification cell against a valid changed-size output.
     exec(verification,{'OUTPUT':out})
+
+from tests.test_experiments import comparison

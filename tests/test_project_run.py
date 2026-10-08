@@ -16,7 +16,7 @@ def test_runner_really_evaluates_all_models_and_scores_open_deals(completed_run)
     out,manifest=completed_run
     assert manifest['status']=='complete'
     table=pd.read_csv(out/'test_metrics.csv')
-    assert set(table.model)=={'dummy_prior','logistic_regression','random_forest','mlp','tabnet'}
+    assert set(table.model)=={'dummy_prior','logistic_regression','random_forest','mlp','tabnet','catboost'}
     assert np.isfinite(table[['accuracy','precision','recall','f1','roc_auc','brier']]).all().all()
     scores=pd.read_csv(out/'open_deal_predictions.csv')
     assert len(scores)==1589

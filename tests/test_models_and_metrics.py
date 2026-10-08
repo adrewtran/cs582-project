@@ -10,8 +10,8 @@ def module(name):
     return importlib.import_module(name)
 
 
-@pytest.mark.parametrize('name',['dummy_prior','logistic_regression','random_forest','mlp','tabnet'])
-def test_all_five_models_fit_real_data_and_return_complementary_probabilities(name):
+@pytest.mark.parametrize('name',['dummy_prior','logistic_regression','random_forest','mlp','tabnet','catboost'])
+def test_all_six_models_fit_real_data_and_return_complementary_probabilities(name):
     d=build(); s=asof_split(d)
     m=module('src.models').fit_model(name,d,s.train,s.validation,quick=True)
     p=m.predict_proba(d.features().loc[s.test[:12]])
