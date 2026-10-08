@@ -5,9 +5,9 @@ metrics as src.run_project, on data/crm_synthetic/. Two feature sets:
   base     -- the project's standard CRM features
   extended -- base + sector match, 5-year industry trend and competitor comparison features
 The oracle row scores the planted true win probability (upper bound for any model).
-Writes data/crm_synthetic/model_results.csv. Synthetic: never mix with reports/crm/final/.
+Writes model_results.csv into the data directory (default data/crm_synthetic/). Synthetic: never mix with reports/crm/final/.
 
-Run: .venv-crm/bin/python scripts/run_synthetic_models.py [--quick]
+Run: .venv-crm/bin/python scripts/run_synthetic_models.py [--quick] [--data-dir DIR]
 """
 import argparse
 import dataclasses
@@ -30,10 +30,10 @@ EXTRA_NUMERIC = ["sector_match", "trend_5y_avg_growth", "trend_5y_slope", "trend
                  "recycled_diff", "longevity_diff", "usa_diff"]
 
 
-def extended(dataset):
-    extra = (pd.read_csv(SYN / "ground_truth.csv")[["opportunity_id", "sector_match", "trend_5y_avg_growth",
+def extended(dataset, syn):
+    extra = (pd.read_csv(syn / "ground_truth.csv")[["opportunity_id", "sector_match", "trend_5y_avg_growth",
                                                    "trend_5y_slope", "trend_last_growth"]]
-             .merge(pd.read_csv(SYN / "deal_comparison.csv").drop(columns="competitor_product"), on="opportunity_id"))
+             .merge(pd.read_csv(syn / "deal_comparison.csv").drop(columns="competitor_product"), on="opportunity_id"))
     frame = dataset.frame.merge(extra, on="opportunity_id", how="left", validate="one_to_one")
     assert len(frame) == len(dataset.frame) and (frame["opportunity_id"] == dataset.frame["opportunity_id"]).all()
     return dataclasses.replace(dataset, frame=frame, numeric=dataset.numeric + EXTRA_NUMERIC)
@@ -42,12 +42,14 @@ def extended(dataset):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="smoke test: few epochs/trees")
-    quick = ap.parse_args().quick
-    base = build(SYN)
+    ap.add_argument("--data-dir", type=Path, default=SYN, help="output dir of make_synthetic_deals.py")
+    a = ap.parse_args()
+    quick, syn = a.quick, a.data_dir
+    base = build(syn)
     split = asof_split(base)
-    truth = pd.read_csv(SYN / "ground_truth.csv").set_index("opportunity_id")["win_prob"]
+    truth = pd.read_csv(syn / "ground_truth.csv").set_index("opportunity_id")["win_prob"]
     rows = []
-    for label, ds in (("base", base), ("extended", extended(base))):
+    for label, ds in (("base", base), ("extended", extended(base, syn))):
         X, y = ds.features(), ds.labels()
         xv, yv, xt, yt = X.loc[split.validation], y.loc[split.validation], X.loc[split.test], y.loc[split.test]
         for name in MODEL_NAMES:
@@ -63,7 +65,7 @@ def main():
         rows.append({"features": "oracle", "model": "true_win_prob", "split": part,
                      **metrics(base.labels().loc[idx], truth.loc[ids].to_numpy(), .5)})
     res = pd.DataFrame(rows)
-    res.to_csv(SYN / "model_results.csv", index=False)
+    res.to_csv(syn / "model_results.csv", index=False)
     print(f"train/val/test rows: {len(split.train)}/{len(split.validation)}/{len(split.test)}")
     cols = [c for c in ("accuracy", "precision", "recall", "f1", "roc_auc", "brier") if c in res]
     print(res[res["split"] == "test"][["features", "model", *cols]].round(3).to_string(index=False))
