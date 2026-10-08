@@ -4,7 +4,7 @@
 
 Project: **Predicting CRM Sales Opportunities Using Machine Learning**. Original: `docs/CS582_Group2_Original_CRM_Proposal.docx`; transcription: `CS582_Group2_Project_Proposal.md`. Read README and PLAN before editing. Leads/Bank/Telco experiments were removed on 2026-10-07 (recoverable from commit `c5bcfa6`); do not switch away from CRM to get higher scores.
 
-Required: LR, RF, MLP, TabNet; Dummy prior control. Accuracy, Precision, Recall, F1, ROC-AUC and confusion matrices. Importance and optional SHAP are implemented. Autonomous agents are not a proposal requirement.
+Required: LR, RF, MLP, TabNet; Dummy prior control and CatBoost comparator. Accuracy, Precision, Recall, F1, ROC-AUC and confusion matrices. Importance and optional SHAP are implemented. The authorized upgrade adds a deterministic evidence-based sales assistant; no autonomous action.
 
 ## Run
 
@@ -32,3 +32,5 @@ Main open explanations are selected-calibrated-model reference sensitivities, no
 - Load joblib bundles only from trusted sources.
 
 Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui.
+
+History protocol: frozen training archive; other deals must close strictly before engagement. Never incorporate held-out labels. Default runner compares six models × raw/history and locks validation selection before test. Current documents must read actual comparison outputs.
