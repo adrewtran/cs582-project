@@ -104,7 +104,7 @@ Reference sensitivity thay một input bằng train reference; không additive v
 - [Hướng dẫn demo](docs/PROFESSOR_DEMO_GUIDE.md)
 - [Báo cáo](reports/crm/final/deliverables/CRM_Final_Report.md), cùng folder có DOCX
 - [PowerPoint 12 slides](reports/crm/final/deliverables/CRM_Final_Presentation.pptx)
-- [ESL script 10 phút, 3 người](reports/crm/final/deliverables/SPEAKER_SCRIPT_ESL.md), cùng folder có DOCX
+- [ESL script 11 phút (10–12 phút), 3 người](reports/crm/final/deliverables/SPEAKER_SCRIPT_ESL.md), cùng folder có DOCX
 - [Tóm tắt kết quả](reports/crm/final/deliverables/RESULTS_SUMMARY.md)
 - [Verification record](docs/VERIFICATION.md)
 
