@@ -1,0 +1,9 @@
+{
+  "model": "random_forest_raw",
+  "sample": "first dated test rows",
+  "rows": 64,
+  "expected_probability": 0.6463428571428576,
+  "max_additivity_error": 3.141931159689193e-14,
+  "method": "TreeSHAP tree_path_dependent",
+  "warning": "Associations, not causal effects; not the calibrated scoring model"
+}
