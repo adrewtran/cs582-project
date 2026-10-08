@@ -1,0 +1,10 @@
+split,entity,rows,with_history,coverage,median_prior_count
+train,agent,2975,1951,0.6557983193277311,16.0
+train,account,2975,1896,0.6373109243697479,5.0
+train,product,2975,1970,0.6621848739495798,83.0
+validation,agent,583,583,1.0,111.0
+validation,account,583,583,1.0,37.0
+validation,product,583,583,1.0,505.0
+test,agent,1361,1361,1.0,103.0
+test,account,1361,1361,1.0,37.0
+test,product,1361,1361,1.0,505.0
