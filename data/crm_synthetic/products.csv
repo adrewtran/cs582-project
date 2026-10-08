@@ -1,0 +1,17 @@
+product,series,sales_price,synthetic
+GTX Basic,GTX,550,False
+GTX Pro,GTX,4821,False
+MG Special,MG,55,False
+MG Advanced,MG,3393,False
+GTX Plus Pro,GTX,5482,False
+GTX Plus Basic,GTX,1096,False
+GTK 500,GTK,26768,False
+GTX Lite,GTX,250,True
+GTX Ultra,GTX,9800,True
+MG Lite,MG,25,True
+MG Elite,MG,7200,True
+GTK 250,GTK,13400,True
+GTK 1000,GTK,52000,True
+GTS Starter,GTS,1500,True
+GTS Standard,GTS,3200,True
+GTS Enterprise,GTS,15000,True
