@@ -1,0 +1,61 @@
+"""Repeat the synthetic experiment over several data seeds to get error bars.
+
+For each interaction strength and seed: generate N deals into a temporary directory, fit all
+models (scripts/run_synthetic_models.py), and collect the test metrics. Each seed draws a new
+synthetic world (new product/agent effects, accounts, rivals and outcomes); model seed stays 42.
+Writes data/crm_synthetic/seed_results.csv (every run) and seed_summary.csv (mean, std, min, max).
+Generated deal files are not kept -- rerun the generator with the seed to recreate one.
+
+Run: .venv-crm/bin/python scripts/run_synthetic_seeds.py [--seeds 1 2 3 4 5] [--strengths 1 3]
+"""
+import argparse
+import subprocess
+import sys
+import tempfile
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "data" / "crm_synthetic"
+METRICS = ["roc_auc", "f1", "accuracy", "brier"]
+
+
+def one_run(seed, k, n, tmp):
+    d = Path(tmp) / f"k{k}_s{seed}"
+    subprocess.run([sys.executable, str(ROOT / "scripts/make_synthetic_deals.py"), "--n-deals", str(n),
+                    "--seed", str(seed), "--interaction-strength", str(k), "--out-dir", str(d)],
+                   check=True, capture_output=True)
+    subprocess.run([sys.executable, str(ROOT / "scripts/run_synthetic_models.py"), "--data-dir", str(d)],
+                   check=True, capture_output=True)
+    res = pd.read_csv(d / "model_results.csv")
+    print(f"done: strength={k} seed={seed}", flush=True)
+    return res[res["split"] == "test"].assign(seed=seed, interaction_strength=k)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3, 4, 5])
+    ap.add_argument("--strengths", type=float, nargs="+", default=[1.0, 3.0])
+    ap.add_argument("--n-deals", type=int, default=100000)
+    ap.add_argument("--workers", type=int, default=2, help="parallel runs (each model uses 2 threads)")
+    a = ap.parse_args()
+    with tempfile.TemporaryDirectory() as tmp, ThreadPoolExecutor(a.workers) as pool:
+        jobs = [pool.submit(one_run, s, k, a.n_deals, tmp) for k in a.strengths for s in a.seeds]
+        runs = pd.concat([j.result() for j in jobs], ignore_index=True)
+    runs.to_csv(OUT / "seed_results.csv", index=False)
+    summary = (runs.groupby(["interaction_strength", "features", "model"])[METRICS]
+               .agg(["mean", "std", "min", "max"]).round(4))
+    summary.columns = ["_".join(c) for c in summary.columns]
+    summary.to_csv(OUT / "seed_summary.csv")
+    # how often each model has the best test AUC, per setting
+    best = (runs[runs["features"] != "oracle"].loc[lambda r: r.groupby(
+        ["interaction_strength", "features", "seed"])["roc_auc"].idxmax()]
+        .groupby(["interaction_strength", "features", "model"]).size().rename("times_best"))
+    print(summary[["roc_auc_mean", "roc_auc_std", "f1_mean", "f1_std"]].to_string())
+    print(best.to_string())
+
+
+if __name__ == "__main__":
+    main()
