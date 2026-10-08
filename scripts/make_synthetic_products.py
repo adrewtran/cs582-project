@@ -1,7 +1,8 @@
 """Extend the real product catalog with synthetic products for TabNet stress tests.
 
 Reads data/crm/products.csv (read-only) and writes data/crm_synthetic/products.csv.
-Also writes competitor_products.csv (rival products with recycled %, longevity, made-in-USA).
+Also writes product_rd.csv (annual R&D expense per product), unit_cost in products.csv, and
+competitor_products.csv (rival products with recycled %, longevity, made-in-USA).
 Synthetic rows are flagged so they are never mixed into final results.
 """
 from pathlib import Path
@@ -70,6 +71,30 @@ def competitor_table(products: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+# Unit cost as a share of list price, by series (hardware-heavy GTK costs more to make).
+COST_RATIO = {"GTX": 0.45, "MG": 0.35, "GTK": 0.55, "GTS": 0.40}
+RD_YEARS = (2016, 2017)
+
+
+def add_unit_cost(products: pd.DataFrame) -> pd.Series:
+    rng = np.random.default_rng(SEED + 1)  # separate stream: competitor table stays unchanged
+    ratio = products["series"].map(COST_RATIO) * rng.uniform(0.85, 1.15, len(products))
+    return (products["sales_price"] * ratio).round(2)
+
+
+def rd_table(products: pd.DataFrame) -> pd.DataFrame:
+    """Annual R&D spend per product. Scales with price tier; newer (synthetic) products spend more."""
+    rng = np.random.default_rng(SEED + 2)
+    rows = []
+    for _, p in products.iterrows():
+        base = 40_000 + 60 * p["sales_price"] * rng.lognormal(0, 0.35)
+        if p["synthetic"]:
+            base *= 1.8
+        for k, year in enumerate(RD_YEARS):
+            rows.append((p["product"], year, round(base * (1 + rng.normal(0.08, 0.1)) ** k, -2)))
+    return pd.DataFrame(rows, columns=["product", "year", "rd_expense"])
+
+
 def main() -> None:
     real = pd.read_csv(SRC).assign(synthetic=False)
     new = pd.DataFrame(NEW_PRODUCTS, columns=["product", "series", "sales_price"]).assign(synthetic=True)
@@ -79,8 +104,10 @@ def main() -> None:
     assert out["industry"].notna().all(), "product missing an industry"
     out[["recycled_pct", "longevity_years", "made_in_usa"]] = pd.DataFrame(
         out["product"].map(FACTORS).tolist(), index=out.index)
+    out["unit_cost"] = add_unit_cost(out)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(OUT, index=False)
+    rd_table(out).to_csv(OUT.parent / "product_rd.csv", index=False)
     competitors = competitor_table(out)
     competitors.to_csv(OUT.parent / "competitor_products.csv", index=False)
     print(out.to_string(index=False))
