@@ -25,13 +25,23 @@ python3.12 --version                # should print Python 3.12.x
 ```
 `main` is the default branch. Until PR #7 is merged, `main` does not yet contain the 3-month revenue script and these docs.
 
-**1c. Install the dependencies:**
+**1c. Create the virtual environment:**
 ```bash
-python3.12 scripts/setup_cpu.py     # creates .venv-crm and installs the CPU packages
+python3.12 -m venv .venv-crm
 ```
-The first install can take several minutes. On Windows the interpreter is `.venv-crm\Scripts\python.exe` instead of `.venv-crm/bin/python`.
+This is optional: `scripts/setup_cpu.py` creates `.venv-crm` itself if it is missing, and reuses it if it exists. The name must stay `.venv-crm`, because every later command calls `.venv-crm/bin/python`. Do not use another name or the system Python.
 
-**1d. Check that the install worked:**
+To activate it in your shell (optional, since the commands in this guide call the venv's Python directly):
+- **Linux/macOS:** `source .venv-crm/bin/activate`
+- **Windows (PowerShell):** `.venv-crm\Scripts\Activate.ps1`
+
+**1d. Install the dependencies into the venv:**
+```bash
+python3.12 scripts/setup_cpu.py     # installs CPU torch first, then requirements.txt, then runs pip check
+```
+The first install can take several minutes. On Windows the interpreter is `.venv-crm\Scripts\python.exe` instead of `.venv-crm/bin/python`. To start over, delete the `.venv-crm` folder and run this step again.
+
+**1e. Check that the install worked:**
 ```bash
 .venv-crm/bin/python -c "import sklearn, torch, pytorch_tabnet; print('ok')"
 ```
