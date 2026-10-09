@@ -41,16 +41,26 @@ This writes to `reports/crm/smoke/` and is labelled SMOKE_TEST_NOT_FINAL. Its nu
 ## Step 6: Show scoring of open deals
 Open `open_deal_predictions.csv`. It has 1,589 Engaging rows with `win_probability` and `loss_probability` summing to 1. Rows with a missing account are flagged. Priority is only a heuristic, and open deals are never labelled Lost.
 
-## Step 7: Show the deliverables
+## Step 7: Estimate 3-month expected revenue (illustrative)
+```bash
+python scripts/expected_revenue_3m.py
+```
+It multiplies each open deal's `win_probability` by the product's list `sales_price`, then simulates wins and losses 10,000 times. The output goes to `reports/crm/final/expected_revenue_3m.json`, labelled `ILLUSTRATIVE_NOT_A_VALIDATED_FORECAST`.
+- **Result:** about 2.50M expected from 1,589 open deals (3.89M if all were won). The simulated range is about 2.38M–2.63M.
+- **Account present only:** 501 deals, about 0.83M expected.
+- **Why 3 months and not 2 years:** deals close within 138 days (median 45), so the current pipeline covers a short horizon. The data spans only about 10 months and is simulated, so a 2-year forecast is not supported.
+- **Say it carefully:** the model is weak (ROC-AUC about 0.5), the range ignores model error, prices are list prices rather than `close_value`, and new deals are not included.
+
+## Step 8: Show the deliverables
 `reports/crm/final/deliverables/` holds a PPTX, a DOCX, a Markdown paper and an ESL speaking script.
 
-## Step 8: Run the tests (optional, slow)
+## Step 9: Run the tests (optional, slow)
 ```bash
 .venv-crm/bin/python -m pytest -q
 ```
 It includes real CPU fits of all five models and a full smoke run. Passing tests do not mean the model is good enough for business use.
 
-## Step 9: Close with the limitations
+## Step 10: Close with the limitations
 - The data covers closed deals only, so there is selection bias.
 - The validation set was reused.
 - The account, team and product tables are static snapshots.
