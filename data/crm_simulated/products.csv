@@ -1,4 +1,4 @@
-product,series,sales_price,synthetic,industry,recycled_pct,longevity_years,made_in_usa,unit_cost
+product,series,sales_price,simulated,industry,recycled_pct,longevity_years,made_in_usa,unit_cost
 GTX Basic,GTX,550,False,retail,25,4,1,215.78
 GTX Pro,GTX,4821,False,marketing,35,7,1,2062.91
 MG Special,MG,55,False,employment,15,3,0,17.69

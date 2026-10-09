@@ -1,13 +1,13 @@
-"""Fit the project's models (Dummy control, LR, RF, MLP, TabNet) on the synthetic CRM data.
+"""Fit the project's models (Dummy control, LR, RF, MLP, TabNet) on the simulated CRM data.
 
 Uses the same loader, as-of split, preprocessing, model settings, validation threshold and
-metrics as src.run_project, on data/crm_synthetic/. Two feature sets:
+metrics as src.run_project, on data/crm_simulated/. Two feature sets:
   base     -- the project's standard CRM features
   extended -- base + sector match, 5-year industry trend and competitor comparison features
 The oracle row scores the planted true win probability (upper bound for any model).
-Writes model_results.csv into the data directory (default data/crm_synthetic/). Synthetic: never mix with reports/crm/final/.
+Writes model_results.csv into the data directory (default data/crm_simulated/). Simulated: never mix with reports/crm/final/.
 
-Run: .venv-crm/bin/python scripts/run_synthetic_models.py [--quick] [--data-dir DIR]
+Run: .venv-crm/bin/python scripts/run_simulated_models.py [--quick] [--data-dir DIR]
 """
 import argparse
 import dataclasses
@@ -23,7 +23,7 @@ from src.evaluation import choose_threshold, metrics  # noqa: E402
 from src.models import MODEL_NAMES, fit_model  # noqa: E402
 from src.temporal import asof_split  # noqa: E402
 
-SYN = ROOT / "data" / "crm_synthetic"
+SIM = ROOT / "data" / "crm_simulated"
 # Known when the deal is engaged: product attributes, account-sector match, prior-year trends, rival.
 EXTRA_NUMERIC = ["sector_match", "trend_5y_avg_growth", "trend_5y_slope", "trend_last_growth",
                  "recycled_pct", "longevity_years", "made_in_usa", "competitor_price",
@@ -47,7 +47,7 @@ def extended(dataset, syn):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="smoke test: few epochs/trees")
-    ap.add_argument("--data-dir", type=Path, default=SYN, help="output dir of make_synthetic_deals.py")
+    ap.add_argument("--data-dir", type=Path, default=SIM, help="output dir of make_simulated_deals.py")
     a = ap.parse_args()
     quick, syn = a.quick, a.data_dir
     base = build(syn)

@@ -1,6 +1,6 @@
-# Synthetic CRM data: how it is generated
+# Simulated CRM data: how it is generated
 
-Synthetic deals are used only to test whether the models (LR, RF, MLP, TabNet) can recover
+Simulated deals are used only to test whether the models (LR, RF, MLP, TabNet) can recover
 structure that was deliberately planted. They are **not** evidence about real sales behaviour,
 and results on them must never be mixed into `reports/crm/final/`.
 
@@ -14,7 +14,7 @@ used, so the true probability is known for every row (the "oracle" in the result
 - The 85 accounts (sector, revenue, employees) and 30 sales agents (manager, regional office).
 - The 7 real products with series and list price.
 - How often each real product is sold in the real pipeline (product sampling weights).
-- Calibration targets so the synthetic data looks like the real data: engage dates
+- Calibration targets so the simulated data looks like the real data: engage dates
   2016-10-20 to 2017-12-27, snapshot 2017-12-31, closed-deal win rate about 0.63, sales cycle
   1–138 days, about 5.7% Prospecting rows, and about 68% of open deals missing the account
   (closed deals always have one).
@@ -37,11 +37,11 @@ used, so the true probability is known for every row (the "oracle" in the result
 
 | Step | Script | Output |
 |---|---|---|
-| Products, competitors, cost, R&D | `scripts/make_synthetic_products.py` | `products.csv`, `competitor_products.csv`, `product_rd.csv` |
+| Products, competitors, cost, R&D | `scripts/make_simulated_products.py` | `products.csv`, `competitor_products.csv`, `product_rd.csv` |
 | Industry trends | `scripts/make_industry_trends.py` | `industry_trends.csv` |
-| Deals | `scripts/make_synthetic_deals.py` | `sales_pipeline.csv`, `ground_truth.csv`, `deal_comparison.csv` |
+| Deals | `scripts/make_simulated_deals.py` | `sales_pipeline.csv`, `ground_truth.csv`, `deal_comparison.csv` |
 
-For each deal, `make_synthetic_deals.py`:
+For each deal, `make_simulated_deals.py`:
 
 1. Draws an account using Dirichlet weights, so some accounts buy far more than others.
 2. Draws a sales agent uniformly.
@@ -78,8 +78,8 @@ env(trend, k) = clip(1 + k * trend_5y_avg_growth / 10, 0.3 / k, 2.5 * k)
   comparison with the rival matters more.
 - The intercept is found by bisection so that the overall win rate is 0.63.
 - `k` (`--interaction-strength`) scales the interactions:
-  - k = 1 is the default and reproduces the committed data exactly.
-  - k = 3 gives the "strong interaction" setting.
+  - k = 3 is the default "strong interaction" setting and reproduces `data/crm_simulated/`.
+  - k = 1 gives the weaker original setting.
 
 ### Smooth-signal scenario (`--smooth-strength s`, default 0)
 
@@ -103,7 +103,7 @@ The effect is a smooth function of an oblique combination of the signals, plus a
 product term. Trees can only approximate it with many axis-aligned steps; neural nets fit it
 directly. With s = 0 the signals are pure noise and all other files are unchanged.
 
-## 4. Output files (`data/crm_synthetic*/`)
+## 4. Output files (`data/crm_simulated/`)
 
 | File | Use |
 |---|---|
@@ -114,24 +114,22 @@ directly. With s = 0 the signals are pure noise and all other files are unchange
 | `industry_trends.csv`, `competitor_products.csv`, `product_rd.csv` | Lookup tables |
 | `model_results.csv`, `seed_results*.csv`, `seed_summary*.csv` | Model results (`_smooth` = smooth-signal scenario) |
 
-Datasets in the repository:
-
-| Folder | Deals | Interaction strength k |
-|---|---|---|
-| `data/crm_synthetic/` | 20,000 | 1 |
-| `data/crm_synthetic_100k/` | 100,000 | 1 |
-| `data/crm_synthetic_100k_strong/` | 100,000 | 3 |
+The repository keeps one simulated dataset, `data/crm_simulated/`: 100,000 deals, interaction
+strength k = 3, seed 582. Its `deal_comparison.csv`, `ground_truth.csv` and `model_results.csv` were
+generated before `deal_signals.csv` existed, so the stored extended results do not use the signals.
+The earlier 20,000-deal and 100,000-deal k = 1 sets were removed. To recreate one without
+overwriting the default, pass `--interaction-strength 1 --out-dir <other dir>` (plus
+`--n-deals 20000` for the small set).
 
 ## 5. Reproduce
 
 ```bash
-python scripts/make_synthetic_products.py
+python scripts/make_simulated_products.py
 python scripts/make_industry_trends.py
-python scripts/make_synthetic_deals.py --n-deals 100000 --interaction-strength 3 \
-    --seed 582 --out-dir data/crm_synthetic_100k_strong
-.venv-crm/bin/python scripts/run_synthetic_models.py --data-dir data/crm_synthetic_100k_strong
-.venv-crm/bin/python scripts/run_synthetic_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
-.venv-crm/bin/python scripts/run_synthetic_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min
+python scripts/make_simulated_deals.py                     # defaults: 100,000 deals, k = 3, seed 582
+.venv-crm/bin/python scripts/run_simulated_models.py
+.venv-crm/bin/python scripts/run_simulated_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
+.venv-crm/bin/python scripts/run_simulated_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min
 python scripts/product_investment_report.py                # heuristic product ranking
 ```
 
@@ -146,7 +144,7 @@ The same seed always gives identical data.
   from how the data was designed.
 - The smooth-signal scenario was chosen *because* it favours neural nets. Its result (TabNet
   beats RF) must be reported together with that design choice, never as a general finding.
-- Each seed draws a new synthetic world, while the model seed stays fixed at 42. Variation from
+- Each seed draws a new simulated world, while the model seed stays fixed at 42. Variation from
   TabNet and MLP initialisation is not measured.
 - A data-driven generator such as CTGAN would rely on fewer hand-made assumptions. However, it
   has no ground truth, cannot create the new columns (competitors, trends, R&D), ignores date

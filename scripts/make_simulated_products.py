@@ -1,9 +1,9 @@
-"""Extend the real product catalog with synthetic products for TabNet stress tests.
+"""Extend the real product catalog with simulated products for TabNet stress tests.
 
-Reads data/crm/products.csv (read-only) and writes data/crm_synthetic/products.csv.
+Reads data/crm/products.csv (read-only) and writes data/crm_simulated/products.csv.
 Also writes product_rd.csv (annual R&D expense per product), unit_cost in products.csv, and
 competitor_products.csv (rival products with recycled %, longevity, made-in-USA).
-Synthetic rows are flagged so they are never mixed into final results.
+Simulated rows are flagged so they are never mixed into final results.
 """
 from pathlib import Path
 
@@ -12,7 +12,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "data" / "crm" / "products.csv"
-OUT = ROOT / "data" / "crm_synthetic" / "products.csv"
+OUT = ROOT / "data" / "crm_simulated" / "products.csv"
 
 # Target industry per product, using the account `sector` labels (raw spelling, e.g. "technolgy").
 # Every one of the 10 sectors gets at least one product so product x sector effects can be planted.
@@ -83,12 +83,12 @@ def add_unit_cost(products: pd.DataFrame) -> pd.Series:
 
 
 def rd_table(products: pd.DataFrame) -> pd.DataFrame:
-    """Annual R&D spend per product. Scales with price tier; newer (synthetic) products spend more."""
+    """Annual R&D spend per product. Scales with price tier; newer (simulated) products spend more."""
     rng = np.random.default_rng(SEED + 2)
     rows = []
     for _, p in products.iterrows():
         base = 40_000 + 60 * p["sales_price"] * rng.lognormal(0, 0.35)
-        if p["synthetic"]:
+        if p["simulated"]:
             base *= 1.8
         for k, year in enumerate(RD_YEARS):
             rows.append((p["product"], year, round(base * (1 + rng.normal(0.08, 0.1)) ** k, -2)))
@@ -96,8 +96,8 @@ def rd_table(products: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
-    real = pd.read_csv(SRC).assign(synthetic=False)
-    new = pd.DataFrame(NEW_PRODUCTS, columns=["product", "series", "sales_price"]).assign(synthetic=True)
+    real = pd.read_csv(SRC).assign(simulated=False)
+    new = pd.DataFrame(NEW_PRODUCTS, columns=["product", "series", "sales_price"]).assign(simulated=True)
     out = pd.concat([real, new], ignore_index=True)
     assert out["product"].is_unique, "duplicate product names"
     out["industry"] = out["product"].map(INDUSTRY)

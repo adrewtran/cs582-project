@@ -1,8 +1,8 @@
-"""Rank products for future investment from the synthetic CRM data.
+"""Rank products for future investment from the simulated CRM data.
 
-Reads data/crm_synthetic/ (sales_pipeline, products, product_rd, industry_trends) and writes
+Reads data/crm_simulated/ (sales_pipeline, products, product_rd, industry_trends) and writes
 product_investment.csv there. Uses only observed outcomes, never ground_truth.csv.
-Synthetic data and a heuristic score: an illustration of the analysis, not a business finding.
+Simulated data and a heuristic score: an illustration of the analysis, not a business finding.
 
 Columns: won deals and revenue, gross profit (revenue - unit_cost per won deal), total R&D,
 R&D ROI ((gross profit - R&D) / R&D), win rate, margin, open pipeline expected value
@@ -18,15 +18,15 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from make_industry_trends import trailing_features  # noqa: E402
 
-SYN = Path(__file__).resolve().parents[1] / "data" / "crm_synthetic"
+SIM = Path(__file__).resolve().parents[1] / "data" / "crm_simulated"
 SCORE_PARTS = ["rd_roi", "win_rate", "gross_margin", "pipeline_to_rd", "industry_growth"]
 
 
 def main() -> None:
-    pipe = pd.read_csv(SYN / "sales_pipeline.csv")
-    products = pd.read_csv(SYN / "products.csv").set_index("product")
-    rd = pd.read_csv(SYN / "product_rd.csv").groupby("product")["rd_expense"].sum()
-    trends = trailing_features(pd.read_csv(SYN / "industry_trends.csv"), 2017).set_index("industry")
+    pipe = pd.read_csv(SIM / "sales_pipeline.csv")
+    products = pd.read_csv(SIM / "products.csv").set_index("product")
+    rd = pd.read_csv(SIM / "product_rd.csv").groupby("product")["rd_expense"].sum()
+    trends = trailing_features(pd.read_csv(SIM / "industry_trends.csv"), 2017).set_index("industry")
 
     g = pipe.groupby("product")
     won = pipe[pipe["deal_stage"] == "Won"].groupby("product")
@@ -47,7 +47,7 @@ def main() -> None:
     r["industry_growth"] = r["industry"].map(trends["trend_last_growth"])
     r["invest_score"] = r[SCORE_PARTS].rank(pct=True).mean(axis=1)
     r = r.sort_values("invest_score", ascending=False).round(3)
-    r.to_csv(SYN / "product_investment.csv", index_label="product")
+    r.to_csv(SIM / "product_investment.csv", index_label="product")
     show = ["won_deals", "revenue", "gross_margin", "rd_expense", "rd_roi", "win_rate",
             "pipeline_ev", "industry", "industry_growth", "invest_score"]
     print(r[show].to_string())

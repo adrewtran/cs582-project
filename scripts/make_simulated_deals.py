@@ -1,4 +1,4 @@
-"""Generate synthetic CRM deals with a planted, known win-probability formula.
+"""Generate simulated CRM deals with a planted, known win-probability formula.
 
 Output is a drop-in directory for ``src.datasets.crm.build(data_dir=...)``:
 sales_pipeline.csv (raw schema), plus accounts/products/sales_teams copies.
@@ -12,7 +12,7 @@ product-industry/account-sector match, 5-year industry trend (no look-ahead), an
 interactions the linear model cannot express: match x rising trend, affordability
 (high price x small account), and GTS series x West region.
 Real products/accounts/agents are reused; raw data/crm is only read.
-Synthetic data tests recovery of planted structure, not real-world accuracy -- keep it out of
+Simulated data tests recovery of planted structure, not real-world accuracy -- keep it out of
 reports/crm/final/.
 """
 import argparse
@@ -28,7 +28,7 @@ from make_industry_trends import build as build_trends, trailing_features  # noq
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "crm"
-SYN = ROOT / "data" / "crm_synthetic"
+SIM = ROOT / "data" / "crm_simulated"
 COMPETITORS_PER_PRODUCT = 2
 TARGET_WIN_RATE = 0.63
 START, LAST_ENGAGE, SNAPSHOT = pd.Timestamp("2016-10-20"), pd.Timestamp("2017-12-27"), pd.Timestamp("2017-12-31")
@@ -88,11 +88,11 @@ def smooth_logit(sig, s):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--n-deals", type=int, default=20000)
+    ap.add_argument("--n-deals", type=int, default=100000)
     ap.add_argument("--seed", type=int, default=582)
-    ap.add_argument("--out-dir", type=Path, default=SYN)
-    ap.add_argument("--interaction-strength", type=float, default=1.0,
-                    help="multiplier on planted interactions (1 = original data)")
+    ap.add_argument("--out-dir", type=Path, default=SIM)
+    ap.add_argument("--interaction-strength", type=float, default=3.0,
+                    help="multiplier on planted interactions (3 = default strong setting; 1 = weak)")
     ap.add_argument("--smooth-strength", type=float, default=0.0,
                     help="weight of the smooth continuous-signal effect (0 = signals are pure noise)")
     a = ap.parse_args()
@@ -100,7 +100,7 @@ def main():
     out = a.out_dir
     out.mkdir(parents=True, exist_ok=True)
 
-    products = pd.read_csv(SYN / "products.csv")  # run make_synthetic_products.py first
+    products = pd.read_csv(SIM / "products.csv")  # run make_simulated_products.py first
     accounts = pd.read_csv(RAW / "accounts.csv")
     teams = pd.read_csv(RAW / "sales_teams.csv")
     real = pd.read_csv(RAW / "sales_pipeline.csv")
@@ -126,7 +126,7 @@ def main():
     d["product"] = products["product"].to_numpy()[(rng.random(n)[:, None] > cum).sum(1).clip(max=len(products) - 1)]
     d = (d.merge(products[["product", "series", "sales_price", "industry"]], on="product", how="left")
           .merge(teams[["sales_agent", "regional_office"]], on="sales_agent", how="left"))
-    comp = pd.read_csv(SYN / "competitor_products.csv")  # run make_synthetic_products.py first
+    comp = pd.read_csv(SIM / "competitor_products.csv")  # run make_simulated_products.py first
     rival = comp.groupby("competes_with").sample(frac=1, random_state=a.seed).groupby("competes_with").head(
         COMPETITORS_PER_PRODUCT)
     rivals = {k: g.reset_index(drop=True) for k, g in rival.groupby("competes_with")}
@@ -181,8 +181,8 @@ def main():
     pipe.to_csv(out / "sales_pipeline.csv", index=False)
     for name in ("accounts", "sales_teams"):
         shutil.copy(RAW / f"{name}.csv", out / f"{name}.csv")
-    if out != SYN:
-        shutil.copy(SYN / "products.csv", out / "products.csv")
+    if out != SIM:
+        shutil.copy(SIM / "products.csv", out / "products.csv")
     d[["opportunity_id", "competitor_product", "competitor_price", "recycled_diff", "longevity_diff",
        "usa_diff"]].to_csv(out / "deal_comparison.csv", index=False)
     sig.assign(opportunity_id=d["opportunity_id"])[["opportunity_id", *SIGNALS]].to_csv(

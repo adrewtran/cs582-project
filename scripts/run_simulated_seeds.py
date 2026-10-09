@@ -1,12 +1,12 @@
-"""Repeat the synthetic experiment over several data seeds to get error bars.
+"""Repeat the simulated experiment over several data seeds to get error bars.
 
 For each interaction strength and seed: generate N deals into a temporary directory, fit all
-models (scripts/run_synthetic_models.py), and collect the test metrics. Each seed draws a new
-synthetic world (new product/agent effects, accounts, rivals and outcomes); model seed stays 42.
-Writes data/crm_synthetic/seed_results.csv (every run) and seed_summary.csv (mean, std, min, max).
+models (scripts/run_simulated_models.py), and collect the test metrics. Each seed draws a new
+simulated world (new product/agent effects, accounts, rivals and outcomes); model seed stays 42.
+Writes data/crm_simulated/seed_results.csv (every run) and seed_summary.csv (mean, std, min, max).
 Generated deal files are not kept -- rerun the generator with the seed to recreate one.
 
-Run: .venv-crm/bin/python scripts/run_synthetic_seeds.py [--seeds 1 2 3 4 5] [--strengths 1 3]
+Run: .venv-crm/bin/python scripts/run_simulated_seeds.py [--seeds 1 2 3 4 5] [--strengths 1 3]
 """
 import argparse
 import subprocess
@@ -18,17 +18,17 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "data" / "crm_synthetic"
+OUT = ROOT / "data" / "crm_simulated"
 METRICS = ["roc_auc", "f1", "accuracy", "brier"]
 
 
 def one_run(seed, k, n, tmp, smooth=0.0):
     d = Path(tmp) / f"k{k}_m{smooth}_s{seed}"
-    subprocess.run([sys.executable, str(ROOT / "scripts/make_synthetic_deals.py"), "--n-deals", str(n),
+    subprocess.run([sys.executable, str(ROOT / "scripts/make_simulated_deals.py"), "--n-deals", str(n),
                     "--seed", str(seed), "--interaction-strength", str(k), "--smooth-strength", str(smooth),
                     "--out-dir", str(d)],
                    check=True, capture_output=True)
-    subprocess.run([sys.executable, str(ROOT / "scripts/run_synthetic_models.py"), "--data-dir", str(d)],
+    subprocess.run([sys.executable, str(ROOT / "scripts/run_simulated_models.py"), "--data-dir", str(d)],
                    check=True, capture_output=True)
     res = pd.read_csv(d / "model_results.csv")
     print(f"done: strength={k} smooth={smooth} seed={seed}", flush=True)

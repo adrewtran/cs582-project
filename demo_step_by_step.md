@@ -1,6 +1,6 @@
 # CRM Sales Opportunities: Step-by-Step Demo
 
-Total time is about 10–15 minutes. Results from a full run are already in `reports/crm/final/`, so the demo can use them and skip the long training run. For the talking script, see `docs/demo_script.md`.
+Total time is about 10–15 minutes. Results from a full run are already in `reports/crm/final`, so the demo can use them and skip the long training run. For the talking script, see `docs/demo_script.md`.
 
 ## Step 0: Set the story
 - **Goal:** predict whether a CRM sales opportunity will be Won or Lost, and explain which factors drive the score.
@@ -57,14 +57,14 @@ If `setup_cpu.py` stops with a version error, you are not using Python 3.12.
 ```bash
 .venv-crm/bin/python -m src.run_project --quick
 ```
-This writes to `reports/crm/smoke/` and is labelled SMOKE_TEST_NOT_FINAL. Its numbers are not reportable. It only shows that the pipeline runs end to end.
+This writes to `reports/crm/smoke` and is labelled SMOKE_TEST_NOT_FINAL. Its numbers are not reportable. It only shows that the pipeline runs end to end.
 
 ## Step 3: Show the full pipeline (pick one)
 - **Live:** `.venv-crm/bin/python -m src.run_project`. This takes several minutes because it trains Dummy, LR, RF, MLP and TabNet on CPU.
-- **Faster:** skip the run and open the existing `reports/crm/final/`.
+- **Faster:** skip the run and open the existing `reports/crm/final`.
 - **Colab:** upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, upload the source ZIP and choose Run all. The team's own Colab session has not been verified, so test it once beforehand.
 
-## Step 4: Walk through the results in `reports/crm/final/`
+## Step 4: Walk through the results in `reports/crm/final`
 1. `run_manifest.json`: shows `status: complete` and `mode: full`.
 2. `data_quality.json` and `leakage_audit.csv`: `close_value`, `close_date`, `deal_stage` and `opportunity_id` are excluded from the predictors.
 3. `split_manifest.csv`: the time-based split gives train 2,975, validation 583, test 1,361, with 1,792 rows purged because their outcomes weren't known at the cutoff.
@@ -91,7 +91,7 @@ It multiplies each open deal's `win_probability` by the product's list `sales_pr
 - **Say it carefully:** the model is weak (ROC-AUC about 0.5), the range ignores model error, prices are list prices rather than `close_value`, and new deals are not included.
 
 ## Step 8: Show the deliverables
-`reports/crm/final/deliverables/` holds a PPTX, a DOCX, a Markdown paper and an ESL speaking script.
+`reports/crm/final/deliverables` holds a PPTX, a DOCX, a Markdown paper and an ESL speaking script.
 
 ## Step 9: Run the tests (optional, slow)
 ```bash
@@ -108,6 +108,6 @@ It includes real CPU fits of all five models and a full smoke run. Passing tests
 - Results don't yet prove the model helps sales prioritisation.
 
 ## Tips
-- Have `reports/crm/final/` pre-opened in case the live run is slow.
+- Have `reports/crm/final` pre-opened in case the live run is slow.
 - TabNet results can vary slightly across platforms, so don't promise exact decimals.
 - Don't claim Colab or Google Slides were tested unless you've run them.

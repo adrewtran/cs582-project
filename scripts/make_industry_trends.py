@@ -1,6 +1,6 @@
-"""Synthetic 5-year industry trend table for TabNet stress tests.
+"""Simulated 5-year industry trend table for TabNet stress tests.
 
-Writes data/crm_synthetic/industry_trends.csv: one row per (industry, year) for 2011-2016
+Writes data/crm_simulated/industry_trends.csv: one row per (industry, year) for 2011-2016
 with annual growth_pct and demand_index (2011 = 100). Industries are the account `sector`
 labels. Deals run 2016-10..2017-12, so a deal in year Y may only use years Y-5..Y-1
 (`trailing_features`), which keeps the feature known before the deal is engaged.
@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "data" / "crm_synthetic" / "industry_trends.csv"
+OUT = ROOT / "data" / "crm_simulated" / "industry_trends.csv"
 YEARS = list(range(2011, 2017))
 SEED = 582
 
