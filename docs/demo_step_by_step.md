@@ -8,44 +8,48 @@ Total time is about 10–15 minutes. Results from a full run are already in `rep
 - **Output:** a Won/Lost probability and the factors that influence it.
 - **Honest framing:** the models are weak (test ROC-AUC about 0.50–0.52). Present this as a rigorous, leakage-free study, not a production model.
 
-## Step 1: Install (once, before the demo)
-No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. Windows and macOS have not been tested.
+## Step 1: Install (once, before the demo) — macOS
+No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. macOS has **not** been tested by the team, so run this whole step once before the demo day and fix any problem early. Windows and Linux notes are at the end of this step.
 
-**1a. Install Python 3.12** (skip if `python3.12 --version` already works):
-- **Ubuntu/Debian:** `sudo apt install python3.12 python3.12-venv` (on older releases you may need the deadsnakes PPA).
-- **macOS (Homebrew):** `brew install python@3.12`
-- **Windows:** download Python 3.12 from <https://www.python.org/downloads/> and tick "Add python.exe to PATH".
+**1a. Install the tools** (Terminal):
+```bash
+xcode-select --install              # gives you git; skip if `git --version` works
+brew install python@3.12            # needs Homebrew: https://brew.sh
+python3.12 --version                # should print Python 3.12.x
+```
+If `python3.12` is not found after installing, close and reopen Terminal. On Apple Silicon the binary is at `/opt/homebrew/bin/python3.12`, on Intel Macs at `/usr/local/bin/python3.12`. Python 3.13 and 3.14 are rejected by the project, so do not use `python3` if it points to them.
 
-**1b. Get the code and check the version:**
+**1b. Get the code:**
 ```bash
 git clone https://github.com/thai-phan/cs582-project.git
 cd cs582-project
 git checkout main
-python3.12 --version                # should print Python 3.12.x
 ```
 `main` is the default branch. Until PR #7 is merged, `main` does not yet contain the 3-month revenue script and these docs.
 
 **1c. Create the virtual environment:**
 ```bash
 python3.12 -m venv .venv-crm
+source .venv-crm/bin/activate       # optional; the prompt now starts with (.venv-crm)
+which python                        # with the venv active, should end in .venv-crm/bin/python
 ```
-This is optional: `scripts/setup_cpu.py` creates `.venv-crm` itself if it is missing, and reuses it if it exists. The name must stay `.venv-crm`, because every later command calls `.venv-crm/bin/python`. Do not use another name or the system Python.
-
-To activate it in your shell (optional, since the commands in this guide call the venv's Python directly):
-- **Linux/macOS:** `source .venv-crm/bin/activate`
-- **Windows (PowerShell):** `.venv-crm\Scripts\Activate.ps1`
+Creating it by hand is optional: `scripts/setup_cpu.py` creates `.venv-crm` itself if it is missing and reuses it if it exists. Keep the name `.venv-crm`, because every later command calls `.venv-crm/bin/python`. Run `deactivate` to leave the venv. The commands in this guide call the venv's Python directly, so activating it is not required.
 
 **1d. Install the dependencies into the venv:**
 ```bash
 python3.12 scripts/setup_cpu.py     # installs CPU torch first, then requirements.txt, then runs pip check
 ```
-The first install can take several minutes. On Windows the interpreter is `.venv-crm\Scripts\python.exe` instead of `.venv-crm/bin/python`. To start over, delete the `.venv-crm` folder and run this step again.
+The first install can take several minutes. To start over, delete the `.venv-crm` folder and run steps 1c and 1d again.
 
 **1e. Check that the install worked:**
 ```bash
 .venv-crm/bin/python -c "import sklearn, torch, pytorch_tabnet; print('ok')"
 ```
-If `setup_cpu.py` stops with a version error, you are not using Python 3.12. The README says setup refuses untested Python versions.
+If `setup_cpu.py` stops with a version error, you are not using Python 3.12.
+
+**Other systems:**
+- **Ubuntu/Debian:** `sudo apt install python3.12 python3.12-venv` (older releases may need the deadsnakes PPA), then the same commands as above.
+- **Windows:** install Python 3.12 from <https://www.python.org/downloads/> and tick "Add python.exe to PATH". The interpreter is `.venv-crm\Scripts\python.exe` and activation is `.venv-crm\Scripts\Activate.ps1`. Windows has not been tested.
 
 **No install at all?** Use Google Colab instead: upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, then Run all (the README has the full steps).
 
