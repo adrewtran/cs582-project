@@ -13,7 +13,7 @@ No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. 
 
 **1a. Install the tools** (Terminal):
 ```bash
-xcode-select --install              # gives you git; skip if `git --version` works
+git --version                       # check that git is installed
 brew install python@3.12            # needs Homebrew: https://brew.sh
 python3.12 --version                # should print Python 3.12.x
 ```
