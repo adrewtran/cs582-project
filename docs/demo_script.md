@@ -1,4 +1,4 @@
-# CRM Sales Opportunities: One-Page Demo Script (about 10 min)
+# CRM Sales Opportunities: One-Page Demo Script (about 11 min)
 
 Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 
@@ -38,10 +38,15 @@ Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 **Show:** `open_deal_predictions.csv`.
 **Say:** "We scored 1,589 Engaging deals. Win and loss probabilities sum to 1, and 1,088 rows with a missing account are flagged. Priority is a heuristic, and these are snapshot scores, not historical predictions."
 
-## 8. Deliverables (0.5 min)
+## 8. 3-month expected revenue (1 min)
+**Run:** `python scripts/expected_revenue_3m.py`
+**Show:** `reports/crm/final/expected_revenue_3m.json`.
+**Say:** "Deals close within 138 days, with a median of 45, so the open pipeline covers about the next 3 months. Multiplying each deal's win probability by its list price gives about 2.50M expected from 1,589 deals, with a simulated range of 2.38M to 2.63M. Counting only the 501 deals with an account, it is about 0.83M. This is illustrative, not a forecast. The model is weak, the range ignores model error, prices are list prices, and new deals are not included. We do not forecast 2 years, because the data spans only about 10 months and is simulated."
+
+## 9. Deliverables (0.5 min)
 **Show:** `deliverables/` (PPTX, DOCX, Markdown paper, ESL script).
 
-## 9. Honest close (0.5 min)
+## 10. Honest close (0.5 min)
 **Say:** "Our results do not yet show the model helps sales prioritisation. Limitations: closed-only bias, validation reuse, static snapshots, repeated accounts, and the data was examined in earlier attempts, so the test set isn't pristine. The value of the project is a rigorous, leakage-free pipeline."
 
 ## Likely questions
@@ -49,6 +54,8 @@ Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 - **Why did the Dummy model get high accuracy?** About 60% of closed deals are Won, so always predicting Won scores well.
 - **Did you test on Colab?** Only if the team has run it. Run the notebook once beforehand and say what you verified.
 - **Will TabNet give exactly the same numbers?** Not guaranteed across platforms. Seeds don't ensure identical results.
+
+- **Can you forecast 2 years of revenue?** No. The data covers about 10 months and is simulated. We only give a short-term, illustrative estimate from the current pipeline.
 
 ## Backup
 If the live run is slow or fails, skip step 2 and demo only from `reports/crm/final/`.

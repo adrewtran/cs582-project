@@ -8,11 +8,50 @@ Total time is about 10–15 minutes. Results from a full run are already in `rep
 - **Output:** a Won/Lost probability and the factors that influence it.
 - **Honest framing:** the models are weak (test ROC-AUC about 0.50–0.52). Present this as a rigorous, leakage-free study, not a production model.
 
-## Step 1: Setup (once, before the demo)
+## Step 1: Install (once, before the demo) — macOS
+No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. macOS has **not** been tested by the team, so run this whole step once before the demo day and fix any problem early. Windows and Linux notes are at the end of this step.
+
+**1a. Install the tools** (Terminal):
 ```bash
-cd cs582-project
-python scripts/setup_cpu.py        # needs Python 3.12; installs the CPU environment
+git --version                       # check that git is installed
+brew install python@3.12            # needs Homebrew: https://brew.sh
+python3.12 --version                # should print Python 3.12.x
 ```
+If `python3.12` is not found after installing, close and reopen Terminal. On Apple Silicon the binary is at `/opt/homebrew/bin/python3.12`, on Intel Macs at `/usr/local/bin/python3.12`. Python 3.13 and 3.14 are rejected by the project, so do not use `python3` if it points to them.
+
+**1b. Get the code:**
+```bash
+git clone https://github.com/thai-phan/cs582-project.git
+cd cs582-project
+git checkout main
+```
+`main` is the default branch.
+
+**1c. Create the virtual environment:**
+```bash
+python3.12 -m venv .venv-crm
+source .venv-crm/bin/activate       # optional; the prompt now starts with (.venv-crm)
+which python                        # with the venv active, should end in .venv-crm/bin/python
+```
+Creating it by hand is optional: `scripts/setup_cpu.py` creates `.venv-crm` itself if it is missing and reuses it if it exists. Keep the name `.venv-crm`, because every later command calls `.venv-crm/bin/python`. Run `deactivate` to leave the venv. The commands in this guide call the venv's Python directly, so activating it is not required.
+
+**1d. Install the dependencies into the venv:**
+```bash
+python3.12 scripts/setup_cpu.py     # installs CPU torch first, then requirements.txt, then runs pip check
+```
+The first install can take several minutes. To start over, delete the `.venv-crm` folder and run steps 1c and 1d again.
+
+**1e. Check that the install worked:**
+```bash
+.venv-crm/bin/python -c "import sklearn, torch, pytorch_tabnet; print('ok')"
+```
+If `setup_cpu.py` stops with a version error, you are not using Python 3.12.
+
+**Other systems:**
+- **Ubuntu/Debian:** `sudo apt install python3.12 python3.12-venv` (older releases may need the deadsnakes PPA), then the same commands as above.
+- **Windows:** install Python 3.12 from <https://www.python.org/downloads/> and tick "Add python.exe to PATH". The interpreter is `.venv-crm\Scripts\python.exe` and activation is `.venv-crm\Scripts\Activate.ps1`. Windows has not been tested.
+
+**No install at all?** Use Google Colab instead: upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, then Run all (the README has the full steps).
 
 ## Step 2: Verify the environment with a smoke run (about 2 min)
 ```bash
@@ -41,16 +80,26 @@ This writes to `reports/crm/smoke/` and is labelled SMOKE_TEST_NOT_FINAL. Its nu
 ## Step 6: Show scoring of open deals
 Open `open_deal_predictions.csv`. It has 1,589 Engaging rows with `win_probability` and `loss_probability` summing to 1. Rows with a missing account are flagged. Priority is only a heuristic, and open deals are never labelled Lost.
 
-## Step 7: Show the deliverables
+## Step 7: Estimate 3-month expected revenue (illustrative)
+```bash
+python scripts/expected_revenue_3m.py
+```
+It multiplies each open deal's `win_probability` by the product's list `sales_price`, then simulates wins and losses 10,000 times. The output goes to `reports/crm/final/expected_revenue_3m.json`, labelled `ILLUSTRATIVE_NOT_A_VALIDATED_FORECAST`.
+- **Result:** about 2.50M expected from 1,589 open deals (3.89M if all were won). The simulated range is about 2.38M–2.63M.
+- **Account present only:** 501 deals, about 0.83M expected.
+- **Why 3 months and not 2 years:** deals close within 138 days (median 45), so the current pipeline covers a short horizon. The data spans only about 10 months and is simulated, so a 2-year forecast is not supported.
+- **Say it carefully:** the model is weak (ROC-AUC about 0.5), the range ignores model error, prices are list prices rather than `close_value`, and new deals are not included.
+
+## Step 8: Show the deliverables
 `reports/crm/final/deliverables/` holds a PPTX, a DOCX, a Markdown paper and an ESL speaking script.
 
-## Step 8: Run the tests (optional, slow)
+## Step 9: Run the tests (optional, slow)
 ```bash
 .venv-crm/bin/python -m pytest -q
 ```
 It includes real CPU fits of all five models and a full smoke run. Passing tests do not mean the model is good enough for business use.
 
-## Step 9: Close with the limitations
+## Step 10: Close with the limitations
 - The data covers closed deals only, so there is selection bias.
 - The validation set was reused.
 - The account, team and product tables are static snapshots.
