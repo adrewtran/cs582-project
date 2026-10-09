@@ -20,9 +20,10 @@ No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. 
 ```bash
 git clone https://github.com/thai-phan/cs582-project.git
 cd cs582-project
-git checkout claude/determined-babbage-0bvd41   # or main once PR #7 is merged
-python3.12 --version                            # should print Python 3.12.x
+git checkout main
+python3.12 --version                # should print Python 3.12.x
 ```
+`main` is the default branch. Until PR #7 is merged, `main` does not yet contain the 3-month revenue script and these docs.
 
 **1c. Install the dependencies:**
 ```bash
