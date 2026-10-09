@@ -8,11 +8,35 @@ Total time is about 10–15 minutes. Results from a full run are already in `rep
 - **Output:** a Won/Lost probability and the factors that influence it.
 - **Honest framing:** the models are weak (test ROC-AUC about 0.50–0.52). Present this as a rigorous, leakage-free study, not a production model.
 
-## Step 1: Setup (once, before the demo)
+## Step 1: Install (once, before the demo)
+No GPU is needed. The tested environment is **Python 3.12 on Linux, CPU only**. Windows and macOS have not been tested.
+
+**1a. Install Python 3.12** (skip if `python3.12 --version` already works):
+- **Ubuntu/Debian:** `sudo apt install python3.12 python3.12-venv` (on older releases you may need the deadsnakes PPA).
+- **macOS (Homebrew):** `brew install python@3.12`
+- **Windows:** download Python 3.12 from <https://www.python.org/downloads/> and tick "Add python.exe to PATH".
+
+**1b. Get the code and check the version:**
 ```bash
+git clone https://github.com/thai-phan/cs582-project.git
 cd cs582-project
-python scripts/setup_cpu.py        # needs Python 3.12; installs the CPU environment
+git checkout claude/determined-babbage-0bvd41   # or main once PR #7 is merged
+python3.12 --version                            # should print Python 3.12.x
 ```
+
+**1c. Install the dependencies:**
+```bash
+python3.12 scripts/setup_cpu.py     # creates .venv-crm and installs the CPU packages
+```
+The first install can take several minutes. On Windows the interpreter is `.venv-crm\Scripts\python.exe` instead of `.venv-crm/bin/python`.
+
+**1d. Check that the install worked:**
+```bash
+.venv-crm/bin/python -c "import sklearn, torch, pytorch_tabnet; print('ok')"
+```
+If `setup_cpu.py` stops with a version error, you are not using Python 3.12. The README says setup refuses untested Python versions.
+
+**No install at all?** Use Google Colab instead: upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, then Run all (the README has the full steps).
 
 ## Step 2: Verify the environment with a smoke run (about 2 min)
 ```bash
