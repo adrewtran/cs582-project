@@ -25,7 +25,7 @@ git clone https://github.com/thai-phan/cs582-project.git
 cd cs582-project
 git checkout main
 ```
-`main` is the default branch. Until PR #7 is merged, `main` does not yet contain the 3-month revenue script and these docs.
+`main` is the default branch.
 
 **1c. Create the virtual environment:**
 ```bash
