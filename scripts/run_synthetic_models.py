@@ -28,15 +28,20 @@ SYN = ROOT / "data" / "crm_synthetic"
 EXTRA_NUMERIC = ["sector_match", "trend_5y_avg_growth", "trend_5y_slope", "trend_last_growth",
                  "recycled_pct", "longevity_years", "made_in_usa", "competitor_price",
                  "recycled_diff", "longevity_diff", "usa_diff"]
+SIGNALS = ["discount_pct", "quote_gap", "engagement_score", "days_since_contact"]
 
 
 def extended(dataset, syn):
     extra = (pd.read_csv(syn / "ground_truth.csv")[["opportunity_id", "sector_match", "trend_5y_avg_growth",
                                                    "trend_5y_slope", "trend_last_growth"]]
              .merge(pd.read_csv(syn / "deal_comparison.csv").drop(columns="competitor_product"), on="opportunity_id"))
+    numeric = EXTRA_NUMERIC
+    if (syn / "deal_signals.csv").exists():  # continuous per-deal signals (newer generator output)
+        extra = extra.merge(pd.read_csv(syn / "deal_signals.csv"), on="opportunity_id")
+        numeric = EXTRA_NUMERIC + SIGNALS
     frame = dataset.frame.merge(extra, on="opportunity_id", how="left", validate="one_to_one")
     assert len(frame) == len(dataset.frame) and (frame["opportunity_id"] == dataset.frame["opportunity_id"]).all()
-    return dataclasses.replace(dataset, frame=frame, numeric=dataset.numeric + EXTRA_NUMERIC)
+    return dataclasses.replace(dataset, frame=frame, numeric=dataset.numeric + numeric)
 
 
 def main():

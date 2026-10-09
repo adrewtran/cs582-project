@@ -81,15 +81,38 @@ env(trend, k) = clip(1 + k * trend_5y_avg_growth / 10, 0.3 / k, 2.5 * k)
   - k = 1 is the default and reproduces the committed data exactly.
   - k = 3 gives the "strong interaction" setting.
 
+### Smooth-signal scenario (`--smooth-strength s`, default 0)
+
+This scenario was **designed on purpose to favour neural models over trees**. It answers
+"under which data conditions does TabNet beat Random Forest?", not "is TabNet better?".
+
+It adds four continuous per-deal signals, drawn from a separate random stream and written to
+`deal_signals.csv`. Each is assumed to be known at engage time:
+
+- `discount_pct`: the quoted discount, U(0, 30).
+- `quote_gap`: log of our discounted quote over the competitor's quote, with per-deal noise.
+- `engagement_score`: N(0, 1).
+- `days_since_contact`: Exp(mean 10).
+
+```
+logit += s * ( 2.0 * tanh(0.8 * (0.9*disc - 1.1*gap + 0.8*engage - 0.7*contact))
+             + 0.8 * disc * engage )                  (signals standardised)
+```
+
+The effect is a smooth function of an oblique combination of the signals, plus a continuous
+product term. Trees can only approximate it with many axis-aligned steps; neural nets fit it
+directly. With s = 0 the signals are pure noise and all other files are unchanged.
+
 ## 4. Output files (`data/crm_synthetic*/`)
 
 | File | Use |
 |---|---|
 | `sales_pipeline.csv`, `accounts.csv`, `products.csv`, `sales_teams.csv` | Model input in the raw format |
 | `deal_comparison.csv` | Per-deal rival and differences; extra features |
+| `deal_signals.csv` | Continuous per-deal signals (only in newer generator output); extra features |
 | `ground_truth.csv` | True `win_prob`, latent outcome and trend features. **Answer key: do not use `win_prob` as a feature.** |
 | `industry_trends.csv`, `competitor_products.csv`, `product_rd.csv` | Lookup tables |
-| `model_results.csv`, `seed_results.csv`, `seed_summary.csv` | Model results |
+| `model_results.csv`, `seed_results*.csv`, `seed_summary*.csv` | Model results (`_smooth` = smooth-signal scenario) |
 
 Datasets in the repository:
 
@@ -108,6 +131,7 @@ python scripts/make_synthetic_deals.py --n-deals 100000 --interaction-strength 3
     --seed 582 --out-dir data/crm_synthetic_100k_strong
 .venv-crm/bin/python scripts/run_synthetic_models.py --data-dir data/crm_synthetic_100k_strong
 .venv-crm/bin/python scripts/run_synthetic_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
+.venv-crm/bin/python scripts/run_synthetic_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min
 python scripts/product_investment_report.py                # heuristic product ranking
 ```
 
@@ -120,6 +144,8 @@ The same seed always gives identical data.
   learn the planted structure, not how well it predicts real deals.
 - Conclusions such as "non-linear models beat LR when interactions are strong" partly follow
   from how the data was designed.
+- The smooth-signal scenario was chosen *because* it favours neural nets. Its result (TabNet
+  beats RF) must be reported together with that design choice, never as a general finding.
 - Each seed draws a new synthetic world, while the model seed stays fixed at 42. Variation from
   TabNet and MLP initialisation is not measured.
 - A data-driven generator such as CTGAN would rely on fewer hand-made assumptions. However, it

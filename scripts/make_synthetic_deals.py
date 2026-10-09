@@ -61,6 +61,31 @@ def win_logit(d, prod_fx, agent_fx, k=1.0):
     return z + env_weight(d, k) * cmp_
 
 
+SIGNALS = ["discount_pct", "quote_gap", "engagement_score", "days_since_contact"]
+
+
+def deal_signals(n, seed, competitor_price, list_price):
+    """Continuous per-deal signals assumed known at engage time (initial quote, activity).
+    Drawn from a separate random stream so data generated without them is unchanged."""
+    rng = np.random.default_rng(seed + 1000)
+    discount = rng.uniform(0, 30, n)
+    competitor_quote = competitor_price * rng.lognormal(0, 0.15, n)
+    return pd.DataFrame({
+        "discount_pct": discount.round(2),
+        "quote_gap": np.log(list_price * (1 - discount / 100) / competitor_quote).round(4),
+        "engagement_score": rng.normal(0, 1, n).round(4),
+        "days_since_contact": rng.exponential(10, n).round(2),
+    })
+
+
+def smooth_logit(sig, s):
+    """Smooth, oblique effect: tanh of a linear combination of all four signals plus a continuous
+    product term. Trees need many axis-aligned splits to approximate it; neural nets do not."""
+    z = lambda c: (sig[c] - sig[c].mean()) / sig[c].std()
+    index = 0.9 * z("discount_pct") - 1.1 * z("quote_gap") + 0.8 * z("engagement_score") - 0.7 * z("days_since_contact")
+    return s * (2.0 * np.tanh(0.8 * index) + 0.8 * z("discount_pct") * z("engagement_score"))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-deals", type=int, default=20000)
@@ -68,6 +93,8 @@ def main():
     ap.add_argument("--out-dir", type=Path, default=SYN)
     ap.add_argument("--interaction-strength", type=float, default=1.0,
                     help="multiplier on planted interactions (1 = original data)")
+    ap.add_argument("--smooth-strength", type=float, default=0.0,
+                    help="weight of the smooth continuous-signal effect (0 = signals are pure noise)")
     a = ap.parse_args()
     rng = np.random.default_rng(a.seed)
     out = a.out_dir
@@ -122,7 +149,8 @@ def main():
 
     prod_fx = effects(rng, products["product"], 0.4)
     agent_fx = effects(rng, teams["sales_agent"], 0.4)
-    z = win_logit(d, prod_fx, agent_fx, a.interaction_strength)
+    sig = deal_signals(n, a.seed, d["competitor_price"].to_numpy(), d["sales_price"].to_numpy())
+    z = win_logit(d, prod_fx, agent_fx, a.interaction_strength) + smooth_logit(sig, a.smooth_strength)
     lo, hi = -10.0, 10.0
     for _ in range(50):  # shift the intercept so the overall win rate matches the real data (~0.63)
         mid = (lo + hi) / 2
@@ -157,6 +185,8 @@ def main():
         shutil.copy(SYN / "products.csv", out / "products.csv")
     d[["opportunity_id", "competitor_product", "competitor_price", "recycled_diff", "longevity_diff",
        "usa_diff"]].to_csv(out / "deal_comparison.csv", index=False)
+    sig.assign(opportunity_id=d["opportunity_id"])[["opportunity_id", *SIGNALS]].to_csv(
+        out / "deal_signals.csv", index=False)
     d[["opportunity_id", "win_prob", "is_won_latent", "sector_match", "trend_5y_avg_growth",
        "trend_5y_slope", "trend_last_growth", "industry", "sector"]].to_csv(out / "ground_truth.csv", index=False)
 
