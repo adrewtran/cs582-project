@@ -5,7 +5,9 @@ metrics as src.run_project, on data/crm_simulated/. Two feature sets:
   base     -- the project's standard CRM features
   extended -- base + sector match, 5-year industry trend and competitor comparison features
 The oracle row scores the planted true win probability (upper bound for any model).
-Writes model_results.csv into the data directory (default data/crm_simulated/). Simulated: never mix with reports/crm/final/.
+Writes model_results.csv into the data directory (default data/crm_simulated/); --quick writes
+model_results_quick.csv instead, so a smoke run never replaces the stored results.
+Simulated: never mix with reports/crm/final/.
 
 Run: .venv-crm/bin/python scripts/run_simulated_models.py [--quick] [--data-dir DIR]
 """
@@ -70,7 +72,7 @@ def main():
         rows.append({"features": "oracle", "model": "true_win_prob", "split": part,
                      **metrics(base.labels().loc[idx], truth.loc[ids].to_numpy(), .5)})
     res = pd.DataFrame(rows)
-    res.to_csv(syn / "model_results.csv", index=False)
+    res.to_csv(syn / ("model_results_quick.csv" if quick else "model_results.csv"), index=False)
     print(f"train/val/test rows: {len(split.train)}/{len(split.validation)}/{len(split.test)}")
     cols = [c for c in ("accuracy", "precision", "recall", "f1", "roc_auc", "brier") if c in res]
     print(res[res["split"] == "test"][["features", "model", *cols]].round(3).to_string(index=False))

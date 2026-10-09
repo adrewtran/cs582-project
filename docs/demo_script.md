@@ -1,15 +1,18 @@
-# CRM Sales Opportunities: One-Page Demo Script (about 11 min)
+# CRM Sales Opportunities: One-Page Demo Script (about 14 min)
 
 Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 
 ## Before you start
 - Python 3.12 environment is set up (`python scripts/setup_cpu.py`).
 - Open `reports/crm/final/` in a file browser. Open `figures/` and `deliverables/` in tabs.
+- Open `data/crm_simulated/model_results.csv`, `data/crm_simulated/seed_summary.csv` and `docs/SIMULATED_DATA.md` for Scenario B.
 - Terminal is in the repo root.
 
 ## 1. Problem (1 min)
-**Say:** "We predict whether a CRM sales opportunity will be Won or Lost, and we show which factors influence the score. The input is four CRM tables: pipeline, accounts, products and teams."
+**Say:** "We predict whether a CRM sales opportunity will be Won or Lost, and we show which factors influence the score. The input is four CRM tables: pipeline, accounts, products and teams. We show two scenarios. Scenario A uses the original Maven CRM data and gives our reported results. Scenario B runs the same models on simulated data, to check that the pipeline finds signal when signal exists."
 **Show:** `README.md`, section 1.
+
+**Scenario A: original data (sections 2–8)**
 
 ## 2. Pipeline run (1 min)
 **Run:** `.venv-crm/bin/python -m src.run_project --quick`
@@ -41,13 +44,26 @@ Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 ## 8. 3-month expected revenue (1 min)
 **Run:** `python scripts/expected_revenue_3m.py`
 **Show:** `reports/crm/final/expected_revenue_3m.json`.
-**Say:** "Deals close within 138 days, with a median of 45, so the open pipeline covers about the next 3 months. Multiplying each deal's win probability by its list price gives about 2.50M expected from 1,589 deals, with a simulated range of 2.38M to 2.63M. Counting only the 501 deals with an account, it is about 0.83M. This is illustrative, not a forecast. The model is weak, the range ignores model error, prices are list prices, and new deals are not included. We do not forecast 2 years, because the data spans only about 10 months and is simulated."
+**Say:** "Deals close within 138 days, with a median of 45, so the open pipeline covers about the next 3 months. Multiplying each deal's win probability by its list price gives about 2.50M expected from 1,589 deals, with a simulated range of 2.38M to 2.63M. Counting only the 501 deals with an account, it is about 0.83M. This is illustrative, not a forecast. The model is weak, the range ignores model error, prices are list prices, and new deals are not included. We do not forecast 2 years, because the data spans only about 10 months and comes from a fictitious practice dataset."
 
-## 9. Deliverables (0.5 min)
+**Scenario B: simulated data (section 9)**
+
+## 9. Same models on simulated data (2.5 min)
+**Show:** `docs/SIMULATED_DATA.md`, sections 1 and 3.
+**Say:** "Scenario B uses 100,000 simulated deals. They reuse the real accounts, agents and products, but each deal's win probability comes from a formula we wrote, including interaction effects such as an expensive product sold to a small account. Because we wrote the formula, we know every deal's true win probability."
+**Run:** `.venv-crm/bin/python scripts/run_simulated_models.py --quick` (about 20 seconds; writes `model_results_quick.csv`, so the stored results stay unchanged)
+**Say:** "This uses the same loader, time-based split, preprocessing, threshold rule and metrics as Scenario A. The quick run only shows that it works. The numbers I quote come from the full run that is already saved."
+**Show:** `data/crm_simulated/model_results.csv`, test rows.
+**Say:** "With the extended features, test ROC-AUC is 0.809 for Logistic Regression, 0.864 for Random Forest, 0.866 for MLP and 0.867 for TabNet. The best possible, using the true probability, is 0.878. So the nonlinear models recover nearly all of the planted signal. Logistic Regression is lower because it cannot represent the interactions."
+**Show:** `data/crm_simulated/seed_summary.csv`, rows with `interaction_strength` 3.0.
+**Say:** "Over five newly generated datasets the result holds: TabNet 0.875, MLP 0.873, Random Forest 0.872, Logistic Regression 0.827, with standard deviations under 0.01."
+**Say:** "Putting the two scenarios together: on the original data every model is near 0.52, and on simulated data with real signal the same pipeline reaches 0.87. So the low scores come from the original data, not from the pipeline. The simulated scores are not real-world performance, and we never mix them into our reported results."
+
+## 10. Deliverables (0.5 min)
 **Show:** `deliverables/` (PPTX, DOCX, Markdown paper, ESL script).
 
-## 10. Honest close (0.5 min)
-**Say:** "Our results do not yet show the model helps sales prioritisation. Limitations: closed-only bias, validation reuse, static snapshots, repeated accounts, and the data was examined in earlier attempts, so the test set isn't pristine. The value of the project is a rigorous, leakage-free pipeline."
+## 11. Honest close (0.5 min)
+**Say:** "Our results do not yet show the model helps sales prioritisation. Limitations: closed-only bias, validation reuse, static snapshots, repeated accounts, and the data was examined in earlier attempts, so the test set isn't pristine. The simulated scenario shows that the pipeline can learn, but its win/loss rule is invented, so it says nothing about real sales. The value of the project is a rigorous, leakage-free pipeline."
 
 ## Likely questions
 - **Why are the scores so low?** The available features carry little signal. We did not add close_value to inflate the numbers.
@@ -55,7 +71,9 @@ Team: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 - **Did you test on Colab?** Only if the team has run it. Run the notebook once beforehand and say what you verified.
 - **Will TabNet give exactly the same numbers?** Not guaranteed across platforms. Seeds don't ensure identical results.
 
-- **Can you forecast 2 years of revenue?** No. The data covers about 10 months and is simulated. We only give a short-term, illustrative estimate from the current pipeline.
+- **Isn't simulated data cheating?** Simulated data is only a check of the pipeline. Our reported results use the original data. A high simulated score shows the models can learn a pattern we planted, not that they predict real deals.
+- **Why does TabNet do well on simulated data but not on real data?** The simulated data was built with interaction effects that nonlinear models can learn. The original data has almost no signal for any model.
+- **Can you forecast 2 years of revenue?** No. The data covers about 10 months and comes from a fictitious practice dataset. We only give a short-term, illustrative estimate from the current pipeline.
 
 ## Backup
-If the live run is slow or fails, skip step 2 and demo only from `reports/crm/final/`.
+If a live run is slow or fails, skip the run and demo from the saved results: `reports/crm/final/` for Scenario A and `data/crm_simulated/model_results.csv` for Scenario B.
