@@ -10,7 +10,7 @@ Total time is about 15–20 minutes. The demo has two scenarios that run the sam
 | Results | `reports/crm/final/` | `data/crm_simulated/model_results.csv` |
 | Test ROC-AUC | about 0.50–0.52 (no better than chance) | about 0.87 (best possible is 0.88) |
 
-Results from full runs of both scenarios are already saved, so the demo can use them and skip the long training runs. For the talking script, see `docs/demo_script.md`.
+Results from full runs of both scenarios are already saved, so the demo can use them and skip the long training runs.
 
 ## Step 0: Set the story
 - **Goal:** predict whether a CRM sales opportunity will be Won or Lost, and explain which factors drive the score.
@@ -108,7 +108,7 @@ It multiplies each open deal's `win_probability` by the product's list `sales_pr
 
 ## Step 8: Run the same models on simulated data (about 3 min)
 
-**8a. Explain the data.** Open `docs/SIMULATED_DATA.md`, sections 1 and 3.
+**8a. Explain the data.** Open `SIMULATED_DATA.md`, sections 1 and 3.
 - The simulated data reuses the real accounts, sales agents and products, and matches the real date range and a win rate of about 0.63.
 - It adds 9 invented products, competitor products and 5-year industry trends.
 - Each deal's win probability comes from a formula the team wrote. It includes three interaction effects, such as "expensive product **and** small account". The interaction strength is k = 3, the "strong" setting.

@@ -25,4 +25,4 @@ Near-chance AUC does not establish useful sales prioritization. No causal interv
 - Authorized integration: push `codex/crm-completion` through the existing writable project fork and open a PR against `thai-phan/cs582-project:main`. No automatic merge.
 - Submit course deliverables. No video recording is claimed; guidelines allow slides and/or video.
 
-Detailed records: `docs/COMMITMENT_AUDIT.md`, `docs/superpowers/specs/2026-10-06-crm-completion-design.md`, `docs/superpowers/plans/2026-10-06-crm-completion.md`. These supersede September evaluation/output conventions.
+The former `docs/` folder (commitment audit, design specs) was removed on 2026-10-10; it is recoverable from git history.

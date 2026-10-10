@@ -34,3 +34,19 @@ def test_evaluate_and_predict_follow_the_data_dir_used_for_training(tmp_path):
     scores=predict.run(out)
     # 1,589 Engaging deals in data/crm; the copy had 89 removed, so the copy was used.
     assert len(scores)==1500
+
+
+def test_simulated_data_uses_extended_features_by_default_and_never_the_answer():
+    from src.data.crm import build
+    from src.data import simulated
+    from src.outputs import ROOT
+    sim=ROOT/'data/crm_simulated'
+    if not simulated.available(sim): pytest.skip('simulated data not generated')
+    extended=build(sim); standard=build(sim,simulated_features=False)
+    assert len(standard.feature_columns)==18
+    assert extended.feature_columns==standard.feature_columns+simulated.extra_numeric(sim)
+    assert extended.report['feature_set']=='standard + simulated extended'
+    assert not {'win_prob','is_won_latent'} & set(extended.frame.columns)
+    assert extended.features().notna().all().loc[simulated.NUMERIC].all()
+    assert extended.extra['scorable_open_deals'][simulated.NUMERIC].notna().all().all()
+    assert len(build().feature_columns)==18   # the real data never gets extended features

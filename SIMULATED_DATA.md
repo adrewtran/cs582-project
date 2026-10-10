@@ -128,7 +128,7 @@ python scripts/simulation/make_simulated_products.py
 python scripts/simulation/make_industry_trends.py
 python scripts/simulation/make_simulated_deals.py                     # defaults: 100,000 deals, k = 3, seed 582
 .venv-crm/bin/python scripts/simulation/run_simulated_models.py   # base + extended features + oracle
-.venv-crm/bin/python -m src.train --data-dir data/crm_simulated   # or: the main train stage, base features only,
+.venv-crm/bin/python -m src.train --data-dir data/crm_simulated   # or: the main train stage (extended features by default),
                                                                   # into reports/crm/simulated/final (then src.evaluate/src.predict --output ...)
 .venv-crm/bin/python scripts/simulation/run_simulated_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
 .venv-crm/bin/python scripts/simulation/run_simulated_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min

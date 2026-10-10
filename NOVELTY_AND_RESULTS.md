@@ -12,7 +12,7 @@ The original CRM proposal promises prediction plus model explainability, and a c
 | Opportunity priority | `priority`, `checks/priority_test.csv`, validation sensitivity export | High/Medium/Low heuristic; business usefulness is not established |
 | Auditability | Data validation, label-availability purge, leakage control, missing-account flags | Helps detect invalid evidence; does not add new predictive information |
 | Does the split protocol matter? | `checks/split_protocol_summary.csv`, `checks/split_protocol_comparison.csv` | A random stratified split is up to +0.036 AUC higher (MLP; LR +0.022). Dropping the purge changes AUC on the same test set by −0.029 to +0.006, and every paired bootstrap interval includes 0. All protocols stay near chance |
-| Weak data or broken pipeline? | `scripts/simulation/run_simulated_seeds.py`, `data/crm_simulated/seed_summary*.csv`, `docs/SIMULATED_DATA.md` | Same pipeline on simulated deals with a known win formula: TabNet 0.875, MLP 0.873, RF 0.872, LR 0.827, oracle 0.886 (planted interactions, 5 datasets). The models learn when signal exists. The formula is invented, so this says nothing about real sales |
+| Weak data or broken pipeline? | `scripts/simulation/run_simulated_seeds.py`, `data/crm_simulated/seed_summary*.csv`, `SIMULATED_DATA.md` | Same pipeline on simulated deals with a known win formula: TabNet 0.875, MLP 0.873, RF 0.872, LR 0.827, oracle 0.886 (planted interactions, 5 datasets). The models learn when signal exists. The formula is invented, so this says nothing about real sales |
 
 ## How strong is each novelty claim?
 

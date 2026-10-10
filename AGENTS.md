@@ -2,7 +2,7 @@
 
 ## Contract
 
-Project: **Predicting CRM Sales Opportunities Using Machine Learning**. Original: `docs/CS582_Group2_Original_CRM_Proposal.docx`; transcription: `CS582_Group2_Project_Proposal.md`. Read README and PLAN before editing. Leads/Bank/Telco experiments were removed on 2026-10-07 (recoverable from commit `c5bcfa6`); do not switch away from CRM to get higher scores.
+Project: **Predicting CRM Sales Opportunities Using Machine Learning**. Original: `CS582_Group2_Original_CRM_Proposal.docx`; transcription: `CS582_Group2_Project_Proposal.md`. Read README and PLAN before editing. Leads/Bank/Telco experiments were removed on 2026-10-07 (recoverable from commit `c5bcfa6`); do not switch away from CRM to get higher scores.
 
 Required: LR, RF, MLP, TabNet; Dummy prior control. Accuracy, Precision, Recall, F1, ROC-AUC and confusion matrices. Importance and optional SHAP are implemented. Autonomous agents are not a proposal requirement.
 

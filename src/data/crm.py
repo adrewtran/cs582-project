@@ -12,6 +12,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from src.data import simulated
 from src.data.dataset import DATA_DIR, Dataset, basic_report, blank_to_na, strip_strings
 
 CRM_DIR = DATA_DIR / "crm"
@@ -122,12 +123,22 @@ def add_derived_features(frame: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def build(data_dir: Path = CRM_DIR) -> Dataset:
+def build(data_dir: Path = CRM_DIR, simulated_features: bool = True) -> Dataset:
+    """Load, validate and join one data folder.
+
+    For the simulated data (side files present), the extended deal-level features are added by
+    default; pass ``simulated_features=False`` for the 18 standard features only.
+    """
     raw = load_raw(data_dir)
     validate_raw(raw)
     joined = join_tables(clean_pipeline(raw["sales_pipeline"]), clean_accounts(raw["accounts"]),
                          raw["products"], raw["sales_teams"])
     joined = add_derived_features(joined)
+    numeric = list(NUMERIC)
+    extended = simulated_features and simulated.available(data_dir)
+    if extended:
+        joined = simulated.add_features(joined, simulated.side_table(data_dir))
+        numeric += simulated.extra_numeric(data_dir)
     closed = joined["deal_stage"].isin(CLOSED_STAGES)
     joined[TARGET] = np.where(closed, (joined["deal_stage"] == "Won").astype(int), np.nan)
 
@@ -148,13 +159,14 @@ def build(data_dir: Path = CRM_DIR) -> Dataset:
         "temporal_column": "engage_date",
         "unmatched_product": int(joined["series"].isna().sum()),
         "unmatched_account_in_labeled": int(labeled["sector"].isna().sum()),
+        "feature_set": "standard + simulated extended" if extended else "standard",
     }
     return Dataset(
         "crm",
         labeled,
         TARGET,
         CATEGORICAL,
-        NUMERIC,
+        numeric,
         report,
         {"open_deals": open_deals, "scorable_open_deals": scorable_open_deals},
     )
@@ -176,5 +188,8 @@ def prepare_new_deals(pipeline: pd.DataFrame, data_dir: Path = CRM_DIR) -> pd.Da
     rows = clean_pipeline(rows)
     if rows["engage_date"].isna().any():
         raise ValueError("every new deal needs an engage_date (Prospecting deals cannot be scored)")
-    joined = join_tables(rows, clean_accounts(raw["accounts"]), raw["products"], raw["sales_teams"])
-    return add_derived_features(joined).reset_index(drop=True)
+    joined = add_derived_features(join_tables(rows, clean_accounts(raw["accounts"]), raw["products"], raw["sales_teams"]))
+    if simulated.available(data_dir):
+        # Extended features exist only for deals the simulator generated.
+        joined = simulated.add_features(joined, simulated.side_table(data_dir))
+    return joined.reset_index(drop=True)

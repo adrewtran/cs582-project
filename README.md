@@ -63,7 +63,7 @@ Results never go to `reports/crm/final/`.
 .venv-crm/bin/python scripts/simulation/make_simulated_deals.py --n-deals 100000 --seed 582 --interaction-strength 3
 ```
 
-### Full pipeline (main stages, 18 standard features)
+### Full pipeline
 
 ```bash
 .venv-crm/bin/python -m src.train    --data-dir data/crm_simulated      # → reports/crm/simulated/final/
@@ -71,14 +71,14 @@ Results never go to `reports/crm/final/`.
 .venv-crm/bin/python -m src.predict  --output reports/crm/simulated/final
 ```
 
-`--quick` on `train` writes to `reports/crm/simulated/smoke/` instead. `evaluate` and `predict` reload the data folder recorded by `train`. On 100,000 deals, `evaluate` is slow because the split-protocol check refits every model.
+The simulated data uses 29 features by default: the 18 standard ones plus 11 deal-level ones (sector match, industry trend, rival product). `--quick` on `train` writes to `reports/crm/simulated/smoke/` instead. `evaluate` and `predict` reload the data folder recorded by `train`. On 100,000 deals, `evaluate` is slow because the split-protocol check refits every model.
 
 ### Notebooks
 
 Run in order: `notebooks/simulated/1_train.ipynb`, `2_evaluate.ipynb`, `3_predict.ipynb` (writes to `reports/crm/simulated/final/`).
 In `2_evaluate.ipynb`, the slow split-protocol and explanation checks run only with `RUN_CHECKS = True`.
 
-### Model comparison with extended features and the oracle
+### Model comparison: standard vs extended features, and the oracle
 
 ```bash
 .venv-crm/bin/python scripts/simulation/run_simulated_models.py --quick   # ~20 s → data/crm_simulated/model_results_quick.csv
