@@ -1,13 +1,13 @@
 import importlib
 import numpy as np
-from src.datasets.crm import build
+from src.data.crm import build
 
 
 def test_reference_explanations_are_labeled_and_flag_missing_accounts():
-    assert importlib.util.find_spec('src.explain') is not None,'explanations are not implemented'
-    from src.explain import explain_open,make_reference
-    from src.models import fit_model
-    from src.temporal import asof_split
+    assert importlib.util.find_spec('src.explain.reference') is not None,'explanations are not implemented'
+    from src.explain.reference import explain_open,make_reference
+    from src.models.zoo import fit_model
+    from src.data.split import asof_split
     d=build(); s=asof_split(d); m=fit_model('logistic_regression',d,s.train,s.validation,quick=True)
     r=make_reference(d.features().loc[s.train],d)
     out=explain_open(m,d,r,.5)

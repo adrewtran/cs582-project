@@ -1,0 +1,241 @@
+{
+  "trace_version": 1,
+  "agent": "EvidenceGroundedCRMAgent",
+  "policy_version": "evidence-agent-1.0",
+  "configuration": "full_agent",
+  "case": {
+    "opportunity_id": "0000I7AO",
+    "pool": "open",
+    "label": "S6b",
+    "requested_actions": []
+  },
+  "goal": {
+    "id": "TRIAGE_OPPORTUNITY",
+    "description": "Decide the safest supported review action for 0000I7AO"
+  },
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "started_utc": "2026-10-10T09:54:16.372186+00:00",
+  "finished_utc": "2026-10-10T09:54:16.372389+00:00",
+  "steps": [
+    {
+      "step": 1,
+      "timestamp": "2026-10-10T09:54:16.372199+00:00",
+      "phase": "goal",
+      "state_before": {},
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 0000I7AO"
+      },
+      "evaluation": "Goal selected; start by observing the opportunity."
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-10-10T09:54:16.372259+00:00",
+      "phase": "act",
+      "state_before": {
+        "opportunity": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 0000I7AO"
+      },
+      "candidates": [
+        {
+          "tool": "get_opportunity",
+          "slot": "opportunity",
+          "need": 1.0,
+          "cost": 0.02,
+          "utility": 0.98,
+          "applicable": true,
+          "reason": "the goal needs the opportunity record"
+        },
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": null,
+          "cost": 0.02,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        }
+      ],
+      "chosen": "get_opportunity",
+      "tool_call": {
+        "tool": "get_opportunity",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "0000I7AO",
+          "pool": "open"
+        },
+        "status": "error",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "not_eligible: closed deal; only dated Engaging opportunities are scored",
+            "duration_ms": 0.011
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "not_eligible: closed deal; only dated Engaging opportunities are scored",
+            "duration_ms": 0.005
+          }
+        ],
+        "result": {},
+        "sources": [],
+        "error": "not_eligible: closed deal; only dated Engaging opportunities are scored"
+      },
+      "evaluation": "get_opportunity failed after 2 attempt(s): not_eligible: closed deal; only dated Engaging opportunities are scored. No value is assumed."
+    },
+    {
+      "step": 3,
+      "timestamp": "2026-10-10T09:54:16.372346+00:00",
+      "phase": "decide",
+      "state_before": {
+        "opportunity": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 0000I7AO"
+      },
+      "candidates": [
+        {
+          "decision": "ESCALATE_AT_RISK_REVIEW",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": false,
+            "no_conflicting_evidence": true,
+            "model_not_indistinguishable_from_chance": true,
+            "score_at_risk": false,
+            "reasons_available": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "MONITOR_NO_TASK",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": false,
+            "no_conflicting_evidence": true,
+            "model_not_indistinguishable_from_chance": true,
+            "score_favorable": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "REVIEW_UNCERTAIN",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true
+          },
+          "valid": false
+        },
+        {
+          "decision": "DATA_COMPLETION",
+          "requirements": {
+            "blocking_data_issue": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "ABSTAIN",
+          "requirements": {},
+          "valid": true
+        }
+      ],
+      "chosen": "ABSTAIN",
+      "evaluation": "Most specific supported action: ABSTAIN.",
+      "rejected": [
+        "ESCALATE_AT_RISK_REVIEW not supported: prediction_available, evidence_sufficient, score_at_risk, reasons_available",
+        "MONITOR_NO_TASK not supported: prediction_available, evidence_sufficient, score_favorable",
+        "REVIEW_UNCERTAIN not supported: prediction_available",
+        "DATA_COMPLETION not supported: blocking_data_issue"
+      ]
+    }
+  ],
+  "decision": {
+    "action": "ABSTAIN",
+    "why_not_more_specific": [
+      "ESCALATE_AT_RISK_REVIEW not supported: prediction_available, evidence_sufficient, score_at_risk, reasons_available",
+      "MONITOR_NO_TASK not supported: prediction_available, evidence_sufficient, score_favorable",
+      "REVIEW_UNCERTAIN not supported: prediction_available",
+      "DATA_COMPLETION not supported: blocking_data_issue"
+    ],
+    "assessment": null,
+    "prediction": null
+  },
+  "final_recommendation": "No recommendation: required information could not be obtained (see errors).",
+  "actions_executed": [],
+  "blocked_actions": [],
+  "approval_requests": [],
+  "errors": [
+    {
+      "tool": "get_opportunity",
+      "error": "not_eligible: closed deal; only dated Engaging opportunities are scored"
+    }
+  ],
+  "evidence_sources": [],
+  "stopping_reason": "invalid_input_abstained",
+  "step_budget": 14,
+  "external_side_effects": 0,
+  "content_sha256": "35012eae6d4c0b0734f7f6f841fc66c60afe3ad5dadec85faea14e72a0de8f2d"
+}

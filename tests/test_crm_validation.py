@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from src.datasets import crm
+from src.data import crm
 
 
 @pytest.mark.parametrize('change,expected', [

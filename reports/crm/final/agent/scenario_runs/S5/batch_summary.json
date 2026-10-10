@@ -1,0 +1,120 @@
+{
+  "goal": {
+    "id": "PRIORITIZE_REVIEW_QUEUE",
+    "description": "Choose which of 25 opportunities need human review first (budget 5)"
+  },
+  "policy_version": "evidence-agent-1.0",
+  "configuration": "full_agent",
+  "cases": 25,
+  "investigated": 25,
+  "deferred": [],
+  "review_budget": 5,
+  "sales_review_queue": [
+    {
+      "rank": 1,
+      "opportunity_id": "K9KGXL2E",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4045856607,
+      "evidence_quality": 0.75,
+      "within_budget": true
+    },
+    {
+      "rank": 2,
+      "opportunity_id": "TOJ902PF",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4430892373,
+      "evidence_quality": 0.75,
+      "within_budget": true
+    },
+    {
+      "rank": 3,
+      "opportunity_id": "L8XNQONA",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4692443435,
+      "evidence_quality": 0.75,
+      "within_budget": true
+    },
+    {
+      "rank": 4,
+      "opportunity_id": "J5BCAQ1Z",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4806706543,
+      "evidence_quality": 0.75,
+      "within_budget": true
+    },
+    {
+      "rank": 5,
+      "opportunity_id": "4ZQTMS3Z",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4914623511,
+      "evidence_quality": 0.75,
+      "within_budget": true
+    },
+    {
+      "rank": 6,
+      "opportunity_id": "RTWE19SU",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.4953185691,
+      "evidence_quality": 0.75,
+      "within_budget": false
+    },
+    {
+      "rank": 7,
+      "opportunity_id": "FZWU2I30",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.5001124726,
+      "evidence_quality": 0.75,
+      "within_budget": false
+    },
+    {
+      "rank": 8,
+      "opportunity_id": "PM2BF2KB",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.5145742659,
+      "evidence_quality": 0.75,
+      "within_budget": false
+    },
+    {
+      "rank": 9,
+      "opportunity_id": "HB740BLB",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.6023965756,
+      "evidence_quality": 0.75,
+      "within_budget": false
+    },
+    {
+      "rank": 10,
+      "opportunity_id": "D55HTKRU",
+      "decision": "REVIEW_UNCERTAIN",
+      "win_probability": 0.6181610401,
+      "evidence_quality": 0.75,
+      "within_budget": false
+    }
+  ],
+  "data_completion_queue": [
+    "PV3TH2FF",
+    "7S8SLZDY",
+    "JVF7HZMV",
+    "GQDS81G1",
+    "LC93MVYP",
+    "07GUKIG3",
+    "RS31U03Y",
+    "VL8YNHD7",
+    "GMY4U7RD",
+    "IQR162ZT",
+    "T6MPH7JC",
+    "NGTVHTFH",
+    "HCQK8NQ8",
+    "RDHTQLNI",
+    "DB801ISB"
+  ],
+  "monitor_only": [],
+  "abstained": [],
+  "decision_counts": {
+    "DATA_COMPLETION": 15,
+    "REVIEW_UNCERTAIN": 10
+  },
+  "triage_key": "escalation before uncertain review; higher evidence quality; lower P(Won); longer open; ID",
+  "note": "Probabilities only break ties inside an evidence tier; they are not treated as business utility.",
+  "content_sha256": "6cd573c1b1474a85741d960a4cc5592c095e3b6696f427541a55051ee8b2ebcb"
+}

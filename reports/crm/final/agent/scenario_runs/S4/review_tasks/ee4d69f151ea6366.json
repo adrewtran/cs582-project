@@ -1,0 +1,292 @@
+{
+  "task_id": "ee4d69f151ea6366",
+  "kind": "sales_review",
+  "priority": "medium",
+  "opportunity_id": "HF74MC9F",
+  "decision": "REVIEW_UNCERTAIN",
+  "why_not_more_specific": [
+    "ESCALATE_AT_RISK_REVIEW not supported: no_conflicting_evidence, score_at_risk",
+    "MONITOR_NO_TASK not supported: no_conflicting_evidence"
+  ],
+  "suggested_human_checks": [
+    "Treat the score as inconclusive; the listed evidence is mixed or incomplete.",
+    "Gather the missing context (activity, buyer intent, budget) that the CRM does not record."
+  ],
+  "evidence": {
+    "opportunity": {
+      "opportunity_id": "HF74MC9F",
+      "sales_agent": "Corliss Cosme",
+      "product": "GTX Plus Pro",
+      "account": "Ganjaflex",
+      "engage_date": "2017-05-06",
+      "deal_stage": "Engaging",
+      "days_open_at_snapshot": 239,
+      "snapshot_date": "2017-12-31"
+    },
+    "account": {
+      "account": "Ganjaflex",
+      "sector": "retail",
+      "year_established": 1995,
+      "revenue": 5158.71,
+      "employees": 17479,
+      "office_location": "Japan",
+      "subsidiary_of": null
+    },
+    "data_quality": [
+      {
+        "code": "retrospective_snapshot",
+        "severity": "warning",
+        "field": "engage_date",
+        "detail": "Engaged 2017-05-06, before the model existed (2017-09-18)."
+      },
+      {
+        "code": "stale_open_record",
+        "severity": "warning",
+        "field": "engage_date",
+        "detail": "Open 239 days at the snapshot; 95% of training deals closed within 116 days."
+      }
+    ],
+    "win_probability": 0.7274616867,
+    "decision_threshold": 0.6109291994,
+    "risk_signal": "favorable",
+    "evidence_quality": 1.0,
+    "conflicts": [
+      {
+        "code": "account_history_contradicts_favorable_score",
+        "account_win_rate": 0.4627864006,
+        "archive_win_rate": 0.6511456024,
+        "gap": -0.1883592018
+      }
+    ],
+    "model_reliability": "weak",
+    "prior_history": {
+      "agent_closed_count": 47.0,
+      "agent_win_rate": 0.6779947695,
+      "account_closed_count": 15.0,
+      "account_win_rate": 0.4627864006,
+      "product_closed_count": 140.0,
+      "product_win_rate": 0.6569360553,
+      "global_closed_count": 1353.0,
+      "global_win_rate": 0.6511456024
+    },
+    "top_factors": [
+      {
+        "feature": "office_location",
+        "value": "Japan",
+        "reference": "United States",
+        "delta_p_win": -0.0729399391,
+        "direction": "opposes win"
+      },
+      {
+        "feature": "global_closed_count",
+        "value": 1353.0,
+        "reference": 514.0,
+        "delta_p_win": -0.069308405,
+        "direction": "opposes win"
+      },
+      {
+        "feature": "sales_agent",
+        "value": "Corliss Cosme",
+        "reference": "Darcel Schlecht",
+        "delta_p_win": 0.068239079,
+        "direction": "supports win"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "HF74MC9F",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm/accounts.csv",
+      "key": "Ganjaflex",
+      "fields": [
+        "sector",
+        "year_established",
+        "revenue",
+        "employees",
+        "office_location",
+        "subsidiary_of"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "HF74MC9F",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_bundle.joblib",
+      "key": "08678d86bee1",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_bundle.joblib:history_archive",
+      "key": "HF74MC9F",
+      "fields": [
+        "sales_agent",
+        "account",
+        "product",
+        "engage_date",
+        "close_date",
+        "is_won",
+        "close_value"
+      ]
+    },
+    {
+      "table": "models/trained_models.joblib",
+      "key": "history",
+      "fields": [
+        "logistic_regression",
+        "random_forest",
+        "mlp",
+        "tabnet",
+        "catboost"
+      ]
+    },
+    {
+      "table": "models/explanation_reference.json",
+      "key": "training medians/modes",
+      "fields": [
+        "product",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "engage_month",
+        "engage_dayofweek",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "created_by": "agent",
+  "created_utc": "2026-10-10T09:53:41.806437+00:00",
+  "status": "open",
+  "external_effect": false,
+  "note": "Predictive association only; not a causal or revenue claim. A human decides any customer action."
+}

@@ -1,0 +1,1344 @@
+{
+  "trace_version": 1,
+  "agent": "EvidenceGroundedCRMAgent",
+  "policy_version": "evidence-agent-1.0",
+  "configuration": "full_agent",
+  "case": {
+    "opportunity_id": "HF74MC9F",
+    "pool": "open",
+    "label": "S4",
+    "requested_actions": []
+  },
+  "goal": {
+    "id": "TRIAGE_OPPORTUNITY",
+    "description": "Decide the safest supported review action for HF74MC9F"
+  },
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "started_utc": "2026-10-10T09:53:41.545484+00:00",
+  "finished_utc": "2026-10-10T09:53:41.809670+00:00",
+  "steps": [
+    {
+      "step": 1,
+      "timestamp": "2026-10-10T09:53:41.545506+00:00",
+      "phase": "goal",
+      "state_before": {},
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "evaluation": "Goal selected; start by observing the opportunity."
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-10-10T09:53:41.545787+00:00",
+      "phase": "act",
+      "state_before": {
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "get_opportunity",
+          "slot": "opportunity",
+          "need": 1.0,
+          "cost": 0.02,
+          "utility": 0.98,
+          "applicable": true,
+          "reason": "the goal needs the opportunity record"
+        },
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": null,
+          "cost": 0.02,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        }
+      ],
+      "chosen": "get_opportunity",
+      "tool_call": {
+        "tool": "get_opportunity",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.22
+          }
+        ],
+        "result": {
+          "opportunity_id": "HF74MC9F",
+          "sales_agent": "Corliss Cosme",
+          "product": "GTX Plus Pro",
+          "account": "Ganjaflex",
+          "engage_date": "2017-05-06",
+          "deal_stage": "Engaging",
+          "days_open_at_snapshot": 239,
+          "snapshot_date": "2017-12-31"
+        },
+        "sources": [
+          {
+            "table": "data/crm/sales_pipeline.csv",
+            "key": "HF74MC9F",
+            "fields": [
+              "opportunity_id",
+              "sales_agent",
+              "product",
+              "account",
+              "engage_date",
+              "deal_stage"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Observed HF74MC9F (GTX Plus Pro, agent Corliss Cosme, account Ganjaflex)."
+    },
+    {
+      "step": 3,
+      "timestamp": "2026-10-10T09:53:41.545997+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": 0.8,
+          "cost": 0.02,
+          "utility": 0.78,
+          "applicable": true,
+          "reason": "customer context and a check that the account exists"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the account lookup"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "get_account_information",
+      "tool_call": {
+        "tool": "get_account_information",
+        "permission": "read",
+        "arguments": {
+          "account": "Ganjaflex"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.103
+          }
+        ],
+        "result": {
+          "account": "Ganjaflex",
+          "sector": "retail",
+          "year_established": 1995,
+          "revenue": 5158.71,
+          "employees": 17479,
+          "office_location": "Japan",
+          "subsidiary_of": null
+        },
+        "sources": [
+          {
+            "table": "data/crm/accounts.csv",
+            "key": "Ganjaflex",
+            "fields": [
+              "sector",
+              "year_established",
+              "revenue",
+              "employees",
+              "office_location",
+              "subsidiary_of"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Account found: Ganjaflex (retail, 17479 employees)."
+    },
+    {
+      "step": 4,
+      "timestamp": "2026-10-10T09:53:41.546647+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "a score must not be trusted before its inputs are checked"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "check_data_quality",
+      "tool_call": {
+        "tool": "check_data_quality",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open",
+          "account_found": true
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.542
+          }
+        ],
+        "result": {
+          "issues": [
+            {
+              "code": "retrospective_snapshot",
+              "severity": "warning",
+              "field": "engage_date",
+              "detail": "Engaged 2017-05-06, before the model existed (2017-09-18)."
+            },
+            {
+              "code": "stale_open_record",
+              "severity": "warning",
+              "field": "engage_date",
+              "detail": "Open 239 days at the snapshot; 95% of training deals closed within 116 days."
+            }
+          ],
+          "blocking": [],
+          "warnings": [
+            "retrospective_snapshot",
+            "stale_open_record"
+          ],
+          "imputed_inputs": []
+        },
+        "sources": [
+          {
+            "table": "data/crm (joined pipeline row)",
+            "key": "HF74MC9F",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_year",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "is_subsidiary",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "agent_cold_start",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "account_cold_start",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "product_cold_start",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          },
+          {
+            "table": "models/model_card.json",
+            "key": "training_categories,training_numeric_range",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Blocking issues: none; warnings: ['retrospective_snapshot', 'stale_open_record']."
+    },
+    {
+      "step": 5,
+      "timestamp": "2026-10-10T09:53:41.560084+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "the goal needs the model estimate"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "predict_win_probability",
+      "tool_call": {
+        "tool": "predict_win_probability",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 13.287
+          }
+        ],
+        "result": {
+          "win_probability": 0.7274616867,
+          "loss_probability": 0.2725383133,
+          "decision_threshold": 0.6109291994,
+          "predicted_outcome": "Won",
+          "distance_to_threshold": 0.1165324873,
+          "model": "logistic_regression_calibrated",
+          "feature_set": "history",
+          "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+          "calibration": "validation-fitted sigmoid; frozen base model"
+        },
+        "sources": [
+          {
+            "table": "models/model_bundle.joblib",
+            "key": "08678d86bee1",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_year",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "is_subsidiary",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "agent_cold_start",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "account_cold_start",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "product_cold_start",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Calibrated P(Won) 0.7275 vs threshold 0.6109: favorable."
+    },
+    {
+      "step": 6,
+      "timestamp": "2026-10-10T09:53:41.561155+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": 0.8,
+          "cost": 0.08,
+          "utility": 0.72,
+          "applicable": true,
+          "reason": "decision-relevant: the result could change the action (MONITOR_NO_TASK vs REVIEW_UNCERTAIN)"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "get_prior_sales_history",
+      "tool_call": {
+        "tool": "get_prior_sales_history",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.387
+          }
+        ],
+        "result": {
+          "agent_closed_count": 47.0,
+          "agent_win_rate": 0.6779947695,
+          "agent_mean_close_value": 1708.0212765957,
+          "agent_mean_cycle_days": 42.3617021277,
+          "agent_cold_start": 0.0,
+          "account_closed_count": 15.0,
+          "account_win_rate": 0.4627864006,
+          "account_mean_close_value": 1141.6,
+          "account_mean_cycle_days": 33.6666666667,
+          "account_cold_start": 0.0,
+          "product_closed_count": 140.0,
+          "product_win_rate": 0.6569360553,
+          "product_mean_close_value": 3612.3071428571,
+          "product_mean_cycle_days": 36.0,
+          "product_cold_start": 0.0,
+          "global_closed_count": 1353.0,
+          "global_win_rate": 0.6511456024,
+          "global_mean_close_value": 1479.9127864006,
+          "global_mean_cycle_days": 39.4781966001,
+          "eligible_archive_count": 1353,
+          "strict_before": true,
+          "latest_prior_close_date": "2017-05-05",
+          "query_date": "2017-05-06",
+          "archive": "frozen training archive (closed strictly before engagement; own outcome excluded)"
+        },
+        "sources": [
+          {
+            "table": "models/model_bundle.joblib:history_archive",
+            "key": "HF74MC9F",
+            "fields": [
+              "sales_agent",
+              "account",
+              "product",
+              "engage_date",
+              "close_date",
+              "is_won",
+              "close_value"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Prior closed deals: agent 47, account 15, product 140 (archive win rate 0.651)."
+    },
+    {
+      "step": 7,
+      "timestamp": "2026-10-10T09:53:41.746047+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "check_model_agreement",
+      "tool_call": {
+        "tool": "check_model_agreement",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 184.315
+          }
+        ],
+        "result": {
+          "members": {
+            "logistic_regression": {
+              "raw_win_probability": 0.5468211355,
+              "validation_percentile": 0.9913460575
+            },
+            "random_forest": {
+              "raw_win_probability": 0.5286358387,
+              "validation_percentile": 0.837076211
+            },
+            "mlp": {
+              "raw_win_probability": 0.6422875524,
+              "validation_percentile": 0.8667162584
+            },
+            "tabnet": {
+              "raw_win_probability": 0.6585227847,
+              "validation_percentile": 0.9624763452
+            },
+            "catboost": {
+              "raw_win_probability": 0.6118943822,
+              "validation_percentile": 1.0
+            }
+          },
+          "selected_model": "logistic_regression",
+          "disagreeing_models": [],
+          "disagreement_share": 0.0,
+          "percentile_spread": 0.162923789,
+          "committee_split": false,
+          "note": "Percentiles use each model's validation score distribution (models/model_card.json); no test row is used."
+        },
+        "sources": [
+          {
+            "table": "models/trained_models.joblib",
+            "key": "history",
+            "fields": [
+              "logistic_regression",
+              "random_forest",
+              "mlp",
+              "tabnet",
+              "catboost"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Committee disagreement 0.00 (agrees)."
+    },
+    {
+      "step": 8,
+      "timestamp": "2026-10-10T09:53:41.805854+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "explain_prediction",
+      "tool_call": {
+        "tool": "explain_prediction",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HF74MC9F",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 58.907
+          }
+        ],
+        "result": {
+          "factors": [
+            {
+              "feature": "office_location",
+              "value": "Japan",
+              "reference": "United States",
+              "delta_p_win": -0.0729399391,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "global_closed_count",
+              "value": 1353.0,
+              "reference": 514.0,
+              "delta_p_win": -0.069308405,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "sales_agent",
+              "value": "Corliss Cosme",
+              "reference": "Darcel Schlecht",
+              "delta_p_win": 0.068239079,
+              "direction": "supports win"
+            },
+            {
+              "feature": "global_mean_cycle_days",
+              "value": 39.4781966001,
+              "reference": 46.6104023553,
+              "delta_p_win": -0.065086164,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "product_mean_close_value",
+              "value": 3612.3071428571,
+              "reference": 359.111969112,
+              "delta_p_win": -0.0632361477,
+              "direction": "opposes win"
+            }
+          ],
+          "method": "single-feature reference sensitivity of the selected calibrated model",
+          "interpretation": "predictive association inside this model; not additive and not a causal business effect"
+        },
+        "sources": [
+          {
+            "table": "models/explanation_reference.json",
+            "key": "training medians/modes",
+            "fields": [
+              "product",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "engage_month",
+              "engage_dayofweek",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Top factor: office_location (-0.0729)"
+    },
+    {
+      "step": 9,
+      "timestamp": "2026-10-10T09:53:41.806024+00:00",
+      "phase": "plan",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [],
+      "chosen": null,
+      "evaluation": "No remaining tool clears the minimum information gain; assess the evidence."
+    },
+    {
+      "step": 10,
+      "timestamp": "2026-10-10T09:53:41.806175+00:00",
+      "phase": "evaluate",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "chosen": "evaluate_evidence",
+      "tool_call": {
+        "tool": "evaluate_evidence",
+        "permission": "compute",
+        "arguments": {
+          "beliefs": "current belief state"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.06
+          }
+        ],
+        "result": {
+          "evidence_quality": 1.0,
+          "evidence_checks": {
+            "account_present": true,
+            "account_history_supported": true,
+            "product_history_supported": true,
+            "agent_history_supported": true,
+            "no_imputed_inputs": true,
+            "inputs_in_training_support": true,
+            "committee_agrees": true
+          },
+          "sufficient": true,
+          "blocking_issues": [],
+          "conflicts": [
+            {
+              "code": "account_history_contradicts_favorable_score",
+              "account_win_rate": 0.4627864006,
+              "archive_win_rate": 0.6511456024,
+              "gap": -0.1883592018
+            }
+          ],
+          "risk_signal": "favorable",
+          "model_reliability": "weak",
+          "validation_roc_auc": 0.5691967039,
+          "validation_roc_auc_ci95": [
+            0.5225729337,
+            0.6155118218
+          ],
+          "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+        },
+        "sources": [
+          {
+            "table": "models/model_card.json",
+            "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Evidence quality 1.00 (sufficient); risk favorable; conflicts ['account_history_contradicts_favorable_score']; model reliability weak."
+    },
+    {
+      "step": 11,
+      "timestamp": "2026-10-10T09:53:41.806296+00:00",
+      "phase": "decide",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "candidates": [
+        {
+          "decision": "ESCALATE_AT_RISK_REVIEW",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": true,
+            "no_conflicting_evidence": false,
+            "model_not_indistinguishable_from_chance": true,
+            "score_at_risk": false,
+            "reasons_available": true
+          },
+          "valid": false
+        },
+        {
+          "decision": "MONITOR_NO_TASK",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": true,
+            "no_conflicting_evidence": false,
+            "model_not_indistinguishable_from_chance": true,
+            "score_favorable": true
+          },
+          "valid": false
+        },
+        {
+          "decision": "REVIEW_UNCERTAIN",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true
+          },
+          "valid": true
+        },
+        {
+          "decision": "DATA_COMPLETION",
+          "requirements": {
+            "blocking_data_issue": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "ABSTAIN",
+          "requirements": {},
+          "valid": true
+        }
+      ],
+      "chosen": "REVIEW_UNCERTAIN",
+      "evaluation": "Most specific supported action: REVIEW_UNCERTAIN.",
+      "rejected": [
+        "ESCALATE_AT_RISK_REVIEW not supported: no_conflicting_evidence, score_at_risk",
+        "MONITOR_NO_TASK not supported: no_conflicting_evidence"
+      ]
+    },
+    {
+      "step": 12,
+      "timestamp": "2026-10-10T09:53:41.809537+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for HF74MC9F"
+      },
+      "chosen": "create_review_task",
+      "tool_call": {
+        "tool": "create_review_task",
+        "permission": "local_write",
+        "arguments": {
+          "task_id": "ee4d69f151ea6366",
+          "kind": "sales_review"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 2.747
+          }
+        ],
+        "result": {
+          "task_id": "ee4d69f151ea6366",
+          "path": "/home/antran/projects/cs582-project/reports/crm/final/agent/scenario_runs/S4/review_tasks/ee4d69f151ea6366.json",
+          "external_effect": false
+        },
+        "sources": [],
+        "error": ""
+      },
+      "evaluation": "sales_review task ee4d69f151ea6366 (medium priority): ok."
+    }
+  ],
+  "decision": {
+    "action": "REVIEW_UNCERTAIN",
+    "why_not_more_specific": [
+      "ESCALATE_AT_RISK_REVIEW not supported: no_conflicting_evidence, score_at_risk",
+      "MONITOR_NO_TASK not supported: no_conflicting_evidence"
+    ],
+    "assessment": {
+      "evidence_quality": 1.0,
+      "evidence_checks": {
+        "account_present": true,
+        "account_history_supported": true,
+        "product_history_supported": true,
+        "agent_history_supported": true,
+        "no_imputed_inputs": true,
+        "inputs_in_training_support": true,
+        "committee_agrees": true
+      },
+      "sufficient": true,
+      "blocking_issues": [],
+      "conflicts": [
+        {
+          "code": "account_history_contradicts_favorable_score",
+          "account_win_rate": 0.4627864006,
+          "archive_win_rate": 0.6511456024,
+          "gap": -0.1883592018
+        }
+      ],
+      "risk_signal": "favorable",
+      "model_reliability": "weak",
+      "validation_roc_auc": 0.5691967039,
+      "validation_roc_auc_ci95": [
+        0.5225729337,
+        0.6155118218
+      ],
+      "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+    },
+    "prediction": {
+      "win_probability": 0.7274616867,
+      "loss_probability": 0.2725383133,
+      "decision_threshold": 0.6109291994,
+      "predicted_outcome": "Won",
+      "distance_to_threshold": 0.1165324873,
+      "model": "logistic_regression_calibrated",
+      "feature_set": "history",
+      "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+      "calibration": "validation-fitted sigmoid; frozen base model"
+    }
+  },
+  "final_recommendation": "Human review, low confidence: P(Won) 0.727; account history contradicts favorable score.",
+  "actions_executed": [
+    {
+      "tool": "create_review_task",
+      "status": "ok",
+      "task_id": "ee4d69f151ea6366"
+    }
+  ],
+  "blocked_actions": [],
+  "approval_requests": [],
+  "errors": [],
+  "evidence_sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "HF74MC9F",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm/accounts.csv",
+      "key": "Ganjaflex",
+      "fields": [
+        "sector",
+        "year_established",
+        "revenue",
+        "employees",
+        "office_location",
+        "subsidiary_of"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "HF74MC9F",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_bundle.joblib",
+      "key": "08678d86bee1",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_bundle.joblib:history_archive",
+      "key": "HF74MC9F",
+      "fields": [
+        "sales_agent",
+        "account",
+        "product",
+        "engage_date",
+        "close_date",
+        "is_won",
+        "close_value"
+      ]
+    },
+    {
+      "table": "models/trained_models.joblib",
+      "key": "history",
+      "fields": [
+        "logistic_regression",
+        "random_forest",
+        "mlp",
+        "tabnet",
+        "catboost"
+      ]
+    },
+    {
+      "table": "models/explanation_reference.json",
+      "key": "training medians/modes",
+      "fields": [
+        "product",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "engage_month",
+        "engage_dayofweek",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "stopping_reason": "goal_reached_decision_made",
+  "step_budget": 14,
+  "external_side_effects": 0,
+  "content_sha256": "96557923bfcea82081040434b0ddb990736eed71aa1ecc00f96eafd4760d4b5f"
+}

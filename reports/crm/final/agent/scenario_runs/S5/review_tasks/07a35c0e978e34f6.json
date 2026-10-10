@@ -1,0 +1,178 @@
+{
+  "task_id": "07a35c0e978e34f6",
+  "kind": "data_completion",
+  "priority": "normal",
+  "opportunity_id": "7S8SLZDY",
+  "decision": "DATA_COMPLETION",
+  "why_not_more_specific": [
+    "ESCALATE_AT_RISK_REVIEW not supported: no_blocking_data_issue, evidence_sufficient, reasons_available",
+    "MONITOR_NO_TASK not supported: no_blocking_data_issue, evidence_sufficient, score_favorable",
+    "REVIEW_UNCERTAIN not supported: no_blocking_data_issue"
+  ],
+  "suggested_human_checks": [
+    "Complete or correct the CRM record (see the blocking issues).",
+    "Re-run the agent after the record is fixed; until then the score is out of training support."
+  ],
+  "evidence": {
+    "opportunity": {
+      "opportunity_id": "7S8SLZDY",
+      "sales_agent": "Rosalina Dieter",
+      "product": "MG Special",
+      "account": null,
+      "engage_date": "2017-11-27",
+      "deal_stage": "Engaging",
+      "days_open_at_snapshot": 34,
+      "snapshot_date": "2017-12-31"
+    },
+    "account": null,
+    "data_quality": [
+      {
+        "code": "account_missing",
+        "severity": "blocking",
+        "field": "account",
+        "detail": "No account: account inputs are imputed, outside the complete-account training support."
+      },
+      {
+        "code": "outside_training_range",
+        "severity": "warning",
+        "field": "global_closed_count",
+        "detail": "2975 outside training range [0, 2938]."
+      }
+    ],
+    "win_probability": 0.4561771972,
+    "decision_threshold": 0.6109291994,
+    "risk_signal": "at_risk",
+    "evidence_quality": 0,
+    "conflicts": [],
+    "model_reliability": "weak",
+    "prior_history": {},
+    "top_factors": []
+  },
+  "sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "7S8SLZDY",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "7S8SLZDY",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_bundle.joblib",
+      "key": "08678d86bee1",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "created_by": "agent",
+  "created_utc": "2026-10-10T09:54:16.309664+00:00",
+  "status": "open",
+  "external_effect": false,
+  "note": "Predictive association only; not a causal or revenue claim. A human decides any customer action."
+}

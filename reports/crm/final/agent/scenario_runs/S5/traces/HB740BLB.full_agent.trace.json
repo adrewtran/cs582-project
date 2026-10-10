@@ -1,0 +1,1404 @@
+{
+  "trace_version": 1,
+  "agent": "EvidenceGroundedCRMAgent",
+  "policy_version": "evidence-agent-1.0",
+  "configuration": "full_agent",
+  "case": {
+    "opportunity_id": "HB740BLB",
+    "pool": "open",
+    "label": "S5",
+    "requested_actions": []
+  },
+  "goal": {
+    "id": "PRIORITIZE_REVIEW_QUEUE",
+    "description": "Choose which of 25 opportunities need human review first (budget 5)"
+  },
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "started_utc": "2026-10-10T09:54:14.466383+00:00",
+  "finished_utc": "2026-10-10T09:54:14.674797+00:00",
+  "steps": [
+    {
+      "step": 1,
+      "timestamp": "2026-10-10T09:54:13.919115+00:00",
+      "phase": "goal",
+      "state_before": {},
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "evaluation": "Goal selected; start by observing the opportunity."
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-10-10T09:54:13.919414+00:00",
+      "phase": "act",
+      "state_before": {
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "get_opportunity",
+          "slot": "opportunity",
+          "need": 1.0,
+          "cost": 0.02,
+          "utility": 0.98,
+          "applicable": true,
+          "reason": "the goal needs the opportunity record"
+        },
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": null,
+          "cost": 0.02,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        }
+      ],
+      "chosen": "get_opportunity",
+      "tool_call": {
+        "tool": "get_opportunity",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.258
+          }
+        ],
+        "result": {
+          "opportunity_id": "HB740BLB",
+          "sales_agent": "Hayden Neloms",
+          "product": "MG Special",
+          "account": "Silis",
+          "engage_date": "2017-12-20",
+          "deal_stage": "Engaging",
+          "days_open_at_snapshot": 11,
+          "snapshot_date": "2017-12-31"
+        },
+        "sources": [
+          {
+            "table": "data/crm/sales_pipeline.csv",
+            "key": "HB740BLB",
+            "fields": [
+              "opportunity_id",
+              "sales_agent",
+              "product",
+              "account",
+              "engage_date",
+              "deal_stage"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Observed HB740BLB (MG Special, agent Hayden Neloms, account Silis)."
+    },
+    {
+      "step": 3,
+      "timestamp": "2026-10-10T09:54:13.919616+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": 0.8,
+          "cost": 0.02,
+          "utility": 0.78,
+          "applicable": true,
+          "reason": "customer context and a check that the account exists"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the account lookup"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        }
+      ],
+      "chosen": "get_account_information",
+      "tool_call": {
+        "tool": "get_account_information",
+        "permission": "read",
+        "arguments": {
+          "account": "Silis"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.098
+          }
+        ],
+        "result": {
+          "account": "Silis",
+          "sector": "medical",
+          "year_established": 1994,
+          "revenue": 2818.38,
+          "employees": 6290,
+          "office_location": "United States",
+          "subsidiary_of": null
+        },
+        "sources": [
+          {
+            "table": "data/crm/accounts.csv",
+            "key": "Silis",
+            "fields": [
+              "sector",
+              "year_established",
+              "revenue",
+              "employees",
+              "office_location",
+              "subsidiary_of"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Account found: Silis (medical, 6290 employees)."
+    },
+    {
+      "step": 4,
+      "timestamp": "2026-10-10T09:54:13.920208+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "a score must not be trusted before its inputs are checked"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        }
+      ],
+      "chosen": "check_data_quality",
+      "tool_call": {
+        "tool": "check_data_quality",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open",
+          "account_found": true
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.492
+          }
+        ],
+        "result": {
+          "issues": [
+            {
+              "code": "outside_training_range",
+              "severity": "warning",
+              "field": "global_closed_count",
+              "detail": "2975 outside training range [0, 2938]."
+            }
+          ],
+          "blocking": [],
+          "warnings": [
+            "outside_training_range"
+          ],
+          "imputed_inputs": []
+        },
+        "sources": [
+          {
+            "table": "data/crm (joined pipeline row)",
+            "key": "HB740BLB",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_year",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "is_subsidiary",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "agent_cold_start",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "account_cold_start",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "product_cold_start",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          },
+          {
+            "table": "models/model_card.json",
+            "key": "training_categories,training_numeric_range",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Blocking issues: none; warnings: ['outside_training_range']."
+    },
+    {
+      "step": 5,
+      "timestamp": "2026-10-10T09:54:13.932094+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "the goal needs the model estimate"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        }
+      ],
+      "chosen": "predict_win_probability",
+      "tool_call": {
+        "tool": "predict_win_probability",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 11.752
+          }
+        ],
+        "result": {
+          "win_probability": 0.6023965756,
+          "loss_probability": 0.3976034244,
+          "decision_threshold": 0.6109291994,
+          "predicted_outcome": "Lost",
+          "distance_to_threshold": -0.0085326238,
+          "model": "logistic_regression_calibrated",
+          "feature_set": "history",
+          "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+          "calibration": "validation-fitted sigmoid; frozen base model"
+        },
+        "sources": [
+          {
+            "table": "models/model_bundle.joblib",
+            "key": "08678d86bee1",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_year",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "is_subsidiary",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "agent_cold_start",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "account_cold_start",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "product_cold_start",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Calibrated P(Won) 0.6024 vs threshold 0.6109: borderline."
+    },
+    {
+      "step": 6,
+      "timestamp": "2026-10-10T09:54:13.932191+00:00",
+      "phase": "plan",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "disabled in this configuration"
+        }
+      ],
+      "chosen": null,
+      "evaluation": "No remaining tool clears the minimum information gain; assess the evidence."
+    },
+    {
+      "step": 7,
+      "timestamp": "2026-10-10T09:54:14.467329+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": 0.5,
+          "cost": 0.08,
+          "utility": 0.42,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "get_prior_sales_history",
+      "tool_call": {
+        "tool": "get_prior_sales_history",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.37
+          }
+        ],
+        "result": {
+          "agent_closed_count": 65.0,
+          "agent_win_rate": 0.7318847539,
+          "agent_mean_close_value": 1637.6307692308,
+          "agent_mean_cycle_days": 50.4461538462,
+          "agent_cold_start": 0.0,
+          "account_closed_count": 32.0,
+          "account_win_rate": 0.5197819668,
+          "account_mean_close_value": 1348.625,
+          "account_mean_cycle_days": 50.375,
+          "account_cold_start": 0.0,
+          "product_closed_count": 539.0,
+          "product_win_rate": 0.6640292882,
+          "product_mean_close_value": 36.5658627087,
+          "product_mean_cycle_days": 48.5120593692,
+          "product_cold_start": 0.0,
+          "global_closed_count": 2975.0,
+          "global_win_rate": 0.6463865546,
+          "global_mean_close_value": 1523.6278991597,
+          "global_mean_cycle_days": 47.0117647059,
+          "eligible_archive_count": 2975,
+          "strict_before": true,
+          "latest_prior_close_date": "2017-07-14",
+          "query_date": "2017-12-20",
+          "archive": "frozen training archive (closed strictly before engagement; own outcome excluded)"
+        },
+        "sources": [
+          {
+            "table": "models/model_bundle.joblib:history_archive",
+            "key": "HB740BLB",
+            "fields": [
+              "sales_agent",
+              "account",
+              "product",
+              "engage_date",
+              "close_date",
+              "is_won",
+              "close_value"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Prior closed deals: agent 65, account 32, product 539 (archive win rate 0.646)."
+    },
+    {
+      "step": 8,
+      "timestamp": "2026-10-10T09:54:14.643720+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "check_model_agreement",
+      "tool_call": {
+        "tool": "check_model_agreement",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 175.849
+          }
+        ],
+        "result": {
+          "members": {
+            "logistic_regression": {
+              "raw_win_probability": 0.4010347254,
+              "validation_percentile": 0.4411894946
+            },
+            "random_forest": {
+              "raw_win_probability": 0.5573136293,
+              "validation_percentile": 0.9188078983
+            },
+            "mlp": {
+              "raw_win_probability": 0.534216702,
+              "validation_percentile": 0.6637283132
+            },
+            "tabnet": {
+              "raw_win_probability": 0.5712308288,
+              "validation_percentile": 0.5722227231
+            },
+            "catboost": {
+              "raw_win_probability": 0.5693506988,
+              "validation_percentile": 0.9551978966
+            }
+          },
+          "selected_model": "logistic_regression",
+          "disagreeing_models": [
+            "random_forest",
+            "mlp",
+            "tabnet",
+            "catboost"
+          ],
+          "disagreement_share": 1.0,
+          "percentile_spread": 0.514008402,
+          "committee_split": true,
+          "note": "Percentiles use each model's validation score distribution (models/model_card.json); no test row is used."
+        },
+        "sources": [
+          {
+            "table": "models/trained_models.joblib",
+            "key": "history",
+            "fields": [
+              "logistic_regression",
+              "random_forest",
+              "mlp",
+              "tabnet",
+              "catboost"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Committee disagreement 1.00 (split)."
+    },
+    {
+      "step": 9,
+      "timestamp": "2026-10-10T09:54:14.673658+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": 0.5,
+          "cost": 0.15,
+          "utility": 0.35,
+          "applicable": true,
+          "reason": "cannot change the action (REVIEW_UNCERTAIN), but the review task needs this context"
+        }
+      ],
+      "chosen": "explain_prediction",
+      "tool_call": {
+        "tool": "explain_prediction",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "HB740BLB",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 29.226
+          }
+        ],
+        "result": {
+          "factors": [
+            {
+              "feature": "global_closed_count",
+              "value": 2975.0,
+              "reference": 514.0,
+              "delta_p_win": -0.221524011,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "sales_agent",
+              "value": "Hayden Neloms",
+              "reference": "Darcel Schlecht",
+              "delta_p_win": 0.1918041585,
+              "direction": "supports win"
+            },
+            {
+              "feature": "engage_quarter",
+              "value": 4.0,
+              "reference": 2.0,
+              "delta_p_win": -0.1897960254,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "product_closed_count",
+              "value": 539.0,
+              "reference": 83.0,
+              "delta_p_win": -0.0579145105,
+              "direction": "opposes win"
+            },
+            {
+              "feature": "agent_win_rate",
+              "value": 0.7318847539,
+              "reference": 0.6542617047,
+              "delta_p_win": -0.0420775198,
+              "direction": "opposes win"
+            }
+          ],
+          "method": "single-feature reference sensitivity of the selected calibrated model",
+          "interpretation": "predictive association inside this model; not additive and not a causal business effect"
+        },
+        "sources": [
+          {
+            "table": "models/explanation_reference.json",
+            "key": "training medians/modes",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Top factor: global_closed_count (-0.2215)"
+    },
+    {
+      "step": 10,
+      "timestamp": "2026-10-10T09:54:14.673759+00:00",
+      "phase": "plan",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [],
+      "chosen": null,
+      "evaluation": "No remaining tool clears the minimum information gain; assess the evidence."
+    },
+    {
+      "step": 11,
+      "timestamp": "2026-10-10T09:54:14.673841+00:00",
+      "phase": "evaluate",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "chosen": "evaluate_evidence",
+      "tool_call": {
+        "tool": "evaluate_evidence",
+        "permission": "compute",
+        "arguments": {
+          "beliefs": "current belief state"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.029
+          }
+        ],
+        "result": {
+          "evidence_quality": 0.75,
+          "evidence_checks": {
+            "account_present": true,
+            "account_history_supported": true,
+            "product_history_supported": true,
+            "agent_history_supported": true,
+            "no_imputed_inputs": true,
+            "inputs_in_training_support": false,
+            "committee_agrees": false
+          },
+          "sufficient": true,
+          "blocking_issues": [],
+          "conflicts": [
+            {
+              "code": "model_committee_split",
+              "disagreeing_models": [
+                "random_forest",
+                "mlp",
+                "tabnet",
+                "catboost"
+              ],
+              "disagreement_share": 1.0
+            }
+          ],
+          "risk_signal": "borderline",
+          "model_reliability": "weak",
+          "validation_roc_auc": 0.5691967039,
+          "validation_roc_auc_ci95": [
+            0.5225729337,
+            0.6155118218
+          ],
+          "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+        },
+        "sources": [
+          {
+            "table": "models/model_card.json",
+            "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Evidence quality 0.75 (sufficient); risk borderline; conflicts ['model_committee_split']; model reliability weak."
+    },
+    {
+      "step": 12,
+      "timestamp": "2026-10-10T09:54:14.673906+00:00",
+      "phase": "decide",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "candidates": [
+        {
+          "decision": "ESCALATE_AT_RISK_REVIEW",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": true,
+            "no_conflicting_evidence": false,
+            "model_not_indistinguishable_from_chance": true,
+            "score_at_risk": false,
+            "reasons_available": true
+          },
+          "valid": false
+        },
+        {
+          "decision": "MONITOR_NO_TASK",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": true,
+            "no_conflicting_evidence": false,
+            "model_not_indistinguishable_from_chance": true,
+            "score_favorable": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "REVIEW_UNCERTAIN",
+          "requirements": {
+            "prediction_available": true,
+            "no_blocking_data_issue": true
+          },
+          "valid": true
+        },
+        {
+          "decision": "DATA_COMPLETION",
+          "requirements": {
+            "blocking_data_issue": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "ABSTAIN",
+          "requirements": {},
+          "valid": true
+        }
+      ],
+      "chosen": "REVIEW_UNCERTAIN",
+      "evaluation": "Most specific supported action: REVIEW_UNCERTAIN.",
+      "rejected": [
+        "ESCALATE_AT_RISK_REVIEW not supported: no_conflicting_evidence, score_at_risk",
+        "MONITOR_NO_TASK not supported: no_conflicting_evidence, score_favorable"
+      ]
+    },
+    {
+      "step": 13,
+      "timestamp": "2026-10-10T09:54:14.674746+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "agreement": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "explanation": "known",
+        "history": "known",
+        "opportunity": "known",
+        "prediction": "known"
+      },
+      "goal": {
+        "id": "PRIORITIZE_REVIEW_QUEUE",
+        "description": "Choose which of 25 opportunities need human review first (budget 5)"
+      },
+      "chosen": "create_review_task",
+      "tool_call": {
+        "tool": "create_review_task",
+        "permission": "local_write",
+        "arguments": {
+          "task_id": "1f00de287884ade0",
+          "kind": "sales_review"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.571
+          }
+        ],
+        "result": {
+          "task_id": "1f00de287884ade0",
+          "path": "/home/antran/projects/cs582-project/reports/crm/final/agent/scenario_runs/S5/review_tasks/1f00de287884ade0.json",
+          "external_effect": false
+        },
+        "sources": [],
+        "error": ""
+      },
+      "evaluation": "sales_review task 1f00de287884ade0 (medium priority): ok."
+    }
+  ],
+  "decision": {
+    "action": "REVIEW_UNCERTAIN",
+    "why_not_more_specific": [
+      "ESCALATE_AT_RISK_REVIEW not supported: no_conflicting_evidence, score_at_risk",
+      "MONITOR_NO_TASK not supported: no_conflicting_evidence, score_favorable"
+    ],
+    "assessment": {
+      "evidence_quality": 0.75,
+      "evidence_checks": {
+        "account_present": true,
+        "account_history_supported": true,
+        "product_history_supported": true,
+        "agent_history_supported": true,
+        "no_imputed_inputs": true,
+        "inputs_in_training_support": false,
+        "committee_agrees": false
+      },
+      "sufficient": true,
+      "blocking_issues": [],
+      "conflicts": [
+        {
+          "code": "model_committee_split",
+          "disagreeing_models": [
+            "random_forest",
+            "mlp",
+            "tabnet",
+            "catboost"
+          ],
+          "disagreement_share": 1.0
+        }
+      ],
+      "risk_signal": "borderline",
+      "model_reliability": "weak",
+      "validation_roc_auc": 0.5691967039,
+      "validation_roc_auc_ci95": [
+        0.5225729337,
+        0.6155118218
+      ],
+      "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+    },
+    "prediction": {
+      "win_probability": 0.6023965756,
+      "loss_probability": 0.3976034244,
+      "decision_threshold": 0.6109291994,
+      "predicted_outcome": "Lost",
+      "distance_to_threshold": -0.0085326238,
+      "model": "logistic_regression_calibrated",
+      "feature_set": "history",
+      "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+      "calibration": "validation-fitted sigmoid; frozen base model"
+    }
+  },
+  "final_recommendation": "Human review, low confidence: P(Won) 0.602; score within 0.05 of the decision threshold; model committee split.",
+  "actions_executed": [
+    {
+      "tool": "create_review_task",
+      "status": "ok",
+      "task_id": "1f00de287884ade0"
+    }
+  ],
+  "blocked_actions": [],
+  "approval_requests": [],
+  "errors": [],
+  "evidence_sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "HB740BLB",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm/accounts.csv",
+      "key": "Silis",
+      "fields": [
+        "sector",
+        "year_established",
+        "revenue",
+        "employees",
+        "office_location",
+        "subsidiary_of"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "HB740BLB",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_bundle.joblib",
+      "key": "08678d86bee1",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_bundle.joblib:history_archive",
+      "key": "HB740BLB",
+      "fields": [
+        "sales_agent",
+        "account",
+        "product",
+        "engage_date",
+        "close_date",
+        "is_won",
+        "close_value"
+      ]
+    },
+    {
+      "table": "models/trained_models.joblib",
+      "key": "history",
+      "fields": [
+        "logistic_regression",
+        "random_forest",
+        "mlp",
+        "tabnet",
+        "catboost"
+      ]
+    },
+    {
+      "table": "models/explanation_reference.json",
+      "key": "training medians/modes",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "stopping_reason": "goal_reached_decision_made",
+  "step_budget": 14,
+  "external_side_effects": 0,
+  "content_sha256": "9b32f63730c8d3fad3449bdece7c17e040762c7bb14e871b603acf25fa2f0985"
+}

@@ -1,117 +1,126 @@
-# CS 582 CRM Sales Opportunities
+# CS 582 — Predicting CRM Sales Opportunities
 
-Group 2: Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui.
+## Setup (once)
 
-Project giữ đúng đề tài CRM đã báo cáo với giáo sư. Bản nâng cấp gồm **xác suất Won/Lost**, **lý do của model** và **Sales Assistant đề xuất review actions kèm bằng chứng**. Chạy CPU, không cần GPU hoặc API trả phí.
-
-**Hướng dẫn demo từng bước: [docs/PROFESSOR_DEMO_GUIDE.md](docs/PROFESSOR_DEMO_GUIDE.md).** Giải thích code: [docs/PROJECT_WALKTHROUGH.md](docs/PROJECT_WALKTHROUGH.md).
-
-## Chạy trên Google Colab
-
-1. Tải **Code → Download ZIP** và `notebooks/CRM_Sales_Opportunities.ipynb` từ cùng branch. Trước PR merge, dùng **adrewtran/cs582-project → codex/crm-history-agent**; sau merge dùng **thai-phan/cs582-project → main**.
-2. Mở [Google Colab](https://colab.research.google.com/), **File → Upload notebook**, chọn notebook vừa tải.
-3. Runtime Python **3.12**, accelerator **None/CPU**. Setup dừng nếu phiên bản chưa được kiểm thử.
-4. **Runtime → Run all**. Upload đúng một ZIP source khi được hỏi. Không upload `.patch` hoặc ZIP chỉ có kết quả.
-5. Notebook cài môi trường riêng, chạy tests, 6 model × 2 feature sets, xuất tài liệu, rồi demo bằng model thật.
-6. Kiểm tra `PASS: full`, bảng A/B và `CRM SALES ASSISTANT`. Cell cuối tải ZIP kết quả; lưu trước khi runtime ngắt.
-
-Không cần đổi tài khoản GitHub kết nối ChatGPT. Colab miễn phí có quota; xem [FAQ chính thức](https://research.google.com/colaboratory/faq.html). Nhóm vẫn cần xác nhận upload/download trong Colab và import Google Slides; thực thi code cell trong môi trường phát triển không xác nhận các UI này.
-
-## Một lần setup, một lệnh full run
-
-Từ thư mục chứa README, Python 3.12:
+Python 3.12, CPU only.
 
 ```bash
-python scripts/setup_cpu.py
-.venv-crm/bin/python -m src.run_project
+python3.12 scripts/tools/setup_cpu.py      # creates .venv-crm and installs the pinned dependencies
 ```
 
-Runner thực hiện validate/join, split, history, 12 lượt fit CPU, selection trên validation, evaluation, calibration, explanations/SHAP, leakage audit, assistant, report, PPTX và script. Bất kỳ model bắt buộc nào lỗi đều dừng pipeline.
+All commands below run from the repository root with `.venv-crm/bin/python` (Windows: `.venv-crm\Scripts\python.exe`).
+
+## Live demo of the agent (one command, offline, ~5 s)
 
 ```bash
-# Verification
-.venv-crm/bin/python -m pytest -q
-.venv-crm/bin/python -m pip check
-
-# Demo từ saved bundle, không train lại
-.venv-crm/bin/python -m src.demo
-.venv-crm/bin/python -m src.demo --opportunity-id 01XZ9CRY --json
-
-# Smoke test, không dùng số liệu báo cáo
-.venv-crm/bin/python -m src.run_project --quick
-
-# Giữ output riêng
-.venv-crm/bin/python -m src.run_project --output reports/crm/my_run
-.venv-crm/bin/python -m src.demo --bundle reports/crm/my_run/model_bundle.joblib
-
-# Regenerate tài liệu từ A/B outputs
-.venv-crm/bin/python -m src.upgrade_deliverables reports/crm/final
-
-# Chạy experiment không sinh tài liệu; hoặc raw-only để kiểm tra tương thích
-.venv-crm/bin/python -m src.run_project --no-documents
-.venv-crm/bin/python -m src.run_project --raw-only --output reports/crm/raw_only
+.venv-crm/bin/python -m src.agent_demo                              # one real Engaging deal, narrated step by step
+.venv-crm/bin/python -m src.agent_demo --scenario missing-account   # also: borderline, conflict, invalid, tool-failure, prohibited
+.venv-crm/bin/python -m src.agent_demo --batch 10 --budget 3        # several deals → prioritized human-review queue
+.venv-crm/bin/python -m src.assistant_demo                          # Baseline B: the earlier rule-based assistant
 ```
 
-`--quick` ghi `reports/crm/smoke`, nhãn `SMOKE_TEST_NOT_FINAL`. Full mặc định ghi `reports/crm/final`. Rerun cùng folder ghi đè artifact cùng tên; dùng output khác để giữ kết quả. Linux CPU đã kiểm thử; không tuyên bố đã kiểm thử Windows/macOS. Joblib chỉ được load từ nguồn tin cậy.
+The demo loads the saved models in `reports/crm/final/` (no training, no API key, no network) and writes its trace and review tasks to `reports/crm/agent_demo/` (git-ignored). The step-by-step professor demo guide is `docs/EXCELLENT_PROJECT_DEMO_STEP_BY_STEP.md`. The architecture and decision policy are in `docs/AGENT_ARCHITECTURE.md`. The three-speaker ESL transcript is in `docs/ESL_PRESENTATION_TRANSCRIPT.md`.
 
-## Kết quả và novelty
+## Documents
 
-Nguồn số liệu hiện tại: [ablation_comparison.csv](reports/crm/final/ablation_comparison.csv). A là 18 features gốc; B thêm 19 features lịch sử, cùng split. Bảng chứa cả validation/test metrics riêng cho 12 lượt fit.
-
-Validation chọn **history / Logistic Regression**: validation AUC khoảng 0.5692, test AUC **0.5168** so với raw LR **0.5238** (−0.0070). History chưa cải thiện kết quả này. Raw CatBoost có test AUC khoảng 0.5424 nhưng không được chọn sau khi xem test. Calibrated Brier của selected model khoảng 0.2489, vẫn kém Dummy 0.2421. Đây chưa phải model đủ tốt cho sales prioritization.
-
-| Đóng góp | Implementation | Bằng chứng |
-|---|---|---|
-| Leakage audit | `analysis.leakage_control` | `leakage_audit.csv`, diagnostic C |
-| Lịch sử đúng thời điểm | `history.build_history` | Row audit, coverage, invariance tests |
-| Sales Assistant | `sales_agent.recommend` | Rule IDs, evidence, rationale, batch JSONL và real-model CLI |
-
-Đây là đóng góp ứng dụng có kiểm chứng, không phải thuật toán mới. CatBoost là comparator, SHAP hỗ trợ giải thích. Không có bằng chứng tăng doanh thu hoặc causal uplift. [NOVELTY_AND_RESULTS.md](docs/NOVELTY_AND_RESULTS.md) có đối chiếu rubric và trả lời ESL.
-
-## Data và protocol
-
-[Maven CRM Sales Opportunities](https://mavenanalytics.io/data-playground/crm-sales-opportunities) mô tả công ty phần cứng B2B giả lập. Raw CSV giữ nguyên trong `data/crm`; SHA-256 ghi trong manifest. Các synthetic experiments nhóm thêm trong `data/crm_synthetic` và scripts riêng được giữ nguyên; runner chính không trộn chúng vào kết quả CRM gốc.
-
-- 8.800 opportunities, 85 accounts, 7 products, 35 sales-team rows và một data dictionary.
-- 6.711 closed: 4.238 Won / 2.473 Lost. Score 1.589 dated Engaging, trong đó 1.088 thiếu account. Không gán open thành Lost; không score 500 Prospecting thiếu ngày.
-- Train 2.975 / validation 583 / test 1.361; purge 1.792 outcomes chưa biết ở cutoff. Ngày cắt 2017-07-15 và 2017-09-18; cùng ngày cùng tập.
-- History archive chỉ chứa **train**. Query tại T chỉ dùng deal khác có **close_date < T**, loại closure cùng ngày và chính ID. Outcome validation/test không cập nhật archive.
-- Agent/account/product: prior count, smoothed win rate, mean value/cycle, cold-start. Thêm 4 global statistics, tổng 19 history features.
-- Smoothing cố định 5. Khi history thiếu dùng eligible global prior; global rỗng: p=.5, count/value/cycle=0. Missing account không gộp thành một khách hàng.
-- Current `close_value`, `close_date`, `deal_stage`, `opportunity_id` không là predictor. Past mean value chỉ từ deal khác đã đóng trước T.
-- Preprocessing fit train; model/epoch/threshold/calibration chọn bằng validation. `selection_lock.json` tạo trước test. Test đã từng được xem nên là exploratory holdout, không phải independent external test.
-
-TabNet có thể khác giữa CPU/runtime dù cùng seed và pins; không chọn lần có test đẹp hơn. Frozen histories tạo khác biệt phân phối giữa train và các period sau. Account/team/product là snapshot tĩnh. Closed-only sampling và missing open accounts hạn chế khả năng áp dụng thực tế.
-
-## Outputs và diễn giải
-
-| File/field | Ý nghĩa |
+| File | Content |
 |---|---|
-| `experiments/raw`, `experiments/history` | Chi tiết A/B: metrics, figures, configs, model và split |
-| `history_audit.csv`, `history_coverage.csv` | Đối chiếu eligibility theo thời gian và mức đủ history |
-| `open_deal_predictions.csv` | Probabilities, legacy win-priority và reference sensitivities |
-| `sales_assistant_outputs.jsonl` | Tách `model_prediction` và `agent_recommendation`, một dòng mỗi deal |
-| `loss_risk` | HIGH nếu P(win)<.40; MEDIUM nếu <.70; LOW nếu ≥.70; khác High win-priority |
-| `actions` | 2–4 review requests có rule ID, evidence, rationale; không tự gửi email hoặc giảm giá |
-| `timing` | Retrospective snapshot nếu engagement trước lúc model sẵn sàng |
-| `rf_shap_*` | Diagnostic riêng cho RF chưa calibration; không gán thành explanation của selected model khác |
-| `model_bundle.joblib` | Saved model, preprocessing, reference, threshold, frozen history archive |
+| `CRM_IEEE_Paper.docx` | Paper (hand-maintained; numbers checked by `tests/test_documents.py`) |
+| `CRM_Final.pptx`, `slide.md` | Slides (21 + 3 backup) and their reviewable source with speaker notes |
+| `docs/ESL_PRESENTATION_TRANSCRIPT.md` | Three-speaker ESL script and professor Q&A |
+| `docs/EXCELLENT_PROJECT_DEMO_STEP_BY_STEP.md` | Step-by-step demo guide (Vietnamese instructions, English sentences) |
+| `docs/AGENT_ARCHITECTURE.md` | Agent design, decision policy and novelty hypothesis |
+| `NOVELTY_AND_RESULTS.md` | Prediction results, agent comparison, ablations, replay, contribution table |
 
-Reference sensitivity thay một input bằng train reference; không additive và không causal. Correlated features có thể khiến perturbation không thực tế. Rules kiểm tra missing/thin history hoặc supported weak patterns, rồi yêu cầu verify status và human review. Chưa có user study hoặc intervention study.
+The notebooks' saved outputs were cleared in the 2026-10-10 merge because the results changed; run them to see current outputs.
 
-## Tài liệu cho professor
+## Dataset 1: real CRM data (`data/crm/`)
 
-- [Hướng dẫn demo](docs/PROFESSOR_DEMO_GUIDE.md)
-- [Báo cáo](reports/crm/final/deliverables/CRM_Final_Report.md), cùng folder có DOCX
-- [PowerPoint 12 slides](reports/crm/final/deliverables/CRM_Final_Presentation.pptx)
-- [ESL script 11 phút (10–12 phút), 3 người](reports/crm/final/deliverables/SPEAKER_SCRIPT_ESL.md), cùng folder có DOCX
-- [Tóm tắt kết quả](reports/crm/final/deliverables/RESULTS_SUMMARY.md)
-- [Verification record](docs/VERIFICATION.md)
+Results go to `reports/crm/final/`.
 
-PPTX có native text/table và speaker notes. Template trong `assets`, normal pipeline chỉ cần Python để điền nội dung, không cần design API/Node. Nhóm inspect sau Google Slides import. Giới hạn 1–8 slides trước đây dành cho progress forum; xác nhận giới hạn final. Chưa tự ghi đóng góp thực tế, merge PR hoặc nộp bài.
+### Full pipeline
 
-## Khi nào coi là chạy xong?
+```bash
+.venv-crm/bin/python -m src.run_project                               # train → evaluate → predict → agent evaluation
+.venv-crm/bin/python -m src.run_project --quick                       # smoke test → reports/crm/smoke/ (not reportable)
+.venv-crm/bin/python -m src.run_project --output reports/crm/my_run   # keep a separate run
+```
 
-Manifest `status=complete`, `mode=full`; comparison 12 dòng; selected table 6 model; confusion counts cộng 1.361. Open scores 1.589 và win+loss=1. History không có closure cùng/sau query date. Live demo khớp exported score. Tests kiểm tra invariance, model fits, rules, empty inputs và artifact consistency.
+### Step by step
 
-`scripts/verify_notebook.py` chạy nguyên 7 code cells tuần tự trong một Python process; không kiểm chứng Jupyter/Colab UI. Tests pass chứng minh phần mềm hoạt động, không chứng minh predictive utility.
+```bash
+.venv-crm/bin/python -m src.train              # 6 models × {raw, history} features; lock selection on validation; calibrate; save to models/
+.venv-crm/bin/python -m src.evaluate           # test metrics, 12-row feature-set comparison, figures, SHAP, checks
+.venv-crm/bin/python -m src.predict            # score the 1,589 open Engaging deals → predictions/
+.venv-crm/bin/python -m src.agent.experiment   # A vs B vs agent, ablations, outcome-masked replay → agent/
+```
+
+Add `--output PATH` to `evaluate` and `predict` when `train` used a different output folder.
+
+### Notebooks
+
+Open with the `.venv-crm` kernel and run in order: `notebooks/original/1_train.ipynb`, `2_evaluate.ipynb`, `3_predict.ipynb`.
+They run the same steps as the commands above, one cell per step, and write to the same `reports/crm/final/`.
+
+### Score new deals
+
+```bash
+.venv-crm/bin/python -m src.predict --input new_deals.csv --save new_deal_scores.csv
+```
+
+`new_deals.csv` uses the `sales_pipeline.csv` format: `opportunity_id, sales_agent, product, account, engage_date` (date as `m/d/yy`).
+
+### 3-month expected revenue (illustrative)
+
+```bash
+.venv-crm/bin/python scripts/analysis/expected_revenue_3m.py    # → predictions/expected_revenue_3m.json
+```
+
+## Dataset 2: simulated data (`data/crm_simulated/`)
+
+Results never go to `reports/crm/final/`.
+
+### Generate the data (only if `data/crm_simulated/` is missing or you want new data)
+
+```bash
+.venv-crm/bin/python scripts/simulation/make_simulated_products.py
+.venv-crm/bin/python scripts/simulation/make_industry_trends.py
+.venv-crm/bin/python scripts/simulation/make_simulated_deals.py --n-deals 100000 --seed 582 --interaction-strength 3
+```
+
+### Full pipeline
+
+```bash
+.venv-crm/bin/python -m src.train    --data-dir data/crm_simulated      # → reports/crm/simulated/final/
+.venv-crm/bin/python -m src.evaluate --output reports/crm/simulated/final
+.venv-crm/bin/python -m src.predict  --output reports/crm/simulated/final
+```
+
+The simulated data uses 29 features by default: the 18 standard ones plus 11 deal-level ones (sector match, industry trend, rival product). `--quick` on `train` writes to `reports/crm/simulated/smoke/` instead. `evaluate` and `predict` reload the data folder recorded by `train`. On 100,000 deals, `evaluate` is slow because the split-protocol check refits every model.
+
+### Notebooks
+
+Run in order: `notebooks/simulated/1_train.ipynb`, `2_evaluate.ipynb`, `3_predict.ipynb` (writes to `reports/crm/simulated/final/`).
+In `2_evaluate.ipynb`, the slow split-protocol and explanation checks run only with `RUN_CHECKS = True`.
+
+### Model comparison: standard vs extended features, and the oracle
+
+```bash
+.venv-crm/bin/python scripts/simulation/run_simulated_models.py --quick   # ~20 s → data/crm_simulated/model_results_quick.csv
+.venv-crm/bin/python scripts/simulation/run_simulated_models.py           # ~5–6 min → data/crm_simulated/model_results.csv
+```
+
+### Repeat over several seeds (error bars)
+
+```bash
+.venv-crm/bin/python scripts/simulation/run_simulated_seeds.py --seeds 1 2 3 4 5 --strengths 1 3
+.venv-crm/bin/python scripts/simulation/run_simulated_seeds.py --strengths 1 --smooth 1 --tag _smooth
+```
+
+Writes `seed_results*.csv` and `seed_summary*.csv` to `data/crm_simulated/`.
+
+### Product ranking (illustrative)
+
+```bash
+.venv-crm/bin/python scripts/analysis/product_investment_report.py   # → data/crm_simulated/product_investment.csv
+```

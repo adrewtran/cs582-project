@@ -1,0 +1,79 @@
+{
+  "status": "complete",
+  "mode": "full",
+  "policy_version": "evidence-agent-1.0",
+  "completed_utc": "2026-10-10T11:05:05.846681+00:00",
+  "elapsed_seconds": 4332.7527873059735,
+  "model": {
+    "feature_set": "history",
+    "name": "logistic_regression_calibrated",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22"
+  },
+  "open_cases": 1589,
+  "replay_cases": 1361,
+  "replay_base_win_rate": 0.6002939015429831,
+  "scenarios_passed": {
+    "S1": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "S2": {
+      "A": false,
+      "B": true,
+      "C": true
+    },
+    "S3": {
+      "A": false,
+      "B": true,
+      "C": true
+    },
+    "S4": {
+      "A": false,
+      "B": false,
+      "C": true
+    },
+    "S5": {
+      "A": false,
+      "B": false,
+      "C": true
+    },
+    "S6a": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "S6b": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "S6c": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "S6d": {
+      "A": false,
+      "B": false,
+      "C": true
+    },
+    "S7": {
+      "A": false,
+      "B": false,
+      "C": true
+    }
+  },
+  "determinism": {
+    "agent_cases": 200,
+    "agent_identical_hashes": 200,
+    "rule_assistant_identical": 200
+  },
+  "tool_replay": {
+    "calls": 880,
+    "matched": 880
+  },
+  "claims": "every cited claim re-derived from raw CSVs / saved bundle via separate code paths",
+  "interpretation": "Workflow and safety properties under a stated evidence policy. Several checks test capabilities the agent was designed to add; they do not measure sales conversion, revenue or causal uplift.",
+  "base_commit": "ba5f635c350ba548b667b8ab655a1ddcd25875ec"
+}

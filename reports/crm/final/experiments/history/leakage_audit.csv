@@ -1,3 +1,0 @@
-model,accuracy,balanced_accuracy,precision,recall,f1,macro_f1,roc_auc,average_precision,brier,log_loss,tn,fp,fn,tp,threshold,purpose
-logistic_regression,0.426157237325496,0.5020688584491324,0.608433734939759,0.12362301101591187,0.20549338758901323,0.3781923522188885,0.5167949906400748,0.6095395491240563,0.3179993428837416,0.8404537768811324,479,65,716,101,0.41,Pre-close feature set; no outcome predictors
-LEAKY_close_value_stump,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,2.2204460492503136e-16,544,0,0,817,0.5,Invalid future information; illustration only

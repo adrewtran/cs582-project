@@ -1,12 +1,12 @@
 {
   "status": "complete",
   "mode": "full",
-  "started_utc": "2026-10-08T09:58:22.178893+00:00",
+  "started_utc": "2026-10-10T09:49:23.184039+00:00",
   "seed": 42,
-  "python": "3.12.14",
-  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.39",
   "machine": "x86_64",
-  "run_location": "execution environment; Google Colab has not been independently verified",
+  "run_location": "local CPU execution; see platform and machine",
   "features": [
     "product",
     "series",
@@ -46,12 +46,13 @@
     "global_mean_close_value",
     "global_mean_cycle_days"
   ],
+  "data_dir": "data/crm",
   "raw_sha256": {
-    "accounts.csv": "13e9d5f6d84e87d23c5d708c22609e5ef2ee36bb335c1cafb1c26266edea0cf8",
-    "data_dictionary.csv": "bb5b4735cbb97893a90317754eca8baedff9b0c069410a704a13364c80e9e125",
-    "products.csv": "ca087f1baaea66d6ff43b02b33cad3211ce8dff07e1d20382ba94bab04dfb7c4",
     "sales_pipeline.csv": "23486f3389e92bac2ba134bc7532c9db444abfeff9f44bb002b944ed00c539b3",
-    "sales_teams.csv": "88ad66bc934488cac475f01267823daf5ad6fdad6de736f7210cfb4b26b42705"
+    "accounts.csv": "13e9d5f6d84e87d23c5d708c22609e5ef2ee36bb335c1cafb1c26266edea0cf8",
+    "products.csv": "ca087f1baaea66d6ff43b02b33cad3211ce8dff07e1d20382ba94bab04dfb7c4",
+    "sales_teams.csv": "88ad66bc934488cac475f01267823daf5ad6fdad6de736f7210cfb4b26b42705",
+    "data_dictionary.csv": "bb5b4735cbb97893a90317754eca8baedff9b0c069410a704a13364c80e9e125"
   },
   "split": {
     "method": "engagement date groups + outcome availability purge",
@@ -75,51 +76,81 @@
     "shap": "0.50.0",
     "catboost": "1.2.10",
     "matplotlib": "3.10.8",
-    "joblib": "1.6.0",
-    "python-pptx": "1.0.2",
-    "python-docx": "1.2.0"
+    "joblib": "1.6.0"
   },
-  "base_commit": "08a96d48b4892b70fb099573f570b4ef015d95e6",
+  "base_commit": "ba5f635c350ba548b667b8ab655a1ddcd25875ec",
   "source_sha256": {
     "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "src/analysis.py": "47030f55e75b6f79a34d39a71db4c84c4fe67e27148bb22c4a4d3b3f9246900e",
-    "src/crm_workflow.py": "ef922efa469dfa8b5b2b18cc83a0124c16483b151f51cfe1815272b54b8d752b",
-    "src/data.py": "adec564bbcbf1f7bb9d94d74a04a4dfbbae22be85badafabcf7ea5880c26bfe1",
-    "src/datasets/__init__.py": "6de80fe8a037a317fc578b935786571ca794daa7875e99863eb938345d43a83e",
-    "src/datasets/__main__.py": "617fcb331c24c133ce4afffbff284a038f197c1ae4447022743f660065e91b35",
-    "src/datasets/crm.py": "47480be0ae6f09df47d68624113244a38f185850d0d5cdcae4c2a1f63fecd7a8",
-    "src/deliverables.py": "cfdec640ff756d6cae72b05f9687bef4617d65c51c560240a7a154180cbad08b",
-    "src/demo.py": "76e8b3889fb5da5e5490057af428ee7f0d96c75ff8a1405f5b17ec5b5777d981",
-    "src/evaluation.py": "1120e107b0cbc85c925c11d053b16f03a4eb4c90f09792a262e7b5503930dcf2",
-    "src/experiments.py": "0c79a10182d9f1a82401f7ec898fb70790d57a9e403050463df3003059fe9771",
-    "src/explain.py": "a081f3631e742b49f2595550de39ecfe857ddf8fdaf7ce605c9b36802aedd018",
-    "src/features.py": "91bf1a3d17f4374d590bbc51aea9b9cc6b2611007a61b0dee0dbb9d784584256",
-    "src/history.py": "809f253b49a85121cc7007e725a29084ac4f7dcd074447f1de8badc080b3352b",
-    "src/models.py": "ffa75a45fdf8ba4cd5270bf3eafe40bee300abc464247ec5fa93f369ad569753",
-    "src/presentation_story.py": "b884a8e5a8bdabe1a2d493c17df9cf0254ec15edd5a54d35e1a3dbe5d4c4d790",
-    "src/run_project.py": "8b56b67635c7f4ef3d030ba59fa11cb99f0d61642ef63505a05805dbd9379645",
-    "src/sales_agent.py": "f3137a70aa74d7670503303ddc250c4fb82daf6159aa4f369c192d37ecdde2f6",
-    "src/temporal.py": "b208e4ad264177eab74305e3fde1ab268ebbb7c50a5a1461ed9fee4699240203",
-    "src/upgrade_deliverables.py": "83f0829b805d5eba69059bf2ae22d78ced7968623ea6d34c88546e72722d22b7"
+    "src/agent/__init__.py": "3ce48fb4e85534b21deebfe3bcf9d4322bd00b38c4568270e320f72627458837",
+    "src/agent/assistant.py": "daa74545b71b478ad68402559a3864243747096b89e8b002735b305f57dc5621",
+    "src/agent/controller.py": "9b793817a9f7ef36e34d9d69ec3bb4809ddbbfe8271197eabcde36c4cc46642b",
+    "src/agent/experiment.py": "ae7f25e40d53b66f901cf1ebc6879fe67c2a84da32de71de93872c0e994da88e",
+    "src/agent/planner.py": "2599ca9a41f136364e3c8f52570a66a8da7a92cabdf5fc5366993de1a82f39b1",
+    "src/agent/policy.py": "8b825f0736aff376419470665b0b9895a4e3acc6d6f86a07030e2e8a09a8e327",
+    "src/agent/scenarios.py": "a7dc990eefc2a733d76d8749a9377755031bffbb62c38fc0daf7ae56be380161",
+    "src/agent/tools.py": "2de82e4d04c6c308025073605bfad61f6a33796bbe93b930229834a939ed8690",
+    "src/agent_demo.py": "e4e0fe6b2ab9b8ad0a1dde518471fb1a6171046829f244b4c817f93be84cd02d",
+    "src/assistant_demo.py": "9cca15fb9e39874fe3eb591dc9eee86ad5892c441de892984f7e009dcd5f3536",
+    "src/data/__init__.py": "8a451db792fe11d66cb69f3f0ebd54314c1bc3c610c6f6a7c39f0681d91a57ef",
+    "src/data/__main__.py": "3a1a92ca3ceed87d872b9b4c429ca86f941fe8c018ce92b2857c1841f5917af2",
+    "src/data/crm.py": "e7fa56e107f4f6c201d46fa2db38f359b337790e36fe84c46f226f295ab1d103",
+    "src/data/dataset.py": "afb9272d4efc477a48c7d5d246f00041d6656e9b9e66bbc92b38e2335a2d1395",
+    "src/data/history.py": "809f253b49a85121cc7007e725a29084ac4f7dcd074447f1de8badc080b3352b",
+    "src/data/preprocess.py": "9c02b1f805c10e95391badec5b4e441ad0a64cbb7a57c55fd46b083ad7700e8f",
+    "src/data/simulated.py": "d064a242825d3b5f8019224c138417944122620327c40396c066767e14c136db",
+    "src/data/split.py": "77eabd1789e0ec2733623b03fa147df44beef88c14008307faa84140aae789da",
+    "src/evaluate.py": "a7681fc770f56c4267041649bade9969a946fcbffb2f7fed0f84e9a86f5a085f",
+    "src/evaluation/__init__.py": "f0d777341278dd2ba40b37f5bd91a7d8c990a83b8f6ace1ca7c3e5d24e25e0be",
+    "src/evaluation/audits.py": "13f6d462e18faca8a92295cf675825d07c6eef4940107174b688c8442e4a4bbe",
+    "src/evaluation/figures.py": "19d5b543308b195a9c40091e22027fe78a7536540942c1b82e191f37fa0c348d",
+    "src/evaluation/metrics.py": "32c1721e0d5d9db7d18d5dd0fca182cd1be8cf00879a79270d11aced61a10991",
+    "src/evaluation/novelty_checks.py": "d63dbeb926d443840cf310d454cc36472ba3e1bc90b4a7da761f5821c7d83fd3",
+    "src/explain/__init__.py": "28d89482c0af3c91c183a559097355fdec0df4ee1472e5d9acdf3f30c80f89c1",
+    "src/explain/importance.py": "ca1a771254d67d94bdb2be4d4adcb27a5069824d74a12a2042a678edeb8c18b6",
+    "src/explain/priority.py": "834db748d802f94d8c31f9c4eb899927dd2882cad1e804f3fd4960490936e888",
+    "src/explain/reference.py": "9ad26e2c1105ce8cf1d453d6ffa09e6cbe3dbbfad6cfcb7867f604bd878e627a",
+    "src/models/__init__.py": "c4fdebfa383aa2255798899ca176d5464ddeb6712b3495873c4590a81cf8ad99",
+    "src/models/bundle.py": "160334740702531d56022c392b6c42fd79f10e866cd11d5d1a8bc1fc2715f0b6",
+    "src/models/calibration.py": "cc25952674fde8ff12affd96ac4734182c8900e221f3906e8168a0c096d50d84",
+    "src/models/zoo.py": "9e4af72b3bd7f6c6c472361b43c9bf292a909022343c22b22ae425e7367efe5d",
+    "src/outputs.py": "232b2ca8bf3fb072772f21555d449b7f85a0b31fd69fc37cf0d5a167e6e6208b",
+    "src/predict.py": "6b1bfbef26a6fe4e6aeb9110c6827af8a32ac7528c355eb980e424354fa5a326",
+    "src/run_project.py": "b63acdbe485e66531f5dcad7af60590c86474172356aacf707132dc7211a09ba",
+    "src/train.py": "03eb5facf81192d255b4de6562ba7b4a59d6e21ee64fba3d8fa7baccf1d59142"
   },
   "selected_model": "logistic_regression",
-  "selection_rule": "validation ROC-AUC, then lower Brier, then model name",
+  "feature_set": "history",
+  "feature_sets_compared": [
+    "raw",
+    "history"
+  ],
+  "selection_rule": "validation ROC-AUC, then lower validation Brier, then feature set, then model name",
+  "selection_lock": "models/selection_lock.json",
+  "model_available_date": "2017-09-18",
   "calibration": {
     "method": "positive-slope sigmoid on validation logit scores; base remains frozen",
-    "slope": 0.9615117003723773,
-    "intercept": 0.8011767111756979
+    "slope": 0.9615116975785121,
+    "intercept": 0.801176709793909
   },
   "raw_decision_threshold": 0.41,
-  "calibrated_decision_threshold": 0.6109291994821234,
+  "calibrated_decision_threshold": 0.6109291993953841,
   "threshold_rule": "validation macro-F1; 0.10..0.90 by 0.01; ties closest to 0.50",
   "priority": {
     "medium_min": 0.4,
     "high_min": 0.7,
     "status": "unvalidated heuristic, not a business policy"
   },
-  "experiment": "history",
-  "model_available_date": "2017-09-18",
-  "scored_open_rows": 1589,
+  "stages": {
+    "train": "2026-10-10T09:49:47.038235+00:00",
+    "evaluate": "2026-10-10T09:52:47.348018+00:00",
+    "predict": "2026-10-10T09:52:50.617651+00:00",
+    "agent": "2026-10-10T11:05:05.856430+00:00"
+  },
+  "novelty_checks": {
+    "split_protocol_max_auc_gain": 0.03565037050029507,
+    "rf_explanation_spearman_median": 0.5437659307009597,
+    "deletion_ratio_top_to_random": 6.329222347963887
+  },
   "limitations": [
     "Previously inspected dataset: exploratory holdout, not an untouched external test.",
     "Outcome-availability purge reduces but cannot remove right-censoring/closed-only selection bias.",
@@ -130,12 +161,8 @@
     "Missing-account open deals are out of training support; no validated uplift or causal recommendation.",
     "Probability calibration and priority thresholds need external/prospective validation."
   ],
-  "elapsed_seconds": 138.20898590299998,
-  "completed_utc": "2026-10-08T10:00:40.387827+00:00",
-  "selected_experiment": "history",
-  "comparison_models": 12,
-  "selection_lock": "selection_lock.json",
-  "history_protocol": "frozen training archive; close_date strictly before engagement; exclude query ID",
-  "selected_variant_export_seconds": 29.640175150999994,
-  "timing_scope": "entire raw/history comparison, training and deliverables"
+  "scored_open_rows": 1589,
+  "agent_experiment": "agent/experiment.json",
+  "completed_utc": "2026-10-10T11:05:06.407091+00:00",
+  "elapsed_seconds": 4540.681758416002
 }

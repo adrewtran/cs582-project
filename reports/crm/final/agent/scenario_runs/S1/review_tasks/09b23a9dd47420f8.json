@@ -1,0 +1,280 @@
+{
+  "task_id": "09b23a9dd47420f8",
+  "kind": "sales_review",
+  "priority": "high",
+  "opportunity_id": "01XZ9CRY",
+  "decision": "ESCALATE_AT_RISK_REVIEW",
+  "why_not_more_specific": [],
+  "suggested_human_checks": [
+    "Confirm the deal is still active and who owns the next step.",
+    "Review the listed negative factors and prior outcomes with the account owner.",
+    "Decide on any customer contact yourself; the agent sends nothing."
+  ],
+  "evidence": {
+    "opportunity": {
+      "opportunity_id": "01XZ9CRY",
+      "sales_agent": "Zane Levy",
+      "product": "GTX Plus Pro",
+      "account": "Initech",
+      "engage_date": "2017-09-18",
+      "deal_stage": "Engaging",
+      "days_open_at_snapshot": 104,
+      "snapshot_date": "2017-12-31"
+    },
+    "account": {
+      "account": "Initech",
+      "sector": "telecommunications",
+      "year_established": 1994,
+      "revenue": 6395.05,
+      "employees": 20275,
+      "office_location": "United States",
+      "subsidiary_of": null
+    },
+    "data_quality": [
+      {
+        "code": "outside_training_range",
+        "severity": "warning",
+        "field": "global_closed_count",
+        "detail": "2975 outside training range [0, 2938]."
+      }
+    ],
+    "win_probability": 0.5343117235,
+    "decision_threshold": 0.6109291994,
+    "risk_signal": "at_risk",
+    "evidence_quality": 0.85,
+    "conflicts": [],
+    "model_reliability": "weak",
+    "prior_history": {
+      "agent_closed_count": 120.0,
+      "agent_win_rate": 0.5938554622,
+      "account_closed_count": 28.0,
+      "account_win_rate": 0.5827858416,
+      "product_closed_count": 324.0,
+      "product_win_rate": 0.6542004036,
+      "global_closed_count": 2975.0,
+      "global_win_rate": 0.6463865546
+    },
+    "top_factors": [
+      {
+        "feature": "global_closed_count",
+        "value": 2975.0,
+        "reference": 514.0,
+        "delta_p_win": -0.2455981237,
+        "direction": "opposes win"
+      },
+      {
+        "feature": "engage_quarter",
+        "value": 3.0,
+        "reference": 2.0,
+        "delta_p_win": -0.1110766168,
+        "direction": "opposes win"
+      },
+      {
+        "feature": "product_mean_close_value",
+        "value": 3572.712962963,
+        "reference": 359.111969112,
+        "delta_p_win": -0.0835754907,
+        "direction": "opposes win"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "01XZ9CRY",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm/accounts.csv",
+      "key": "Initech",
+      "fields": [
+        "sector",
+        "year_established",
+        "revenue",
+        "employees",
+        "office_location",
+        "subsidiary_of"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "01XZ9CRY",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_bundle.joblib",
+      "key": "08678d86bee1",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_bundle.joblib:history_archive",
+      "key": "01XZ9CRY",
+      "fields": [
+        "sales_agent",
+        "account",
+        "product",
+        "engage_date",
+        "close_date",
+        "is_won",
+        "close_value"
+      ]
+    },
+    {
+      "table": "models/explanation_reference.json",
+      "key": "training medians/modes",
+      "fields": [
+        "product",
+        "sector",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/trained_models.joblib",
+      "key": "history",
+      "fields": [
+        "logistic_regression",
+        "random_forest",
+        "mlp",
+        "tabnet",
+        "catboost"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "created_by": "agent",
+  "created_utc": "2026-10-10T09:53:36.580459+00:00",
+  "status": "open",
+  "external_effect": false,
+  "note": "Predictive association only; not a causal or revenue claim. A human decides any customer action."
+}

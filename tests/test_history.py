@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from src.history import build_history, augment_dataset, HISTORY_COLUMNS
-from src.datasets.crm import build
-from src.temporal import asof_split
+from src.data.history import build_history, augment_dataset, HISTORY_COLUMNS
+from src.data.crm import build
+from src.data.split import asof_split
 
 
 def archive():

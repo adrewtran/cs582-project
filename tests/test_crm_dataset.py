@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.datasets import crm
+from src.data import crm
 
 
 CRM_DATA = Path(__file__).resolve().parents[1] / "data" / "crm"

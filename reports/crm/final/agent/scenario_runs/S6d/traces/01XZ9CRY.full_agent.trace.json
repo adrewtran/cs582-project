@@ -1,0 +1,811 @@
+{
+  "trace_version": 1,
+  "agent": "EvidenceGroundedCRMAgent",
+  "policy_version": "evidence-agent-1.0",
+  "configuration": "full_agent",
+  "case": {
+    "opportunity_id": "01XZ9CRY",
+    "pool": "open",
+    "label": "S6d",
+    "requested_actions": []
+  },
+  "goal": {
+    "id": "TRIAGE_OPPORTUNITY",
+    "description": "Decide the safest supported review action for 01XZ9CRY"
+  },
+  "model": {
+    "name": "logistic_regression_calibrated",
+    "feature_set": "history",
+    "bundle_sha256": "08678d86bee16689bc5d703ba2ee2164db4464bade9f3c0fbf43a5907861eb22",
+    "decision_threshold": 0.6109291994,
+    "validation_roc_auc": 0.5691967039,
+    "validation_roc_auc_ci95": [
+      0.5225729337,
+      0.6155118218
+    ],
+    "model_available_date": "2017-09-18"
+  },
+  "started_utc": "2026-10-10T09:54:17.054659+00:00",
+  "finished_utc": "2026-10-10T09:54:17.143577+00:00",
+  "steps": [
+    {
+      "step": 1,
+      "timestamp": "2026-10-10T09:54:17.054676+00:00",
+      "phase": "goal",
+      "state_before": {},
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "evaluation": "Goal selected; start by observing the opportunity."
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-10-10T09:54:17.054955+00:00",
+      "phase": "act",
+      "state_before": {
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "tool": "get_opportunity",
+          "slot": "opportunity",
+          "need": 1.0,
+          "cost": 0.02,
+          "utility": 0.98,
+          "applicable": true,
+          "reason": "the goal needs the opportunity record"
+        },
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": null,
+          "cost": 0.02,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs the opportunity record first"
+        }
+      ],
+      "chosen": "get_opportunity",
+      "tool_call": {
+        "tool": "get_opportunity",
+        "permission": "read",
+        "arguments": {
+          "opportunity_id": "01XZ9CRY",
+          "pool": "open"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.218
+          }
+        ],
+        "result": {
+          "opportunity_id": "01XZ9CRY",
+          "sales_agent": "Zane Levy",
+          "product": "GTX Plus Pro",
+          "account": "Initech",
+          "engage_date": "2017-09-18",
+          "deal_stage": "Engaging",
+          "days_open_at_snapshot": 104,
+          "snapshot_date": "2017-12-31"
+        },
+        "sources": [
+          {
+            "table": "data/crm/sales_pipeline.csv",
+            "key": "01XZ9CRY",
+            "fields": [
+              "opportunity_id",
+              "sales_agent",
+              "product",
+              "account",
+              "engage_date",
+              "deal_stage"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Observed 01XZ9CRY (GTX Plus Pro, agent Zane Levy, account Initech)."
+    },
+    {
+      "step": 3,
+      "timestamp": "2026-10-10T09:54:17.055226+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "tool": "get_account_information",
+          "slot": "account",
+          "need": 0.8,
+          "cost": 0.02,
+          "utility": 0.78,
+          "applicable": true,
+          "reason": "customer context and a check that the account exists"
+        },
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the account lookup"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "get_account_information",
+      "tool_call": {
+        "tool": "get_account_information",
+        "permission": "read",
+        "arguments": {
+          "account": "Initech"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.102
+          }
+        ],
+        "result": {
+          "account": "Initech",
+          "sector": "telecommunications",
+          "year_established": 1994,
+          "revenue": 6395.05,
+          "employees": 20275,
+          "office_location": "United States",
+          "subsidiary_of": null
+        },
+        "sources": [
+          {
+            "table": "data/crm/accounts.csv",
+            "key": "Initech",
+            "fields": [
+              "sector",
+              "year_established",
+              "revenue",
+              "employees",
+              "office_location",
+              "subsidiary_of"
+            ]
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Account found: Initech (telecommunications, 20275 employees)."
+    },
+    {
+      "step": 4,
+      "timestamp": "2026-10-10T09:54:17.143046+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "tool": "check_data_quality",
+          "slot": "data_quality",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "a score must not be trusted before its inputs are checked"
+        },
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": null,
+          "cost": 0.05,
+          "utility": null,
+          "applicable": false,
+          "reason": "waits for the data-quality check"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "check_data_quality",
+      "tool_call": {
+        "tool": "check_data_quality",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "01XZ9CRY",
+          "pool": "open",
+          "account_found": true
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 87.707
+          }
+        ],
+        "result": {
+          "issues": [
+            {
+              "code": "outside_training_range",
+              "severity": "warning",
+              "field": "global_closed_count",
+              "detail": "2975 outside training range [0, 2938]."
+            }
+          ],
+          "blocking": [],
+          "warnings": [
+            "outside_training_range"
+          ],
+          "imputed_inputs": []
+        },
+        "sources": [
+          {
+            "table": "data/crm (joined pipeline row)",
+            "key": "01XZ9CRY",
+            "fields": [
+              "product",
+              "series",
+              "sector",
+              "office_location",
+              "regional_office",
+              "manager",
+              "sales_agent",
+              "sales_price",
+              "revenue",
+              "employees",
+              "revenue_per_employee",
+              "year_established",
+              "account_age_at_engage",
+              "engage_year",
+              "engage_month",
+              "engage_quarter",
+              "engage_dayofweek",
+              "is_subsidiary",
+              "agent_closed_count",
+              "agent_win_rate",
+              "agent_mean_close_value",
+              "agent_mean_cycle_days",
+              "agent_cold_start",
+              "account_closed_count",
+              "account_win_rate",
+              "account_mean_close_value",
+              "account_mean_cycle_days",
+              "account_cold_start",
+              "product_closed_count",
+              "product_win_rate",
+              "product_mean_close_value",
+              "product_mean_cycle_days",
+              "product_cold_start",
+              "global_closed_count",
+              "global_win_rate",
+              "global_mean_close_value",
+              "global_mean_cycle_days"
+            ]
+          },
+          {
+            "table": "models/model_card.json",
+            "key": "training_categories,training_numeric_range",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Blocking issues: none; warnings: ['outside_training_range']."
+    },
+    {
+      "step": 5,
+      "timestamp": "2026-10-10T09:54:17.143183+00:00",
+      "phase": "act",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": null,
+          "cost": 0.08,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "predict_win_probability",
+          "slot": "prediction",
+          "need": 0.9,
+          "cost": 0.05,
+          "utility": 0.85,
+          "applicable": true,
+          "reason": "the goal needs the model estimate"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a prediction attempt first"
+        }
+      ],
+      "chosen": "predict_win_probability",
+      "tool_call": {
+        "tool": "predict_win_probability",
+        "permission": "compute",
+        "arguments": {
+          "opportunity_id": "01XZ9CRY",
+          "pool": "open"
+        },
+        "status": "error",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "error",
+            "error": "RuntimeError: model file unreadable (injected fault for evaluation)",
+            "duration_ms": 0.008
+          },
+          {
+            "attempt": 2,
+            "status": "error",
+            "error": "RuntimeError: model file unreadable (injected fault for evaluation)",
+            "duration_ms": 0.003
+          }
+        ],
+        "result": {},
+        "sources": [],
+        "error": "RuntimeError: model file unreadable (injected fault for evaluation)"
+      },
+      "evaluation": "predict_win_probability failed after 2 attempt(s): RuntimeError: model file unreadable (injected fault for evaluation). No value is assumed."
+    },
+    {
+      "step": 6,
+      "timestamp": "2026-10-10T09:54:17.143391+00:00",
+      "phase": "plan",
+      "state_before": {
+        "account": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "tool": "get_prior_sales_history",
+          "slot": "history",
+          "need": 0.05,
+          "cost": 0.08,
+          "utility": -0.03,
+          "applicable": true,
+          "reason": "cannot change the action (ABSTAIN) and no sales review task needs it"
+        },
+        {
+          "tool": "check_model_agreement",
+          "slot": "agreement",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a successful prediction"
+        },
+        {
+          "tool": "explain_prediction",
+          "slot": "explanation",
+          "need": null,
+          "cost": 0.15,
+          "utility": null,
+          "applicable": false,
+          "reason": "needs a successful prediction"
+        }
+      ],
+      "chosen": null,
+      "evaluation": "No remaining tool clears the minimum information gain; assess the evidence."
+    },
+    {
+      "step": 7,
+      "timestamp": "2026-10-10T09:54:17.143476+00:00",
+      "phase": "evaluate",
+      "state_before": {
+        "account": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "chosen": "evaluate_evidence",
+      "tool_call": {
+        "tool": "evaluate_evidence",
+        "permission": "compute",
+        "arguments": {
+          "beliefs": "current belief state"
+        },
+        "status": "ok",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "ok",
+            "error": "",
+            "duration_ms": 0.024
+          }
+        ],
+        "result": {
+          "evidence_quality": 0.4,
+          "evidence_checks": {
+            "account_present": true,
+            "account_history_supported": false,
+            "product_history_supported": false,
+            "agent_history_supported": false,
+            "no_imputed_inputs": true,
+            "inputs_in_training_support": false,
+            "committee_agrees": false
+          },
+          "sufficient": false,
+          "blocking_issues": [],
+          "conflicts": [],
+          "risk_signal": null,
+          "model_reliability": "weak",
+          "validation_roc_auc": 0.5691967039,
+          "validation_roc_auc_ci95": [
+            0.5225729337,
+            0.6155118218
+          ],
+          "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+        },
+        "sources": [
+          {
+            "table": "models/model_card.json",
+            "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+            "fields": []
+          }
+        ],
+        "error": ""
+      },
+      "evaluation": "Evidence quality 0.40 (insufficient); risk None; conflicts none; model reliability weak."
+    },
+    {
+      "step": 8,
+      "timestamp": "2026-10-10T09:54:17.143529+00:00",
+      "phase": "decide",
+      "state_before": {
+        "account": "known",
+        "assessment": "known",
+        "data_quality": "known",
+        "opportunity": "known",
+        "prediction": "failed"
+      },
+      "goal": {
+        "id": "TRIAGE_OPPORTUNITY",
+        "description": "Decide the safest supported review action for 01XZ9CRY"
+      },
+      "candidates": [
+        {
+          "decision": "ESCALATE_AT_RISK_REVIEW",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": false,
+            "no_conflicting_evidence": true,
+            "model_not_indistinguishable_from_chance": true,
+            "score_at_risk": false,
+            "reasons_available": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "MONITOR_NO_TASK",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true,
+            "evidence_sufficient": false,
+            "no_conflicting_evidence": true,
+            "model_not_indistinguishable_from_chance": true,
+            "score_favorable": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "REVIEW_UNCERTAIN",
+          "requirements": {
+            "prediction_available": false,
+            "no_blocking_data_issue": true
+          },
+          "valid": false
+        },
+        {
+          "decision": "DATA_COMPLETION",
+          "requirements": {
+            "blocking_data_issue": false
+          },
+          "valid": false
+        },
+        {
+          "decision": "ABSTAIN",
+          "requirements": {},
+          "valid": true
+        }
+      ],
+      "chosen": "ABSTAIN",
+      "evaluation": "Most specific supported action: ABSTAIN.",
+      "rejected": [
+        "ESCALATE_AT_RISK_REVIEW not supported: prediction_available, evidence_sufficient, score_at_risk, reasons_available",
+        "MONITOR_NO_TASK not supported: prediction_available, evidence_sufficient, score_favorable",
+        "REVIEW_UNCERTAIN not supported: prediction_available",
+        "DATA_COMPLETION not supported: blocking_data_issue"
+      ]
+    }
+  ],
+  "decision": {
+    "action": "ABSTAIN",
+    "why_not_more_specific": [
+      "ESCALATE_AT_RISK_REVIEW not supported: prediction_available, evidence_sufficient, score_at_risk, reasons_available",
+      "MONITOR_NO_TASK not supported: prediction_available, evidence_sufficient, score_favorable",
+      "REVIEW_UNCERTAIN not supported: prediction_available",
+      "DATA_COMPLETION not supported: blocking_data_issue"
+    ],
+    "assessment": {
+      "evidence_quality": 0.4,
+      "evidence_checks": {
+        "account_present": true,
+        "account_history_supported": false,
+        "product_history_supported": false,
+        "agent_history_supported": false,
+        "no_imputed_inputs": true,
+        "inputs_in_training_support": false,
+        "committee_agrees": false
+      },
+      "sufficient": false,
+      "blocking_issues": [],
+      "conflicts": [],
+      "risk_signal": null,
+      "model_reliability": "weak",
+      "validation_roc_auc": 0.5691967039,
+      "validation_roc_auc_ci95": [
+        0.5225729337,
+        0.6155118218
+      ],
+      "rules": "evidence weights {'account_present': 0.25, 'account_history_supported': 0.15, 'product_history_supported': 0.1, 'agent_history_supported': 0.1, 'no_imputed_inputs': 0.15, 'inputs_in_training_support': 0.15, 'committee_agrees': 0.1}; sufficient >= 0.7; borderline margin 0.05; reliability from the validation AUC CI only"
+    },
+    "prediction": null
+  },
+  "final_recommendation": "No recommendation: required information could not be obtained (see errors).",
+  "actions_executed": [],
+  "blocked_actions": [],
+  "approval_requests": [],
+  "errors": [
+    {
+      "tool": "predict_win_probability",
+      "error": "RuntimeError: model file unreadable (injected fault for evaluation)"
+    }
+  ],
+  "evidence_sources": [
+    {
+      "table": "data/crm/sales_pipeline.csv",
+      "key": "01XZ9CRY",
+      "fields": [
+        "opportunity_id",
+        "sales_agent",
+        "product",
+        "account",
+        "engage_date",
+        "deal_stage"
+      ]
+    },
+    {
+      "table": "data/crm/accounts.csv",
+      "key": "Initech",
+      "fields": [
+        "sector",
+        "year_established",
+        "revenue",
+        "employees",
+        "office_location",
+        "subsidiary_of"
+      ]
+    },
+    {
+      "table": "data/crm (joined pipeline row)",
+      "key": "01XZ9CRY",
+      "fields": [
+        "product",
+        "series",
+        "sector",
+        "office_location",
+        "regional_office",
+        "manager",
+        "sales_agent",
+        "sales_price",
+        "revenue",
+        "employees",
+        "revenue_per_employee",
+        "year_established",
+        "account_age_at_engage",
+        "engage_year",
+        "engage_month",
+        "engage_quarter",
+        "engage_dayofweek",
+        "is_subsidiary",
+        "agent_closed_count",
+        "agent_win_rate",
+        "agent_mean_close_value",
+        "agent_mean_cycle_days",
+        "agent_cold_start",
+        "account_closed_count",
+        "account_win_rate",
+        "account_mean_close_value",
+        "account_mean_cycle_days",
+        "account_cold_start",
+        "product_closed_count",
+        "product_win_rate",
+        "product_mean_close_value",
+        "product_mean_cycle_days",
+        "product_cold_start",
+        "global_closed_count",
+        "global_win_rate",
+        "global_mean_close_value",
+        "global_mean_cycle_days"
+      ]
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "training_categories,training_numeric_range",
+      "fields": []
+    },
+    {
+      "table": "models/model_card.json",
+      "key": "validation_roc_auc,validation_calibrated_roc_auc_ci95",
+      "fields": []
+    }
+  ],
+  "stopping_reason": "required_information_unavailable",
+  "step_budget": 14,
+  "external_side_effects": 0,
+  "content_sha256": "1d1b2c5542bad090c4371e389f73a1ef21d202bd13823300d4c6cfe9b212e1f8"
+}

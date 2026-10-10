@@ -1,4 +1,4 @@
-from src.crm_workflow import priority_group
+from src.explain.priority import priority_group
 
 
 def test_priority_group_thresholds_are_explicit():

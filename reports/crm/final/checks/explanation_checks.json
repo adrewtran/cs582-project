@@ -1,0 +1,24 @@
+{
+  "agreement": {
+    "model": "random_forest_raw",
+    "rows": 64,
+    "features": 37,
+    "top_k": 3,
+    "spearman_median": 0.5437659307009597,
+    "spearman_mean": 0.5375574682939135,
+    "top_overlap_mean": 0.734375,
+    "top_overlap_random_expectation": 0.08108108108108109,
+    "top_feature_same_sign_rate": 1.0
+  },
+  "deletion": {
+    "model": "logistic_regression_calibrated",
+    "rows": 1361,
+    "top_k": 3,
+    "random_draws": 20,
+    "mean_abs_change_top": 0.35566797054894567,
+    "mean_abs_change_random": 0.05619457667866009,
+    "ratio_top_to_random": 6.329222347963887,
+    "share_rows_top_exceeds_random": 0.9992652461425422
+  },
+  "note": "Checks whether explanations describe model behaviour; they do not test causal effects."
+}
