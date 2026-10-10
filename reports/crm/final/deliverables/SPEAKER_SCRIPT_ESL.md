@@ -76,7 +76,11 @@ For the demo, we can upload the project ZIP, run the notebook and inspect the ge
 
 ## Short Q&A practice
 
-**What is the novelty?** Our contribution is an explainable CRM workflow with checks for future information and missing inputs. It combines probability prediction with reasons and an audit trail. We are not claiming a new machine learning algorithm.
+**What is the novelty?** We do not claim a new algorithm. Our contribution is an explainable CRM workflow where every safeguard has evidence. The leaky control shows how an outcome field fakes a perfect score. We compared our time-based split with a random split. We checked that the explanations really describe the model. A known-truth simulation shows the pipeline learns when signal exists.
+
+**Does your time-based split really matter?** On this dataset, the effect is small. A random split gives an AUC up to 0.04 higher, but every protocol is still close to chance. We measured it instead of assuming it. The much bigger danger is the close value field.
+
+**How do you know the explanations are correct?** We tested them against the model. If we reset a deal's top three factors, the score moves about 3 times more than if we reset three random factors. They also agree with SHAP on the Random Forest. This shows they describe the model, not that they are real causes.
 
 **Why is the accuracy low?** The available pre-close features contain little useful signal in this test. We prefer to report that honestly instead of using information that is only known after the outcome.
 

@@ -1,0 +1,29 @@
+{
+  "label": "ILLUSTRATIVE_NOT_A_VALIDATED_FORECAST",
+  "source": "/Users/thaiphan/sources/miu/cs582-project/reports/crm/final/predictions/open_deal_predictions.csv",
+  "scoring_context": [
+    "frozen_model_snapshot_demo"
+  ],
+  "all_open_deals": {
+    "deals": 1589,
+    "pipeline_value": 3892229.0,
+    "expected_revenue": 2502556.3777542566
+  },
+  "account_present_only": {
+    "deals": 501,
+    "pipeline_value": 1269836.0,
+    "expected_revenue": 831484.1625202673
+  },
+  "simulation": {
+    "n": 10000,
+    "p05": 2379829.95,
+    "p50": 2504151.0,
+    "p95": 2625304.25
+  },
+  "caveats": [
+    "Model ROC-AUC ~0.5: probabilities barely rank deals.",
+    "List sales_price, not close_value.",
+    "Only current Engaging deals; no new deals or Prospecting rows.",
+    "Simulation treats deals as independent and ignores model error."
+  ]
+}

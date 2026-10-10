@@ -1,11 +1,11 @@
 {
   "status": "complete",
   "mode": "full",
-  "started_utc": "2026-10-06T19:41:05.038515+00:00",
+  "started_utc": "2026-10-10T03:23:13.711211+00:00",
   "seed": 42,
-  "python": "3.12.14",
-  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
-  "machine": "x86_64",
+  "python": "3.12.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
   "run_location": "execution environment; Google Colab has not been independently verified",
   "features": [
     "product",
@@ -28,11 +28,11 @@
     "is_subsidiary"
   ],
   "raw_sha256": {
-    "accounts.csv": "13e9d5f6d84e87d23c5d708c22609e5ef2ee36bb335c1cafb1c26266edea0cf8",
-    "data_dictionary.csv": "bb5b4735cbb97893a90317754eca8baedff9b0c069410a704a13364c80e9e125",
-    "products.csv": "ca087f1baaea66d6ff43b02b33cad3211ce8dff07e1d20382ba94bab04dfb7c4",
-    "sales_pipeline.csv": "23486f3389e92bac2ba134bc7532c9db444abfeff9f44bb002b944ed00c539b3",
-    "sales_teams.csv": "88ad66bc934488cac475f01267823daf5ad6fdad6de736f7210cfb4b26b42705"
+    "accounts.csv": "521344f5ce3ebf3b326c738cf629a384bb50e904f3557dbde5a2698d69b7f076",
+    "data_dictionary.csv": "1e6f31b4da309d399fffdd0a730094bd74204656e54641fc6574611fd3227f12",
+    "products.csv": "6152b6f9428ffd5366c9e368acb4065d9536d05c258fd8a920f03f49b82c4dae",
+    "sales_pipeline.csv": "18d781d618ae14fcefd28552c2c39210f0178c94d56d58950c4783fccff120e0",
+    "sales_teams.csv": "ba7d8ae5caab9abbcdb426672f943d36ab962f0bc40e9e67f60e00e93c1cb447"
   },
   "split": {
     "method": "engagement date groups + outcome availability purge",
@@ -51,7 +51,7 @@
     "pandas": "2.2.3",
     "scipy": "1.18.1",
     "scikit-learn": "1.8.0",
-    "torch": "2.8.0+cpu",
+    "torch": "2.8.0",
     "pytorch-tabnet": "4.1.0",
     "shap": "0.50.0",
     "matplotlib": "3.10.8",
@@ -59,44 +59,61 @@
     "python-pptx": "1.0.2",
     "python-docx": "1.2.0"
   },
-  "base_commit": "f37826f90bebb7f7a33046222b81c28b09fa37d4",
+  "base_commit": "1272dfc3bb2b904cfa3df4fdf3d6bafba45a0230",
   "source_sha256": {
     "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "src/analysis.py": "ec6d3d7d0fa87355f76aa457bbe46c2c070e020d58d766b0ba2b2ede207fde15",
-    "src/baselines.py": "6ad5bc57ed45bd7b282db57f00e5ed7536eda30414611ea4d25b19a26187a3e2",
-    "src/crm_workflow.py": "aff10a9f228ff0a6dd2c8843646343fbb4f8a955493ba63edbaa4c086b64779e",
-    "src/data.py": "adec564bbcbf1f7bb9d94d74a04a4dfbbae22be85badafabcf7ea5880c26bfe1",
-    "src/datasets/__init__.py": "ea733940105a17b34c892a0e9dbed86cfa2fe816ceae0e9eca60183d74f916f9",
-    "src/datasets/__main__.py": "b2177d759da9477f5b2b64b767e1bcaffdcb9bfa03538d839248dd8b5ea643f1",
-    "src/datasets/bank.py": "dd7b6fd30b773c084668e8bafbfc60aefb21552d9b473a9b31d6993a334ebe6b",
-    "src/datasets/crm.py": "47480be0ae6f09df47d68624113244a38f185850d0d5cdcae4c2a1f63fecd7a8",
-    "src/datasets/leads.py": "17861ba98a40f7d05f7630b9bfb3abf36afc3bf2e849c4ace1455b0556eba2cd",
-    "src/datasets/telco.py": "c93b8ad3e0c129fba7b1266b8a0c00608ee10e0b81062520d2cae56e5217f746",
-    "src/deliverables.py": "72e4c86c9e1461d3e0119a6aab42027d5d6a5bffdeb16c3640aa5f46512deeeb",
-    "src/evaluation.py": "1120e107b0cbc85c925c11d053b16f03a4eb4c90f09792a262e7b5503930dcf2",
-    "src/explain.py": "a081f3631e742b49f2595550de39ecfe857ddf8fdaf7ce605c9b36802aedd018",
-    "src/features.py": "91bf1a3d17f4374d590bbc51aea9b9cc6b2611007a61b0dee0dbb9d784584256",
-    "src/models.py": "d07fc192ae71a5bb1cffc68c971c7452e708cd85ab3f235926bf0814912e83b6",
-    "src/run_project.py": "557b8025732933d64064df2bbbb82dc0e525d24756b1a4ad9b42f658bde9a510",
-    "src/summary.py": "e54b6c7773d827b401d657f82ddfcbededc768879e88a512bcd921e928233d22",
-    "src/temporal.py": "b208e4ad264177eab74305e3fde1ab268ebbb7c50a5a1461ed9fee4699240203"
+    "src/data/__init__.py": "8a451db792fe11d66cb69f3f0ebd54314c1bc3c610c6f6a7c39f0681d91a57ef",
+    "src/data/__main__.py": "3a1a92ca3ceed87d872b9b4c429ca86f941fe8c018ce92b2857c1841f5917af2",
+    "src/data/crm.py": "6f8839333c08316abb5499d3aca7d8ca960756e519cfb63387131505e40c0237",
+    "src/data/dataset.py": "afb9272d4efc477a48c7d5d246f00041d6656e9b9e66bbc92b38e2335a2d1395",
+    "src/data/preprocess.py": "9c02b1f805c10e95391badec5b4e441ad0a64cbb7a57c55fd46b083ad7700e8f",
+    "src/data/split.py": "77eabd1789e0ec2733623b03fa147df44beef88c14008307faa84140aae789da",
+    "src/evaluate.py": "cf039b7e565fc4cbae254ada42bdfb83833089a1a176a5976d4072296666bbeb",
+    "src/evaluation/__init__.py": "f0d777341278dd2ba40b37f5bd91a7d8c990a83b8f6ace1ca7c3e5d24e25e0be",
+    "src/evaluation/audits.py": "13f6d462e18faca8a92295cf675825d07c6eef4940107174b688c8442e4a4bbe",
+    "src/evaluation/figures.py": "19d5b543308b195a9c40091e22027fe78a7536540942c1b82e191f37fa0c348d",
+    "src/evaluation/metrics.py": "32c1721e0d5d9db7d18d5dd0fca182cd1be8cf00879a79270d11aced61a10991",
+    "src/evaluation/novelty_checks.py": "d63dbeb926d443840cf310d454cc36472ba3e1bc90b4a7da761f5821c7d83fd3",
+    "src/explain/__init__.py": "28d89482c0af3c91c183a559097355fdec0df4ee1472e5d9acdf3f30c80f89c1",
+    "src/explain/importance.py": "93b094ef5c2a80095e89311adc7e9eff3526d0aba462a3b6869086a5f6516ad9",
+    "src/explain/priority.py": "834db748d802f94d8c31f9c4eb899927dd2882cad1e804f3fd4960490936e888",
+    "src/explain/reference.py": "9ad26e2c1105ce8cf1d453d6ffa09e6cbe3dbbfad6cfcb7867f604bd878e627a",
+    "src/models/__init__.py": "c4fdebfa383aa2255798899ca176d5464ddeb6712b3495873c4590a81cf8ad99",
+    "src/models/bundle.py": "cfb927ff62a0d73902183aa1be394a1f4a5e4ece040c41cf0663710d8e82dbda",
+    "src/models/calibration.py": "cc25952674fde8ff12affd96ac4734182c8900e221f3906e8168a0c096d50d84",
+    "src/models/zoo.py": "78a5a543d8b9f34c4e4eeeccfd61dfbfbe00576471dd9a49a0ff3faf7349563d",
+    "src/outputs.py": "c13564bb8e6c9759e3c5ee08eaf1ff3603477298dbca92e548101837e7dc709e",
+    "src/predict.py": "5098ca5cd2d06ebb9bf9fd23b7055d26412f494f02bd223dad4737502bcdbfbf",
+    "src/reporting/__init__.py": "a7de13185662d62ba0e3d823d0e03ceaf914196c3d14e95ae77424057b64bb4d",
+    "src/reporting/deliverables.py": "087e4f2318c6b859cbd11696cd706823fad06a98d67e412f3b6f856241e943e7",
+    "src/run_project.py": "6089931708fabe489ef6c243203fcfca62dd769ba8bec68cd71e9e163587e3fb",
+    "src/train.py": "eb8a6e10d66524fb7f7768938419b00665809f440805223c0b575dc787e0878f"
   },
   "selected_model": "logistic_regression",
   "selection_rule": "validation ROC-AUC, then lower Brier, then model name",
   "calibration": {
     "method": "positive-slope sigmoid on validation logit scores; base remains frozen",
-    "slope": 0.8268830023368351,
-    "intercept": 0.48981397589696213
+    "slope": 0.8268830023541097,
+    "intercept": 0.4898139758714102
   },
   "raw_decision_threshold": 0.48,
-  "calibrated_decision_threshold": 0.6043510767669934,
+  "calibrated_decision_threshold": 0.604351076760553,
   "threshold_rule": "validation macro-F1; 0.10..0.90 by 0.01; ties closest to 0.50",
   "priority": {
     "medium_min": 0.4,
     "high_min": 0.7,
     "status": "unvalidated heuristic, not a business policy"
   },
-  "scored_open_rows": 1589,
+  "stages": {
+    "train": "2026-10-10T03:23:23.084349+00:00",
+    "evaluate": "2026-10-10T03:24:30.945899+00:00",
+    "predict": "2026-10-10T03:24:31.704061+00:00"
+  },
+  "novelty_checks": {
+    "split_protocol_max_auc_gain": 0.03565013226892477,
+    "rf_explanation_spearman_median": 0.7632946174365223,
+    "deletion_ratio_top_to_random": 3.141773580182009
+  },
   "limitations": [
     "Previously inspected dataset: exploratory holdout, not an untouched external test.",
     "Outcome-availability purge reduces but cannot remove right-censoring/closed-only selection bias.",
@@ -107,6 +124,7 @@
     "Missing-account open deals are out of training support; no validated uplift or causal recommendation.",
     "Probability calibration and priority thresholds need external/prospective validation."
   ],
-  "elapsed_seconds": 16.940068092000047,
-  "completed_utc": "2026-10-06T19:41:21.978515+00:00"
+  "scored_open_rows": 1589,
+  "elapsed_seconds": 78.25340499999947,
+  "completed_utc": "2026-10-10T03:24:31.964273+00:00"
 }

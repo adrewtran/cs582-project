@@ -18,7 +18,7 @@ used, so the true probability is known for every row (the "oracle" in the result
   2016-10-20 to 2017-12-27, snapshot 2017-12-31, closed-deal win rate about 0.63, sales cycle
   1–138 days, about 5.7% Prospecting rows, and about 68% of open deals missing the account
   (closed deals always have one).
-- The raw file format, so `src.datasets.crm.build(data_dir=...)` loads the output unchanged.
+- The raw file format, so `src.data.crm.build(data_dir=...)` loads the output unchanged.
 
 ### Added at the project team's request
 - 9 extra products, including a new GTS series (16 products in total).
@@ -37,9 +37,9 @@ used, so the true probability is known for every row (the "oracle" in the result
 
 | Step | Script | Output |
 |---|---|---|
-| Products, competitors, cost, R&D | `scripts/make_simulated_products.py` | `products.csv`, `competitor_products.csv`, `product_rd.csv` |
-| Industry trends | `scripts/make_industry_trends.py` | `industry_trends.csv` |
-| Deals | `scripts/make_simulated_deals.py` | `sales_pipeline.csv`, `ground_truth.csv`, `deal_comparison.csv` |
+| Products, competitors, cost, R&D | `scripts/simulation/make_simulated_products.py` | `products.csv`, `competitor_products.csv`, `product_rd.csv` |
+| Industry trends | `scripts/simulation/make_industry_trends.py` | `industry_trends.csv` |
+| Deals | `scripts/simulation/make_simulated_deals.py` | `sales_pipeline.csv`, `ground_truth.csv`, `deal_comparison.csv` |
 
 For each deal, `make_simulated_deals.py`:
 
@@ -124,13 +124,13 @@ overwriting the default, pass `--interaction-strength 1 --out-dir <other dir>` (
 ## 5. Reproduce
 
 ```bash
-python scripts/make_simulated_products.py
-python scripts/make_industry_trends.py
-python scripts/make_simulated_deals.py                     # defaults: 100,000 deals, k = 3, seed 582
-.venv-crm/bin/python scripts/run_simulated_models.py
-.venv-crm/bin/python scripts/run_simulated_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
-.venv-crm/bin/python scripts/run_simulated_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min
-python scripts/product_investment_report.py                # heuristic product ranking
+python scripts/simulation/make_simulated_products.py
+python scripts/simulation/make_industry_trends.py
+python scripts/simulation/make_simulated_deals.py                     # defaults: 100,000 deals, k = 3, seed 582
+.venv-crm/bin/python scripts/simulation/run_simulated_models.py
+.venv-crm/bin/python scripts/simulation/run_simulated_seeds.py        # 5 seeds x k in {1, 3}, about 25 min on 4 CPUs
+.venv-crm/bin/python scripts/simulation/run_simulated_seeds.py --strengths 1 --smooth 1 --tag _smooth   # about 13 min
+python scripts/analysis/product_investment_report.py                # heuristic product ranking
 ```
 
 The same seed always gives identical data.

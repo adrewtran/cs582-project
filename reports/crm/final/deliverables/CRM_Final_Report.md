@@ -2,11 +2,11 @@
 
 CS 582 • Group 2 • Hong Thai Phan, Nguyen Khanh An Tran, Hoang Thien Bao Bui
 
-Result-driven final paper draft for team review. Experiment mode: **full**. Generated from the run starting 2026-10-06T19:41:05.038515+00:00. This document has not been submitted. Team members must verify the narrative, authorship/contributions and instructor formatting requirements before submission.
+Result-driven final paper draft for team review. Experiment mode: **full**. Generated from the run starting 2026-10-10T03:23:13.711211+00:00. This document has not been submitted. Team members must verify the narrative, authorship/contributions and instructor formatting requirements before submission.
 
 ## Abstract
 
-We implement a reproducible CRM classification and explanation pipeline using the supplied Maven Sales Opportunities data. The system estimates P(Won) and P(Lost) and reports the input factors behind each score. We compare a prior-only control, Logistic Regression, Random Forest, MLP and TabNet using identical dated partitions and training-only preprocessing. To reduce future-label leakage, a training or validation deal is eligible only when its outcome was available before the next period. The resulting split contains 2,975 training, 583 validation and 1,361 test deals, with 1,792 late-label records purged. Logistic Regression is selected on validation ROC-AUC and reaches test ROC-AUC 0.5238. These results do not establish practically useful discrimination. A deliberately invalid close-value control demonstrates how outcome leakage can create a misleading near-perfect score. We provide calibrated snapshot scores, auditable local sensitivities, Random Forest SHAP diagnostics and explicit input-quality warnings. The contribution is an applied, explainable evaluation workflow and an honest negative finding, not a new learning algorithm or proven sales uplift.
+We implement a reproducible CRM classification and explanation pipeline using the supplied Maven Sales Opportunities data. The system estimates P(Won) and P(Lost) and reports the input factors behind each score. We compare a prior-only control, Logistic Regression, Random Forest, MLP and TabNet using identical dated partitions and training-only preprocessing. To reduce future-label leakage, a training or validation deal is eligible only when its outcome was available before the next period. The resulting split contains 2,975 training, 583 validation and 1,361 test deals, with 1,792 late-label records purged. Logistic Regression is selected on validation ROC-AUC and reaches test ROC-AUC 0.5238. These results do not establish practically useful discrimination. A deliberately invalid close-value control demonstrates how outcome leakage can create a misleading near-perfect score. We provide calibrated snapshot scores, auditable local sensitivities, Random Forest SHAP diagnostics and explicit input-quality warnings. We also measure what each safeguard does: a naive random split raises test AUC by at most 0.036 and does not change the conclusion, while replacing each deal's top three explanation inputs moves the score 3.1 times more than replacing three random inputs. The contribution is an applied, explainable evaluation workflow and an honest negative finding, not a new learning algorithm or proven sales uplift.
 
 ## 1. Problem and intended use
 
@@ -22,7 +22,13 @@ Rezazadeh [3] presents a B2B workflow connecting probabilistic training with pre
 
 Arik and Pfister [4] introduce sequential attention for tabular learning in TabNet. We compare an existing TabNet implementation [7] with simpler learners, without claiming that advanced architecture must improve this CRM dataset. We do not implement its self-supervised pretraining.
 
-Our course-project contribution combines availability-aware splitting, an explicit leakage control, probability diagnostics, local explanations and missing-input warnings in one regenerable pipeline. Explainable CRM scoring already exists in the literature. We therefore describe our novelty as the design and audit of this particular applied workflow, rather than a previously unknown algorithm.
+Explainable CRM scoring already exists in the literature, so we do not claim a new algorithm. Our course-project contribution is an audited, explainable evaluation workflow in which each safeguard comes with its own evidence:
+
+- Prediction plus explanation: calibrated P(Won) and per-deal factors, checked for faithfulness (Section 7.1).
+- Leakage control: a deliberately invalid close-value model shows how an outcome field fakes near-perfect accuracy (Section 6.2).
+- Availability-aware split, compared against naive alternatives on the same data (Section 6.3).
+- Missing-input warnings: open deals scored with imputed account data are flagged, not hidden.
+- A separate known-truth synthetic benchmark with an oracle ceiling, used to tell weak data apart from a broken pipeline (Section 6.4).
 
 ## 3. Data and preparation
 
@@ -56,9 +62,9 @@ Actual settings for this run:
 - Logistic Regression: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "C": 1.0, "max_iter": 2000}
 - Random Forest: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "n_estimators": 300, "min_samples_leaf": 5}
 - MLP: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "hidden_layers": [64, 32], "alpha": 0.001, "learning_rate": 0.001, "max_epochs": 120, "patience": 15, "best_epoch": 38, "epochs_run": 53}
-- TabNet: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "n_d": 8, "n_a": 8, "n_steps": 3, "max_epochs": 80, "patience": 12, "best_epoch": 12, "epochs_run": 24}
+- TabNet: {"seed": 42, "class_weight": null, "device": "cpu", "quick": false, "n_d": 8, "n_a": 8, "n_steps": 3, "max_epochs": 80, "patience": 12, "best_epoch": 30, "epochs_run": 42}
 
-The environment is Python 3.12.14, scikit-learn 1.8.0, CPU PyTorch 2.8.0+cpu and pytorch-tabnet 4.1.0. The manifest records the other versions, source hashes and timings. This experiment was executed in the assistant workspace on CPU. A matching notebook is provided for Colab; an actual user Colab session and Google Slides import still need confirmation.
+The environment is Python 3.12.15, scikit-learn 1.8.0, CPU PyTorch 2.8.0 and pytorch-tabnet 4.1.0. The manifest records the other versions, source hashes and timings. This experiment was executed in the assistant workspace on CPU. A matching notebook is provided for Colab; an actual user Colab session and Google Slides import still need confirmation.
 
 ## 6. Results
 
@@ -68,9 +74,9 @@ Validation metrics below explain the selection. Threshold values were chosen on 
 |:--------------------|----------:|--------:|------------:|
 | dummy_prior         |    0.5000 |  0.2400 |      0.5000 |
 | logistic_regression |    0.5630 |  0.2514 |      0.4800 |
-| random_forest       |    0.5380 |  0.2429 |      0.5400 |
+| random_forest       |    0.5400 |  0.2426 |      0.5200 |
 | mlp                 |    0.5286 |  0.2911 |      0.4600 |
-| tabnet              |    0.5587 |  0.2369 |      0.6100 |
+| tabnet              |    0.5151 |  0.2419 |      0.5800 |
 
 The primary test comparison uses raw probabilities and each model's validation-selected threshold:
 
@@ -78,9 +84,9 @@ The primary test comparison uses raw probabilities and each model's validation-s
 |:--------------------|-----------:|------------:|---------:|-------:|----------:|--------:|
 | dummy_prior         |     0.6003 |      0.6003 |   1.0000 | 0.7502 |    0.5000 |  0.2421 |
 | logistic_regression |     0.4372 |      0.6154 |   0.1665 | 0.2620 |    0.5238 |  0.2794 |
-| random_forest       |     0.5900 |      0.5982 |   0.9657 | 0.7388 |    0.5194 |  0.2508 |
+| random_forest       |     0.5922 |      0.5981 |   0.9780 | 0.7422 |    0.5180 |  0.2510 |
 | mlp                 |     0.4849 |      0.5929 |   0.4529 | 0.5135 |    0.4954 |  0.3314 |
-| tabnet              |     0.5628 |      0.6135 |   0.7344 | 0.6685 |    0.5173 |  0.2468 |
+| tabnet              |     0.5356 |      0.6002 |   0.6781 | 0.6368 |    0.5068 |  0.2490 |
 
 Confusion counts and additional metrics:
 
@@ -88,9 +94,9 @@ Confusion counts and additional metrics:
 |:--------------------|-----:|-----:|-----:|-----:|--------------------:|-----------:|--------------------:|
 | dummy_prior         |    0 |  544 |    0 |  817 |              0.5000 |     0.3751 |              0.6003 |
 | logistic_regression |  459 |   85 |  681 |  136 |              0.5051 |     0.4036 |              0.6138 |
-| random_forest       |   14 |  530 |   28 |  789 |              0.4957 |     0.3933 |              0.6169 |
+| random_forest       |    7 |  537 |   18 |  799 |              0.4954 |     0.3834 |              0.6170 |
 | mlp                 |  290 |  254 |  447 |  370 |              0.4930 |     0.4832 |              0.5879 |
-| tabnet              |  166 |  378 |  217 |  600 |              0.5198 |     0.5133 |              0.6231 |
+| tabnet              |  175 |  369 |  263 |  554 |              0.4999 |     0.4966 |              0.6125 |
 
 ![Test ROC](../figures/roc_curves.png)
 
@@ -108,6 +114,25 @@ A depth-one tree trained on close_value is intentionally invalid for pre-close p
 
 ![Leakage control](../figures/leakage_audit.png)
 
+### 6.3 Does the evaluation protocol change the conclusion?
+
+We refit the four learned models under two alternative protocols. Chronological, no purge keeps the same boundaries and the same test rows but also trains on deals whose outcome was not yet known at the cutoff. Random stratified ignores time and draws a 60/20/20 split of all closed deals (five seeds; mean ± s.d.). Test ROC-AUC:
+
+| model               | As-of + purge (ours)   | Chronological, no purge   | Random stratified   |
+|:--------------------|:-----------------------|:--------------------------|:--------------------|
+| Logistic Regression | 0.5238                 | 0.5294                    | 0.5456 ± 0.0093     |
+| Random Forest       | 0.5180                 | 0.5051                    | 0.5335 ± 0.0095     |
+| MLP                 | 0.4954                 | 0.4754                    | 0.5311 ± 0.0087     |
+| TabNet              | 0.5068                 | 0.4779                    | 0.5061 ± 0.0205     |
+
+A naive random split reports slightly higher AUC (largest gain +0.0357), and dropping the purge changes AUC on the shared test set by -0.0289 to +0.0056; every paired bootstrap interval for that change includes zero (checks/split_protocol_comparison.csv). Every protocol stays near chance. On this dataset the availability-aware split is therefore a safeguard with a small measured effect, not the source of the weak result, and the outcome field (Section 6.2) is by far the larger risk. The table refits models in a separate pass, so its as-of row can differ slightly from the main results across platforms; selection still uses only the main run.
+
+### 6.4 Separate known-truth synthetic benchmark
+
+A near-chance result has two possible readings: the inputs carry little signal, or the pipeline is broken. To separate them, the team generated datasets of 100,000 synthetic deals (scripts/simulation/make_simulated_deals.py, docs/SIMULATED_DATA.md) that reuse the real accounts, agents, products and calendar but draw each outcome from a planted logistic model. Because every true win probability is known, scoring with it gives an oracle ceiling. The same loader, split, preprocessing, threshold rule and metrics are applied. Mean test ROC-AUC over five regenerated datasets: with planted interactions (strength 3, extended features) oracle 0.886 ± 0.007; TabNet 0.875 ± 0.008; MLP 0.873 ± 0.008; Random Forest 0.872 ± 0.007; LR 0.827 ± 0.008; with smooth continuous signals oracle 0.881 ± 0.003; TabNet 0.868 ± 0.001; MLP 0.866 ± 0.004; Random Forest 0.846 ± 0.002; LR 0.833 ± 0.003.
+
+The learned models approach the oracle when signal exists, which supports the reading that the weak real-data result comes from the inputs rather than from the pipeline. The planted formula is our own invention: these numbers say nothing about real sales behavior and are kept out of every real-data table and results file.
+
 ## 7. Explanations and decision-support outputs
 
 We export native LR coefficients, RF impurity importance and TabNet attention importance with their distinct meanings. Held-out permutation importance measures the AUC change when one original feature is shuffled. Correlated inputs can share information, so low or negative permutation importance is possible and is not evidence that a feature can never matter.
@@ -117,6 +142,10 @@ For each open deal, the selected calibrated model reports reference sensitivity:
 Separately, TreeSHAP [6] explains the raw Random Forest on 64 dated test rows. The saved expected probability plus per-feature SHAP values reconstructs the raw RF prediction with maximum error 1.77e-12. This provides an additive diagnostic for that RF only; it is not relabeled as an explanation of the selected calibrated classifier.
 
 ![RF explanations](../figures/rf_shap.png)
+
+### 7.1 Do the explanations describe the model?
+
+Two checks test the explanations against the model they explain; neither tests causal effects. First, on the same 64 test rows we compare grouped TreeSHAP with reference sensitivity for the raw Random Forest. The median per-row Spearman correlation across the 18 inputs is 0.76, the top-three inputs overlap 61% on average (random expectation 17%), and the leading SHAP input has the same sign in 100% of rows. Second, a deletion test on the selected calibrated model replaces each test deal's top three inputs with their training references. The score moves by 0.131 on average, versus 0.042 for three random inputs (3.1 times), and the top inputs move it more in 95% of deals. The explanations therefore identify what drives this model's score, even though the model itself ranks deals weakly.
 
 The output contains 1,589 rows with ID, context, P(Won), P(Lost), predicted outcome, priority, input warnings, model name and explanation method. A real exported example is opportunity AI76U58A, product GTX Basic: win probability 87.94%, loss probability 12.06%. Its outcome is unknown. This is a snapshot demonstration; the model may have been fitted using events later than an open record's original engagement date. It is not a claim that a probability was available on that historic date.
 
@@ -147,7 +176,7 @@ The next external steps are for the group to run the notebook in its own Colab a
 
 ## Reproducibility
 
-Run `python scripts/setup_cpu.py`, then `.venv-crm/bin/python -m src.run_project`. The default output is reports/crm/final. Use `.venv-crm/bin/python -m pytest -q` for tests. The upload-first notebook invokes the same entry point. `--quick` runs small neural budgets and writes SMOKE_TEST_NOT_FINAL artifacts separately. Each run saves source/data hashes, split assignments, configurations, raw test probabilities and a serialized frozen scoring model. Only load the model bundle generated by this trusted project; joblib is not an untrusted-file format.
+Run `python scripts/tools/setup_cpu.py`, then `.venv-crm/bin/python -m src.run_project`, which chains the train, evaluate and predict stages (each also runs alone as `python -m src.train`, `src.evaluate` or `src.predict`). The default output is reports/crm/final, split into data, models, metrics, explain, checks, predictions, figures and deliverables folders. Use `.venv-crm/bin/python -m pytest -q` for tests. The upload-first notebook invokes the same entry point. `--quick` runs small neural budgets and writes SMOKE_TEST_NOT_FINAL artifacts separately. Each run saves source/data hashes, split assignments, configurations, raw test probabilities and a serialized frozen scoring model. Only load the model bundle generated by this trusted project; joblib is not an untrusted-file format.
 
 ## References
 

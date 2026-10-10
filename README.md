@@ -8,15 +8,15 @@ The project keeps the CRM topic reported to the professor. The input is four CRM
 
 ## 1. Actual results
 
-The full version was run in a Python 3.12 / CPU development environment. Dummy, Logistic Regression (LR), Random Forest (RF), MLP and TabNet were all actually trained. The main results are in **`reports/crm/final/`**.
+The full version was run in a Python 3.12 / CPU environment (macOS arm64; versions and hashes in `run_manifest.json`). Dummy, Logistic Regression (LR), Random Forest (RF), MLP and TabNet were all actually trained. The main results are in **`reports/crm/final/`**.
 
 | Model | Test ROC-AUC | Accuracy | F1 (Won) |
 |---|---:|---:|---:|
 | Dummy prior | 0.5000 | 0.6003 | 0.7502 |
 | Logistic Regression | 0.5238 | 0.4372 | 0.2620 |
-| Random Forest | 0.5194 | 0.5900 | 0.7388 |
+| Random Forest | 0.5180 | 0.5922 | 0.7422 |
 | MLP | 0.4954 | 0.4849 | 0.5135 |
-| TabNet | 0.5173 | 0.5628 | 0.6685 |
+| TabNet | 0.5068 | 0.5356 | 0.6368 |
 
 LR was selected by **validation ROC-AUC**, before looking at test. The threshold maximises macro-F1 on validation; it is not the default 0.5 and is not tuned for F1(Won) on test. The Dummy's high Accuracy/F1 comes from always predicting Won. The results **do not yet demonstrate useful sales prioritisation**; `close_value` was not added to the inputs to artificially improve the numbers.
 
@@ -61,16 +61,23 @@ There is no need to change ChatGPT's `adrewtran` GitHub connection. A private re
 In the folder containing this README, using Python 3.12:
 
 ```bash
-python scripts/setup_cpu.py
+python scripts/tools/setup_cpu.py
 .venv-crm/bin/python -m src.run_project
 .venv-crm/bin/python -m pytest -q
 ```
 
-After setup, **the single full-run command** is `.venv-crm/bin/python -m src.run_project`.
+After setup, **the single full-run command** is `.venv-crm/bin/python -m src.run_project`. It chains four stages, and each one also runs on its own:
 
-Pipeline: validate/join → split → EDA → 5 models → validation selection → calibration → test → explanations/SHAP → open scores → paper/slides/script. A failing step makes the command return an error and the manifest records `failed`; no model is silently dropped.
+| Stage | Command | Reads | Writes |
+|---|---|---|---|
+| Train | `python -m src.train` | `data/crm/` | `data/`, `models/`, `metrics/validation_metrics.csv` |
+| Evaluate | `python -m src.evaluate` | saved models | `metrics/`, `explain/`, `checks/`, `figures/` |
+| Predict | `python -m src.predict` | `models/model_bundle.joblib` | `predictions/open_deal_predictions.csv` |
+| Documents | `python -m src.reporting.deliverables reports/crm/final` | all of the above | `deliverables/` |
 
-On Windows, the interpreter path is `.venv-crm\Scripts\python.exe`. The confirmed environment is Linux CPU; Windows is not claimed as tested.
+Train fits all five models, selects one on validation, calibrates it and saves everything; no test row is scored there. Evaluate and predict only load the saved models, so they can be rerun without retraining. A failing step makes the command return an error and the manifest records `failed`; no model is silently dropped.
+
+On Windows, the interpreter path is `.venv-crm\Scripts\python.exe`. Confirmed environments: Linux CPU (earlier run) and macOS arm64 CPU (current results); Windows is not claimed as tested.
 
 ```bash
 # Smoke test: tiny budgets, do NOT report these results
@@ -79,8 +86,12 @@ On Windows, the interpreter path is `.venv-crm\Scripts\python.exe`. The confirme
 .venv-crm/bin/python -m src.run_project --output reports/crm/my_run
 # Experiment only
 .venv-crm/bin/python -m src.run_project --no-documents
+# Recompute metrics, figures and checks from the saved models
+.venv-crm/bin/python -m src.evaluate
+# Score new deals given in sales_pipeline.csv format (needs engage_date)
+.venv-crm/bin/python -m src.predict --input new_deals.csv --save new_deal_scores.csv
 # Regenerate the paper/slides from existing results
-.venv-crm/bin/python -m src.deliverables reports/crm/final
+.venv-crm/bin/python -m src.reporting.deliverables reports/crm/final
 ```
 
 `--quick` writes `reports/crm/smoke/` with the label **SMOKE_TEST_NOT_FINAL**. Rerunning into the same output folder overwrites artifacts with the same name; use a different `--output` to keep the previous run. Files you added yourself are not deleted.
@@ -89,17 +100,17 @@ On Windows, the interpreter path is `.venv-crm\Scripts\python.exe`. The confirme
 
 | Check | Result with the bundled data |
 |---|---|
-| `run_manifest.json` | `status: complete`, `mode: full` |
-| `test_metrics.csv` | 5 models, all metrics, no NaN |
+| `run_manifest.json` | `status: complete`, `mode: full`, stages train/evaluate/predict |
+| `metrics/test_metrics.csv` | 5 models, all metrics, no NaN |
 | Raw data | 8,800 pipeline; 85 accounts; 7 products; 35 teams |
 | Labels | 6,711 closed: 4,238 Won / 2,473 Lost |
 | Split | train 2,975; validation 583; test 1,361; purged 1,792 |
-| `open_deal_predictions.csv` | 1,589 rows; win_probability + loss_probability = 1 |
+| `predictions/open_deal_predictions.csv` | 1,589 rows; win_probability + loss_probability = 1 |
 | Missing account | 1,088 rows flagged |
-| `shap_audit.json` | RF additivity error < 1e-5 |
+| `explain/shap_audit.json` | RF additivity error < 1e-5 |
 | `deliverables/` | PPTX, DOCX, Markdown and ESL script |
 
-The notebook checks the main conditions itself. The tests also check date availability, tied dates, invalid IDs/stages/dates/joins, metric formulas, all five real models, calibration and that a reloaded bundle gives the same predictions. **Passing tests does not mean the model is good enough for business use.** Two TabNet fits in the same final environment gave the same predictions; an earlier CPU environment gave AUC 0.4924 instead of 0.5173. Seeds do not guarantee bitwise-identical results across all platforms; early stopping may choose a different epoch. Do not pick the better result to decide the model: all models are weak, and LR is still the one selected on validation. Compare versions, hashes and platform when reproducing.
+The notebook checks the main conditions itself. The tests also check date availability, tied dates, invalid IDs/stages/dates/joins, metric formulas, all five real models, calibration and that a reloaded bundle gives the same predictions. **Passing tests does not mean the model is good enough for business use.** The same code gives different RF/TabNet numbers on different platforms: the earlier Linux run had RF 0.5194 and TabNet 0.5173 test AUC, this macOS run 0.5180 and 0.5068; LR and MLP match exactly. Seeds do not guarantee bitwise-identical results across all platforms; early stopping may choose a different epoch. Do not pick the better result to decide the model: all models are weak, and LR is still the one selected on validation. Compare versions, hashes and platform when reproducing.
 
 ## 5. Data and feature policy
 
@@ -127,13 +138,24 @@ The new split keeps same-date deals in the same period and purges outcomes not y
 | input_warning / account_missing | Missing-account warning; imputation/unknown categories are not hidden |
 | scoring_context | `frozen_model_snapshot_demo`, not a historical replay |
 | rf_shap_* | SHAP for the **raw RF** only, not to be mislabelled as an explanation of the calibrated LR |
-| model_bundle.joblib | Frozen model + calibration + features/reference/threshold |
+| models/model_bundle.joblib | Frozen model + calibration + features/reference/threshold (used by `src.predict`) |
+| models/trained_models.joblib | All five fitted models + thresholds (used by `src.evaluate`) |
 
 Reference sensitivity replaces each input with the training median/mode and measures the change in P(Won). This describes model behaviour; it does not prove that changing the input would change the real outcome. Replacing only one correlated feature can create unrealistic combinations. Only load joblib files from a trusted project, because this format deserialises Python objects.
 
 Comparison of the promised novelty and why the results are still weak: [`docs/NOVELTY_AND_RESULTS.md`](docs/NOVELTY_AND_RESULTS.md).
 
-**Novelty for the course project:** combining prediction, explanation, leakage audit, label availability and input-quality warnings into a reproducible workflow. No new algorithm, causal effect, expected revenue or proven revenue increase is claimed.
+**Novelty for the course project:** an audited, explainable evaluation workflow in which each safeguard has its own evidence:
+
+| Contribution | Evidence |
+|---|---|
+| Prediction + explanation | Explanation checks (`explanation_checks.json`): on the raw RF, reference sensitivity agrees with TreeSHAP (median per-row Spearman 0.76; top-3 overlap 61% vs 17% by chance). Resetting a deal's top-3 inputs moves the selected model's P(Won) 3.1× more than resetting 3 random inputs. |
+| Leakage control | `close_value` alone gives AUC 1.0; the honest model gives 0.524 (`leakage_audit.csv`). |
+| Label-availability split | Compared with a no-purge split and a random split (`split_protocol_summary.csv`). The random split is at most +0.036 AUC higher, and every paired bootstrap interval for the no-purge change includes 0. All protocols stay near chance, so the split is a safeguard with a small measured effect here. |
+| Input-quality warnings | 1,088 of 1,589 open-deal scores are flagged for a missing account. |
+| Known-truth synthetic benchmark | Same pipeline on simulated deals with a planted win formula reaches AUC 0.875 vs an oracle of 0.886 (`data/crm_simulated/`, `docs/SIMULATED_DATA.md`). This shows the pipeline learns when signal exists. Simulated scores are never real-world performance. |
+
+No new algorithm, causal effect or proven revenue increase is claimed. The 3-month expected revenue on the final slides is illustrative only and has not been validated.
 
 ## 7. Files for reporting
 
@@ -143,9 +165,12 @@ All in `reports/crm/final/`:
 - `deliverables/CRM_Final_Presentation.pptx`: 12 editable slides, Arial, speaker notes. Upload to Drive → Open with Google Slides; check the layout after import. [Google guide](https://support.google.com/docs/answer/9310378?hl=en).
 - `deliverables/SPEAKER_SCRIPT_ESL.docx` and `.md`: 3 people × 4 slides, about 8–10 minutes; includes Q&A.
 - `deliverables/TEAM_REVIEW.md`: steps the team needs to confirm before submission.
-- `test_metrics.csv`, `calibration_test.csv`, `leakage_audit.csv`, `priority_test.csv`: numerical evidence.
+- `metrics/`: validation and test metrics, calibration, raw test probabilities.
+- `checks/`: leakage control, priority bands, split-protocol comparison and explanation checks (evidence for the novelty claims).
+- `explain/`: native and permutation importance, RF TreeSHAP and its additivity audit.
+- `predictions/`: open-deal scores with factors and warnings; `expected_revenue_3m.json` from `scripts/analysis/expected_revenue_3m.py`.
 - `figures/`: ROC, confusion matrices, EDA, calibration, importance, SHAP.
-- `split_manifest.csv`, `model_training.json`, `run_manifest.json`: row assignments, configurations, versions and hashes.
+- `data/split_manifest.csv`, `models/model_training.json`, `run_manifest.json`: row assignments, configurations, versions and hashes.
 
 The 1–8 slide limit in the earlier announcement applies to the progress forum. This 12-slide deck is for the final; check the final limit if the professor announces one separately. No video has been recorded, nothing has been submitted, and members' actual contributions have not been written in.
 
@@ -153,9 +178,9 @@ The 1–8 slide limit in the earlier announcement applies to the progress forum.
 
 | Commitment | Delivered |
 |---|---|
-| CRM Won/Lost + join/clean/EDA | `src/datasets/crm.py`, `src/analysis.py`, data-quality/EDA outputs |
-| LR, RF, MLP, TabNet | `src/models.py`, 5 metric rows including the control |
-| Accuracy/Precision/Recall/F1/AUC/confusion | `src/evaluation.py`, test metrics and figures |
+| CRM Won/Lost + join/clean/EDA | `src/data/crm.py`, `src/evaluation/figures.py`, data-quality/EDA outputs |
+| LR, RF, MLP, TabNet | `src/models/zoo.py`, 5 metric rows including the control |
+| Accuracy/Precision/Recall/F1/AUC/confusion | `src/evaluation/metrics.py`, test metrics and figures |
 | Feature importance + optional SHAP | native/permutation CSV, RF SHAP and additivity audit |
 | Explaining inputs/decisions | per-deal explanation, missing-input warning |
 | Reproducible/free CPU | setup, runner, notebook, tests |
@@ -219,6 +244,23 @@ If using the handoff patch: apply it to a clean clone at the exact base commit r
 | AUC around 0.5 | This is the real result; audit for leakage if a score is unusually high |
 | Very few High priority deals | Do not force the threshold to look good; the bands are not business-validated |
 | Numbers differ from old slides | Use only `reports/crm/final/`; do not mix in old results |
-| Slide edits lost after rerun | Edit the generator `src/deliverables.py`, or keep the hand-edited PowerPoint under a different name |
+| Slide edits lost after rerun | Edit the generator `src/reporting/deliverables.py`, or keep the hand-edited PowerPoint under a different name |
 
-Structure: `data/crm/` inputs → `src/` pipeline → `reports/crm/final/` outputs; `tests/` tests; `scripts/` setup/notebook; `docs/` contract/audit/PR.
+## 11. Project structure
+
+```
+data/crm/                 raw Maven CSVs (read-only); data/crm_simulated/ simulated deals
+src/
+  data/                   dataset.py (container), crm.py (load/validate/join), split.py (as-of split), preprocess.py
+  models/                 zoo.py (5 classifiers), calibration.py (sigmoid), bundle.py (save/load)
+  evaluation/             metrics.py, figures.py, audits.py (leakage/priority), novelty_checks.py
+  explain/                reference.py (per-deal factors), importance.py (native/permutation/SHAP), priority.py
+  reporting/              deliverables.py (paper draft, slides, speaker notes)
+  train.py  evaluate.py  predict.py  run_project.py  outputs.py (run folder layout)
+scripts/
+  tools/                  setup_cpu.py, make_notebook.py, verify_notebook.py, package_handoff.py
+  simulation/             make_simulated_*.py, make_industry_trends.py, run_simulated_models.py, run_simulated_seeds.py
+  analysis/               expected_revenue_3m.py, product_investment_report.py
+reports/crm/final/        data/ models/ metrics/ explain/ checks/ predictions/ figures/ deliverables/ run_manifest.json
+tests/  notebooks/  docs/
+```

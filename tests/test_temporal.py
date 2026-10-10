@@ -3,12 +3,12 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.datasets.crm import build
+from src.data.crm import build
 
 
 def splitter():
-    assert importlib.util.find_spec('src.temporal') is not None, 'as-of split is not implemented'
-    return importlib.import_module('src.temporal').asof_split
+    assert importlib.util.find_spec('src.data.split') is not None, 'as-of split is not implemented'
+    return importlib.import_module('src.data.split').asof_split
 
 
 def test_asof_labels_are_known_before_next_period_and_dates_do_not_overlap():

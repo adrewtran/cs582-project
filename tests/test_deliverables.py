@@ -9,7 +9,7 @@ import nbformat
 
 
 def test_real_deliverables_generation(completed_run):
-    from src.deliverables import build_deliverables
+    from src.reporting.deliverables import build_deliverables
     out,manifest=completed_run
     build_deliverables(out)
     dest=out/'deliverables'
@@ -21,7 +21,7 @@ def test_real_deliverables_generation(completed_run):
             assert shape.left>=0 and shape.top>=0
             assert shape.left+shape.width<=deck.slide_width+100
             assert shape.top+shape.height<=deck.slide_height+100
-    scored=pd.read_csv(out/'open_deal_predictions.csv')
+    scored=pd.read_csv(out/'predictions/open_deal_predictions.csv')
     example=scored.loc[~scored.account_missing].iloc[0]
     output_slide=' '.join(shape.text for shape in deck.slides[8].shapes if shape.has_text_frame)
     assert f"{example['opportunity_id']} / {example['product']}" in output_slide
@@ -29,7 +29,7 @@ def test_real_deliverables_generation(completed_run):
     text=' '.join(p.text for p in Document(dest/'CRM_Final_Report.docx').paragraphs)
     assert 'exploratory' in text.lower() and '1,589' in text
     paper=(dest/'CRM_Final_Report.md').read_text()
-    for row in pd.read_csv(out/'test_metrics.csv').to_dict('records'):
+    for row in pd.read_csv(out/'metrics/test_metrics.csv').to_dict('records'):
         assert f"{row['roc_auc']:.4f}" in paper
     assert 'SMOKE_TEST_NOT_FINAL' in paper
     assert 'not causal' in paper.lower()
@@ -41,16 +41,16 @@ from tests.test_project_run import completed_run
 
 @pytest.mark.parametrize('count',[0,2])
 def test_documents_follow_actual_open_counts_including_empty(completed_run,tmp_path,count):
-    from src.deliverables import build_deliverables
+    from src.reporting.deliverables import build_deliverables
     original,_=completed_run
     out=tmp_path/'altered_run'; shutil.copytree(original,out)
-    scores=pd.read_csv(out/'open_deal_predictions.csv').iloc[:count]
-    scores.to_csv(out/'open_deal_predictions.csv',index=False)
+    scores=pd.read_csv(out/'predictions/open_deal_predictions.csv').iloc[:count]
+    scores.to_csv(out/'predictions/open_deal_predictions.csv',index=False)
     missing=int(scores.account_missing.sum())
-    q=json.loads((out/'data_quality.json').read_text())
+    q=json.loads((out/'data/data_quality.json').read_text())
     q.update(scorable_open_rows=count,scorable_missing_account=missing,open_rows=count+3)
     q['raw_rows']['sales_pipeline']=q['rows']+count+3
-    (out/'data_quality.json').write_text(json.dumps(q))
+    (out/'data/data_quality.json').write_text(json.dumps(q))
     manifest=json.loads((out/'run_manifest.json').read_text()); manifest['scored_open_rows']=count
     (out/'run_manifest.json').write_text(json.dumps(manifest))
     build_deliverables(out)
