@@ -9,4 +9,5 @@ pytest==9.0.2
 torch==2.8.0
 pytorch-tabnet==4.1.0
 shap==0.50.0
+ipykernel==6.30.1
 pillow==11.3.0

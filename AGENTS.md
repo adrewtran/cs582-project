@@ -10,9 +10,9 @@ Required: LR, RF, MLP, TabNet; Dummy prior control. Accuracy, Precision, Recall,
 
 - Python 3.12; `python scripts/tools/setup_cpu.py` installs tested CPU dependencies.
 - `.venv-crm/bin/python -m src.run_project` generates full results by chaining `src.train` (fit, select, calibrate, save models; no test scoring), `src.evaluate` (metrics/figures/explanations/checks from saved models) and `src.predict` (open-deal or `--input` CSV scores). Code does not generate documents; `CRM_IEEE_Paper.docx` and `CRM_Final.pptx` at the root are maintained by hand (removed generator on 2026-10-09 at the user's request).
-- Code layout: `src/data` (load, split, preprocess), `src/models`, `src/evaluation`, `src/explain`; run-folder subpaths come only from `src/outputs.py`. Scripts live in `scripts/tools`, `scripts/simulation`, `scripts/analysis`.
+- Code layout: `src/data` (load, split, preprocess), `src/models`, `src/evaluation`, `src/explain`; run-folder subpaths come only from `src/outputs.py`. Scripts live in `scripts/tools`, `scripts/simulation`, `scripts/analysis`. `src.train --data-dir` trains on other raw-format data (e.g. simulated); such runs go to `reports/crm/simulated/` (git-ignored) and are refused for `reports/crm/final/`.
 - `.venv-crm/bin/python -m pytest -q` includes real CPU fits and full smoke integration.
-- The Colab notebook was removed on 2026-10-09 at the user's request; the CLI is the only entry point.
+- The Colab notebook was removed on 2026-10-09. `notebooks/{original,simulated}/{1_train,2_evaluate,3_predict}.ipynb` (added the same day) run the stages cell by cell by calling the step functions in `src/train.py`, `src/evaluate.py` and `src/predict.py`; the two folders differ only in `DATA_DIR`. Keep logic in `src/`, never copied into notebooks.
 - `reports/crm/final/` is the only and authoritative results folder (subfolders data, models, metrics, explain, checks, predictions, figures). The user deleted the earlier Linux results on 2026-10-09 and asked to regenerate; current results are a macOS run, so RF/TabNet differ slightly from the Linux numbers.
 
 ## Data/evaluation

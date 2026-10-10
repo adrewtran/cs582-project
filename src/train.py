@@ -1,6 +1,9 @@
 """Train stage: fit all five models, select on validation, calibrate, save the models.
 
-    python -m src.train [--quick] [--output PATH]
+    python -m src.train [--quick] [--output PATH] [--data-dir DIR]
+
+--data-dir trains on another folder in the raw CRM format (e.g. data/crm_simulated); its results go to
+reports/crm/simulated/ by default and may never be written into reports/crm/final/.
 
 No test row is scored here: selection, threshold and calibration are locked before evaluation.
 """
@@ -19,15 +22,18 @@ from src.explain.reference import make_reference
 from src.models import bundle
 from src.models.calibration import CalibratedModel
 from src.models.zoo import MODEL_NAMES,fit_model
-from src.outputs import ROOT,DEFAULT_OUTPUT,SMOKE_OUTPUT,Outputs,write_json
+from src.outputs import ROOT,DEFAULT_OUTPUT,SMOKE_OUTPUT,SIMULATED_OUTPUT,Outputs,write_json
 
 DEPENDENCIES=['numpy','pandas','scipy','scikit-learn','torch','pytorch-tabnet','shap','matplotlib','joblib']
 
 
-def describe_run(manifest,dataset,split):
+def describe_run(manifest,dataset,split,data_dir):
     y=dataset.labels()
     manifest['features']=dataset.feature_columns
-    manifest['raw_sha256']={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(CRM_DIR.glob('*.csv'))}
+    manifest['data_dir']=str(data_dir.relative_to(ROOT)) if data_dir.is_relative_to(ROOT) else str(data_dir)
+    # Hash the input tables (and the data dictionary when present), not derived files in the folder.
+    inputs=[data_dir/f'{name}.csv' for name in ['sales_pipeline','accounts','products','sales_teams','data_dictionary']]
+    manifest['raw_sha256']={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in inputs if path.exists()}
     manifest['split']={'method':'engagement date groups + outcome availability purge',
         'validation_start':str(split.validation_start.date()),'test_start':str(split.test_start.date()),
         'train_rows':len(split.train),'validation_rows':len(split.validation),'test_rows':len(split.test),
@@ -41,26 +47,48 @@ def describe_run(manifest,dataset,split):
     manifest['source_sha256']={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((ROOT/'src').rglob('*.py'))}
 
 
-def run(output_dir=DEFAULT_OUTPUT,quick=False,dataset=None,split=None):
-    """Returns (manifest, trained, dataset, split) so run_project can chain stages in memory."""
+def default_output(data_dir=CRM_DIR,quick=False):
+    """Where a run goes when no --output is given; other data never defaults to the final folder."""
+    if Path(data_dir).resolve()==CRM_DIR.resolve(): return SMOKE_OUTPUT if quick else DEFAULT_OUTPUT
+    return SIMULATED_OUTPUT/('smoke' if quick else 'final')
+
+
+def start(output_dir=DEFAULT_OUTPUT,quick=False,data_dir=CRM_DIR,dataset=None,split=None):
+    """Step 1: create the run folder and manifest, load, validate and split the data."""
+    data_dir=Path(data_dir).resolve()
+    if data_dir!=CRM_DIR.resolve() and Path(output_dir).resolve()==DEFAULT_OUTPUT.resolve():
+        raise ValueError(f'{DEFAULT_OUTPUT} holds only results on data/crm; choose another --output for {data_dir}')
     out=Outputs(output_dir).make()
     manifest={'status':'running','mode':'SMOKE_TEST_NOT_FINAL' if quick else 'full',
               'started_utc':datetime.now(timezone.utc).isoformat(),'seed':42,'python':platform.python_version(),
               'platform':platform.platform(),'machine':platform.machine(),
               'run_location':'local CPU execution; see platform and machine'}
     out.write_manifest(manifest)
-    dataset=dataset or build(); split=split or asof_split(dataset)
+    dataset=dataset or build(data_dir); split=split or asof_split(dataset)
     split.manifest.to_csv(out.data/'split_manifest.csv',index=False)
     write_json(out.data/'data_quality.json',dataset.report)
-    describe_run(manifest,dataset,split)
+    describe_run(manifest,dataset,split,data_dir)
+    return out,manifest,dataset,split
+
+
+def fit_one(name,dataset,split,quick=False):
+    """Step 2: fit one model on training rows; pick its threshold and score it on validation only."""
     X=dataset.features(); xv,yv=X.loc[split.validation],dataset.labels().loc[split.validation]
-    models={}; thresholds={}; rows=[]; histories={}
-    for name in MODEL_NAMES:
-        print(f'Training {name} on CPU...',flush=True)
-        model=fit_model(name,dataset,split.train,split.validation,quick=quick); models[name]=model
-        pv=model.predict_proba(xv)[:,1]; thresholds[name]=choose_threshold(yv,pv)
-        rows.append({'model':name,**metrics(yv,pv,thresholds[name])})
-        histories[name]={'settings':model.settings,'history':model.history,'fit_seconds':model.fit_seconds}
+    model=fit_model(name,dataset,split.train,split.validation,quick=quick)
+    pv=model.predict_proba(xv)[:,1]; threshold=choose_threshold(yv,pv)
+    return model,threshold,{'model':name,**metrics(yv,pv,threshold)}
+
+
+def finish(out,manifest,dataset,split,fitted):
+    """Step 3: select on validation, calibrate the frozen selected model, save every artifact.
+
+    ``fitted`` maps each name in MODEL_NAMES to the (model, threshold, validation row) from fit_one.
+    """
+    if list(fitted)!=list(MODEL_NAMES): raise ValueError(f'fit all of {MODEL_NAMES} in order before selecting; got {list(fitted)}')
+    X=dataset.features(); xv,yv=X.loc[split.validation],dataset.labels().loc[split.validation]
+    models={name:f[0] for name,f in fitted.items()}; thresholds={name:f[1] for name,f in fitted.items()}
+    rows=[f[2] for f in fitted.values()]
+    histories={name:{'settings':m.settings,'history':m.history,'fit_seconds':m.fit_seconds} for name,m in models.items()}
     selected=select_model(rows)
     calibrated=CalibratedModel.fit(models[selected],xv,yv)
     reference=make_reference(X.loc[split.train],dataset)
@@ -80,6 +108,17 @@ def run(output_dir=DEFAULT_OUTPUT,quick=False,dataset=None,split=None):
         status='trained',stages={'train':datetime.now(timezone.utc).isoformat()})
     out.write_manifest(manifest)
     print(f'TRAINED: selected={selected}; models saved in {out.models}',flush=True)
+    return trained
+
+
+def run(output_dir=DEFAULT_OUTPUT,quick=False,dataset=None,split=None,data_dir=CRM_DIR):
+    """Returns (manifest, trained, dataset, split) so run_project can chain stages in memory."""
+    out,manifest,dataset,split=start(output_dir,quick,data_dir,dataset,split)
+    fitted={}
+    for name in MODEL_NAMES:
+        print(f'Training {name} on CPU...',flush=True)
+        fitted[name]=fit_one(name,dataset,split,quick=quick)
+    trained=finish(out,manifest,dataset,split,fitted)
     return manifest,trained,dataset,split
 
 
@@ -87,8 +126,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--quick',action='store_true',help='All five models, tiny budgets; not reportable results')
     parser.add_argument('--output',type=Path,default=None)
+    parser.add_argument('--data-dir',type=Path,default=CRM_DIR,help='Folder with sales_pipeline/accounts/products/sales_teams CSVs')
     args=parser.parse_args()
-    run(args.output or (SMOKE_OUTPUT if args.quick else DEFAULT_OUTPUT),quick=args.quick)
+    run(args.output or default_output(args.data_dir,args.quick),quick=args.quick,data_dir=args.data_dir)
 
 
 if __name__=='__main__': main()

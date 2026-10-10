@@ -23,7 +23,7 @@ def load(out):
 
 def run(output_dir=DEFAULT_OUTPUT,dataset=None):
     """Score the dataset's Engaging deals into predictions/open_deal_predictions.csv."""
-    out=Outputs(output_dir).make(); scoring=load(out); dataset=dataset or build()
+    out=Outputs(output_dir).make(); scoring=load(out); dataset=dataset or build(out.source_data())
     if scoring['features']!=dataset.feature_columns: raise ValueError('scoring bundle features differ from the dataset')
     predictions=explain_open(scoring['model'],dataset,scoring['reference'],scoring['decision_threshold'])
     predictions.to_csv(out.predictions/OPEN_FILE,index=False)
@@ -35,9 +35,9 @@ def run(output_dir=DEFAULT_OUTPUT,dataset=None):
 
 
 def score_file(input_csv,output_dir=DEFAULT_OUTPUT,save=None):
-    """Score new deals given in raw sales_pipeline.csv format; joins the reference tables in data/crm."""
+    """Score new deals given in raw sales_pipeline.csv format; joins the reference tables the models were trained with."""
     out=Outputs(output_dir); scoring=load(out)
-    rows=prepare_new_deals(pd.read_csv(input_csv))
+    rows=prepare_new_deals(pd.read_csv(input_csv),out.source_data())
     predictions=explain_rows(scoring['model'],rows,scoring['features'],scoring['reference'],
                              scoring['decision_threshold'],scoring_context='user_supplied_rows')
     save=Path(save) if save else out.predictions/f'{Path(input_csv).stem}_predictions.csv'

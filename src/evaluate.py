@@ -3,8 +3,11 @@
     python -m src.evaluate [--output PATH]
 
 Loads models saved by src.train. Nothing here can change the selected model, threshold or calibration.
+The steps (start, score_test, make_figures, explain_models, run_audits, run_checks, finish) can also
+be called one by one, as the evaluate notebooks do.
 """
 import argparse
+from dataclasses import dataclass,field
 from datetime import datetime,timezone
 from pathlib import Path
 import pandas as pd
@@ -27,44 +30,100 @@ LIMITATIONS=[
     'Probability calibration and priority thresholds need external/prospective validation.']
 
 
-def run(output_dir=DEFAULT_OUTPUT,trained=None,dataset=None,split=None):
+@dataclass
+class Evaluation:
+    out: Outputs
+    manifest: dict
+    trained: bundle.Trained
+    dataset: object
+    split: object
+    quick: bool
+    test_rows: list=field(default_factory=list)       # one metrics row per model
+    probabilities: dict=field(default_factory=dict)   # raw test P(Won) per model
+    calibrated_test: object=None                      # calibrated P(Won) of the selected model
+    test_predictions: object=None
+
+    def xy(self,part):
+        idx=getattr(self.split,part)
+        return self.dataset.features().loc[idx],self.dataset.labels().loc[idx]
+
+
+def start(output_dir=DEFAULT_OUTPUT,trained=None,dataset=None,split=None):
+    """Step 1: load the saved models and rebuild the same data and split they were trained on."""
     out=Outputs(output_dir).make(); manifest=out.read_manifest()
     if 'selected_model' not in manifest: raise RuntimeError(f'{out.root} has no trained models: run src.train first')
-    quick=manifest['mode']!='full'
     trained=trained or bundle.load_trained(out)
-    dataset=dataset or build(); split=split or asof_split(dataset)
-    X=dataset.features(); y=dataset.labels()
-    xt,yt=X.loc[split.test],y.loc[split.test]; xv,yv=X.loc[split.validation],y.loc[split.validation]
-    selected=trained.selected; calibrated=trained.calibrated
+    dataset=dataset or build(out.source_data()); split=split or asof_split(dataset)
+    ev=Evaluation(out,manifest,trained,dataset,split,quick=manifest['mode']!='full')
     figures.eda(dataset,split,out)
-    probabilities={name:model.predict_proba(xt)[:,1] for name,model in trained.models.items()}
-    rows=[{'model':name,**metrics(yt,p,trained.thresholds[name])} for name,p in probabilities.items()]
-    pd.DataFrame(rows).to_csv(out.metrics/'test_metrics.csv',index=False)
-    pc=calibrated.predict_proba(xt)[:,1]
-    pd.DataFrame([{'variant':'raw',**metrics(yt,probabilities[selected],trained.thresholds[selected])},
-                  {'variant':'calibrated',**metrics(yt,pc,trained.decision_threshold)}]).to_csv(out.metrics/'calibration_test.csv',index=False)
-    test_predictions=dataset.frame.loc[split.test,['opportunity_id','deal_stage','engage_date']].copy()
-    for name,p in probabilities.items(): test_predictions['p_'+name]=p
-    test_predictions['p_selected_calibrated']=pc; test_predictions.to_csv(out.metrics/'test_predictions.csv',index=False)
-    histories={name:{'settings':m.settings,'history':m.history,'fit_seconds':m.fit_seconds} for name,m in trained.models.items()}
-    figures.learning_curves(histories,out)
-    figures.evaluation_figures(yt,probabilities,trained.thresholds,{'raw':probabilities[selected],'calibrated':pc},out)
-    importance.native_importances(trained.models,out)
-    importance.permutation_importance(calibrated,xt,yt,out,quick=quick)
-    importance.shap_audit(trained.models['random_forest'],xt,test_predictions.opportunity_id,out,quick=quick)
-    audits.leakage_control(dataset,split,next(r for r in rows if r['model']==selected),out)
-    audits.priority_checks(yt,pc,yv,calibrated.predict_proba(xv)[:,1],out)
+    return ev
+
+
+def score_test(ev):
+    """Step 2: score every model on the test period with its validation threshold; calibrated vs raw."""
+    t=ev.trained; xt,yt=ev.xy('test'); selected=t.selected
+    ev.probabilities={name:model.predict_proba(xt)[:,1] for name,model in t.models.items()}
+    ev.test_rows=[{'model':name,**metrics(yt,p,t.thresholds[name])} for name,p in ev.probabilities.items()]
+    pd.DataFrame(ev.test_rows).to_csv(ev.out.metrics/'test_metrics.csv',index=False)
+    ev.calibrated_test=t.calibrated.predict_proba(xt)[:,1]
+    pd.DataFrame([{'variant':'raw',**metrics(yt,ev.probabilities[selected],t.thresholds[selected])},
+                  {'variant':'calibrated',**metrics(yt,ev.calibrated_test,t.decision_threshold)}]).to_csv(ev.out.metrics/'calibration_test.csv',index=False)
+    ev.test_predictions=ev.dataset.frame.loc[ev.split.test,['opportunity_id','deal_stage','engage_date']].copy()
+    for name,p in ev.probabilities.items(): ev.test_predictions['p_'+name]=p
+    ev.test_predictions['p_selected_calibrated']=ev.calibrated_test
+    ev.test_predictions.to_csv(ev.out.metrics/'test_predictions.csv',index=False)
+    return pd.DataFrame(ev.test_rows)
+
+
+def make_figures(ev):
+    """Step 3: learning curves, ROC/PR curves, confusion matrices and reliability."""
+    t=ev.trained; _,yt=ev.xy('test')
+    histories={name:{'settings':m.settings,'history':m.history,'fit_seconds':m.fit_seconds} for name,m in t.models.items()}
+    figures.learning_curves(histories,ev.out)
+    figures.evaluation_figures(yt,ev.probabilities,t.thresholds,{'raw':ev.probabilities[t.selected],'calibrated':ev.calibrated_test},ev.out)
+
+
+def explain_models(ev):
+    """Step 4: native importance, held-out permutation importance and raw-RF TreeSHAP."""
+    t=ev.trained; xt,yt=ev.xy('test')
+    importance.native_importances(t.models,ev.out)
+    importance.permutation_importance(t.calibrated,xt,yt,ev.out,quick=ev.quick)
+    importance.shap_audit(t.models['random_forest'],xt,ev.test_predictions.opportunity_id,ev.out,quick=ev.quick)
+
+
+def run_audits(ev):
+    """Step 5: invalid close-value leakage control and priority-band diagnostics."""
+    t=ev.trained; xv,yv=ev.xy('validation'); _,yt=ev.xy('test')
+    audits.leakage_control(ev.dataset,ev.split,next(r for r in ev.test_rows if r['model']==t.selected),ev.out)
+    audits.priority_checks(yt,ev.calibrated_test,yv,t.calibrated.predict_proba(xv)[:,1],ev.out)
+
+
+def run_checks(ev):
+    """Step 6: split-protocol comparison and explanation faithfulness. Refits models: slow on large data."""
     print('Checking split protocols and explanations...',flush=True)
-    protocols=novelty_checks.split_protocols(dataset,split,out,quick=quick)
-    checks=novelty_checks.explanation_checks(trained.models['random_forest'],calibrated,dataset,split,trained.reference,out,quick=quick)
-    manifest['novelty_checks']={'split_protocol_max_auc_gain':float(protocols.delta_vs_asof.max()),
+    t=ev.trained
+    protocols=novelty_checks.split_protocols(ev.dataset,ev.split,ev.out,quick=ev.quick)
+    checks=novelty_checks.explanation_checks(t.models['random_forest'],t.calibrated,ev.dataset,ev.split,t.reference,ev.out,quick=ev.quick)
+    ev.manifest['novelty_checks']={'split_protocol_max_auc_gain':float(protocols.delta_vs_asof.max()),
         'rf_explanation_spearman_median':checks['agreement']['spearman_median'],
         'deletion_ratio_top_to_random':checks['deletion']['ratio_top_to_random']}
-    manifest['limitations']=LIMITATIONS
-    manifest.setdefault('stages',{})['evaluate']=datetime.now(timezone.utc).isoformat()
-    out.write_manifest(manifest)
-    print(f'EVALUATED: {selected} test ROC-AUC {next(r for r in rows if r["model"]==selected)["roc_auc"]:.4f}',flush=True)
-    return manifest
+    return protocols,checks
+
+
+def finish(ev):
+    """Step 7: record limitations and the stage in the manifest."""
+    ev.manifest['limitations']=LIMITATIONS
+    ev.manifest.setdefault('stages',{})['evaluate']=datetime.now(timezone.utc).isoformat()
+    ev.out.write_manifest(ev.manifest)
+    auc=next(r for r in ev.test_rows if r['model']==ev.trained.selected)['roc_auc']
+    print(f'EVALUATED: {ev.trained.selected} test ROC-AUC {auc:.4f}',flush=True)
+    return ev.manifest
+
+
+def run(output_dir=DEFAULT_OUTPUT,trained=None,dataset=None,split=None):
+    ev=start(output_dir,trained,dataset,split)
+    score_test(ev); make_figures(ev); explain_models(ev); run_audits(ev); run_checks(ev)
+    return finish(ev)
 
 
 def main():

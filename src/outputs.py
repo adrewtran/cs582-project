@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT=ROOT/'reports/crm/final'
 SMOKE_OUTPUT=ROOT/'reports/crm/smoke'
+SIMULATED_OUTPUT=ROOT/'reports/crm/simulated'   # runs on data other than data/crm; never final results
 
 
 @dataclass(frozen=True)
@@ -39,6 +40,14 @@ class Outputs:
         return json.loads(self.manifest.read_text()) if self.manifest.exists() else {}
 
     def write_manifest(self,manifest): write_json(self.manifest,manifest)
+
+    def source_data(self):
+        """Raw-data folder the saved models were trained on, as recorded by src.train."""
+        from src.data.crm import CRM_DIR
+        value=self.read_manifest().get('data_dir')
+        if value is None: return CRM_DIR
+        path=Path(value)
+        return path if path.is_absolute() else ROOT/path
 
 
 def write_json(path,value):
