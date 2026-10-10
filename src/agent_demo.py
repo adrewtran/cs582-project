@@ -8,6 +8,9 @@
     python -m src.agent_demo --pause                 # wait for Enter between phases (live presentation)
     python -m src.agent_demo --check                 # verify the saved models and results, then exit
     python -m src.agent_demo --traditional           # Baseline A only: the ordinary ML prediction for the demo deal
+    python -m src.agent_demo --diagnosis             # why prediction is weak (saved predictability study)
+    python -m src.agent_demo --benchmark             # equal-information benchmark: where the agent wins, ties and loses
+    python -m src.agent_demo --learning              # feedback learning, live, in the SYNTHETIC reviewer simulator
 
 Offline and deterministic: no API key, no network, no training. It needs the saved run in reports/crm/final/
 (created by python -m src.run_project). Results are written to reports/crm/agent_demo/ (git-ignored).
@@ -159,6 +162,96 @@ def traditional(res,args):
     print('DEMO COMPLETE',flush=True)
 
 
+def diagnosis(run_dir):
+    """Saved Gap-1 study: is there predictive signal in this CRM snapshot?"""
+    from src.outputs import Outputs
+    folder=Outputs(run_dir).analysis/'predictability'
+    banner('WHY IS PREDICTION WEAK? (development data only; test scored once after a lock)')
+    s=json.loads((folder/'summary.json').read_text())
+    perm=pd.DataFrame(s['permutation']); learn=pd.read_csv(folder/'learnability_summary.csv')
+    for r in perm.itertuples():
+        say(f"Permutation test {r.configuration}: validation AUC {r.observed_validation_auc:.3f}; shuffled-label refits "
+            f"average {r.null_mean:.3f} (95th pct {r.null_95th:.3f}); p = {r.p_value:.3f}")
+    say(f"Features with a significant univariate signal after correction: {s['features_significant_after_bh'] or 'none'}")
+    say(f"Best of {len(learn)} rolling-origin candidates: {learn.iloc[0].candidate} (mean AUC {learn.iloc[0].mean_fold_auc:.3f}, "
+        f"gain vs incumbent {learn.iloc[0].delta_vs_incumbent:+.3f}, 95% CI {learn.iloc[0].delta_ci_low:+.3f} to {learn.iloc[0].delta_ci_high:+.3f}); "
+        f"adopted: {s['lock']['adopted']}")
+    sup=s['support']; age=s['deal_age']
+    say(f"Open deals older than any closed deal ({sup['longest_closed_cycle_days']} days): {sup['open_older_than_any_closed_cycle']:.0%}; "
+        f"open deals without an account: {sup['open_missing_account']:.0%} (closed deals: {sup['closed_missing_account']:.0%})")
+    say(f"Deals closed within 14 days were won {age['closed_within_14_days_win_rate']:.0%} of the time, later ones {age['closed_after_14_days_win_rate']:.0%}: "
+        'time matters, but time-to-close is only known after the outcome.')
+    say('Conclusion: the snapshot lacks activity, stage-history and buyer signals; the model cannot be made reliably better with these fields.')
+    print('DEMO COMPLETE',flush=True)
+
+
+def benchmark(run_dir):
+    """Saved Gap-4 benchmark: equal information, 5 seeds, outcomes joined after every system ran."""
+    from src.outputs import Outputs
+    folder=Outputs(run_dir).benchmark
+    banner('EQUAL-INFORMATION BENCHMARK (A prediction | A+ same tools, simple gate | B rules | C agent)')
+    m=pd.read_csv(folder/'benchmark_summary.csv').set_index(['metric','system'])
+    rows=[('missing_detected','injected missing account detected'),('corruption_detected','injected revenue error detected'),
+          ('correct','directional labels correct (real outcome)'),('directional','share given a directional label'),
+          ('review_task','share sent to human review'),('tool_calls','tool calls per deal'),('runtime_ms','runtime per deal (ms)'),
+          ('request_surfaced','external request surfaced for approval'),('external_executed','external actions executed')]
+    systems=[x for x in ['A','A+','B','C'] if (rows[0][0],x) in m.index]
+    say(f"{'metric':<44}"+''.join(f'{x:>16}' for x in systems))
+    for key,label in rows:
+        cells=''.join(f"{m.loc[(key,x),'value']:>8.2f} [{m.loc[(key,x),'ci_low']:.2f},{m.loc[(key,x),'ci_high']:.2f}]"[:16].rjust(16) for x in systems)
+        say(f'{label:<44}{cells}')
+    q=pd.read_csv(folder/'review_queue.csv').groupby('system').lift.agg(['mean','min','max'])
+    say('Top-24 review queue, loss-rate lift over the batch (mean, seed range): '+'; '.join(f"{x} {q.loc[x,'mean']:+.3f} [{q.loc[x,'min']:+.3f},{q.loc[x,'max']:+.3f}]" for x in systems))
+    p=pd.read_csv(folder/'paired_differences.csv')
+    say('Paired differences with a 95% CI (C - other):')
+    for r in p.loc[p.comparison.str.startswith('C')].itertuples():
+        if r.metric in ('correct','missing_detected','corruption_detected','tool_calls','review_task'):
+            say(f"{r.comparison:<8} {r.metric:<20} {r.difference:+.3f} [{r.ci_low:+.3f}, {r.ci_high:+.3f}] -> {r.verdict}",2)
+    say('Read: where C ties A+, the gain comes from having the evidence tools, not from the agent loop.')
+    print('DEMO COMPLETE',flush=True)
+
+
+def learning_demo(res,args,folder):
+    """Live feedback learning in the SYNTHETIC simulator: store -> verify -> learn -> certify -> agent uses it."""
+    import numpy as np
+    from src.agent import learning
+    from src.agent.controller import AgentConfig
+    from src.agent.feedback import DEFAULT_STORE,FeedbackStore
+    real=FeedbackStore(DEFAULT_STORE).records('human_reviewer')
+    banner('FEEDBACK LEARNING (SYNTHETIC REVIEWERS: demonstrates the mechanism, not real-world value)',args.pause)
+    say(f'Real human feedback records in {DEFAULT_STORE.relative_to(ROOT)}: {len(real)} -> the real agent keeps its fixed policy.')
+    frame=pd.read_csv(res.out.learning/'contexts.csv')
+    env='E2_shifted_preferences'
+    say(f"Simulator {env}: {learning.ENVIRONMENTS[env]}")
+    say(f'Contexts are real agent evidence on {len(frame):,} deals (outcomes masked); rewards are simulated usefulness scores 1-5.')
+    banner('[a] 1,000 logged reviews (epsilon-greedy, propensities stored) -> hash-chained feedback store',args.pause)
+    demo=learning.demonstrate(frame,folder)
+    say(f"Store {demo['store']}: chain {demo['chain']}")
+    cert=demo['policy']['certificate']
+    banner('[b] learn on half, certify on the other half (doubly robust, 95% lower bound must be > 0)',args.pause)
+    say(f"Estimated gain over the fixed policy: {cert['dr_delta']:+.3f} (95% CI {cert['ci'][0]:+.3f} to {cert['ci'][1]:+.3f}) -> "
+        f"{'ADOPTED' if cert['adopted'] else 'REJECTED: fixed policy kept'}")
+    held=frame.loc[frame.held_out]
+    X=np.stack([learning.phi(r) for r in held.to_dict('records')])
+    true=learning.expected_reward(learning.environment(env,X,held.fixed.to_list())); n=np.arange(len(held))
+    pol=json.loads((folder/f'learned_policy_{env}.json').read_text())
+    chosen=np.array([learning.ACTIONS.index(learning.choose(pol,r) or r['fixed']) for r in held.to_dict('records')])
+    fixed=np.array([learning.ACTIONS.index(f) for f in held.fixed])
+    say(f"Held-out deals ({len(held):,}): expected reviewer reward fixed {true[n,fixed].mean():+.3f} -> learned {true[n,chosen].mean():+.3f} "
+        f"(oracle {true.max(1).mean():+.3f}); decisions changed {np.mean(chosen!=fixed):.0%}")
+    banner('[c] the SAME agent on one real deal, with and without the certified policy',args.pause)
+    changed=held.loc[chosen!=fixed]
+    if len(changed):
+        row=changed.iloc[0]; case=Case(row.opportunity_id,row.pool,(),'learning_demo')
+        before=CRMAgent(res,folder/'fixed').run(case,write=False)
+        after=CRMAgent(res,folder/'learned',AgentConfig('learned_synthetic',learned_policy=str(folder/f'learned_policy_{env}.json'))).run(case,write=False)
+        say(f"Deal {row.opportunity_id} ({row.pool}): fixed policy -> {before['decision']['action']}; learned policy -> {after['decision']['action']}")
+        say(f"Agent's explanation: {after['final_recommendation']}")
+        say(f"Trace records the certificate: adopted={after['learned_policy']['certificate']['adopted']} on {after['learned_policy']['records']} records")
+    say('Safety rules do not change: blocked records still go to data completion; external actions are still never executed.')
+    print('DEMO COMPLETE',flush=True)
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__.splitlines()[0],formatter_class=argparse.RawDescriptionHelpFormatter,epilog=__doc__)
     parser.add_argument('--scenario',choices=sorted(SCENARIOS))
@@ -171,8 +264,13 @@ def main():
     parser.add_argument('--quiet',action='store_true',help='Do not print every step')
     parser.add_argument('--check',action='store_true',help='Verify saved models and results, then exit')
     parser.add_argument('--traditional',action='store_true',help='Show only the ordinary ML prediction (Baseline A)')
+    parser.add_argument('--diagnosis',action='store_true',help='Show the saved study of why prediction is weak')
+    parser.add_argument('--benchmark',action='store_true',help='Show the saved equal-information benchmark')
+    parser.add_argument('--learning',action='store_true',help='Run feedback learning live in the synthetic simulator')
     args=parser.parse_args()
     if args.check: return check(args.output)
+    if args.diagnosis: return diagnosis(args.output)
+    if args.benchmark: return benchmark(args.output)
 
     banner('[1/5] LOADING THE FROZEN, ALREADY-TRAINED SYSTEM (no training, no network)')
     res=Resources(args.output)
@@ -188,6 +286,7 @@ def main():
     if folder.exists(): shutil.rmtree(folder)
     folder.mkdir(parents=True)
 
+    if args.learning: return learning_demo(res,args,folder)
     if args.batch:
         ids=res.open.sort_values(['engage_date','opportunity_id'],ascending=[False,True],kind='stable').head(args.batch).opportunity_id.tolist()
         banner(f'[2/5] BATCH GOAL: which of {len(ids)} recent Engaging deals need human review first? (budget {args.budget})',args.pause)

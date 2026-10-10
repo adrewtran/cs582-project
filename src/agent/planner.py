@@ -27,10 +27,15 @@ TASK_CONTEXT=.50
 IRRELEVANT=.05
 
 
-def risk_signal(prediction):
+def risk_signal(prediction,th=policy.DEFAULT_THRESHOLDS):
     if not prediction: return None
     d=prediction['distance_to_threshold']
-    return 'borderline' if abs(d)<policy.BORDERLINE_MARGIN else ('at_risk' if d<0 else 'favorable')
+    return 'borderline' if abs(d)<th.borderline_margin else ('at_risk' if d<0 else 'favorable')
+
+
+def split(agreement,th):
+    """Committee split under the policy threshold (the tool reports the share)."""
+    return agreement['disagreement_share']>=th.committee_split
 
 
 def blocked(beliefs):
@@ -43,43 +48,43 @@ def reliability(card):
     return 'unusable' if low<=.5 else 'weak' if auc<.65 else 'moderate' if auc<.75 else 'strong'
 
 
-def assess(beliefs,card):
+def assess(beliefs,card,th=policy.DEFAULT_THRESHOLDS):
     """Pure evidence assessment (used by the evaluate_evidence tool and by lookahead)."""
     prediction=beliefs.get('prediction'); quality=beliefs.get('data_quality') or {}
     history=beliefs.get('history'); agreement=beliefs.get('agreement')
     checks={
         'account_present':beliefs.get('account') is not None,
-        'account_history_supported':bool(history) and history['account_closed_count']>=policy.SUPPORT_MIN,
-        'product_history_supported':bool(history) and history['product_closed_count']>=policy.SUPPORT_MIN,
-        'agent_history_supported':bool(history) and history['agent_closed_count']>=policy.SUPPORT_MIN,
+        'account_history_supported':bool(history) and history['account_closed_count']>=th.support_min,
+        'product_history_supported':bool(history) and history['product_closed_count']>=th.support_min,
+        'agent_history_supported':bool(history) and history['agent_closed_count']>=th.support_min,
         'no_imputed_inputs':bool(quality) and not quality.get('imputed_inputs'),
         'inputs_in_training_support':bool(quality) and not {'unseen_category','outside_training_range'}&set(quality.get('warnings',[])),
-        'committee_agrees':bool(agreement) and not agreement['committee_split'],
+        'committee_agrees':bool(agreement) and not split(agreement,th),
     }
     score=round(sum(policy.EVIDENCE_WEIGHTS[k] for k,v in checks.items() if v),10)
-    risk=risk_signal(prediction); conflicts=[]
-    if prediction and history and history['account_closed_count']>=policy.SUPPORT_MIN:
+    risk=risk_signal(prediction,th); conflicts=[]
+    if prediction and history and history['account_closed_count']>=th.support_min:
         gap=round(history['account_win_rate']-history['global_win_rate'],10)
-        if (risk=='favorable' and gap<=-policy.CONFLICT_GAP) or (risk=='at_risk' and gap>=policy.CONFLICT_GAP):
+        if (risk=='favorable' and gap<=-th.conflict_gap) or (risk=='at_risk' and gap>=th.conflict_gap):
             conflicts.append({'code':f'account_history_contradicts_{risk}_score','account_win_rate':history['account_win_rate'],
                               'archive_win_rate':history['global_win_rate'],'gap':gap})
-    if prediction and agreement and agreement['committee_split']:
+    if prediction and agreement and split(agreement,th):
         conflicts.append({'code':'model_committee_split','disagreeing_models':agreement['disagreeing_models'],
                           'disagreement_share':agreement['disagreement_share']})
-    return {'evidence_quality':score,'evidence_checks':checks,'sufficient':score>=policy.SUFFICIENT_EVIDENCE,
+    return {'evidence_quality':score,'evidence_checks':checks,'sufficient':score>=th.sufficient_evidence,
             'blocking_issues':list(quality.get('blocking',[])),'conflicts':conflicts,'risk_signal':risk,
             'model_reliability':reliability(card),'validation_roc_auc':card['validation_roc_auc'],
             'validation_roc_auc_ci95':card['validation_calibrated_roc_auc_ci95'],
-            'rules':f'evidence weights {policy.EVIDENCE_WEIGHTS}; sufficient >= {policy.SUFFICIENT_EVIDENCE}; '
-                    f'borderline margin {policy.BORDERLINE_MARGIN}; reliability from the validation AUC CI only'}
+            'rules':f'evidence weights {policy.EVIDENCE_WEIGHTS}; sufficient >= {th.sufficient_evidence}; '
+                    f'borderline margin {th.borderline_margin}; reliability from the validation AUC CI only'}
 
 
-def decision_candidates(state,reliability_checks=True,card=None):
+def decision_candidates(state,reliability_checks=True,card=None,th=policy.DEFAULT_THRESHOLDS):
     """Every final action with its requirements evaluated against the current beliefs."""
     beliefs=state['beliefs']
-    a=beliefs.get('assessment') or (assess(beliefs,card) if card and beliefs.get('prediction') else {})
+    a=beliefs.get('assessment') or (assess(beliefs,card,th) if card and beliefs.get('prediction') else {})
     has_prediction=state['status'].get('prediction')=='known'
-    risk=a.get('risk_signal') or risk_signal(beliefs.get('prediction'))
+    risk=a.get('risk_signal') or risk_signal(beliefs.get('prediction'),th)
     gate=lambda value:value if reliability_checks else True   # ablation: reliability evidence is ignored
     common={'prediction_available':has_prediction,'no_blocking_data_issue':gate(not a.get('blocking_issues')),
             'evidence_sufficient':gate(bool(a.get('sufficient'))),'no_conflicting_evidence':gate(not a.get('conflicts')),
@@ -99,7 +104,7 @@ def choose_decision(candidates):
     return next(c for c in candidates if c['valid'])
 
 
-def hypotheses(slot,beliefs):
+def hypotheses(slot,beliefs,th=policy.DEFAULT_THRESHOLDS):
     """Best and worst plausible results of a slot, in the same schema as the real tool output."""
     if slot=='history':
         g=.6   # any archive rate: support and conflict depend only on counts and the gap
@@ -107,8 +112,8 @@ def hypotheses(slot,beliefs):
             h={f'{e}_closed_count':float(count) for e in ('agent','account','product')}
             h.update({f'{e}_win_rate':g for e in ('agent','account','product')},global_win_rate=g)
             h['account_win_rate']=g+gap; return h
-        return [history(policy.SUPPORT_MIN,0.),history(0,0.),history(policy.SUPPORT_MIN,-policy.CONFLICT_GAP),
-                history(policy.SUPPORT_MIN,policy.CONFLICT_GAP)]
+        return [history(th.support_min,0.),history(0,0.),history(th.support_min,-th.conflict_gap),
+                history(th.support_min,th.conflict_gap)]
     if slot=='agreement':
         return [{'committee_split':split,'disagreeing_models':[],'disagreement_share':float(split)} for split in (False,True)]
     if slot=='explanation': return [{'factors':[]},None]
@@ -120,12 +125,12 @@ def decision_with(state,slot,value,config,card):
     trial['beliefs'].pop('assessment',None)
     if value is None: trial['status'][slot]='failed'
     else: trial['beliefs'][slot]=value; trial['status'][slot]='known'
-    return choose_decision(decision_candidates(trial,config['reliability_checks'],card))['decision']
+    return choose_decision(decision_candidates(trial,config['reliability_checks'],card,config['thresholds']))['decision']
 
 
 def value_of_information(slot,state,config,card):
     current=decision_with(state,slot,None,config,card)
-    outcomes=sorted({decision_with(state,slot,v,config,card) for v in hypotheses(slot,state['beliefs'])}|{current})
+    outcomes=sorted({decision_with(state,slot,v,config,card) for v in hypotheses(slot,state['beliefs'],config['thresholds'])}|{current})
     if len(outcomes)>1:
         return RELEVANT[slot],f'decision-relevant: the result could change the action ({" vs ".join(outcomes)})'
     if current in ('ESCALATE_AT_RISK_REVIEW','REVIEW_UNCERTAIN'):
@@ -156,8 +161,8 @@ def need(slot,state,config,card):
     return value_of_information(slot,state,config,card)
 
 
-def tool_candidates(state,allowed,card,reliability_checks=True,fixed_sequence=False):
-    rows=[]; config={'allowed':allowed,'reliability_checks':reliability_checks}
+def tool_candidates(state,allowed,card,reliability_checks=True,fixed_sequence=False,th=policy.DEFAULT_THRESHOLDS):
+    rows=[]; config={'allowed':allowed,'reliability_checks':reliability_checks,'thresholds':th}
     for name in INFORMATION_TOOLS:
         slot=SLOT[name]; cost=policy.TOOL_COST[name]
         if state['status'].get(slot) in ('known','failed'): continue
@@ -173,8 +178,8 @@ def tool_candidates(state,allowed,card,reliability_checks=True,fixed_sequence=Fa
     return rows
 
 
-def choose_tool(candidates):
-    best=[c for c in candidates if c['applicable'] and c['utility']>=policy.MIN_GAIN]
+def choose_tool(candidates,th=policy.DEFAULT_THRESHOLDS):
+    best=[c for c in candidates if c['applicable'] and c['utility']>=th.min_gain]
     if not best: return None
     top=max(c['utility'] for c in best)
     return next(c for c in best if c['utility']==top)

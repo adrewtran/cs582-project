@@ -1,0 +1,2 @@
+task_id,opportunity_id,agent_decision,propensity,reviewer_role,reviewer_action,usefulness,agreed_with_agent,minutes_spent,outcome,notes
+EXAMPLE0000000000,EXAMPLE1,REVIEW_UNCERTAIN,1.0,account executive,followed,4,yes,6,,example row: delete before importing

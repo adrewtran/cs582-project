@@ -27,6 +27,8 @@ class AgentConfig:
     reliability_checks: bool=True   # data quality, committee agreement and evidence gating
     planning: bool=True             # False: run every available tool in a fixed order
     tool_execution: bool=True       # False: decide, but write no task and no report (dry run)
+    thresholds: policy.Thresholds=policy.DEFAULT_THRESHOLDS   # decision-policy thresholds (see policy.Thresholds)
+    learned_policy: str|None=None   # path to a certified policy from src.agent.learning (None: the fixed policy)
 
     def allowed(self):
         tools=set(INFORMATION_TOOLS)
@@ -78,6 +80,7 @@ class Episode:
     steps: list=field(default_factory=list)
     sources: list=field(default_factory=list)
     errors: list=field(default_factory=list)
+    learned: dict|None=None
 
 
 class CRMAgent:
@@ -127,8 +130,9 @@ class CRMAgent:
     def observe_and_plan(self,ep,allowed,goal):
         state=ep.state
         while len(ep.steps)<policy.MAX_STEPS-3:          # keep room for assess, decide, act/report
-            candidates=planner.tool_candidates(state,allowed,self.res.card,self.config.reliability_checks,fixed_sequence=not self.config.planning)
-            chosen=planner.choose_tool(candidates)
+            th=self.config.thresholds
+            candidates=planner.tool_candidates(state,allowed,self.res.card,self.config.reliability_checks,fixed_sequence=not self.config.planning,th=th)
+            chosen=planner.choose_tool(candidates,th)
             if chosen is None:
                 self.record(ep,'plan',goal=goal,candidates=candidates,chosen=None,
                             evaluation='No remaining tool clears the minimum information gain; assess the evidence.')
@@ -165,7 +169,7 @@ class CRMAgent:
 
     def assess(self,ep,goal):
         if ep.state['status'].get('opportunity')!='known': return
-        result,attempts=self.execute(ep,'evaluate_evidence',beliefs=ep.state['beliefs'])
+        result,attempts=self.execute(ep,'evaluate_evidence',beliefs=ep.state['beliefs'],thresholds=self.config.thresholds)
         if result.status=='ok':
             ep.state['beliefs']['assessment']=jsonable(result.data); ep.state['status']['assessment']='known'
             ep.sources.extend(result.sources)
@@ -180,14 +184,30 @@ class CRMAgent:
                     evaluation=evaluation)
 
     def decide(self,ep,goal):
-        candidates=planner.decision_candidates(ep.state,self.config.reliability_checks,self.res.card)
+        candidates=planner.decision_candidates(ep.state,self.config.reliability_checks,self.res.card,self.config.thresholds)
         chosen=planner.choose_decision(candidates)
         decision=chosen['decision']
         reasons=[f"{c['decision']} not supported: "+', '.join(k for k,v in c['requirements'].items() if not v)
                  for c in candidates[:candidates.index(chosen)] if c['requirements']]
-        self.record(ep,'decide',goal=goal,candidates=candidates,chosen=decision,
-                    evaluation=f'Most specific supported action: {decision}.',rejected=reasons)
+        evaluation=f'Most specific supported action: {decision}.'
+        if self.config.learned_policy: decision,evaluation=self.apply_learned(ep,decision,evaluation)
+        self.record(ep,'decide',goal=goal,candidates=candidates,chosen=decision,evaluation=evaluation,rejected=reasons)
         return decision,reasons
+
+    def apply_learned(self,ep,decision,evaluation):
+        """A certified learned policy may re-rank the three review actions; safety rules are untouched."""
+        from src.agent import learning
+        from src.agent.feedback import context_from
+        learned=json.loads(Path(self.config.learned_policy).read_text(encoding='utf-8'))
+        b=ep.state['beliefs']
+        if decision not in learning.ACTIONS or planner.blocked(b): return decision,evaluation
+        choice=learning.choose(learned,context_from(b,self.res.card,self.config.thresholds))
+        ep.learned={'file':Path(self.config.learned_policy).name,'source':learned.get('source'),'records':learned.get('records'),
+                    'certificate':learned.get('certificate'),'fixed_decision':decision,'learned_decision':choice or decision}
+        if choice is None: return decision,evaluation+' Learned policy not certified: fixed policy kept.'
+        if choice==decision: return decision,evaluation+' Learned policy agrees.'
+        return choice,(f"Fixed policy: {decision}. Certified learned policy ({learned.get('source')}, {learned.get('records')} feedback records) "
+                       f"chose {choice}.")
 
     def task_for(self,ep,decision,reasons):
         b=ep.state['beliefs']; a=b.get('assessment') or {}; p=b.get('prediction') or {}
@@ -241,13 +261,16 @@ class CRMAgent:
         b=ep.state['beliefs']; a=b.get('assessment') or {}; p=b.get('prediction')
         score=f"P(Won) {p['win_probability']:.3f}" if p else 'no score'
         why=[]
-        if a.get('risk_signal')=='borderline': why.append(f'score within {policy.BORDERLINE_MARGIN} of the decision threshold')
+        if a.get('risk_signal')=='borderline': why.append(f'score within {self.config.thresholds.borderline_margin} of the decision threshold')
         why+=[c['code'].replace('_',' ') for c in a.get('conflicts',[])]
-        if a and not a.get('sufficient'): why.append(f"evidence quality {a['evidence_quality']:.2f} below {policy.SUFFICIENT_EVIDENCE}")
+        if a and not a.get('sufficient'): why.append(f"evidence quality {a['evidence_quality']:.2f} below {self.config.thresholds.sufficient_evidence}")
         if a.get('model_reliability')=='unusable': why.append('model not distinguishable from chance on validation')
         if decision=='REVIEW_UNCERTAIN' and ep.state['status'].get('explanation')!='known' and a.get('risk_signal')=='at_risk':
             why.append('no explanation available for an escalation')
         blocking=', '.join(a.get('blocking_issues',[])) or 'see errors'
+        if ep.learned and ep.learned['learned_decision']!=ep.learned['fixed_decision']:
+            return (f"{decision} from a learned review policy ({ep.learned['source']} feedback; the fixed policy said "
+                    f"{ep.learned['fixed_decision']}); {score}. A human decides any customer action.")
         return {'ESCALATE_AT_RISK_REVIEW':f'Human review first: {score} is below the threshold, with sufficient evidence ({a.get("evidence_quality",0):.2f}) and no conflicts.',
                 'MONITOR_NO_TASK':f'No task: {score} is favourable, with sufficient evidence and no conflicts; keep monitoring.',
                 'REVIEW_UNCERTAIN':f"Human review, low confidence: {score}; {'; '.join(why) or 'evidence is mixed'}.",
@@ -292,6 +315,7 @@ class CRMAgent:
                'blocked_actions':blocked,'approval_requests':approvals,'errors':ep.errors,
                'evidence_sources':ep.sources,'stopping_reason':stopping,'step_budget':policy.MAX_STEPS,
                'external_side_effects':0}
+        if self.config.learned_policy: trace['learned_policy']=ep.learned
         trace=jsonable(trace); trace['content_sha256']=content_hash(trace)
         if self.config.tool_execution and write:
             name=f"{case.opportunity_id}.{self.config.name}"
@@ -315,7 +339,7 @@ class CRMAgent:
         def value(ep):
             b=ep.state['beliefs']
             if ep.state['status'].get('opportunity')!='known' or planner.blocked(b): return 0.
-            return {'borderline':1.,'at_risk':.8,'favorable':.3}.get(planner.risk_signal(b.get('prediction')),0.)
+            return {'borderline':1.,'at_risk':.8,'favorable':.3}.get(planner.risk_signal(b.get('prediction'),self.config.thresholds),0.)
         def days(ep): return (ep.state['beliefs'].get('opportunity') or {}).get('days_open_at_snapshot',0)
         order=sorted(screened,key=lambda ep:(-value(ep),-days(ep),ep.case.opportunity_id))
         budget=len(order) if investigate_budget is None else investigate_budget

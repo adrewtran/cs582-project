@@ -29,6 +29,14 @@ class Outputs:
     @property
     def figures(self): return self.root/'figures'
     @property
+    def analysis(self): return self.root/'analysis'        # predictability study and policy-threshold study
+    @property
+    def benchmark(self): return self.root/'benchmark'      # equal-information triage benchmark
+    @property
+    def learning(self): return self.root/'learning'        # synthetic feedback-learning study (never real outcomes)
+    @property
+    def pilot(self): return self.root/'pilot'              # prospective pilot power analysis
+    @property
     def manifest(self): return self.root/'run_manifest.json'
 
     def make(self):

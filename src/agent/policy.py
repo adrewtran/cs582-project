@@ -3,6 +3,7 @@
 Every number the agent uses to choose a step or a final action is defined here, so the decision rule can be
 read, cited and ablated. None of these constants was tuned on test outcomes; they are fixed design choices.
 """
+from dataclasses import dataclass
 from pathlib import Path
 
 POLICY_VERSION='evidence-agent-1.0'
@@ -15,6 +16,27 @@ CONFLICT_GAP=0.10            # prior account win rate this far from the archive 
 COMMITTEE_SPLIT=0.40         # share of committee models on the other side of their validation median
 SUFFICIENT_EVIDENCE=0.70     # evidence-quality score needed for an escalation or a no-task decision
 STALE_QUANTILE=0.95          # open longer than this quantile of training sales cycles -> stale record
+
+
+
+@dataclass(frozen=True)
+class Thresholds:
+    """Decision-policy thresholds of the agent, kept apart from the model's classification threshold.
+
+    The model's threshold (models/model_card.json: decision_threshold) is selected on validation by macro-F1
+    in src.train. These six values are policy design choices; src.agent.thresholds tests whether any of them
+    can be chosen by an objective on validation data. Safety rules (blocking data issues never get a
+    directional action; external tools never run) are not thresholds and cannot be changed here.
+    """
+    min_gain: float=MIN_GAIN
+    borderline_margin: float=BORDERLINE_MARGIN
+    support_min: int=SUPPORT_MIN
+    conflict_gap: float=CONFLICT_GAP
+    committee_split: float=COMMITTEE_SPLIT
+    sufficient_evidence: float=SUFFICIENT_EVIDENCE
+
+
+DEFAULT_THRESHOLDS=Thresholds()
 
 # Relative compute cost of each information tool (model calls dominate).
 TOOL_COST={'get_opportunity':.02,'get_account_information':.02,'check_data_quality':.05,

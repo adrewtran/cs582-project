@@ -83,20 +83,34 @@ class Resources:
         self.snapshot_date=max(dataset.frame.close_date.max(),dataset.frame.engage_date.max(),self.open.engage_date.max())
         test=dataset.frame.loc[dataset.frame.engage_date>=pd.Timestamp(self.scoring['model_available_date'])]
         # Outcome-masked replay pool: labelled test-period deals with every outcome column removed.
-        self.replay=test.drop(columns=list(FORBIDDEN)+['deal_stage']).assign(deal_stage='masked_for_replay').set_index('opportunity_id',drop=False).rename_axis(None)
+        self.replay=masked(test)
+        # Validation-period deals, masked the same way. They were used to calibrate the model and pick its
+        # threshold, so they serve only to examine policy thresholds (src.agent.thresholds), never as a test.
+        split=manifest.get('split',{})
+        if 'validation_start' in split:
+            start,end=pd.Timestamp(split['validation_start']),pd.Timestamp(split['test_start'])
+            frame=dataset.frame
+            self.validation_replay=masked(frame.loc[(frame.engage_date>=start)&(frame.engage_date<end)&(frame.close_date<end)])
+        else: self.validation_replay=self.replay.iloc[:0]
+        self.pools={'open':self.open,'test_replay':self.replay,'validation_replay':self.validation_replay}
+        self.case_faults={}      # {opportunity_id: {tool: 'transient' | 'persistent'}} injected by evaluations
+        self._fault_seen=set()
         self.faults=dict(faults or {})
         self.manifest=manifest
         self._inputs={}; self._history={}
 
+    def table(self,pool):
+        if pool not in self.pools: raise ValueError(f'unknown pool {pool}')
+        return self.pools[pool]
+
     def row(self,opportunity_id,pool):
-        table=self.open if pool=='open' else self.replay
-        return table.loc[opportunity_id]
+        return self.table(pool).loc[opportunity_id]
 
     def model_inputs(self,opportunity_id,pool):
         """The exact feature row the frozen model scores: the training pipeline's join + strictly prior history."""
         key=(opportunity_id,pool)
         if key not in self._inputs:
-            frame=(self.open if pool=='open' else self.replay).loc[[opportunity_id]].reset_index(drop=True)
+            frame=self.table(pool).loc[[opportunity_id]].reset_index(drop=True)
             if self.scoring['feature_set']=='history':
                 frame=frame.join(self.history(opportunity_id,pool)[0])
             self._inputs[key]=frame[self.scoring['features']]
@@ -112,6 +126,11 @@ class Resources:
         return self._history[key]
 
 
+def masked(frame):
+    """Labelled deals with every outcome column removed before any tool can read them."""
+    return frame.drop(columns=list(FORBIDDEN)+['deal_stage']).assign(deal_stage='masked_for_replay').set_index('opportunity_id',drop=False).rename_axis(None)
+
+
 def source(table,key,fields):
     return {'table':table,'key':key,'fields':list(fields)}
 
@@ -121,8 +140,8 @@ def source(table,key,fields):
 def get_opportunity(res,opportunity_id,pool='open'):
     if not isinstance(opportunity_id,str) or not opportunity_id.strip():
         return ToolResult('error',error='invalid_input: opportunity_id must be a nonempty string')
-    if pool not in ('open','test_replay'): return ToolResult('error',error=f'invalid_input: unknown pool {pool}')
-    table=res.open if pool=='open' else res.replay
+    if pool not in res.pools: return ToolResult('error',error=f'invalid_input: unknown pool {pool}')
+    table=res.table(pool)
     if opportunity_id not in table.index:
         if pool=='open' and opportunity_id in res.closed.index:
             return ToolResult('error',error='not_eligible: closed deal; only dated Engaging opportunities are scored')
@@ -245,10 +264,10 @@ def check_model_agreement(res,opportunity_id,pool='open'):
     return ToolResult('ok',data,[source('models/trained_models.joblib',res.trained.feature_set,list(members))])
 
 
-def evaluate_evidence(res,beliefs):
+def evaluate_evidence(res,beliefs,thresholds=policy.DEFAULT_THRESHOLDS):
     """Turn observations into an auditable assessment: evidence quality, conflicts, reliability, risk signal."""
     from src.agent.planner import assess
-    return ToolResult('ok',assess(beliefs,res.card),[source('models/model_card.json','validation_roc_auc,validation_calibrated_roc_auc_ci95',[])])
+    return ToolResult('ok',assess(beliefs,res.card,thresholds),[source('models/model_card.json','validation_roc_auc,validation_calibrated_roc_auc_ci95',[])])
 
 
 # ---------------------------------------------------------------------------- local-write tools
@@ -302,6 +321,10 @@ def call(res,name,*args,**kwargs):
     start=perf_counter()
     try:
         if name in res.faults: raise RuntimeError(f'{res.faults[name]} (injected fault for evaluation)')
+        mode=res.case_faults.get(kwargs.get('opportunity_id'),{}).get(name)
+        if mode=='persistent' or (mode=='transient' and (kwargs.get('opportunity_id'),name) not in res._fault_seen):
+            res._fault_seen.add((kwargs.get('opportunity_id'),name))
+            raise RuntimeError(f'{mode} {name} failure (injected fault for evaluation)')
         result=TOOLS[name].fn(res,*args,**kwargs)
     except policy.PolicyViolation: raise
     except Exception as exc:
