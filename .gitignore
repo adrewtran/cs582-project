@@ -33,8 +33,6 @@ data/*/processed/
 
 # Disposable smoke outputs; verified full reports remain tracked.
 reports/crm/smoke/
-reports/crm/final/deliverables/*.tmp
-reports/crm/final/deliverables/.~lock.*#
 
 # Smoke-run output of scripts/simulation/run_simulated_models.py --quick
 data/*/model_results_quick.csv

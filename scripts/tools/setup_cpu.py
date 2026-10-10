@@ -1,4 +1,4 @@
-"""Install an isolated CPU runtime, without modifying the notebook kernel."""
+"""Install an isolated CPU runtime (.venv-crm) with the tested dependency pins."""
 from pathlib import Path
 import subprocess
 import sys

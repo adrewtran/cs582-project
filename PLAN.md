@@ -10,17 +10,17 @@ Original CRM proposal is authoritative. Leads, Bank and Telco experiments were r
 4. Validation-only model/threshold choice and frozen-model sigmoid calibration.
 5. Full proposal metric set plus AP, Brier/log loss; separate invalid leakage control.
 6. Native/permutation importance, RF TreeSHAP reconstruction check, open-deal reference sensitivities and warnings.
-7. Result-driven paper, editable slides, ESL script, README and notebook.
+7. README; paper and slides are maintained by hand at the repo root (document generator and Colab notebook removed 2026-10-09).
 
 Entry: `python -m src.run_project`. Evidence: `reports/crm/final/`.
 
 ## Interpretation
 
-Near-chance AUC does not establish useful sales prioritization. No causal intervention, revenue uplift, pristine external test or completed actual Colab session is claimed. Open scores are frozen snapshot demonstrations.
+Near-chance AUC does not establish useful sales prioritization. No causal intervention, revenue uplift, or pristine external test is claimed. Open scores are frozen snapshot demonstrations.
 
 ## External steps
 
-- Group runs notebook in its Colab account and checks Google Slides import.
+- Group checks Google Slides import of `CRM_Final.pptx` if slides are presented from Google Slides.
 - Review paper, confirm actual contributions, rehearse and verify final slot.
 - Authorized integration: push `codex/crm-completion` through the existing writable project fork and open a PR against `thai-phan/cs582-project:main`. No automatic merge.
 - Submit course deliverables. No video recording is claimed; guidelines allow slides and/or video.

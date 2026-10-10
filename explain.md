@@ -18,8 +18,9 @@ Lệnh này đọc dữ liệu, chia tập, train 5 model, chọn model, hiệu 
 
 ## 1. Bức tranh tổng thể
 
-Pipeline chia thành **3 bước chạy độc lập** (train → evaluate → predict) và một bước sinh tài liệu.
-`src/run_project.py` nối cả 4 bước lại thành một lệnh.
+Pipeline chia thành **3 bước chạy độc lập** (train → evaluate → predict).
+`src/run_project.py` nối cả 3 bước lại thành một lệnh. Paper và slide do nhóm tự viết (`CRM_IEEE_Paper.docx`,
+`CRM_Final.pptx`); code không sinh tài liệu.
 
 ```
 data/crm/*.csv (4 bảng, chỉ đọc)
@@ -42,10 +43,7 @@ src/predict.py       load model_bundle.joblib → chấm điểm deal đang mở
                      kèm yếu tố giải thích (src/explain/reference.py) và nhóm ưu tiên (priority.py)
         │
         ▼
-src/reporting/deliverables.py → báo cáo DOCX/Markdown, slide PPTX, kịch bản thuyết trình
-        │
-        ▼
-reports/crm/final/   data/ models/ metrics/ explain/ checks/ predictions/ figures/ deliverables/
+reports/crm/final/   data/ models/ metrics/ explain/ checks/ predictions/ figures/
 ```
 
 Đường dẫn các thư mục con của kết quả được định nghĩa ở **một chỗ duy nhất**: `src/outputs.py`.
@@ -218,7 +216,7 @@ Lưu ý: đây **không phải SHAP**, các chênh lệch không cộng lại th
 | Train | `python -m src.train` | Tạo `run_manifest.json`; `build()` → `asof_split()` → lưu `data/split_manifest.csv`, `data/data_quality.json`; ghi SHA-256 dữ liệu/mã nguồn, phiên bản thư viện, commit git; train 5 model, chọn threshold riêng từng model trên validation (`metrics/validation_metrics.csv`); **chọn model** theo validation rồi **calibrate**; lưu `models/trained_models.joblib` (cả 5 model) và `models/model_bundle.joblib` (model đã calibrate). **Không chấm điểm deal test nào.** |
 | Evaluate | `python -m src.evaluate` | Load model đã lưu; EDA; đánh giá 5 model trên test (`metrics/test_metrics.csv`), trước/sau calibration (`metrics/calibration_test.csv`), xác suất từng deal test; biểu đồ; importance, permutation, SHAP (`explain/`); leakage, priority, so sánh cách chia, kiểm tra giải thích (`checks/`). Không thể thay đổi model đã chọn. |
 | Predict | `python -m src.predict` | Load `model_bundle.joblib`, chấm điểm deal Engaging → `predictions/open_deal_predictions.csv`. Với `--input deals_moi.csv` (định dạng `sales_pipeline.csv`, cần `engage_date`) thì join với các bảng tham chiếu và chấm điểm deal mới. |
-| Tất cả | `python -m src.run_project` | Chạy train → evaluate → predict (truyền dữ liệu trong bộ nhớ) → sinh tài liệu, rồi đặt trạng thái `complete`. Lỗi ở bất kỳ bước nào → `failed` kèm thông báo lỗi. |
+| Tất cả | `python -m src.run_project` | Chạy train → evaluate → predict (truyền dữ liệu trong bộ nhớ), rồi đặt trạng thái `complete`. Lỗi ở bất kỳ bước nào → `failed` kèm thông báo lỗi. |
 
 Tùy chọn dòng lệnh của `run_project` (và `train`):
 
@@ -226,34 +224,20 @@ Tùy chọn dòng lệnh của `run_project` (và `train`):
 |------------------|----------------------------------------------------------------------------------------------------|
 | `--quick`        | Chạy nhanh với ngân sách nhỏ (smoke test), ghi vào `reports/crm/smoke/`, **không dùng để báo cáo** |
 | `--output PATH`  | Ghi kết quả ra thư mục khác                                                                        |
-| `--no-documents` | Chỉ chạy thí nghiệm, không sinh báo cáo/slide (chỉ `run_project`)                                  |
 
 Chỉ load file joblib do chính project này tạo ra (joblib có thể chạy code khi unpickle).
 
-### 3.11 `src/reporting/deliverables.py` — Sinh tài liệu tự động
-
-Đọc các file kết quả thật trong thư mục output và sinh:
-
-- `CRM_Final_Report.md` / `.docx`: bài báo cáo (phương pháp, kết quả, hạn chế, tài liệu tham khảo).
-- `CRM_Final_Presentation.pptx`: 12 slide chỉnh sửa được, có speaker notes.
-- `SPEAKER_SCRIPT_ESL.md` / `.docx`: kịch bản thuyết trình cho 3 thành viên.
-- `TEAM_REVIEW.md`: các việc nhóm cần tự xác nhận trước khi nộp.
-
-Có thể chạy riêng: `python -m src.reporting.deliverables reports/crm/final`.
-
 ---
 
-## 4. Scripts, notebook và test
+## 4. Scripts và test
 
 | File                         | Chức năng                                                                                                                                                                                                  |
 |------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `scripts/tools/setup_cpu.py`       | Tạo môi trường ảo `.venv-crm` và cài thư viện CPU đã kiểm thử (yêu cầu Python 3.12)                                                                                                                        |
-| `scripts/tools/make_notebook.py`   | Sinh notebook `notebooks/CRM_Sales_Opportunities.ipynb` cho Google Colab (upload ZIP source → setup → chạy cùng lệnh `run_project` → tải kết quả)                                                          |
-| `scripts/tools/verify_notebook.py` | Chạy thử từng cell notebook ở local để lấy bằng chứng (không thay cho việc chạy thật trên Colab)                                                                                                           |
 | `scripts/simulation/`        | Sinh dữ liệu mô phỏng có công thức thắng biết trước và chạy lại 5 model trên đó (`run_simulated_models.py`, `run_simulated_seeds.py`) |
 | `scripts/analysis/`          | Ước tính doanh thu 3 tháng (minh họa) và xếp hạng sản phẩm trên dữ liệu mô phỏng |
 | `scripts/tools/package_handoff.py` | Đóng gói ZIP và patch để bàn giao, không động vào git index                                                                                                                                                |
-| `tests/`                     | Kiểm thử bằng `pytest`: dữ liệu và validate, chia thời gian (kể cả trường hợp cùng ngày), công thức metric, fit thật cả 5 model, calibration, giải thích, sinh tài liệu, notebook và chạy tích hợp toàn bộ |
+| `tests/`                     | Kiểm thử bằng `pytest`: dữ liệu và validate, chia thời gian (kể cả trường hợp cùng ngày), công thức metric, fit thật cả 5 model, calibration, giải thích, chạy lại từng bước từ model đã lưu, chấm điểm file CSV mới và chạy tích hợp toàn bộ |
 
 ---
 

@@ -9,7 +9,7 @@ import tempfile
 
 ROOT=Path(__file__).resolve().parents[2]
 PATHS=['.gitignore','AGENTS.md','README.md','PLAN.md','CS582_Group2_Project_Proposal.md','requirements.txt',
-       'src','tests','scripts','notebooks/CRM_Sales_Opportunities.ipynb','docs','reports/crm']
+       'src','tests','scripts','docs','reports/crm']
 
 
 def git(*args,env=None):
@@ -46,13 +46,13 @@ def package(destination):
 
 Base commit: `{base}`. No commit or push was performed.
 
-For Colab: upload the standalone `CRM_Sales_Opportunities.ipynb`, then upload `CRM_CS582_Complete.zip` when prompted. Source, raw CRM inputs and verified result drafts are included. Read README.md inside the ZIP.
+`CRM_CS582_Complete.zip` contains the source, raw CRM inputs and current results. Unzip it, then follow README.md (`python scripts/tools/setup_cpu.py`, then `.venv-crm/bin/python -m src.run_project`).
 
 For GitHub: keep the existing repository. Use a fresh feature branch. Either copy the extracted contents into the checkout, or apply `crm-completion.patch` to a clean checkout at the base above. Run `git apply --check crm-completion.patch` before `git apply --index crm-completion.patch`. Do not apply the patch twice. Review and test before commit/push/PR.
 
 The patch changes no raw data. Python environments, Git metadata and credentials are excluded. Hashes and changed-file paths are in HANDOFF.json.
 
-The project has weak predictive discrimination; do not present it as production-ready. Actual group Colab/Google Slides validation, member review and course submission remain external steps.
+The project has weak predictive discrimination; do not present it as production-ready. Member review and course submission remain external steps.
 ''',encoding='utf-8')
     print(json.dumps({'files':list(hashes),'base_commit':base,'changed_count':len(changed),'index_unchanged':True},indent=2))
     return manifest

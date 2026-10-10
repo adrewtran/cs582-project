@@ -21,7 +21,7 @@ from src.models.calibration import CalibratedModel
 from src.models.zoo import MODEL_NAMES,fit_model
 from src.outputs import ROOT,DEFAULT_OUTPUT,SMOKE_OUTPUT,Outputs,write_json
 
-DEPENDENCIES=['numpy','pandas','scipy','scikit-learn','torch','pytorch-tabnet','shap','matplotlib','joblib','python-pptx','python-docx']
+DEPENDENCIES=['numpy','pandas','scipy','scikit-learn','torch','pytorch-tabnet','shap','matplotlib','joblib']
 
 
 def describe_run(manifest,dataset,split):
@@ -47,7 +47,7 @@ def run(output_dir=DEFAULT_OUTPUT,quick=False,dataset=None,split=None):
     manifest={'status':'running','mode':'SMOKE_TEST_NOT_FINAL' if quick else 'full',
               'started_utc':datetime.now(timezone.utc).isoformat(),'seed':42,'python':platform.python_version(),
               'platform':platform.platform(),'machine':platform.machine(),
-              'run_location':'execution environment; Google Colab has not been independently verified'}
+              'run_location':'local CPU execution; see platform and machine'}
     out.write_manifest(manifest)
     dataset=dataset or build(); split=split or asof_split(dataset)
     split.manifest.to_csv(out.data/'split_manifest.csv',index=False)

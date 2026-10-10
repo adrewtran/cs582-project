@@ -8,7 +8,7 @@ import pytest
 def completed_run(tmp_path_factory):
     from src.run_project import run
     output=tmp_path_factory.mktemp('complete_crm')
-    manifest=run(output,quick=True,documents=False)
+    manifest=run(output,quick=True)
     return output,manifest
 
 

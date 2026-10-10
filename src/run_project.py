@@ -1,8 +1,8 @@
-"""One command for the whole project: train -> evaluate -> predict -> documents.
+"""One command for the whole project: train -> evaluate -> predict.
 
-    python -m src.run_project [--quick] [--output PATH] [--no-documents]
+    python -m src.run_project [--quick] [--output PATH]
 
-Each stage can also run alone: src.train, src.evaluate, src.predict, src.reporting.deliverables.
+Each stage can also run alone: src.train, src.evaluate, src.predict.
 """
 import argparse
 from datetime import datetime,timezone
@@ -12,18 +12,13 @@ from src import evaluate,predict,train
 from src.outputs import DEFAULT_OUTPUT,SMOKE_OUTPUT,Outputs
 
 
-def run(output_dir=DEFAULT_OUTPUT,quick=False,documents=True):
+def run(output_dir=DEFAULT_OUTPUT,quick=False):
     start=time.perf_counter(); out=Outputs(output_dir)
     try:
         _,trained,dataset,split=train.run(out.root,quick=quick)
         evaluate.run(out.root,trained=trained,dataset=dataset,split=split)
         predict.run(out.root,dataset=dataset)
-        manifest=out.read_manifest(); manifest['elapsed_seconds']=time.perf_counter()-start
-        out.write_manifest(manifest)
-        # Documents consume this manifest; status changes only after every requested artifact succeeds.
-        if documents:
-            from src.reporting.deliverables import build_deliverables
-            build_deliverables(out.root)
+        # Status changes only after every stage succeeds.
         manifest=out.read_manifest()
         manifest.update(status='complete',completed_utc=datetime.now(timezone.utc).isoformat(),elapsed_seconds=time.perf_counter()-start)
         out.write_manifest(manifest)
@@ -39,9 +34,8 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--quick',action='store_true',help='All five models, tiny budgets; not reportable results')
     parser.add_argument('--output',type=Path,default=None)
-    parser.add_argument('--no-documents',action='store_true',help='Run experiment only')
     args=parser.parse_args()
-    run(args.output or (SMOKE_OUTPUT if args.quick else DEFAULT_OUTPUT),quick=args.quick,documents=not args.no_documents)
+    run(args.output or (SMOKE_OUTPUT if args.quick else DEFAULT_OUTPUT),quick=args.quick)
 
 
 if __name__=='__main__': main()

@@ -28,8 +28,6 @@ class Outputs:
     @property
     def figures(self): return self.root/'figures'
     @property
-    def deliverables(self): return self.root/'deliverables'
-    @property
     def manifest(self): return self.root/'run_manifest.json'
 
     def make(self):

@@ -62,8 +62,6 @@ If `setup_cpu.py` stops with a version error, you are not using Python 3.12.
 - **Ubuntu/Debian:** `sudo apt install python3.12 python3.12-venv` (older releases may need the deadsnakes PPA), then the same commands as above.
 - **Windows:** install Python 3.12 from <https://www.python.org/downloads/> and tick "Add python.exe to PATH". The interpreter is `.venv-crm\Scripts\python.exe` and activation is `.venv-crm\Scripts\Activate.ps1`. Windows has not been tested.
 
-**No install at all?** Use Google Colab instead: upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, then Run all (the README has the full steps).
-
 ## Step 2: Verify the environment with a smoke run (about 2 min)
 ```bash
 .venv-crm/bin/python -m src.run_project --quick
@@ -77,7 +75,6 @@ This writes to `reports/crm/smoke` and is labelled SMOKE_TEST_NOT_FINAL. Its num
 ## Step 3: Show the full pipeline (pick one)
 - **Live:** `.venv-crm/bin/python -m src.run_project`. This takes a few minutes because it trains Dummy, LR, RF, MLP and TabNet on CPU. To show the stages separately: `python -m src.train`, then `python -m src.evaluate`, then `python -m src.predict`.
 - **Faster:** skip the run and open the existing `reports/crm/final`.
-- **Colab:** upload `notebooks/CRM_Sales_Opportunities.ipynb`, set the runtime to CPU, upload the source ZIP and choose Run all. The team's own Colab session has not been verified, so test it once beforehand.
 
 ## Step 4: Walk through the results in `reports/crm/final`
 1. `run_manifest.json`: shows `status: complete` and `mode: full`.
@@ -156,8 +153,8 @@ This trains the same five models with the same loader, time-based split, preproc
 
 ---
 
-## Step 9: Show the deliverables
-`reports/crm/final/deliverables` holds a PPTX, a DOCX, a Markdown paper and an ESL speaking script.
+## Step 9: Show the paper and slides
+`CRM_IEEE_Paper.docx` and `CRM_Final.pptx` at the repo root are written by the team from the numbers in `reports/crm/final`.
 
 ## Step 10: Run the tests (optional, slow)
 ```bash
@@ -182,4 +179,4 @@ It includes real CPU fits of all five models and a full smoke run. Passing tests
 - Have `reports/crm/final` and `data/crm_simulated/model_results.csv` pre-opened in case a live run is slow.
 - Always say which scenario a number comes from. Never quote a simulated score as the project's result.
 - TabNet results can vary slightly across platforms, so don't promise exact decimals.
-- Don't claim Colab or Google Slides were tested unless you've run them.
+- Don't claim Google Slides import was tested unless you've done it.
